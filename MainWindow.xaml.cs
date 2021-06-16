@@ -24,5 +24,27 @@ namespace SisAdv
         {
             InitializeComponent();
         }
+
+        private void btadicionar_Click(object sender, RoutedEventArgs e)
+        {
+            funcoesadicionar.Visibility = Visibility.Visible;
+        }
+        private void btadicionar_LostFocus(object sender, RoutedEventArgs e)
+        {
+            funcoesadicionar.Visibility = Visibility.Collapsed;
+        }
+
+        
+
+        private void btbuscar_Click(object sender, RoutedEventArgs e)
+        {
+            funcoesbuscar.Visibility = Visibility.Visible;
+        }
+
+        private void btbuscar_LostFocus(object sender, RoutedEventArgs e)
+        {
+            funcoesbuscar.Visibility = Visibility.Collapsed;
+        }
     }
-}
+    }
+    

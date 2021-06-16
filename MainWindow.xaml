@@ -5,8 +5,78 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:SisAdv"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
-    <Grid>
-        
-    </Grid>
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        TextElement.Foreground="{DynamicResource MaterialDesignBody}"
+        TextElement.FontWeight="Regular"
+        TextElement.FontSize="13"
+        TextOptions.TextFormattingMode="Ideal" 
+        TextOptions.TextRenderingMode="Auto"        
+        Background="{DynamicResource MaterialDesignPaper}"
+        FontFamily="{DynamicResource MaterialDesignFont}"
+        Title="SISADV" Height="700" Width="800" WindowStartupLocation="CenterScreen">
+    <DockPanel>
+        <StackPanel DockPanel.Dock="Left" Width="150" HorizontalAlignment="Center" >
+            <!--Menu para adicionar dados-->
+            <Button x:Name="btadicionar" Margin="0 20 0 0" 
+                Style="{StaticResource MaterialDesignFloatingActionButton}"
+                ToolTip="MaterialDesignFloatingActionButton"  LostFocus="btadicionar_LostFocus" Click="btadicionar_Click">
+                <materialDesign:PackIcon Kind="ArrowUpDropCircle" Width="30" Height="30"/>
+            </Button>
+
+            <StackPanel Visibility="Collapsed" x:Name="funcoesadicionar">
+                <Button Margin="0 5 0 0" x:Name="btaddrevento"
+                Content="Adicionar evento"/>
+                <Button Margin="0 5 0 0" x:Name="btaddcliente"
+                Content="Adicionar Cliente"/>
+            </StackPanel>
+
+            <!--Menu para buscar dados-->
+
+            <Button x:Name="btbuscar" Margin="0 20 0 0" 
+                Style="{StaticResource MaterialDesignFloatingActionButton}"
+                ToolTip="MaterialDesignFloatingActionButton" Click="btbuscar_Click" LostFocus="btbuscar_LostFocus" >
+                <materialDesign:PackIcon Kind="Magnify" Width="30" Height="30"/>
+            </Button>
+
+            <StackPanel Visibility="Collapsed" x:Name="funcoesbuscar">
+                <Button Margin="0 5 0 0" x:Name="btbuscaevento"
+                Content="Buscar Evento"/>
+                <Button Margin="0 5 0 0" x:Name="btbuscacliente"
+                Content="Buscar Cliente"/>
+            </StackPanel>
+
+            <Button Margin="0 20 0 0"
+                Style="{StaticResource MaterialDesignFloatingActionButton}"
+                ToolTip="MaterialDesignFloatingActionButton">
+                <materialDesign:PackIcon Kind="Cog" Width="30" Height="30"/>
+            </Button>
+
+            <Button Margin="0 20 0 0"
+                Style="{StaticResource MaterialDesignFloatingActionButton}"
+                ToolTip="MaterialDesignFloatingActionButton">
+                <materialDesign:PackIcon Kind="ChartBar" Width="30" Height="30"/>
+            </Button>
+
+            <Button Margin="0 20 0 0"
+                Style="{StaticResource MaterialDesignFloatingActionButton}"
+                ToolTip="MaterialDesignFloatingActionButton">
+                <materialDesign:PackIcon Kind="ExitRun" Width="30" Height="30"/>
+            </Button>
+
+            <Button Margin="0 20 0 0"
+                Style="{StaticResource MaterialDesignRaisedLightButton}"
+                ToolTip="Resource name: MaterialDesignRaisedLightButton"
+                Content="Acessar Diário da Justiça">
+            </Button>
+            
+            <Image Source="/imagens/imgtelaprincipal.png" Margin="0 140 0 0" Width="90" Height="90" IsEnabled="False"/>
+
+        </StackPanel>
+
+        <StackPanel DockPanel.Dock="Left"></StackPanel>
+
+        <StackPanel DockPanel.Dock="Right" Width="400">
+            
+        </StackPanel>
+    </DockPanel>
 </Window>
