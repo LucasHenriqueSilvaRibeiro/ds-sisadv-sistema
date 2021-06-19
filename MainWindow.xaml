@@ -14,7 +14,96 @@
         Background="#FFD6D5D5"
         FontFamily="{DynamicResource MaterialDesignFont}"
         Title="SISADV" Height="700" Width="1000" WindowStartupLocation="CenterScreen">
-    <DockPanel>
+    <DockPanel>       
+        <Grid DockPanel.Dock="Left" Width="150" HorizontalAlignment="Center">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="570"/>
+                <RowDefinition Height="100"/>
+            </Grid.RowDefinitions>
+
+            <StackPanel>
+                <!--Menu para adicionar dados-->
+                <Button x:Name="btadicionar" Margin="0 20 0 0" 
+                    Style="{StaticResource MaterialDesignFloatingActionButton}"
+                    ToolTip="MaterialDesignFloatingActionButton"  LostFocus="btadicionar_LostFocus" 
+                    Click="btadicionar_Click" Background="White" BorderBrush="{x:Null}" Foreground="Black">
+                    <materialDesign:PackIcon Kind="Add" Width="30" Height="30"/>
+                </Button>
+
+                <StackPanel Visibility="Collapsed" x:Name="funcoesadicionar">
+                    <Button Margin="0 5 0 0" x:Name="btaddrevento"
+                    Content="Adicionar evento" Background="White" BorderBrush="{x:Null}" Foreground="Black"/>
+                    <Button Margin="0 5 0 0" x:Name="btaddcliente"
+                    Content="Adicionar Cliente" Background="White" BorderBrush="{x:Null}" Foreground="Black"/>
+                </StackPanel>
+
+                <!--Menu para buscar dados-->
+
+                <Button x:Name="btbuscar" Margin="0 20 0 0" 
+                Style="{StaticResource MaterialDesignFloatingActionButton}"
+                ToolTip="MaterialDesignFloatingActionButton" Click="btbuscar_Click" 
+                LostFocus="btbuscar_LostFocus" Background="White" BorderBrush="{x:Null}" Foreground="Black">
+                    <materialDesign:PackIcon Kind="Magnify" Width="30" Height="30"/>
+                </Button>
+
+                <StackPanel Visibility="Collapsed" x:Name="funcoesbuscar">
+                    <Button Margin="0 5 0 0" x:Name="btbuscaevento"
+                Content="Buscar Evento" Background="White" BorderBrush="{x:Null}" Foreground="Black"/>
+                    <Button Margin="0 5 0 0" x:Name="btbuscacliente"
+                Content="Buscar Cliente" Background="White" BorderBrush="{x:Null}" Foreground="Black"/>
+                </StackPanel>
+
+                <Button Margin="0 20 0 0"
+                Style="{StaticResource MaterialDesignFloatingActionButton}"
+                ToolTip="MaterialDesignFloatingActionButton"
+                Background="White" BorderBrush="{x:Null}" Foreground="Black">
+                    <materialDesign:PackIcon Kind="Cog" Width="30" Height="30"/>
+                </Button>
+
+                <Button Margin="0 20 0 0"
+                Style="{StaticResource MaterialDesignFloatingActionButton}"
+                ToolTip="MaterialDesignFloatingActionButton"
+                Background="White" BorderBrush="{x:Null}" Foreground="Black">
+                    <materialDesign:PackIcon Kind="ChartBar" Width="30" Height="30"/>
+                </Button>
+
+                <Button Margin="0 20 0 0"
+                Style="{StaticResource MaterialDesignFloatingActionButton}"
+                ToolTip="MaterialDesignFloatingActionButton"
+                Background="White" BorderBrush="{x:Null}" Foreground="Black">
+                    <materialDesign:PackIcon Kind="ExitRun" Width="30" Height="30"/>
+                </Button>
+
+                <Button Margin="0 20 0 0" Height="50"
+                Style="{StaticResource MaterialDesignRaisedLightButton}"
+                ToolTip="Resource name: MaterialDesignRaisedLightButton"
+                Background="White" BorderBrush="{x:Null}" Foreground="Black">
+                    Diário da Justiça
+                </Button>
+            </StackPanel>
+
+            <StackPanel Grid.Row="1">
+                <Image Source="/imagens/imgtelaprincipal.png"  Width="90" Height="90" IsEnabled="False"/>
+            </StackPanel>
+        </Grid>
+
+        
+
+        <Grid DockPanel.Dock="Left" Width="600">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="400"/>
+                <RowDefinition Height="270"/>
+                <RowDefinition Height="30"/>
+            </Grid.RowDefinitions>            
+
+            <StackPanel Width="450" Margin="10 10">
+                <Calendar x:Name="agendacompromissos" Width="300" Height="350" HorizontalAlignment="Center"/>
+            </StackPanel>
+
+            <StackPanel Width="450" Grid.Row="1" Margin="10">
+                <TextBlock TextAlignment="Center" Height="250">AQUI SERÁ ADICIONADO UM GRÁFICO DE TEMPO DE USO DE ALGUMA <LineBreak/> FORMA E PROVALMENTE SERÁ ALTERADO O CALENDÁRIO ACIMA!</TextBlock>
+            </StackPanel>
+        </Grid>
 
         <Grid DockPanel.Dock="Right" Margin="10" Width="250">
             <Grid.RowDefinitions>
@@ -34,94 +123,5 @@
             <!--Observação: precisará pegar os dados de adicionar serviço-->
             <DataGrid Grid.Row="1" Margin="0 15 0 0" x:Name="dataGridServicosRecentes"/>
         </Grid>
-
-
-        <StackPanel DockPanel.Dock="Bottom" Height="100" Width="100" Margin="0 0 600 0">
-            <Image Source="/imagens/imgtelaprincipal.png"  Width="90" Height="90" IsEnabled="False"/>
-        </StackPanel>
-        
-        <!--Observação: adicionar uma grid para dividir os botões e os colapsados-->
-
-        <StackPanel DockPanel.Dock="Left" Width="150" HorizontalAlignment="Center" >
-            <!--Menu para adicionar dados-->
-            <Button x:Name="btadicionar" Margin="0 20 0 0" 
-                Style="{StaticResource MaterialDesignFloatingActionButton}"
-                ToolTip="MaterialDesignFloatingActionButton"  LostFocus="btadicionar_LostFocus" 
-                Click="btadicionar_Click" Background="White" BorderBrush="{x:Null}" Foreground="Black">
-                <materialDesign:PackIcon Kind="Add" Width="30" Height="30"/>
-                
-            </Button>
-
-            <StackPanel Visibility="Collapsed" x:Name="funcoesadicionar">
-                <Button Margin="0 5 0 0" x:Name="btaddrevento"
-                Content="Adicionar evento" Background="White" BorderBrush="{x:Null}" Foreground="Black"/>
-                <Button Margin="0 5 0 0" x:Name="btaddcliente"
-                Content="Adicionar Cliente" Background="White" BorderBrush="{x:Null}" Foreground="Black"/>
-            </StackPanel>
-
-            <!--Menu para buscar dados-->
-
-            <Button x:Name="btbuscar" Margin="0 20 0 0" 
-                Style="{StaticResource MaterialDesignFloatingActionButton}"
-                ToolTip="MaterialDesignFloatingActionButton" Click="btbuscar_Click" 
-                LostFocus="btbuscar_LostFocus" Background="White" BorderBrush="{x:Null}" Foreground="Black">
-                <materialDesign:PackIcon Kind="Magnify" Width="30" Height="30"/>
-            </Button>
-
-            <StackPanel Visibility="Collapsed" x:Name="funcoesbuscar">
-                <Button Margin="0 5 0 0" x:Name="btbuscaevento"
-                Content="Buscar Evento" Background="White" BorderBrush="{x:Null}" Foreground="Black"/>
-                <Button Margin="0 5 0 0" x:Name="btbuscacliente"
-                Content="Buscar Cliente" Background="White" BorderBrush="{x:Null}" Foreground="Black"/>
-            </StackPanel>
-
-            <Button Margin="0 20 0 0"
-                Style="{StaticResource MaterialDesignFloatingActionButton}"
-                ToolTip="MaterialDesignFloatingActionButton"
-                Background="White" BorderBrush="{x:Null}" Foreground="Black">
-                <materialDesign:PackIcon Kind="Cog" Width="30" Height="30"/>
-            </Button>
-
-            <Button Margin="0 20 0 0"
-                Style="{StaticResource MaterialDesignFloatingActionButton}"
-                ToolTip="MaterialDesignFloatingActionButton"
-                Background="White" BorderBrush="{x:Null}" Foreground="Black">
-                <materialDesign:PackIcon Kind="ChartBar" Width="30" Height="30"/>
-            </Button>
-
-            <Button Margin="0 20 0 0"
-                Style="{StaticResource MaterialDesignFloatingActionButton}"
-                ToolTip="MaterialDesignFloatingActionButton"
-                Background="White" BorderBrush="{x:Null}" Foreground="Black">
-                <materialDesign:PackIcon Kind="ExitRun" Width="30" Height="30"/>
-            </Button>
-
-            <Button Margin="0 20 0 0" Height="50"
-                Style="{StaticResource MaterialDesignRaisedLightButton}"
-                ToolTip="Resource name: MaterialDesignRaisedLightButton"
-                Background="White" BorderBrush="{x:Null}" Foreground="Black">
-                Diário da Justiça
-            </Button>         
-
-        </StackPanel>
-
-        <Grid DockPanel.Dock="Left" Width="600">
-            <Grid.RowDefinitions>
-                <RowDefinition Height="400"/>
-                <RowDefinition Height="270"/>
-                <RowDefinition Height="30"/>
-            </Grid.RowDefinitions>            
-
-            <StackPanel Width="450" Margin="10 10">
-                <Calendar x:Name="agendacompromissos" Width="300" Height="350" HorizontalAlignment="Center"/>
-            </StackPanel>
-
-            <StackPanel Width="450" Grid.Row="1" Margin="10">
-                <TextBlock TextAlignment="Center" Height="250">AQUI SERÁ ADICIONADO UM GRÁFICO DE TEMPO DE USO DE ALGUMA <LineBreak/> FORMA E PROVALMENTE SERÁ ALTERADO O CALENDÁRIO ACIMA!</TextBlock>
-            </StackPanel>
-        </Grid>
-
-        
-
     </DockPanel>
 </Window>
