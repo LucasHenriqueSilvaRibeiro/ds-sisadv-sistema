@@ -5,20 +5,71 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:SisAdv"
         mc:Ignorable="d"
-        Title="ImprimirRelatorio" Height="450" Width="800">
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        TextElement.Foreground="{DynamicResource MaterialDesignBody}"
+        TextElement.FontWeight="Regular"
+        TextElement.FontSize="13"
+        TextOptions.TextFormattingMode="Ideal" 
+        TextOptions.TextRenderingMode="Auto"        
+        Background="#FFD6D5D5"
+        FontFamily="{DynamicResource MaterialDesignFont}"
+        Title="ImprimirRelatorio" Height="350" Width="500">
     <Grid>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="41*"/>
-            <ColumnDefinition Width="157*"/>
+            <ColumnDefinition Width="350"/>
+            <ColumnDefinition Width="150"/>
         </Grid.ColumnDefinitions>
-        <Label Content="mês-ano" HorizontalAlignment="Left" Margin="30,45,0,0" VerticalAlignment="Top" Height="39" Width="88" FontSize="20"/>
-        <ComboBox HorizontalAlignment="Left" Margin="138,58,0,0" VerticalAlignment="Top" Width="120" Height="26" Grid.ColumnSpan="2"/>
-        <Label Content="data" HorizontalAlignment="Left" Margin="44,113,0,0" VerticalAlignment="Top" Height="34" Width="58" FontSize="20"/>
-        <TextBox HorizontalAlignment="Left" Height="29" Margin="138,127,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="120" Grid.ColumnSpan="2"/>
-        <Label Content="visualizar" HorizontalAlignment="Left" Margin="504,63,0,0" VerticalAlignment="Top" Width="70" FontSize="15" Grid.Column="1"/>
-        <Label Content="compatinhar" HorizontalAlignment="Left" Margin="504,163,0,0" VerticalAlignment="Top" FontSize="15" Grid.Column="1"/>
-        <Label Content="imprimir" HorizontalAlignment="Left" Margin="504,258,0,0" VerticalAlignment="Top" FontSize="15" Width="82" Grid.Column="1"/>
-        <Label Content="salvar" HorizontalAlignment="Left" Margin="504,352,0,0" VerticalAlignment="Top" Height="40" Width="82" FontSize="15" Grid.Column="1"/>
 
+        <Grid.RowDefinitions>
+            <RowDefinition Height="100"/>
+            <RowDefinition Height="100"/>
+            <RowDefinition Height="100"/>
+        </Grid.RowDefinitions>
+
+        <StackPanel Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Center">
+            <Label Content="mês-ano" Height="39" Width="88" FontSize="20"/>
+            <ComboBox Width="120" Height="26" Margin="10 0">
+                <ComboBoxItem Content="Janeiro - 2021"/>
+                <ComboBoxItem Content="Fevereiro - 2021"/>
+                <ComboBoxItem Content="Março - 2021"/>
+                <ComboBoxItem Content="Maio - 2021"/>
+                <ComboBoxItem Content="Junho - 2021"/>
+            </ComboBox>
+        </StackPanel>
+
+        <StackPanel Grid.Row="1" Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Center">
+            <Label Content="data" Height="34" Width="58" FontSize="20"/>
+            <!--O calendário que tem no protótipo da tela é na verdade o DataPicker quando clica pra abrir o calendário-->
+            <DatePicker Width="140"/>
+        </StackPanel>
+
+        <StackPanel Grid.Column="1"  HorizontalAlignment="Center">
+            <Button Width="80" Height="70">
+                <materialDesign:PackIcon Kind="Visibility" Width="45" Height="50"/>
+            </Button>
+            <Label Content="visualizar" Width="70" FontSize="15"/>
+        </StackPanel>
+
+        <StackPanel Grid.Column="1" Grid.Row="1" HorizontalAlignment="Center">
+            <Button Width="80" Height="70">
+                <materialDesign:PackIcon Kind="Share" Width="45" Height="50"/>
+            </Button>
+            <Label Content="Compartilhar" FontSize="15"/>
+        </StackPanel>
+
+        <StackPanel Grid.Column="1" Grid.Row="2"  HorizontalAlignment="Center">
+            <Button Width="80" Height="70">
+                <materialDesign:PackIcon Kind="Printer" Width="45" Height="50"/>
+            </Button>
+            <Label Content="imprimir" FontSize="15" Width="82"/>
+        </StackPanel>
+
+        <StackPanel Grid.Row="2"  HorizontalAlignment="Right">
+            <Button Width="80" Height="70">
+                <materialDesign:PackIcon Kind="ContentSave" Width="45" Height="50"/>
+
+            </Button>
+            <Label Content="salvar" FontSize="15" HorizontalAlignment="Center"/>
+        </StackPanel>
     </Grid>
 </Window>
