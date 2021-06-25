@@ -1,0 +1,40 @@
+﻿<Window x:Class="SisAdv.BuscarCliente"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:SisAdv"
+        mc:Ignorable="d"
+        Title="BuscarCliente" Height="500" Width="450">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="350"/>
+            <ColumnDefinition Width="100"/>
+        </Grid.ColumnDefinitions>
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="80"/>
+            <RowDefinition Height="80"/>
+            <RowDefinition Height="80"/>
+            <RowDefinition Height="240"/>
+        </Grid.RowDefinitions>
+
+        <StackPanel Grid.Row="0" Orientation="Horizontal" HorizontalAlignment="Center">
+            <TextBlock Text="Nome" FontSize="18" FontWeight="Bold" Margin="0 25 0 0"/>
+            <TextBox Width="200" Height="30" Margin="10 0 0 0"/>
+        </StackPanel>
+
+        <StackPanel Grid.Row="1" Orientation="Horizontal" HorizontalAlignment="Center">
+            <TextBlock Text="RG" FontSize="18" FontWeight="Bold" Margin="0 25 0 0"/>
+            <TextBox Width="100" Height="30" Margin="10 0 0 0"/>
+        </StackPanel>
+
+        <StackPanel Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Center">
+            <TextBlock Text="CPF" FontSize="18" FontWeight="Bold" Margin="0 25 0 0"/>
+            <TextBox Width="120" Height="30" Margin="10 0 0 0"/>
+        </StackPanel>
+        
+        <!--Cor diferente só pra não me perder mesmo-->
+        <DataGrid Grid.Row="3" Margin="20" Background="Bisque"></DataGrid>
+    </Grid>
+</Window>
