@@ -15,18 +15,13 @@ using System.Windows.Shapes;
 namespace SisAdv
 {
     /// <summary>
-    /// Lógica interna para ImprimirRelatorio.xaml
+    /// Lógica interna para CadastrarServico.xaml
     /// </summary>
-    public partial class ImprimirRelatorio : Window
+    public partial class CadastrarServico : Window
     {
-        public ImprimirRelatorio()
+        public CadastrarServico()
         {
             InitializeComponent();
-        }
-
-        private void Button_Click(object sender, RoutedEventArgs e)
-        {
-            
         }
     }
 }
