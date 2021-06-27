@@ -110,6 +110,7 @@
     <Compile Include="CadastrarServico.xaml.cs">
       <DependentUpon>CadastrarServico.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Dominio\Servico.cs" />
     <Compile Include="ImprimirRelatorio.xaml.cs">
       <DependentUpon>ImprimirRelatorio.xaml</DependentUpon>
     </Compile>
