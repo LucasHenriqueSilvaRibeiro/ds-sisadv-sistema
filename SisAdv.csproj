@@ -63,6 +63,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Servico.cs" />
     <Page Include="AlterarSenha.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -110,7 +111,6 @@
     <Compile Include="CadastrarServico.xaml.cs">
       <DependentUpon>CadastrarServico.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Dominio\Servico.cs" />
     <Compile Include="ImprimirRelatorio.xaml.cs">
       <DependentUpon>ImprimirRelatorio.xaml</DependentUpon>
     </Compile>

@@ -30,11 +30,11 @@ namespace SisAdv
 
         private void MainWindow_Loaded(object sender, RoutedEventArgs e)
         {
-            List<Dominio.Servico> listaServicos = new List<Dominio.Servico>();
+           List<Servico> listaServicos = new List<Servico>();
 
             for (int i = 0; i < 30; i++)
             {
-                listaServicos.Add(new Dominio.Servico()
+                listaServicos.Add(new Servico()
                 {
                     Id = i + 1,
                     Cliente = "Clientão - " + i,
@@ -49,11 +49,7 @@ namespace SisAdv
 
         private void btadicionar_Click(object sender, RoutedEventArgs e)
         {
-            funcoesadicionar.Visibility = Visibility.Visible;
-        }
-        private void btadicionar_LostFocus(object sender, RoutedEventArgs e)
-        {
-            funcoesadicionar.Visibility = Visibility.Collapsed;
+            funcoesadicionar.Visibility = Visibility.Visible;            
         }
 
         
@@ -103,6 +99,15 @@ namespace SisAdv
 
             if (result == MessageBoxResult.Yes)
                 this.Close();
+        }
+
+        private void btOcultarServicos_Click(object sender, RoutedEventArgs e)
+        {
+            //Código inicial para ocultar a grid dos serviços recentes :)
+            dataGridServicosRecentes.Visibility = Visibility.Collapsed;
+            textRecente.Visibility = Visibility.Collapsed;
+            gridDireitaRecentes.Width = 80;
+            gridCentral.Width = 800;
         }
     }
     }
