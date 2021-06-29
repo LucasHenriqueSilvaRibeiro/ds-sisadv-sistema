@@ -24,9 +24,10 @@ namespace SisAdv
             InitializeComponent();
         }
 
-        private void Button_Click(object sender, RoutedEventArgs e)
+        private void btnSalvar_Click(object sender, RoutedEventArgs e)
         {
-            
+            //Abrir explorador de arquivos para salvar o relatório (por enquanto vou deixar somente uma mensagem)
+            MessageBox.Show("Explorador de Arquivos Aberto", "", MessageBoxButton.OK, MessageBoxImage.Exclamation);
         }
     }
 }

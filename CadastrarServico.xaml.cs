@@ -23,5 +23,41 @@ namespace SisAdv
         {
             InitializeComponent();
         }
+
+        private void btnPesquisarServico_Click(object sender, RoutedEventArgs e)
+        {
+            BuscarServico buscarServico = new BuscarServico();
+
+            buscarServico.ShowDialog();
+        }
+
+        private void listArquivos_Drop(object sender, DragEventArgs e)
+        {
+
+        }
+
+        private void btnCancelar_Click(object sender, RoutedEventArgs e)
+        {
+            this.Close();
+        }
+
+        private void btnSalvar_Click(object sender, RoutedEventArgs e)
+        {
+            MessageBox.Show("Serviço Cadastrado com Sucesso", "", MessageBoxButton.OK, MessageBoxImage.Information);
+        }
+
+        private void btnAtribuirEvento_Click(object sender, RoutedEventArgs e)
+        {
+            MessageBox.Show("Evento Atribuido com Sucesso", "", MessageBoxButton.OK, MessageBoxImage.Information);
+        }
+
+        private void btnAdicionarServico_Click(object sender, RoutedEventArgs e)
+        {
+            //Limpar as textbox
+            txbEvento.Clear();
+            txbHorario.Clear();
+            txbValor.Clear();
+            txbDescricao.Clear();
+        }
     }
 }
