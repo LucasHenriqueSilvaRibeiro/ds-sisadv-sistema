@@ -11,7 +11,7 @@
         TextElement.FontSize="13"
         TextOptions.TextFormattingMode="Ideal" 
         TextOptions.TextRenderingMode="Auto"        
-        Background="#FFD6D5D5"
+        Background="#FFAEAEAE"
         FontFamily="{DynamicResource MaterialDesignFont}"
         Title="SISADV" Height="700" Width="1200" WindowStartupLocation="CenterScreen">
     <DockPanel>       
@@ -36,7 +36,7 @@
                     <Button Margin="0 5 0 0" x:Name="btaddcliente" Width="150" FontSize="11"
                     Content="Adicionar Cliente" Background="White" BorderBrush="{x:Null}" Foreground="Black"/>
                     <Button Margin="0 5 0 0" x:Name="btaaddservico" Width="150" FontSize="11"
-                    Content="Adicionar Serviço" Background="White" BorderBrush="{x:Null}" Foreground="Black"/>
+                    Content="Adicionar Serviço" Background="White" BorderBrush="{x:Null}" Foreground="Black" Click="btaaddservico_Click"/>
                     <Button Margin="0 5 0 0" x:Name="btadddespesa" Width="150" FontSize="11"
                     Content="Adicionar Despesa" Background="White" BorderBrush="{x:Null}" Foreground="Black"/>
                     <Button Margin="0 5 0 0" x:Name="btaddlucro" Width="150" FontSize="11"
@@ -53,8 +53,10 @@
                 </Button>
 
                 <StackPanel Visibility="Collapsed" x:Name="funcoesbuscar">
-                    <Button Margin="0 5 0 0" x:Name="btbuscardespesalucro" Width="150" FontSize="11"
-                    Content="Buscar Despesa/Lucro" Background="White" BorderBrush="{x:Null}" Foreground="Black" Click="btbuscardespesalucro_Click"/>
+                    <Button Margin="0 5 0 0" x:Name="btbuscardespesa" Width="150" FontSize="11"
+                    Content="Buscar Despesa" Background="White" BorderBrush="{x:Null}" Foreground="Black" Click="btbuscardespesa_Click"/>
+                    <Button Margin="0 5 0 0" x:Name="btbuscarlucro" Width="150" FontSize="11"
+                    Content="Buscar Lucro" Background="White" BorderBrush="{x:Null}" Foreground="Black" Click="btbuscarlucro_Click"/>
                     <Button Margin="0 5 0 0" x:Name="btbuscarcliente" Width="150" FontSize="11"
                     Content="Buscar Cliente" Background="White" BorderBrush="{x:Null}" Foreground="Black" Click="btbuscarcliente_Click"/>
                     <Button Margin="0 5 0 0" x:Name="btbuscaservico" Width="150" FontSize="11"
@@ -82,10 +84,10 @@
                     <materialDesign:PackIcon Kind="ExitRun" Width="30" Height="30"/>
                 </Button>
 
-                <Button Margin="0 20 0 0" Height="50" Width="150"
+                <Button Margin="0 20 0 0" Height="50" Width="150" x:Name="btacessardiariojustica"
                     Style="{StaticResource MaterialDesignRaisedLightButton}"
                     ToolTip="Resource name: MaterialDesignRaisedLightButton"
-                    Background="White" BorderBrush="{x:Null}" Foreground="Black">
+                    Background="White" BorderBrush="{x:Null}" Foreground="Black" Click="btacessardiariojustica_Click">
                     Diário da Justiça
                 </Button>
             </StackPanel>

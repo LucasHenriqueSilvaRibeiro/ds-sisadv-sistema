@@ -49,7 +49,8 @@ namespace SisAdv
 
         private void btadicionar_Click(object sender, RoutedEventArgs e)
         {
-            funcoesadicionar.Visibility = Visibility.Visible;            
+            funcoesadicionar.Visibility = Visibility.Visible;
+            funcoesbuscar.Visibility = Visibility.Collapsed;
         }
 
         
@@ -57,6 +58,7 @@ namespace SisAdv
         private void btbuscar_Click(object sender, RoutedEventArgs e)
         {
             funcoesbuscar.Visibility = Visibility.Visible;
+            funcoesadicionar.Visibility = Visibility.Collapsed;
         }
 
 
@@ -75,22 +77,15 @@ namespace SisAdv
         private void btbuscarcliente_Click(object sender, RoutedEventArgs e)
         {
             BuscarCliente buscarCliente = new BuscarCliente();
-
-            buscarCliente.ShowDialog();
+            funcoesbuscar.Visibility = Visibility.Collapsed;
+            buscarCliente.ShowDialog();            
         }
 
         private void btbuscaservico_Click(object sender, RoutedEventArgs e)
         {
             BuscarServico buscarServico = new BuscarServico();
-
+            funcoesbuscar.Visibility = Visibility.Collapsed;
             buscarServico.ShowDialog();
-        }
-
-        private void btbuscardespesalucro_Click(object sender, RoutedEventArgs e)
-        {
-            BuscarDespesaLucro buscarDespesaLucro = new BuscarDespesaLucro();
-
-            buscarDespesaLucro.ShowDialog();
         }
 
         private void btsair_Click(object sender, RoutedEventArgs e)
@@ -108,6 +103,34 @@ namespace SisAdv
             textRecente.Visibility = Visibility.Collapsed;
             gridDireitaRecentes.Width = 80;
             gridCentral.Width = 800;
+        }
+
+        private void btbuscardespesa_Click(object sender, RoutedEventArgs e)
+        {
+            BuscarDespesa buscarDespesa = new BuscarDespesa();
+            funcoesbuscar.Visibility = Visibility.Collapsed;
+            buscarDespesa.ShowDialog();
+        }
+
+        private void btbuscarlucro_Click(object sender, RoutedEventArgs e)
+        {
+            BuscarLucro buscarLucro = new BuscarLucro();
+            funcoesbuscar.Visibility = Visibility.Collapsed;
+            buscarLucro.ShowDialog();
+        }
+
+        private void btaaddservico_Click(object sender, RoutedEventArgs e)
+        {
+            CadastrarServico cadastrarServico = new CadastrarServico();
+            funcoesadicionar.Visibility = Visibility.Collapsed;
+            cadastrarServico.ShowDialog();
+        }
+
+        private void btacessardiariojustica_Click(object sender, RoutedEventArgs e)
+        {
+            AcessarDiarioJustiça acessarDiarioJustiça = new AcessarDiarioJustiça();
+
+            acessarDiarioJustiça.ShowDialog();
         }
     }
     }
