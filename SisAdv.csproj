@@ -78,6 +78,9 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="AcessarDiarioJustiça.xaml.cs">
+      <DependentUpon>AcessarDiarioJustiça.xaml</DependentUpon>
+    </Compile>
     <Compile Include="BuscarDespesa.xaml.cs">
       <DependentUpon>BuscarDespesa.xaml</DependentUpon>
     </Compile>
@@ -86,8 +89,15 @@
     </Compile>
     <Compile Include="Cliente.cs" />
     <Compile Include="Despesa.cs" />
+    <Compile Include="Login.xaml.cs">
+      <DependentUpon>Login.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Lucro.cs" />
     <Compile Include="Servico.cs" />
+    <Page Include="AcessarDiarioJustiça.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="AlterarSenha.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -117,6 +127,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="ImprimirRelatorio.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Login.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
