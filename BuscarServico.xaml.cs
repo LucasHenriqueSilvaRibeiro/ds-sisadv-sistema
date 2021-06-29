@@ -22,6 +22,26 @@ namespace SisAdv
         public BuscarServico()
         {
             InitializeComponent();
+            Loaded += BuscarServico_Loaded;
+        }
+        public void BuscarServico_Loaded(object sender, RoutedEventArgs e)
+        {
+            List<Servico> listaServico = new List<Servico>();
+
+            for (int i = 0; i < 30; i++)
+            {
+                listaServico.Add(new Servico()
+                {
+                    Cliente = "Joãozinho - " + i,
+                    Tipo = "Civil - " + i,
+                    Data = "01/06/2021",
+                });
+            }
+            dataGridBuscarServico.ItemsSource = listaServico;
+        }
+        private void btn_excluir_Click(object sender, RoutedEventArgs e)
+        {
+            MessageBox.Show("Deseja excluir esse serviço?", "", MessageBoxButton.YesNo, MessageBoxImage.Question);
         }
     }
 }

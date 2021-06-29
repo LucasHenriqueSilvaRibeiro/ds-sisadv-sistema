@@ -13,7 +13,12 @@ namespace SisAdv
 
         public String Cliente { get; set; }
 
-        public double Valor { get; set; }
+        //Lucas informou para deixar data como string por enquanto
+        public String Data { get; set; }
+
+        public String Tipo { get; set; }
+
+        public double Valor { get; set; }   
 
         public String Descricao { get; set; }
     }
