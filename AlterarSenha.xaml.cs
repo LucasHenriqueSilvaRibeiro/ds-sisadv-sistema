@@ -23,5 +23,15 @@ namespace SisAdv
         {
             InitializeComponent();
         }
+
+        private void btCancelar_Click(object sender, RoutedEventArgs e)
+        {
+            this.Close();
+        }
+
+        private void btSalvar_Click(object sender, RoutedEventArgs e)
+        {
+            MessageBox.Show("Confirme o e-mail que será enviado!", "", MessageBoxButton.OK, MessageBoxImage.Information);
+        }
     }
 }
