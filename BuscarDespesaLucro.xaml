@@ -15,53 +15,7 @@
         FontFamily="{DynamicResource MaterialDesignFont}"
         Title="BuscarDespesaLucro" Height="500" Width="480" WindowStartupLocation="CenterScreen" ResizeMode="NoResize">
     <Grid>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="350"/>
-            <ColumnDefinition Width="120"/>
-        </Grid.ColumnDefinitions>
-
-        <Grid.RowDefinitions>
-            <RowDefinition Height="80"/>
-            <RowDefinition Height="80"/>
-            <RowDefinition Height="90"/>
-            <RowDefinition Height="240"/>
-        </Grid.RowDefinitions>
-
-        <StackPanel Grid.Row="0" Orientation="Horizontal" HorizontalAlignment="Center">
-            <TextBlock Text="Origem" FontSize="18" Margin="0 25 0 0"/>
-            <TextBox Width="200" Height="30" Margin="10 0 0 0"/>
-        </StackPanel>
-
-        <StackPanel Grid.Row="1" Orientation="Horizontal" HorizontalAlignment="Center">
-            <TextBlock Text="Data" FontSize="18" Margin="-80 25 0 0"/>
-            <TextBox Width="100" Height="30" Margin="-35 0 0 0"/>
-        </StackPanel>
-
-        <StackPanel Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Center">
-            <TextBlock Text="Valor" FontSize="18" Margin="-60 25 0 0"/>
-            <TextBox Width="120" Height="30" Margin="-15 0 0 0"/>
-        </StackPanel>
-
-        <!--Cor diferente só pra não me perder mesmo-->
-        <DataGrid Grid.Row="3" Margin="30" Background="Bisque"></DataGrid>
-
-        <StackPanel Grid.Row="2" Grid.Column="1" HorizontalAlignment="Center">
-            <Button Height="70" Width="100" Background="#FFEE0707" BorderBrush="{x:Null}" >
-                <materialDesign:PackIcon Kind="Delete" Width="60" Height="40"/>
-            </Button>
-            <TextBlock FontSize="14" HorizontalAlignment="Center" Text="excluir"/>
-        </StackPanel>
-        <StackPanel Grid.Row="3" Grid.Column="1" HorizontalAlignment="Center">
-            <Button Height="70" Width="100" BorderBrush="{x:Null}" Background="#FFF1F1F1">
-                <materialDesign:PackIcon Kind="Edit" Width="45" Height="40" Foreground="Black"/>
-            </Button>
-            <TextBlock FontSize="14" HorizontalAlignment="Center" Text="Editar"/>
-        </StackPanel>
-        <StackPanel Grid.Row="3" Grid.Column="1" HorizontalAlignment="Center" Margin="0 90 0 0">
-            <Button Height="70" Width="100" Background="#FFF1F1F1" BorderBrush="{x:Null}">
-                <materialDesign:PackIcon Kind="Visibility" Width="45" Height="40" Foreground="Black"/>
-            </Button>
-            <TextBlock FontSize="14" HorizontalAlignment="Center" Text="visualizar"/>
-        </StackPanel>
+        <!--CONVERSAR COM O PROFESSOR SOBRE COMO APAGAR CERTINHO O ARQUIVO, POIS
+        HOUVE A NECESSIDADE DE SEPARAR BUSCAR LUCRO E BUSCAR DESPESA-->
     </Grid>
 </Window>
