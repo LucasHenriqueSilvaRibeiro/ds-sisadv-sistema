@@ -39,9 +39,11 @@
 
         <StackPanel Orientation="Horizontal" Grid.Row="2" HorizontalAlignment="Center">
             <Label FontSize="16" Foreground="White" Content="Tipo" HorizontalAlignment="Center" VerticalAlignment="Center" RenderTransformOrigin="-6.21,0.502"/>
-            <RadioButton FontSize="16" Foreground="White" Content="Eleitoral" HorizontalAlignment="Center" VerticalAlignment="Center" RenderTransformOrigin="-6.21,0.502"/>
-            <RadioButton FontSize="16" Foreground="White" Content="Civil" HorizontalAlignment="Center" VerticalAlignment="Center" RenderTransformOrigin="-6.21,0.502"/>
-            <RadioButton FontSize="16" Foreground="White" Content="Criminal" HorizontalAlignment="Center" VerticalAlignment="Center" RenderTransformOrigin="-6.21,0.502"/>
+            <StackPanel VerticalAlignment="Center" Margin="17 20 0 0">
+                <RadioButton GroupName="a" FontSize="16" Foreground="White" Content="Eleitoral" HorizontalAlignment="Center" VerticalAlignment="Center" RenderTransformOrigin="-6.21,0.502"/>
+                <RadioButton GroupName="a" Margin="-27 0 0 0" FontSize="16" Foreground="White" Content="Civil" HorizontalAlignment="Center" VerticalAlignment="Center" RenderTransformOrigin="-6.21,0.502"/>
+            </StackPanel>
+            <RadioButton GroupName="a" Margin="25 0 0 0" FontSize="16" Foreground="White" Content="Criminal" HorizontalAlignment="Center" VerticalAlignment="Center" RenderTransformOrigin="-6.21,0.502"/>
         </StackPanel>
 
         <!--Peguei do Mateus pois já era o modelo dos botões e a grid-->
@@ -52,7 +54,7 @@
             <TextBlock FontSize="16" Foreground="White" HorizontalAlignment="Center" Text="Pesquisar"/>
         </StackPanel>
         <StackPanel Grid.Row="2" Grid.Column="1" HorizontalAlignment="Center">
-            <Button Height="70" Width="100" Background="#FFEE0707" BorderBrush="{x:Null}" >
+            <Button Height="70" Width="100" x:Name="btnexcluirservico" Background="#FFEE0707" BorderBrush="{x:Null}" Click="btn_excluir_Click">
                 <materialDesign:PackIcon Kind="Delete" Width="60" Height="40"/>
             </Button>
             <TextBlock FontSize="16" Foreground="White" HorizontalAlignment="Center" Text="excluir"/>
