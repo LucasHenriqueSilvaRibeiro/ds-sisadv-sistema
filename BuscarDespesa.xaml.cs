@@ -42,5 +42,10 @@ namespace SisAdv
 
             dataGridBuscarDespesa.ItemsSource = listaDespesa;
         }
+
+        private void buttonExcluir_Click(object sender, RoutedEventArgs e)
+        {
+            MessageBox.Show("Deseja excluir este(s) cadastros?", "", MessageBoxButton.YesNo, MessageBoxImage.Question);
+        }
     }
 }

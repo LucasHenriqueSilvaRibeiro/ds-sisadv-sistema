@@ -43,5 +43,10 @@ namespace SisAdv
             //Está dando um erro nesta linha, descobrir o que é!!
             dataGridBuscarCliente.ItemsSource = listaCliente;
         }
+
+        private void buttonExcluir_Click(object sender, RoutedEventArgs e)
+        {
+            MessageBox.Show("Deseja excluir este(s) cadastro(s)?", "", MessageBoxButton.YesNo, MessageBoxImage.Question);
+        }
     }
 }

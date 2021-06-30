@@ -23,9 +23,9 @@
 
         <Grid.RowDefinitions>
             <RowDefinition Height="80"/>
-            <RowDefinition Height="80"/>
             <RowDefinition Height="90"/>
-            <RowDefinition Height="240"/>
+            <RowDefinition Height="90"/>
+            <RowDefinition Height="220"/>
         </Grid.RowDefinitions>
 
         <StackPanel Grid.Row="0" Orientation="Horizontal" HorizontalAlignment="Center">
@@ -62,8 +62,14 @@
             </DataGrid.Columns>
         </DataGrid>
 
+        <StackPanel Grid.Row="1" Grid.Column="1" HorizontalAlignment="Center">
+            <Button x:Name="buttonPesquisar" Height="70" Width="100" BorderBrush="{x:Null}" Background="#FFF1F1F1">
+                <materialDesign:PackIcon Kind="Search" Width="45" Height="40" Foreground="Black"/>
+            </Button>
+            <TextBlock FontSize="14" HorizontalAlignment="Center" Text="Pesquisar"/>
+        </StackPanel>
         <StackPanel Grid.Row="2" Grid.Column="1" HorizontalAlignment="Center">
-            <Button Height="70" Width="100" Background="#FFEE0707" BorderBrush="{x:Null}" >
+            <Button x:Name="buttonExcluir" Height="70" Width="100" Background="#FFEE0707" BorderBrush="{x:Null}" Click="buttonExcluir_Click" >
                 <materialDesign:PackIcon Kind="Delete" Width="60" Height="40"/>
             </Button>
             <TextBlock FontSize="14" HorizontalAlignment="Center" Text="excluir"/>

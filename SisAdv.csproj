@@ -87,6 +87,12 @@
     <Compile Include="BuscarLucro.xaml.cs">
       <DependentUpon>BuscarLucro.xaml</DependentUpon>
     </Compile>
+    <Compile Include="CadastrarDespesa.xaml.cs">
+      <DependentUpon>CadastrarDespesa.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="CadastrarNovoUsuario.xaml.cs">
+      <DependentUpon>CadastrarNovoUsuario.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Cliente.cs" />
     <Compile Include="ConfigurarPreferenciasRecursos.xaml.cs">
       <DependentUpon>ConfigurarPreferenciasRecursos.xaml</DependentUpon>
@@ -122,6 +128,14 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="BuscarServico.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="CadastrarDespesa.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="CadastrarNovoUsuario.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

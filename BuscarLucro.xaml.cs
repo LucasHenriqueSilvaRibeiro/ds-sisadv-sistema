@@ -42,5 +42,10 @@ namespace SisAdv
 
             dataGridBuscarLucro.ItemsSource = listaLucro;
         }
+
+        private void buttonExcluir_Click(object sender, RoutedEventArgs e)
+        {
+            MessageBox.Show("Deseja excluir este(s) cadastro(s)?", "", MessageBoxButton.YesNo, MessageBoxImage.Question);
+        }
     }
 }

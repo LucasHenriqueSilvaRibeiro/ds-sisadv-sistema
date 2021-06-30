@@ -68,7 +68,7 @@
             <TextBlock FontSize="14" HorizontalAlignment="Center" Text="Pesquisar"/>
         </StackPanel>
         <StackPanel Grid.Row="2" Grid.Column="1" HorizontalAlignment="Center">
-            <Button Height="70" Width="100" Background="#FFEE0707" BorderBrush="{x:Null}" >
+            <Button x:Name="buttonExcluir" Height="70" Width="100" Background="#FFEE0707" BorderBrush="{x:Null}" Click="buttonExcluir_Click" >
                 <materialDesign:PackIcon Kind="Delete" Width="60" Height="40"/>
             </Button>
             <TextBlock FontSize="14" HorizontalAlignment="Center" Text="excluir"/>
