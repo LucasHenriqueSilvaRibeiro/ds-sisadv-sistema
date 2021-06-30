@@ -23,5 +23,17 @@ namespace SisAdv
         {
             InitializeComponent();
         }
+
+        private void btnsalvar_Click(object sender, RoutedEventArgs e)
+        {
+            MessageBox.Show("Alterações salvas com sucesso!", "", MessageBoxButton.OK, MessageBoxImage.Information);
+        }
+
+        private void bttrocarsenha_Click(object sender, RoutedEventArgs e)
+        {
+            AlterarSenha alterarSenha = new AlterarSenha();
+
+            alterarSenha.ShowDialog();
+        }
     }
 }

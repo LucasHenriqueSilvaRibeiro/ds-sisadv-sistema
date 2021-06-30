@@ -13,10 +13,10 @@
         TextOptions.TextRenderingMode="Auto"        
         Background="#FFAEAEAE"
         FontFamily="{DynamicResource MaterialDesignFont}"
-        Title="BuscarServico" Height="500" Width="600" WindowStartupLocation="CenterScreen" ResizeMode="NoResize">
+        Title="BuscarServico" Height="500" Width="550" WindowStartupLocation="CenterScreen" ResizeMode="NoResize">
     <Grid>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="470"/>
+            <ColumnDefinition Width="400"/>
             <ColumnDefinition Width="130"/>
         </Grid.ColumnDefinitions>
 
@@ -28,20 +28,20 @@
         </Grid.RowDefinitions>
 
         <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
-            <Label Content="Data"  RenderTransformOrigin="-6.21,0.502"/>
-            <TextBox HorizontalAlignment="Center" Text="TextBox" VerticalAlignment="Center" Width="120"/>
+            <Label  Content="Data" FontSize="16" Foreground="White" RenderTransformOrigin="-6.21,0.502"/>
+            <TextBox HorizontalAlignment="Center" VerticalAlignment="Center" Width="120"/>
         </StackPanel>
 
         <StackPanel Orientation="Horizontal" Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Center">
-            <Label Content="Cliente" RenderTransformOrigin="-6.21,0.502"/>
-            <ComboBox HorizontalAlignment="Left" Text="TextBox" VerticalAlignment="Center" Width="120"/>
+            <Label FontSize="16" Foreground="White" Content="Cliente" RenderTransformOrigin="-6.21,0.502"/>
+            <ComboBox HorizontalAlignment="Left" VerticalAlignment="Center" Width="120"/>
         </StackPanel>
 
-        <StackPanel Orientation="Horizontal" Grid.Row="2">
-            <Label Content="Tipo" HorizontalAlignment="Center" VerticalAlignment="Center" RenderTransformOrigin="-6.21,0.502"/>
-            <RadioButton Content="Eleitoral" HorizontalAlignment="Center" VerticalAlignment="Center" RenderTransformOrigin="-6.21,0.502"/>
-            <RadioButton Content="Civil" HorizontalAlignment="Center" VerticalAlignment="Center" RenderTransformOrigin="-6.21,0.502"/>
-            <RadioButton Content="Criminal" HorizontalAlignment="Center" VerticalAlignment="Center" RenderTransformOrigin="-6.21,0.502"/>
+        <StackPanel Orientation="Horizontal" Grid.Row="2" HorizontalAlignment="Center">
+            <Label FontSize="16" Foreground="White" Content="Tipo" HorizontalAlignment="Center" VerticalAlignment="Center" RenderTransformOrigin="-6.21,0.502"/>
+            <RadioButton FontSize="16" Foreground="White" Content="Eleitoral" HorizontalAlignment="Center" VerticalAlignment="Center" RenderTransformOrigin="-6.21,0.502"/>
+            <RadioButton FontSize="16" Foreground="White" Content="Civil" HorizontalAlignment="Center" VerticalAlignment="Center" RenderTransformOrigin="-6.21,0.502"/>
+            <RadioButton FontSize="16" Foreground="White" Content="Criminal" HorizontalAlignment="Center" VerticalAlignment="Center" RenderTransformOrigin="-6.21,0.502"/>
         </StackPanel>
 
         <!--Peguei do Mateus pois já era o modelo dos botões e a grid-->
@@ -49,25 +49,25 @@
             <Button Height="70" Width="100" Background="#FFF1F1F1" BorderBrush="{x:Null}" >
                 <materialDesign:PackIcon Kind="Search" Width="60" Height="40" Foreground="Black"/>
             </Button>
-            <TextBlock FontSize="14" HorizontalAlignment="Center" Text="Pesquisar"/>
+            <TextBlock FontSize="16" Foreground="White" HorizontalAlignment="Center" Text="Pesquisar"/>
         </StackPanel>
         <StackPanel Grid.Row="2" Grid.Column="1" HorizontalAlignment="Center">
             <Button Height="70" Width="100" Background="#FFEE0707" BorderBrush="{x:Null}" >
                 <materialDesign:PackIcon Kind="Delete" Width="60" Height="40"/>
             </Button>
-            <TextBlock FontSize="14" HorizontalAlignment="Center" Text="excluir"/>
+            <TextBlock FontSize="16" Foreground="White" HorizontalAlignment="Center" Text="excluir"/>
         </StackPanel>
         <StackPanel Grid.Row="3" Grid.Column="1" HorizontalAlignment="Center">
             <Button Height="70" Width="100" BorderBrush="{x:Null}" Background="#FFF1F1F1">
                 <materialDesign:PackIcon Kind="Edit" Width="45" Height="40" Foreground="Black"/>
             </Button>
-            <TextBlock FontSize="14" HorizontalAlignment="Center" Text="Editar"/>
+            <TextBlock FontSize="16" Foreground="White" HorizontalAlignment="Center" Text="Editar"/>
         </StackPanel>
         <StackPanel Grid.Row="3" Grid.Column="1" HorizontalAlignment="Center" Margin="0 90 0 0">
             <Button Height="70" Width="100" Background="#FFF1F1F1" BorderBrush="{x:Null}">
                 <materialDesign:PackIcon Kind="Visibility" Width="45" Height="40" Foreground="Black"/>
             </Button>
-            <TextBlock FontSize="14" HorizontalAlignment="Center" Text="visualizar"/>
+            <TextBlock FontSize="16" Foreground="White" HorizontalAlignment="Center" Text="visualizar"/>
         </StackPanel>
 
         <DataGrid Grid.Row="3" Margin="10 10 10 10" x:Name="dataGridBuscarServico" AlternationCount="2" AutoGenerateColumns="False" BorderBrush="#FF747474" Background="#FFECECEC">
