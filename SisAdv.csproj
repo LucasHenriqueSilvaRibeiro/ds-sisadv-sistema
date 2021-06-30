@@ -87,11 +87,16 @@
     <Compile Include="BuscarLucro.xaml.cs">
       <DependentUpon>BuscarLucro.xaml</DependentUpon>
     </Compile>
+<<<<<<< Updated upstream
     <Compile Include="CadastrarDespesa.xaml.cs">
       <DependentUpon>CadastrarDespesa.xaml</DependentUpon>
     </Compile>
     <Compile Include="CadastrarNovoUsuario.xaml.cs">
       <DependentUpon>CadastrarNovoUsuario.xaml</DependentUpon>
+=======
+    <Compile Include="CadastrarEvento.xaml.cs">
+      <DependentUpon>CadastrarEvento.xaml</DependentUpon>
+>>>>>>> Stashed changes
     </Compile>
     <Compile Include="Cliente.cs" />
     <Compile Include="ConfigurarPreferenciasRecursos.xaml.cs">
@@ -131,11 +136,15 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+<<<<<<< Updated upstream
     <Page Include="CadastrarDespesa.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="CadastrarNovoUsuario.xaml">
+=======
+    <Page Include="CadastrarEvento.xaml">
+>>>>>>> Stashed changes
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
