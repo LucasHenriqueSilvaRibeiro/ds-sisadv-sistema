@@ -13,7 +13,7 @@
         Background="#FFD6D5D5"
         FontFamily="{DynamicResource MaterialDesignFont}"
         mc:Ignorable="d"
-        Title="CadastrarNovoUsuario" Height="550" Width="600">
+        Title="CadastrarNovoUsuario" Height="570" Width="640">
     <DockPanel>
         <Grid DockPanel.Dock="Left" Width="300">
             <Grid.RowDefinitions>
@@ -29,42 +29,48 @@
             </Grid.RowDefinitions>
 
             <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
-                <Label Content="Nome" FontSize="16" FontWeight="Bold" Foreground="White"/>
+                <Label Content="Nome" Margin="10" FontSize="16" FontWeight="Bold" Foreground="White"/>
                 <TextBox Width="200" Height="30" FontSize="16" Foreground="White"/>
             </StackPanel>
             <StackPanel Grid.Row="1" Orientation="Horizontal" VerticalAlignment="Center">
-                <Label Content="CPF" FontSize="16" FontWeight="Bold" Foreground="White"/>
+                <Label Content="CPF" Margin="10" FontSize="16" FontWeight="Bold" Foreground="White"/>
                 <TextBox Width="130" Height="30" FontSize="16" Foreground="White"/>
             </StackPanel>
             <StackPanel Grid.Row="2" Orientation="Horizontal" VerticalAlignment="Center">
-                <Label Content="RG" FontSize="16" FontWeight="Bold" Foreground="White"/>
+                <Label Content="RG" Margin="10" FontSize="16" FontWeight="Bold" Foreground="White"/>
                 <TextBox Width="90" Height="30" FontSize="16" Foreground="White"/>
             </StackPanel>
             <StackPanel Grid.Row="3" Orientation="Horizontal" VerticalAlignment="Center">
-                <Label Content="Data Nasc" FontSize="16" FontWeight="Bold" Foreground="White"/>
+                <Label Content="Data Nasc" Margin="10" FontSize="16" FontWeight="Bold" Foreground="White"/>
                 <DatePicker Width="120" Height="30" FontSize="16" Foreground="White"/>
             </StackPanel>
             <StackPanel Grid.Row="4" Orientation="Horizontal" VerticalAlignment="Center">
-                <Label Content="E-mail" FontSize="16" FontWeight="Bold" Foreground="White"/>
+                <Label Content="E-mail" Margin="10" FontSize="16" FontWeight="Bold" Foreground="White"/>
                 <TextBox Width="200" Height="30" FontSize="16" Foreground="White"/>
             </StackPanel>
             <StackPanel Grid.Row="5" Orientation="Horizontal" VerticalAlignment="Center">
-                <Label Content="Telefone" FontSize="16" FontWeight="Bold" Foreground="White"/>
+                <Label Content="Telefone" Margin="10" FontSize="16" FontWeight="Bold" Foreground="White"/>
                 <TextBox Width="130" Height="30" FontSize="16" Foreground="White"/>
             </StackPanel>
-            <StackPanel Grid.Row="6" VerticalAlignment="Center">
+            <StackPanel Grid.Row="6" Margin="10" VerticalAlignment="Center">
                 <Label Content="Tipo de Usuário" FontSize="16" FontWeight="Bold" Foreground="White"/>
                 <RadioButton Content="Associado e Gerente Financeiro" FontSize="16" Foreground="White"/>
                 <RadioButton Content="Associado" FontSize="16" Foreground="White"/>
             </StackPanel>
             <StackPanel Grid.Row="7" Orientation="Horizontal" VerticalAlignment="Center">
-                <Label Content="Código" FontSize="16" FontWeight="Bold" Foreground="White"/>
+                <Label Content="Código" Margin="10" FontSize="16" FontWeight="Bold" Foreground="White"/>
                 <TextBox Width="80" Height="30" FontSize="16" Foreground="White" Text="001" TextAlignment="Center" IsEnabled="False"/>
             </StackPanel>
             <StackPanel Grid.Row="8" Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Right">
-                <Button Width="100" Height="40" BorderBrush="{x:Null}" Background="White" Foreground="black">Retroceder</Button>
-                <Button Width="100" Height="40" BorderBrush="{x:Null}" Background="White" Foreground="black">Avançar</Button>
+                <Button Width="100" Height="40" BorderBrush="{x:Null}" Background="White" Foreground="black">
+                    <materialDesign:PackIcon Kind="ArrowBack" Width="70" Height="35"/>
+                </Button>
+                <Button Width="100" Height="40" Margin="10 0" BorderBrush="{x:Null}" Background="White" Foreground="black">
+                    <materialDesign:PackIcon Kind="ArrowRight" Width="70" Height="35"/>
+                </Button>
             </StackPanel>
+            <Label Grid.Row="8" Margin="95 60 0 0">Retroceder</Label>
+            <Label Grid.Row="8" Margin="215 60 0 0">Avançar</Label>
         </Grid>
 
         <Grid DockPanel.Dock="Right" Width="300">
@@ -78,24 +84,32 @@
             </Grid.RowDefinitions>
             
             <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
-                <Label Content="Senha" FontSize="16" FontWeight="Bold" Foreground="White"/>
+                <Label Content="Senha" Margin="10" FontSize="16" FontWeight="Bold" Foreground="White"/>
                 <PasswordBox Width="140" Height="30" FontSize="16" Foreground="White"/>
             </StackPanel>
             <StackPanel Grid.Row="1" Orientation="Horizontal" VerticalAlignment="Center">
-                <Label Content="Confirmar" FontSize="16" FontWeight="Bold" Foreground="White"/>
+                <Label Content="Confirmar" Margin="10" FontSize="16" FontWeight="Bold" Foreground="White"/>
                 <PasswordBox Width="140" Height="30" FontSize="16" Foreground="White"/>
             </StackPanel>
             <StackPanel Grid.Row="2" Orientation="Horizontal" VerticalAlignment="Center">
-                <Label Content="Descrição" FontSize="16" FontWeight="Bold" Foreground="White"/>
-                <PasswordBox Width="200" Height="100" FontSize="16" Foreground="White"/>
+                <Label Content="Descrição"  Margin="10" FontSize="16" FontWeight="Bold" Foreground="White"/>
+                <TextBox Width="200" Text="Especialista em..." Height="100" FontSize="16" Background="WhiteSmoke"/>
             </StackPanel>
             <StackPanel Grid.Row="4" Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Center">
-                <Button Width="100" Height="65" BorderBrush="{x:Null}" Background="White" Foreground="black">Editar</Button>
-                <Button Width="100" Height="65" BorderBrush="{x:Null}" Background="#FF1090FB" Foreground="black">Adicionar</Button>
+                <Button Width="100" Height="65" Margin="10 0" BorderBrush="{x:Null}" Background="White" Foreground="black">
+                    <materialDesign:PackIcon Kind="EditOutline" Width="60" Height="40"/>
+                </Button>
+                <Button Width="100" Height="65" BorderBrush="{x:Null}" Background="#FF1090FB" Foreground="black">
+                    <materialDesign:PackIcon Kind="Add" Width="60" Height="40"/>
+                </Button>
             </StackPanel>
             <StackPanel Grid.Row="5" Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Center">
-                <Button Width="100" Height="65" BorderBrush="{x:Null}" Background="#FF4EFD46" Foreground="black">Salvar</Button>
-                <Button Width="100" Height="65" BorderBrush="{x:Null}" Background="#FFCF2121" Foreground="black">Excluir</Button>
+                <Button Width="100" Height="65" BorderBrush="{x:Null}" Margin="10 0" Background="#FF4EFD46" Foreground="black">
+                    <materialDesign:PackIcon Kind="ContentSaveAllOutline" Width="60" Height="40"/>
+                </Button>
+                <Button Width="100" Height="65" BorderBrush="{x:Null}" Background="#FFCF2121" Foreground="black">
+                    <materialDesign:PackIcon Kind="Delete" Width="60" Height="40"/>
+                </Button>
             </StackPanel>
         </Grid>
     </DockPanel>
