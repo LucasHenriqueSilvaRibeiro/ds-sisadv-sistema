@@ -5,6 +5,14 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:SisAdv"
         mc:Ignorable="d"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        TextElement.Foreground="{DynamicResource MaterialDesignBody}"
+        TextElement.FontWeight="Regular"
+        TextElement.FontSize="13"
+        TextOptions.TextFormattingMode="Ideal" 
+        TextOptions.TextRenderingMode="Auto"        
+        Background="#FFAEAEAE"
+        FontFamily="{DynamicResource MaterialDesignFont}"
         Title="Cadastrarcliente" Height="660" Width="600">
     <Grid>
         <Grid.RowDefinitions>
@@ -18,90 +26,95 @@
             <RowDefinition Height="100"/>
         </Grid.RowDefinitions>
 
-
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="320"/>
             <ColumnDefinition Width="240"/>
         </Grid.ColumnDefinitions>
 
-        <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
-            <Label>Nome</Label>
+        <StackPanel Margin="20 0 0 0" Orientation="Horizontal" VerticalAlignment="Center">
+            <Label Foreground="#FFE8E8E8" FontWeight="Bold">Nome</Label>
             <TextBox Width="170" Margin="10"/>
         </StackPanel>
 
-        <StackPanel Orientation="Horizontal" VerticalAlignment="Center" Grid.Row="1">
-            <Label>Telefone</Label>
-            <TextBox Width="170" Margin="10"/>
+        <StackPanel Margin="20 0 0 0" Orientation="Horizontal" VerticalAlignment="Center" Grid.Row="1">
+            <Label Foreground="#FFE8E8E8"  FontWeight="Bold">Telefone</Label>
+            <TextBox Width="100" Margin="10"/>
         </StackPanel>
 
-        <StackPanel Grid.Row="2">
+        <StackPanel Margin="20 0 0 0" Grid.Row="2">
             <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
-                <Label>E-mail</Label>
-                <TextBox Width="170" Margin="10"/>
+                <Label Foreground="#FFE8E8E8" FontWeight="Bold">E-mail</Label>
+                <TextBox Width="190" Margin="10"/>
             </StackPanel>
 
             <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
-                <Label>Rua</Label>
+                <Label Foreground="#FFE8E8E8" FontWeight="Bold">Rua</Label>
                 <TextBox Width="170" Margin="10"/>
-                <Label Margin="15 0 0 0">Nº</Label>
+                <Label Foreground="#FFE8E8E8" FontWeight="Bold" Margin="15 0 0 0">Nº</Label>
                 <TextBox Width="50" Margin="10"/>
             </StackPanel>
         </StackPanel>
 
-        <StackPanel Orientation="Horizontal" VerticalAlignment="Center" Grid.Row="3">
-            <Label>Bairro</Label>
+        <StackPanel Margin="20 0 0 0" Orientation="Horizontal" VerticalAlignment="Center" Grid.Row="3">
+            <Label Foreground="#FFE8E8E8" FontWeight="Bold">Bairro</Label>
+            <TextBox Width="180" Margin="10"/>
+        </StackPanel>
+        <StackPanel Margin="20 0 0 0" Orientation="Horizontal" VerticalAlignment="Center" Grid.Row="4">
+            <Label Foreground="#FFE8E8E8" FontWeight="Bold">Data</Label>
+            <Label Foreground="#FFE8E8E8" FontWeight="Bold">Nasc</Label>
+            <TextBox Width="100" Margin="10"/>
+        </StackPanel>
+        <StackPanel Margin="20 0 0 0" Orientation="Horizontal" VerticalAlignment="Center" Grid.Row="5">
+            <Label Foreground="#FFE8E8E8" FontWeight="Bold">Profissão</Label>
             <TextBox Width="170" Margin="10"/>
         </StackPanel>
-        <StackPanel Orientation="Horizontal" VerticalAlignment="Center" Grid.Row="4">
-            <Label>Data</Label>
-            <Label>Nasc</Label>
-            <TextBox Width="170" Margin="10"/>
+        <StackPanel Margin="20 0 0 0" Orientation="Horizontal" VerticalAlignment="Center" Grid.Row="6">
+            <Label Foreground="#FFE8E8E8" FontWeight="Bold">Descrição</Label>
+            <TextBox Width="170" Height="70" Margin="10"/>
         </StackPanel>
-        <StackPanel Orientation="Horizontal" VerticalAlignment="Center" Grid.Row="5">
-            <Label>Profissão</Label>
-            <TextBox Width="170" Margin="10"/>
-        </StackPanel>
-        <StackPanel Orientation="Horizontal" VerticalAlignment="Center" Grid.Row="6">
-            <Label>Descrição</Label>
-            <TextBox Width="170" Margin="10"/>
-        </StackPanel>
-        <StackPanel Orientation="Horizontal" VerticalAlignment="Center" Grid.Row="7">
-            <Label>Código</Label>
+        <StackPanel Margin="20 0 0 0" Orientation="Horizontal" VerticalAlignment="Center" Grid.Row="7">
+            <Label Foreground="#FFE8E8E8" FontWeight="Bold">Código</Label>
             <!--Não pode estar habilitado, procurar propriedade-->
             <TextBox Width="170" Margin="10" IsEnabled="False"/>
         </StackPanel>
-        <StackPanel Orientation="Horizontal" VerticalAlignment="Center" Grid.Row="0" Grid.Column="1">
-            <Label>RG</Label>
+        <StackPanel Margin="20 0 0 0" Orientation="Horizontal" VerticalAlignment="Center" Grid.Row="0" Grid.Column="1">
+            <Label Foreground="#FFE8E8E8" FontWeight="Bold">RG</Label>
             <!---->
-            <TextBox Width="170" Margin="10"/>
+            <TextBox Width="90" Margin="10"/>
         </StackPanel>
-        <StackPanel Orientation="Horizontal" VerticalAlignment="Center" Grid.Row="1" Grid.Column="1">
-            <Label>CPF</Label>
+        <StackPanel Margin="20 0 0 0" Orientation="Horizontal" VerticalAlignment="Center" Grid.Row="1" Grid.Column="1">
+            <Label Foreground="#FFE8E8E8" FontWeight="Bold">CPF</Label>
             <!---->
-            <TextBox Width="170" Margin="10"/>
+            <TextBox  Width="120" Margin="10"/>
         </StackPanel>
-        <StackPanel Orientation="Horizontal" VerticalAlignment="Center" Grid.Row="2" Grid.Column="1" Margin="0 22 0 0">
-            <Label>Cidade</Label>
+        <StackPanel Orientation="Horizontal" VerticalAlignment="Center" Grid.Row="2" Grid.Column="1" Margin="20 22 0 0">
+            <Label Foreground="#FFE8E8E8" FontWeight="Bold">Cidade</Label>
             <!---->
             <TextBox Width="170" Margin="10"/>
         </StackPanel>
 
         <!--Botoes - Colocar um stack dentor do outro-->
-        <StackPanel VerticalAlignment="Center" HorizontalAlignment="Right" Grid.Row="6" Grid.Column="1">
+        <StackPanel Margin="-5 0 0 0" VerticalAlignment="Center" HorizontalAlignment="Right" Grid.Row="6" Grid.Column="1">
             <!--Salvar-->
-            <Button Width="90" Height="60" Margin="10" Background="White" BorderBrush="{x:Null}"></Button>
-            <Label>Salvar</Label>
+            <Button Width="90" Height="60" Margin="10" Background="#FF00FF17" BorderBrush="{x:Null}">
+                <materialDesign:PackIcon Kind="ContentSave" Width="40" Height="30" Foreground="Black"/>
+            </Button>
+            <Label Margin=" 30 0 0 0" Foreground="#FFE8E8E8" FontWeight="Bold">Salvar</Label>
         </StackPanel>
         <StackPanel Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Center" Grid.Row="7" Grid.Column="1">
             <StackPanel>
                 <!--Pesquisar-->
-                <Button Width="90" Height="60" Margin="10" Background="White" BorderBrush="{x:Null}"></Button>
-                <Label>Pesquisar</Label>
+                <Button Width="90" Height="60" Margin="10" Background="White" BorderBrush="{x:Null}">
+                    <materialDesign:PackIcon Kind="Search" Width="40" Height="30" Foreground="Black"/>
+                </Button>
+                <Label Foreground="#FFE8E8E8" FontWeight="Bold" Margin=" 20 0 0 0">Pesquisar</Label>
             </StackPanel>
             <StackPanel>
                 <!--Adicionar-->
-                <Button Width="90" Height="60" Margin="10" Background="White" BorderBrush="{x:Null}"></Button>
-                <Label>Pesquisar</Label>
+                <Button Width="90" Height="60" Margin="10" Background="#FF0068FF" BorderBrush="{x:Null}">
+                    <materialDesign:PackIcon Kind="Add" Width="40" Height="30" Foreground="Black"/>
+                </Button>
+                <Label Foreground="#FFE8E8E8" FontWeight="Bold" Margin=" 20 0 0 0">Adicionar</Label>
             </StackPanel>
         </StackPanel>
     </Grid>
