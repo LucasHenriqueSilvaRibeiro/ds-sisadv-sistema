@@ -33,7 +33,7 @@
 
         <StackPanel Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Center">
             <!--Pesquisar como pular linha nos botões-->
-            <Button Width="150" Height="60">Vizualizar Última Edição</Button>
+            <Button Width="187" FontSize="12" Height="60">Vizualizar Última Edição</Button>
         </StackPanel>
         
         <!--verificar se há necessidade do calendário-->
