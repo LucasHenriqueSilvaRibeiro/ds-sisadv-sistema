@@ -34,13 +34,13 @@
                     <Button Margin="0 5 0 0" x:Name="btaddrevento" Width="150" FontSize="11"
                     Content="Adicionar evento" Background="White" BorderBrush="{x:Null}" Foreground="Black" Click="btaddrevento_Click"/>
                     <Button Margin="0 5 0 0" x:Name="btaddcliente" Width="150" FontSize="11"
-                    Content="Adicionar Cliente" Background="White" BorderBrush="{x:Null}" Foreground="Black"/>
+                    Content="Adicionar Cliente" Background="White" BorderBrush="{x:Null}" Foreground="Black" Click="btaddcliente_Click"/>
                     <Button Margin="0 5 0 0" x:Name="btaaddservico" Width="150" FontSize="11"
                     Content="Adicionar Serviço" Background="White" BorderBrush="{x:Null}" Foreground="Black" Click="btaaddservico_Click"/>
                     <Button Margin="0 5 0 0" x:Name="btadddespesa" Width="150" FontSize="11"
-                    Content="Adicionar Despesa" Background="White" BorderBrush="{x:Null}" Foreground="Black"/>
+                    Content="Adicionar Despesa" Background="White" BorderBrush="{x:Null}" Foreground="Black" Click="btadddespesa_Click"/>
                     <Button Margin="0 5 0 0" x:Name="btaddlucro" Width="150" FontSize="11"
-                    Content="Adicionar Lucro" Background="White" BorderBrush="{x:Null}" Foreground="Black"/>
+                    Content="Adicionar Lucro" Background="White" BorderBrush="{x:Null}" Foreground="Black" Click="btaddlucro_Click"/>
                 </StackPanel>
 
                 <!--Menu para buscar dados-->
@@ -63,10 +63,10 @@
                     Content="Buscar Serviço" Background="White" BorderBrush="{x:Null}" Foreground="Black" Click="btbuscaservico_Click"/>
                 </StackPanel>
 
-                <Button Margin="0 20 0 0"
+                <Button Margin="0 20 0 0" x:Name="btconfiguracoes"
                     Style="{StaticResource MaterialDesignFloatingActionButton}"
                     ToolTip="MaterialDesignFloatingActionButton"
-                    Background="White" BorderBrush="{x:Null}" Foreground="Black">
+                    Background="White" BorderBrush="{x:Null}" Foreground="Black" Click="btconfiguracoes_Click">
                     <materialDesign:PackIcon Kind="Cog" Width="30" Height="30"/>
                 </Button>
 

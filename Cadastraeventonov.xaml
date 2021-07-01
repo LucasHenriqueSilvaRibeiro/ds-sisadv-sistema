@@ -33,7 +33,7 @@
 
         <StackPanel Grid.Row="1" Orientation="Horizontal">
             <TextBlock Margin="10,5,0,0" Text="Título" VerticalAlignment="Top" HorizontalAlignment="Left" Width="34" Height="27" />
-            <TextBox  TextWrapping="Wrap" Text="" Margin="10,0,0,0" Background="White" Foreground="#FF0C0C0C" SelectionBrush="White" TextChanged="TextBox_TextChanged" Width="142" BorderBrush="{x:Null}"/>
+            <TextBox  TextWrapping="Wrap" Text="" Margin="10,0,0,0" Background="White" Foreground="#FF0C0C0C" SelectionBrush="White" Width="142" BorderBrush="{x:Null}"/>
         </StackPanel>
 
         <StackPanel Grid.Row="2" Orientation="Horizontal">
@@ -60,19 +60,19 @@
         </StackPanel>
         
         <StackPanel Grid.ColumnSpan="2" Margin="470,0,10,0" Grid.RowSpan="6">
-            <Button HorizontalAlignment="Center" Margin="121,15" Height="53" Width="95" Background="#FF24B0CF" BorderBrush="{x:Null}" x:Name="btnAdicionar" Click="bntAdicionar_Click">
+            <Button HorizontalAlignment="Center" Margin="121,15" Height="53" Width="95" Background="#FF24B0CF" BorderBrush="{x:Null}" x:Name="btnAdicionar">
                 <materialDesign:PackIcon Kind="Add" Width="45" Height="50" Foreground="White"/>
             </Button>
             <TextBlock HorizontalAlignment="Center" Text="Adicionar Evento"/>
-            <Button HorizontalAlignment="Center" Margin="121,15" Background="#FFC11919" Height="55" Width="95" BorderBrush="{x:Null}" x:Name="btnExcluir" Click="bntExcluir_Click" >
+            <Button HorizontalAlignment="Center" Margin="121,15" Background="#FFC11919" Height="55" Width="95" BorderBrush="{x:Null}" x:Name="btnExcluir">
                 <materialDesign:PackIcon Kind="Delete" Width="60" Height="40"/>
             </Button>
             <TextBlock HorizontalAlignment="Center" Text="Excluir Evento"/>
-            <Button HorizontalAlignment="Center" Margin="121,15" Background="#FFB2B2B2" Height="55" Width="95" BorderBrush="{x:Null}" x:FieldModifier="bntEditar" Click="bntEditar_Click">
+            <Button HorizontalAlignment="Center" Margin="121,15" Background="#FFB2B2B2" Height="55" Width="95" BorderBrush="{x:Null}" x:Name="bntEditar">
                 <materialDesign:PackIcon Kind="Edit" Width="45" Height="40" Foreground="Black"/>
             </Button>
             <TextBlock HorizontalAlignment="Center" Text="Editar Evento"/>
-            <Button HorizontalAlignment="Center" Margin="121,15" Background="#FF51C745" Height="55" Width="95" BorderBrush="{x:Null}" x:Name="bntSalvar" Click="BntSalvar_Click">
+            <Button HorizontalAlignment="Center" Margin="121,15" Background="#FF51C745" Height="55" Width="95" BorderBrush="{x:Null}" x:Name="bntSalvar">
                 <materialDesign:PackIcon Kind="ContentSave" Width="45" Height="50" Foreground="White"/>
             </Button>
             <TextBlock HorizontalAlignment="Center" Text="Salvar Evento"/>

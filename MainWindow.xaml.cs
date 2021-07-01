@@ -64,7 +64,9 @@ namespace SisAdv
 
         private void btaddrevento_Click(object sender, RoutedEventArgs e)
         {
+            Cadastraeventonov cadastrarEvento = new Cadastraeventonov();
 
+            cadastrarEvento.ShowDialog();
         }
 
         private void btImprimirRelatorio_Click(object sender, RoutedEventArgs e)
@@ -131,6 +133,34 @@ namespace SisAdv
             AcessarDiarioJustiça acessarDiarioJustiça = new AcessarDiarioJustiça();
 
             acessarDiarioJustiça.ShowDialog();
+        }
+
+        private void btaddcliente_Click(object sender, RoutedEventArgs e)
+        {
+            Cadastrarcliente cadastrarCliente = new Cadastrarcliente();
+            funcoesadicionar.Visibility = Visibility.Collapsed;
+            cadastrarCliente.ShowDialog();
+        }
+
+        private void btadddespesa_Click(object sender, RoutedEventArgs e)
+        {
+            CadastrarDespesa cadastrarDespesa = new CadastrarDespesa();
+            funcoesadicionar.Visibility = Visibility.Collapsed;
+            cadastrarDespesa.ShowDialog();
+        }
+
+        private void btaddlucro_Click(object sender, RoutedEventArgs e)
+        {
+            Cadastrarlucro cadastrarLucro = new Cadastrarlucro();
+            funcoesadicionar.Visibility = Visibility.Collapsed;
+            cadastrarLucro.ShowDialog();
+        }
+
+        private void btconfiguracoes_Click(object sender, RoutedEventArgs e)
+        {
+            ConfigurarPreferenciasRecursos configurarPreferenciasRecursos = new ConfigurarPreferenciasRecursos();
+
+            configurarPreferenciasRecursos.ShowDialog();
         }
     }
     }
