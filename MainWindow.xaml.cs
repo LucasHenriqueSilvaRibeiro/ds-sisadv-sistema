@@ -132,6 +132,21 @@ namespace SisAdv
 
             acessarDiarioJustiça.ShowDialog();
         }
+
+        private void btaddcliente_Click(object sender, RoutedEventArgs e)
+        {
+            
+        }
+
+        private void btadddespesa_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void btaddlucro_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
     }
     
