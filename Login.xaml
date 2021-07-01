@@ -24,7 +24,7 @@
         </Grid.RowDefinitions>
 
         <StackPanel Grid.Row="0">
-            <Image Source="imagens/imgtelaprincipal.png" Height="180"/>
+            <Image Source="imagem/imgtelaprincipal.png" Height="180"/>
         </StackPanel>
 
         <StackPanel Grid.Row="1" Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">

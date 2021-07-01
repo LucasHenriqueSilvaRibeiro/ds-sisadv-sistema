@@ -94,7 +94,7 @@
             
             <!--Observação: estudar uma forma de fazer com que a imagem apareça-->
             <StackPanel Grid.Row="1">
-                <Image Source="/imagens/imgtelaprincipal.png"  Width="90" Height="90" IsEnabled="False"/>
+                <Image Source="/imagem/imgtelaprincipal.png"  Width="90" Height="90" IsEnabled="False"/>
             </StackPanel>
         </Grid>        
 
