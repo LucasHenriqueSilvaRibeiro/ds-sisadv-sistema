@@ -26,9 +26,7 @@
             <ComboBox Margin="20 0 0 0" Width="110" Height="30"></ComboBox>
 
             <StackPanel Margin="20 0 0 0">
-                <Button Width="80" Height="40" Background="White" BorderBrush="{x:Null}" Foreground="Black">
-                    <materialDesign:PackIcon Kind="Search" Width="40" Height="30" Foreground="Black"/>
-                </Button>
+                <Button Width="80" Height="40" Background="White" BorderBrush="{x:Null}" Foreground="Black"/>
                 <TextBlock Text="Buscar" HorizontalAlignment="center"/>
             </StackPanel>
         </StackPanel>
@@ -37,7 +35,7 @@
             <!--Pesquisar como pular linha nos botões-->
             <Button Width="150" Height="60">Vizualizar Última Edição</Button>
         </StackPanel>
-
+        
         <!--verificar se há necessidade do calendário-->
     </Grid>
 </Window>

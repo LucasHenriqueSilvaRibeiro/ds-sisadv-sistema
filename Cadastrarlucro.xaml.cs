@@ -22,7 +22,6 @@ namespace SisAdv
         public Cadastrarlucro()
         {
             InitializeComponent();
-<<<<<<< HEAD
             Loaded += Cadastrarlucro_Loaded;
         }
         public void Cadastrarlucro_Loaded(object sender, RoutedEventArgs e)
@@ -37,8 +36,6 @@ namespace SisAdv
                 });
             }
             gridcadastrarlucro.ItemsSource = listadeLucro;
-=======
->>>>>>> main
         }
     }
 }

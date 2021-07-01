@@ -17,8 +17,8 @@
     <DockPanel>       
         <Grid DockPanel.Dock="Left" Width="200" HorizontalAlignment="Center">
             <Grid.RowDefinitions>
-                <RowDefinition Height="560"/>
-                <RowDefinition Height="110"/>
+                <RowDefinition Height="570"/>
+                <RowDefinition Height="100"/>
             </Grid.RowDefinitions>
 
             <StackPanel>
@@ -34,13 +34,13 @@
                     <Button Margin="0 5 0 0" x:Name="btaddrevento" Width="150" FontSize="11"
                     Content="Adicionar evento" Background="White" BorderBrush="{x:Null}" Foreground="Black" Click="btaddrevento_Click"/>
                     <Button Margin="0 5 0 0" x:Name="btaddcliente" Width="150" FontSize="11"
-                    Content="Adicionar Cliente" Background="White" BorderBrush="{x:Null}" Foreground="Black" Click="btaddcliente_Click" />
+                    Content="Adicionar Cliente" Background="White" BorderBrush="{x:Null}" Foreground="Black"/>
                     <Button Margin="0 5 0 0" x:Name="btaaddservico" Width="150" FontSize="11"
                     Content="Adicionar Serviço" Background="White" BorderBrush="{x:Null}" Foreground="Black" Click="btaaddservico_Click"/>
                     <Button Margin="0 5 0 0" x:Name="btadddespesa" Width="150" FontSize="11"
-                    Content="Adicionar Despesa" Background="White" BorderBrush="{x:Null}" Foreground="Black" Click="btadddespesa_Click"/>
+                    Content="Adicionar Despesa" Background="White" BorderBrush="{x:Null}" Foreground="Black"/>
                     <Button Margin="0 5 0 0" x:Name="btaddlucro" Width="150" FontSize="11"
-                    Content="Adicionar Lucro" Background="White" BorderBrush="{x:Null}" Foreground="Black" Click="btaddlucro_Click"/>
+                    Content="Adicionar Lucro" Background="White" BorderBrush="{x:Null}" Foreground="Black"/>
                 </StackPanel>
 
                 <!--Menu para buscar dados-->
@@ -94,7 +94,7 @@
             
             <!--Observação: estudar uma forma de fazer com que a imagem apareça-->
             <StackPanel Grid.Row="1">
-                <Image Source="/imagens/imgtelaprincipal.png"  Width="90" Height="100" IsEnabled="False"/>
+                <Image Source="/imagens/imgtelaprincipal.png"  Width="90" Height="90" IsEnabled="False"/>
             </StackPanel>
         </Grid>        
 
@@ -110,7 +110,7 @@
             </StackPanel>
 
             <StackPanel Width="450" Grid.Row="1" Margin="10">
-                <TextBlock TextAlignment="Center" Height="250">AQUI SERÁ ADICIONADO UM GRÁFICO DE TEMPO DE USO DE ALGUMA</TextBlock>
+                <TextBlock TextAlignment="Center" Height="250">AQUI SERÁ ADICIONADO UM GRÁFICO DE TEMPO DE USO DE ALGUMA <LineBreak/> FORMA E PROVALMENTE SERÁ ALTERADO O CALENDÁRIO ACIMA!</TextBlock>
             </StackPanel>
                
         </Grid>

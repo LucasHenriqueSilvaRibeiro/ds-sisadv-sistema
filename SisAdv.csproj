@@ -87,13 +87,9 @@
     <Compile Include="BuscarLucro.xaml.cs">
       <DependentUpon>BuscarLucro.xaml</DependentUpon>
     </Compile>
-<<<<<<< HEAD
     <Compile Include="Cadastrarcliente.xaml.cs">
       <DependentUpon>Cadastrarcliente.xaml</DependentUpon>
     </Compile>
-=======
-<<<<<<< Updated upstream
->>>>>>> main
     <Compile Include="CadastrarDespesa.xaml.cs">
       <DependentUpon>CadastrarDespesa.xaml</DependentUpon>
     </Compile>
@@ -102,10 +98,6 @@
     </Compile>
     <Compile Include="CadastrarNovoUsuario.xaml.cs">
       <DependentUpon>CadastrarNovoUsuario.xaml</DependentUpon>
-=======
-    <Compile Include="CadastrarEvento.xaml.cs">
-      <DependentUpon>CadastrarEvento.xaml</DependentUpon>
->>>>>>> Stashed changes
     </Compile>
     <Compile Include="Cliente.cs" />
     <Compile Include="ConfigurarPreferenciasRecursos.xaml.cs">
@@ -145,14 +137,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-<<<<<<< HEAD
     <Page Include="Cadastrarcliente.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-=======
-<<<<<<< Updated upstream
->>>>>>> main
     <Page Include="CadastrarDespesa.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -162,9 +150,6 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="CadastrarNovoUsuario.xaml">
-=======
-    <Page Include="CadastrarEvento.xaml">
->>>>>>> Stashed changes
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -242,12 +227,6 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
-  <ItemGroup>
-    <Content Include="imagens\imgtelaprincipal.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-  </ItemGroup>
-  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="packages\MaterialDesignThemes.4.2.0-ci2581\build\MaterialDesignThemes.targets" Condition="Exists('packages\MaterialDesignThemes.4.2.0-ci2581\build\MaterialDesignThemes.targets')" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

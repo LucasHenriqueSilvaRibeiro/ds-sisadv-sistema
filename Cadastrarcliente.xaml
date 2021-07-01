@@ -102,11 +102,7 @@
                 <!--Adicionar-->
                 <Button Width="90" Height="60" Margin="10" Background="White" BorderBrush="{x:Null}"></Button>
                 <Label>Pesquisar</Label>
-<<<<<<< HEAD
             </StackPanel>
-=======
-            </StackPanel>                     
->>>>>>> main
         </StackPanel>
     </Grid>
 </Window>

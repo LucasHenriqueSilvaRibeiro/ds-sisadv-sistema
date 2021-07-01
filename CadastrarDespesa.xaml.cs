@@ -22,22 +22,6 @@ namespace SisAdv
         public CadastrarDespesa()
         {
             InitializeComponent();
-            Loaded += CadastrarDespesa_Loaded;
-        }
-        public void CadastrarDespesa_Loaded(object sender, RoutedEventArgs e)
-        {
-            List<Despesa> listaDespesa = new List<Despesa>();
-
-            for (int i = 0; i < 10; i++)
-            {
-                listaDespesa.Add(new Despesa()
-                {
-                    Valor = i + 10,
-                });
-            }
-
-            //Está dando um erro nesta linha, descobrir o que é!!
-            gridcadastrardespesa.ItemsSource = listaDespesa;
         }
     }
 }
