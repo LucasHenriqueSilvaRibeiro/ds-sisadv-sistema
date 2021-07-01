@@ -26,13 +26,14 @@
             <ComboBox Margin="20 0 0 0" Width="110" Height="30"></ComboBox>
 
             <StackPanel Margin="20 0 0 0">
-                <Button Width="80" Height="40" Background="White" BorderBrush="{x:Null}" Foreground="Black"/>
+                <Button Width="80" Height="40" Background="White" BorderBrush="{x:Null}" Foreground="Black">
+                    <materialDesign:PackIcon Kind="Search" Width="40" Height="30" Foreground="Black"/>
+                </Button>
                 <TextBlock Text="Buscar" HorizontalAlignment="center"/>
             </StackPanel>
         </StackPanel>
 
         <StackPanel Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Center">
-            <!--Pesquisar como pular linha nos botões-->
             <Button Width="187" FontSize="12" Height="60">Vizualizar Última Edição</Button>
         </StackPanel>
         

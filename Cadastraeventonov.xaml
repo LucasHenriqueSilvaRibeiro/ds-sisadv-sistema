@@ -11,7 +11,7 @@
         TextOptions.TextFormattingMode="Ideal" 
         TextOptions.TextRenderingMode="Auto"       
         mc:Ignorable="d"
-        Title="Cadastraeventonov" Height="600" Width="825" Background="#FFD6D5D5">
+        Title="Cadastraeventonov" Height="600" Width="825" Background="#FFD6D5D5" WindowStartupLocation="CenterScreen" ResizeMode="NoResize">
     <Grid Margin="0,10,0,0">
         <Grid.ColumnDefinitions> 
             <ColumnDefinition Width="480"/> 

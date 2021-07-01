@@ -23,5 +23,26 @@ namespace SisAdv
         {
             InitializeComponent();
         }
+
+        private void btacessar_Click(object sender, RoutedEventArgs e)
+        {
+            MainWindow mainWindow = new MainWindow();
+            this.Close();
+            mainWindow.Show();
+        }
+
+        private void btnovousuario_Click(object sender, RoutedEventArgs e)
+        {
+            CadastrarNovoUsuario cadastrarNovoUsuario = new CadastrarNovoUsuario();
+            this.Close();
+            cadastrarNovoUsuario.ShowDialog();
+        }
+
+        private void bttrocarsenha_Click(object sender, RoutedEventArgs e)
+        {
+            AlterarSenha alterarSenha = new AlterarSenha();
+
+            alterarSenha.ShowDialog();
+        }
     }
 }
