@@ -23,5 +23,12 @@ namespace SisAdv
         {
             InitializeComponent();
         }
+
+        private void BtBuscar_Click(object sender, RoutedEventArgs e)
+        {
+
+
+
+        }
     }
 }
