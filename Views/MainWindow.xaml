@@ -1,0 +1,162 @@
+﻿<Window x:Class="SisAdv.Views.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:SisAdv.Views"
+        mc:Ignorable="d"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        TextElement.Foreground="{DynamicResource MaterialDesignBody}"
+        TextElement.FontWeight="Regular"
+        TextElement.FontSize="13"
+        TextOptions.TextFormattingMode="Ideal" 
+        TextOptions.TextRenderingMode="Auto"        
+        Background="#FFAEAEAE"
+        FontFamily="{DynamicResource MaterialDesignFont}"
+        Title="SISADV" Height="700" Width="1200" WindowStartupLocation="CenterScreen">
+    <DockPanel>       
+        <Grid DockPanel.Dock="Left" Width="200" HorizontalAlignment="Center">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="570"/>
+                <RowDefinition Height="100"/>
+            </Grid.RowDefinitions>
+
+            <StackPanel>
+                <!--Menu para adicionar dados-->
+                <Button x:Name="btadicionar" Margin="0 20 0 0" 
+                    Style="{StaticResource MaterialDesignFloatingActionButton}"
+                    ToolTip="MaterialDesignFloatingActionButton"  
+                    Click="btadicionar_Click" Background="White" BorderBrush="{x:Null}" Foreground="Black">
+                    <materialDesign:PackIcon Kind="Add" Width="30" Height="30"/>
+                </Button>
+
+                <StackPanel Visibility="Collapsed" x:Name="funcoesadicionar">
+                    <Button Margin="0 5 0 0" x:Name="btaddrevento" Width="150" FontSize="11"
+                    Content="Adicionar evento" Background="White" BorderBrush="{x:Null}" Foreground="Black" Click="btaddrevento_Click"/>
+                    <Button Margin="0 5 0 0" x:Name="btaddcliente" Width="150" FontSize="11"
+                    Content="Adicionar Cliente" Background="White" BorderBrush="{x:Null}" Foreground="Black" Click="btaddcliente_Click"/>
+                    <Button Margin="0 5 0 0" x:Name="btaaddservico" Width="150" FontSize="11"
+                    Content="Adicionar Serviço" Background="White" BorderBrush="{x:Null}" Foreground="Black" Click="btaaddservico_Click"/>
+                    <Button Margin="0 5 0 0" x:Name="btadddespesa" Width="150" FontSize="11"
+                    Content="Adicionar Despesa" Background="White" BorderBrush="{x:Null}" Foreground="Black" Click="btadddespesa_Click"/>
+                    <Button Margin="0 5 0 0" x:Name="btaddlucro" Width="150" FontSize="11"
+                    Content="Adicionar Lucro" Background="White" BorderBrush="{x:Null}" Foreground="Black" Click="btaddlucro_Click"/>
+                </StackPanel>
+
+                <!--Menu para buscar dados-->
+
+                <Button x:Name="btbuscar" Margin="0 20 0 0" 
+                    Style="{StaticResource MaterialDesignFloatingActionButton}"
+                    ToolTip="MaterialDesignFloatingActionButton" Click="btbuscar_Click" 
+                    Background="White" BorderBrush="{x:Null}" Foreground="Black">
+                    <materialDesign:PackIcon Kind="Magnify" Width="30" Height="30"/>
+                </Button>
+
+                <StackPanel Visibility="Collapsed" x:Name="funcoesbuscar">
+                    <Button Margin="0 5 0 0" x:Name="btbuscardespesa" Width="150" FontSize="11"
+                    Content="Buscar Despesa" Background="White" BorderBrush="{x:Null}" Foreground="Black" Click="btbuscardespesa_Click"/>
+                    <Button Margin="0 5 0 0" x:Name="btbuscarlucro" Width="150" FontSize="11"
+                    Content="Buscar Lucro" Background="White" BorderBrush="{x:Null}" Foreground="Black" Click="btbuscarlucro_Click"/>
+                    <Button Margin="0 5 0 0" x:Name="btbuscarcliente" Width="150" FontSize="11"
+                    Content="Buscar Cliente" Background="White" BorderBrush="{x:Null}" Foreground="Black" Click="btbuscarcliente_Click"/>
+                    <Button Margin="0 5 0 0" x:Name="btbuscaservico" Width="150" FontSize="11"
+                    Content="Buscar Serviço" Background="White" BorderBrush="{x:Null}" Foreground="Black" Click="btbuscaservico_Click"/>
+                </StackPanel>
+
+                <Button Margin="0 20 0 0" x:Name="btconfiguracoes"
+                    Style="{StaticResource MaterialDesignFloatingActionButton}"
+                    ToolTip="MaterialDesignFloatingActionButton"
+                    Background="White" BorderBrush="{x:Null}" Foreground="Black" Click="btconfiguracoes_Click">
+                    <materialDesign:PackIcon Kind="Cog" Width="30" Height="30"/>
+                </Button>
+
+                <Button Margin="0 20 0 0" x:Name="btImprimirRelatorio"
+                    Style="{StaticResource MaterialDesignFloatingActionButton}"
+                    ToolTip="MaterialDesignFloatingActionButton"
+                    Background="White" BorderBrush="{x:Null}" Foreground="Black" Click="btImprimirRelatorio_Click">
+                    <materialDesign:PackIcon Kind="ChartBar" Width="30" Height="30"/>
+                </Button>
+
+                <Button Margin="0 20 0 0" x:Name="btsair"
+                    Style="{StaticResource MaterialDesignFloatingActionButton}"
+                    ToolTip="MaterialDesignFloatingActionButton"
+                    Background="White" BorderBrush="{x:Null}" Foreground="Black" Click="btsair_Click">
+                    <materialDesign:PackIcon Kind="ExitRun" Width="30" Height="30"/>
+                </Button>
+
+                <Button Margin="0 20 0 0" Height="50" Width="150" x:Name="btacessardiariojustica"
+                    Style="{StaticResource MaterialDesignRaisedLightButton}"
+                    ToolTip="Resource name: MaterialDesignRaisedLightButton"
+                    Background="White" BorderBrush="{x:Null}" Foreground="Black" Click="btacessardiariojustica_Click">
+                    Diário da Justiça
+                </Button>
+            </StackPanel>
+            
+            <!--Observação: estudar uma forma de fazer com que a imagem apareça-->
+            <StackPanel Grid.Row="1">
+                <Image Source="/imagem/imgtelaprincipal.png"  Width="90" Height="90" IsEnabled="False"/>
+            </StackPanel>
+        </Grid>        
+
+        <Grid DockPanel.Dock="Left" Width="600" Margin="20" x:Name="gridCentral"> 
+            <Grid.RowDefinitions>
+                <RowDefinition Height="400"/>
+                <RowDefinition Height="270"/>
+                <RowDefinition Height="30"/>
+            </Grid.RowDefinitions>      
+
+            <StackPanel Width="450" Margin="10 10">
+                <Calendar x:Name="agendacompromissos" Width="300" Height="350" HorizontalAlignment="Center"/>
+            </StackPanel>
+
+            <StackPanel Width="450" Grid.Row="1" Margin="10">
+                <TextBlock TextAlignment="Center" Height="250">AQUI SERÁ ADICIONADO UM GRÁFICO DE TEMPO DE USO DE ALGUMA <LineBreak/> FORMA E PROVALMENTE SERÁ ALTERADO O CALENDÁRIO ACIMA!</TextBlock>
+            </StackPanel>
+               
+        </Grid>
+
+        <Grid DockPanel.Dock="Right" Margin="30" Width="320" x:Name="gridDireitaRecentes">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="60"/>
+                <RowDefinition Height="600"/>
+            </Grid.RowDefinitions>
+
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                <TextBlock FontSize="22" FontWeight="Black" Margin="-20 18 0 0" x:Name="textRecente">Recentes</TextBlock>
+                <Button x:Name="btOcultarServicos" Margin="10 0 0 0" Height="40" Width="40"
+                    Style="{StaticResource MaterialDesignFloatingActionButton}"
+                    ToolTip="MaterialDesignFloatingActionButton" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="Black" Click="btOcultarServicos_Click">
+                    <materialDesign:PackIcon Kind="Visibility" Width="30" Height="30"/>
+                </Button>
+            </StackPanel>
+
+            <DataGrid Grid.Row="1" Margin="0 15 0 0" x:Name="dataGridServicosRecentes" IsReadOnly="true"
+                      AutoGenerateColumns="False" AlternatingRowBackground="#FFE5E5E5" AlternationCount="2">
+
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="Cliente" Width="110" Binding="{Binding Cliente}"/>
+                    <DataGridTextColumn Header="Valor" Width="80" Binding="{Binding Valor, ConverterCulture='pt-BR', StringFormat=C}"/>
+
+                    <DataGridTemplateColumn Width="50">
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <Button Padding="-10" Margin="0 0 0 -5" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="{x:Null}" >
+                                    <materialDesign:PackIcon Kind="Delete" Width="30" Height="35" Foreground="#FFE02121" />
+                                </Button>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+                    <DataGridTemplateColumn Width="50">
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <Button Padding="-10" Margin="0 0 0 -5" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="{x:Null}" >
+                                    <materialDesign:PackIcon Kind="PinOutline" Width="30" Height="35" Foreground="Blue"/>
+                                </Button>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+                </DataGrid.Columns>                
+            </DataGrid>
+        </Grid>
+    </DockPanel>
+</Window>

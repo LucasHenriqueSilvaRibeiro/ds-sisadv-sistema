@@ -15,27 +15,18 @@ using System.Windows.Shapes;
 namespace SisAdv.Views
 {
     /// <summary>
-    /// Lógica interna para Login.xaml
+    /// Lógica interna para ConfigurarPreferenciasRecursos.xaml
     /// </summary>
-    public partial class Login : Window
+    public partial class ConfigurarPreferenciasRecursos : Window
     {
-        public Login()
+        public ConfigurarPreferenciasRecursos()
         {
             InitializeComponent();
         }
 
-        private void btacessar_Click(object sender, RoutedEventArgs e)
+        private void btnsalvar_Click(object sender, RoutedEventArgs e)
         {
-            MainWindow mainWindow = new MainWindow();
-            this.Close();
-            mainWindow.Show();
-        }
-
-        private void btnovousuario_Click(object sender, RoutedEventArgs e)
-        {
-            CadastrarNovoUsuario cadastrarNovoUsuario = new CadastrarNovoUsuario();
-            this.Close();
-            cadastrarNovoUsuario.ShowDialog();
+            MessageBox.Show("Alterações salvas com sucesso!", "", MessageBoxButton.OK, MessageBoxImage.Information);
         }
 
         private void bttrocarsenha_Click(object sender, RoutedEventArgs e)

@@ -78,104 +78,94 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="AcessarDiarioJustiça.xaml.cs">
+    <Compile Include="Database\Conexao.cs" />
+    <Compile Include="Views\AcessarDiarioJustiça.xaml.cs">
       <DependentUpon>AcessarDiarioJustiça.xaml</DependentUpon>
     </Compile>
-    <Compile Include="BuscarDespesa.xaml.cs">
+    <Compile Include="Views\BuscarDespesa.xaml.cs">
       <DependentUpon>BuscarDespesa.xaml</DependentUpon>
     </Compile>
-    <Compile Include="BuscarLucro.xaml.cs">
+    <Compile Include="Views\BuscarLucro.xaml.cs">
       <DependentUpon>BuscarLucro.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Cadastraeventonov.xaml.cs">
-      <DependentUpon>Cadastraeventonov.xaml</DependentUpon>
+    <Compile Include="Views\CadastrarEvento.xaml.cs">
+      <DependentUpon>CadastrarEvento.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Cadastrar-Evento.xaml.cs">
-      <DependentUpon>Cadastrar-Evento.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Cadastrarcliente.xaml.cs">
+    <Compile Include="Views\Cadastrarcliente.xaml.cs">
       <DependentUpon>Cadastrarcliente.xaml</DependentUpon>
     </Compile>
-    <Compile Include="CadastrarDespesa.xaml.cs">
+    <Compile Include="Views\CadastrarDespesa.xaml.cs">
       <DependentUpon>CadastrarDespesa.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Cadastrarlucro.xaml.cs">
+    <Compile Include="Views\Cadastrarlucro.xaml.cs">
       <DependentUpon>Cadastrarlucro.xaml</DependentUpon>
     </Compile>
-    <Compile Include="CadastrarNovoUsuario.xaml.cs">
+    <Compile Include="Views\CadastrarNovoUsuario.xaml.cs">
       <DependentUpon>CadastrarNovoUsuario.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Cliente.cs" />
-    <Compile Include="ConfigurarPreferenciasRecursos.xaml.cs">
+    <Compile Include="Models\Cliente.cs" />
+    <Compile Include="Views\ConfigurarPreferenciasRecursos.xaml.cs">
       <DependentUpon>ConfigurarPreferenciasRecursos.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Despesa.cs" />
+    <Compile Include="Models\Despesa.cs" />
     <Compile Include="Login.xaml.cs">
       <DependentUpon>Login.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Lucro.cs" />
-    <Compile Include="Servico.cs" />
-    <Page Include="AcessarDiarioJustiça.xaml">
+    <Compile Include="Models\Lucro.cs" />
+    <Compile Include="Models\Servico.cs" />
+    <Page Include="Views\AcessarDiarioJustiça.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="AlterarSenha.xaml">
+    <Page Include="Views\AlterarSenha.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="BuscarCliente.xaml">
+    <Page Include="Views\BuscarCliente.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="BuscarDespesa.xaml">
+    <Page Include="Views\BuscarDespesa.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="BuscarDespesaLucro.xaml">
+    <Page Include="Views\BuscarLucro.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="BuscarLucro.xaml">
+    <Page Include="Views\BuscarServico.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="BuscarServico.xaml">
+    <Page Include="Views\CadastrarEvento.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Cadastraeventonov.xaml">
+    <Page Include="Views\Cadastrarcliente.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Cadastrar-Evento.xaml">
+    <Page Include="Views\CadastrarDespesa.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Cadastrarcliente.xaml">
+    <Page Include="Views\Cadastrarlucro.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="CadastrarDespesa.xaml">
+    <Page Include="Views\CadastrarNovoUsuario.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Cadastrarlucro.xaml">
+    <Page Include="Views\CadastrarServico.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="CadastrarNovoUsuario.xaml">
+    <Page Include="Views\ConfigurarPreferenciasRecursos.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="CadastrarServico.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="ConfigurarPreferenciasRecursos.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="ImprimirRelatorio.xaml">
+    <Page Include="Views\ImprimirRelatorio.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -183,33 +173,30 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="MainWindow.xaml">
+    <Page Include="Views\MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Compile Include="AlterarSenha.xaml.cs">
+    <Compile Include="Views\AlterarSenha.xaml.cs">
       <DependentUpon>AlterarSenha.xaml</DependentUpon>
     </Compile>
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="BuscarCliente.xaml.cs">
+    <Compile Include="Views\BuscarCliente.xaml.cs">
       <DependentUpon>BuscarCliente.xaml</DependentUpon>
     </Compile>
-    <Compile Include="BuscarDespesaLucro.xaml.cs">
-      <DependentUpon>BuscarDespesaLucro.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="BuscarServico.xaml.cs">
+    <Compile Include="Views\BuscarServico.xaml.cs">
       <DependentUpon>BuscarServico.xaml</DependentUpon>
     </Compile>
-    <Compile Include="CadastrarServico.xaml.cs">
+    <Compile Include="Views\CadastrarServico.xaml.cs">
       <DependentUpon>CadastrarServico.xaml</DependentUpon>
     </Compile>
-    <Compile Include="ImprimirRelatorio.xaml.cs">
+    <Compile Include="Views\ImprimirRelatorio.xaml.cs">
       <DependentUpon>ImprimirRelatorio.xaml</DependentUpon>
     </Compile>
-    <Compile Include="MainWindow.xaml.cs">
+    <Compile Include="Views\MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
@@ -244,6 +231,7 @@
   <ItemGroup>
     <Resource Include="imagem\imgtelaprincipal.png" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="packages\MaterialDesignThemes.4.2.0-ci2581\build\MaterialDesignThemes.targets" Condition="Exists('packages\MaterialDesignThemes.4.2.0-ci2581\build\MaterialDesignThemes.targets')" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
