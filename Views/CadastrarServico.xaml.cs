@@ -60,27 +60,31 @@ namespace SisAdv.Views
                 servico.Cliente = Convert.ToString(comboboxCliente.Text);
                 servico.Data = (DateTime)datepickerDataServico.SelectedDate;
                 servico.Valor = Convert.ToDouble(txbValor.Text);
+
+                //ver essas questões
                 servico.Fk_advogado = 1;
                 servico.Fk_cliente = 1;
                 servico.Fk_evento = 1;
 
-                if (rbtipoEleitoral != null)
-                {
+                if (rbtipoEleitoral.IsChecked.Value)
                     servico.Tipo = "Eleitoral";
-                }
-                else if (rbtipoCriminal != null)
-                {
+                else if (rbtipoCriminal.IsChecked.Value)
                     servico.Tipo = "Criminal";
-                }
-                else if (rbtipoCivil != null)
-                {
+                else if (rbtipoCivil.IsChecked.Value)
                     servico.Tipo = "Civil";
-                }
 
                 ServicoDAO servicoDAO = new ServicoDAO();
                 servicoDAO.Insert(servico);
 
                 MessageBox.Show("O Serviço foi cadastrado com sucesso!", "Sucesso", MessageBoxButton.OK, MessageBoxImage.Information);
+
+                //Código do SpaceSistema (programa do professor).
+                var result = MessageBox.Show("Deseja continuar adicionando serviços?", "Continuar?", MessageBoxButton.YesNo, MessageBoxImage.Question);
+
+                if (result == MessageBoxResult.No)
+                    this.Close();
+                else
+                    ClearInputs();
             }
             catch (Exception ex)
             {
@@ -95,11 +99,18 @@ namespace SisAdv.Views
 
         private void btnAdicionarServico_Click(object sender, RoutedEventArgs e)
         {
-            //Limpar as textbox
-            txbEvento.Clear();
-            txbHorario.Clear();
+            ClearInputs();
+        }
+
+        private void ClearInputs()
+        {
             txbValor.Clear();
             txbDescricao.Clear();
+            txbEvento.Clear();
+            txbHorario.Clear();
+            datepickerDataEvento.SelectedDate = null;
+            datepickerDataServico.SelectedDate = null;
+            comboboxCliente = null;
         }
     }
 }

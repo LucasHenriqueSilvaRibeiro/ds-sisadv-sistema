@@ -33,7 +33,7 @@ namespace SisAdv.Models
             try
             {
                 var query = conn.Query();
-                query.CommandText = "INSERT INTO servico (cliente_serv, valor_serv, data_serv, tipo_serv, fk_advogado, fk_cliente, fk_evento) VALUES (@cliente, @valor, @data, @tipo)";
+                query.CommandText = "INSERT INTO servico (cliente_serv, valor_serv, data_serv, tipo_serv, fk_advogado, fk_cliente, fk_evento) VALUES (@cliente, @valor, @data, @tipo, @fk_cliente, @fk_advogado, @fk_evento)";
 
                 query.Parameters.AddWithValue("@cliente", t.Cliente);
                 query.Parameters.AddWithValue("@valor", t.Valor);

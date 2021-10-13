@@ -16,7 +16,7 @@ namespace SisAdv.Database
 
         private static string user = "root";
 
-        private static string password = "YES";
+        private static string password = "Rootrootsisadv";
 
         private static string dbname = "db_sistema_sisadv";
 
