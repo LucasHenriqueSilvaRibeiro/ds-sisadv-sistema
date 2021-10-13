@@ -35,7 +35,7 @@ namespace SisAdv.Views
                 {
                     Cliente = "Joãozinho - " + i,
                     Tipo = "Civil - " + i,
-                    Data = "01/06/2021",
+                    //Data = "01/06/2021",
                 });
             }
             dataGridBuscarServico.ItemsSource = listaServico;

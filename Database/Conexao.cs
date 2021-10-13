@@ -16,7 +16,7 @@ namespace SisAdv.Database
 
         private static string user = "root";
 
-        private static string password = "root";
+        private static string password = "YES";
 
         private static string dbname = "db_sistema_sisadv";
 
@@ -28,7 +28,7 @@ namespace SisAdv.Database
         {
             try
             {
-                connection = new MySqlConnection($"server={host};database={dbname};port={port};user={user};password={password}");
+                connection = new MySqlConnection($"server={host};database={dbname};port={port};user={user};password={password}; SslMode = none");
 
                 connection.Open();
             }

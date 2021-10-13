@@ -8,8 +8,14 @@
 
 #Banco de Dados:
  
-create database sistemaSISADV;
-use sistemaSISADV;
+create database db_sistema_sisadv;
+use db_sistema_sisadv;
+
+desc servico;
+select * from servico;
+select * from advogado;
+select * from cliente;
+select * from evento;
 
 create table endereco(
 id_endereco int primary key auto_increment,

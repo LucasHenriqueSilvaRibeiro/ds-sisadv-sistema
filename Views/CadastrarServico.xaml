@@ -68,9 +68,17 @@
         
         <!--Segunda metade da tela-->
 
-        <StackPanel Grid.Row="3" HorizontalAlignment="Center" VerticalAlignment="Center">
+        <StackPanel Grid.Row="3" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0 -50 0 0">
             <Label FontSize="18">Descrição</Label>
-            <TextBox x:Name="txbDescricao" Width="270" Height="100" Style="{StaticResource MaterialDesignOutlinedTextBox}" CaretBrush="#FF1E1E1F" Foreground="{x:Null}"/>
+            <TextBox x:Name="txbDescricao" Width="270" Height="50" Style="{StaticResource MaterialDesignOutlinedTextBox}" CaretBrush="#FF1E1E1F" Foreground="{x:Null}"/>
+        </StackPanel>
+        
+        <!--Observação, será necessário colocar o tipo do serviço, acabei esquecendo no semestre passado, trabalharei melhor na parte estética depois.-->
+        <StackPanel Grid.Row="3" HorizontalAlignment="Center" VerticalAlignment="Center" Orientation="Horizontal" Margin="0 100 0 0">
+            <Label FontSize="18">Tipo do Serviço:</Label>
+            <RadioButton x:Name="rbtipoEleitoral">Eleitoral</RadioButton>
+            <RadioButton x:Name="rbtipoCriminal">Criminal</RadioButton>
+            <RadioButton x:Name="rbtipoCivil">Civil</RadioButton>
         </StackPanel>
 
         <StackPanel Grid.Row="4" HorizontalAlignment="Center" VerticalAlignment="Center" Height="180" Width="320">

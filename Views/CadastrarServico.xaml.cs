@@ -20,9 +20,17 @@ namespace SisAdv.Views
     /// </summary>
     public partial class CadastrarServico : Window
     {
+        private Servico _servico;
+
         public CadastrarServico()
         {
             InitializeComponent();
+            Loaded += CadastrarServico_Loaded;
+        }
+
+        private void CadastrarServico_Loaded(object sender, RoutedEventArgs e)
+        {
+            _servico = new Servico();
         }
 
         private void btnPesquisarServico_Click(object sender, RoutedEventArgs e)
@@ -44,7 +52,40 @@ namespace SisAdv.Views
 
         private void btnSalvar_Click(object sender, RoutedEventArgs e)
         {
-            MessageBox.Show("Serviço Cadastrado com Sucesso", "", MessageBoxButton.OK, MessageBoxImage.Information);
+            try
+            {
+                Servico servico = new Servico();
+
+                //Tentei utilizar o ToString, se não der, verificaro outra solução.
+                servico.Cliente = Convert.ToString(comboboxCliente.Text);
+                servico.Data = (DateTime)datepickerDataServico.SelectedDate;
+                servico.Valor = Convert.ToDouble(txbValor.Text);
+                servico.Fk_advogado = 1;
+                servico.Fk_cliente = 1;
+                servico.Fk_evento = 1;
+
+                if (rbtipoEleitoral != null)
+                {
+                    servico.Tipo = "Eleitoral";
+                }
+                else if (rbtipoCriminal != null)
+                {
+                    servico.Tipo = "Criminal";
+                }
+                else if (rbtipoCivil != null)
+                {
+                    servico.Tipo = "Civil";
+                }
+
+                ServicoDAO servicoDAO = new ServicoDAO();
+                servicoDAO.Insert(servico);
+
+                MessageBox.Show("O Serviço foi cadastrado com sucesso!", "Sucesso", MessageBoxButton.OK, MessageBoxImage.Information);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Não executado", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
         }
 
         private void btnAtribuirEvento_Click(object sender, RoutedEventArgs e)
