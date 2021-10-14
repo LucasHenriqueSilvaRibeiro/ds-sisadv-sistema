@@ -25,6 +25,7 @@ namespace SisAdv.Views
         {
             InitializeComponent();
             Loaded += MainWindow_Loaded;
+            ShowColumnChart();
         }
 
         private void MainWindow_Loaded(object sender, RoutedEventArgs e)
@@ -44,6 +45,20 @@ namespace SisAdv.Views
 
             //Está dando um erro nesta linha, descobrir o que é!!
             dataGridServicosRecentes.ItemsSource = listaServicos;
+        }
+
+        private void ShowColumnChart()
+        {
+            List<KeyValuePair<string, int>> valueList = new List<KeyValuePair<string, int>>();
+            valueList.Add(new KeyValuePair<string, int>("Segunda", 8));
+            valueList.Add(new KeyValuePair<string, int>("Terça", 7));
+            valueList.Add(new KeyValuePair<string, int>("Quarta", 7));
+            valueList.Add(new KeyValuePair<string, int>("Quinta", 10));
+            valueList.Add(new KeyValuePair<string, int>("Sexta", 6));
+            valueList.Add(new KeyValuePair<string, int>("Sábado", 4));
+
+            //Setting data for column chart
+            columnChart.DataContext = valueList;
         }
 
         private void btadicionar_Click(object sender, RoutedEventArgs e)

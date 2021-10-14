@@ -3,7 +3,8 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:SisAdv.Views"
+        xmlns:local="clr-namespace:SisAdv.Views"        
+        xmlns:chartingToolkit="clr-namespace:System.Windows.Controls.DataVisualization.Charting;assembly=System.Windows.Controls.DataVisualization.Toolkit"
         mc:Ignorable="d"
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         TextElement.Foreground="{DynamicResource MaterialDesignBody}"
@@ -109,8 +110,11 @@
                 <Calendar x:Name="agendacompromissos" Width="300" Height="350" HorizontalAlignment="Center"/>
             </StackPanel>
 
-            <StackPanel Width="450" Grid.Row="1" Margin="10">
-                <TextBlock TextAlignment="Center" Height="250">AQUI SERÁ ADICIONADO UM GRÁFICO DE TEMPO DE USO DE ALGUMA <LineBreak/> FORMA E PROVALMENTE SERÁ ALTERADO O CALENDÁRIO ACIMA!</TextBlock>
+            <StackPanel Width="450" Grid.Row="1" Margin="65 0 0 0">
+                <!--Label HorizontalAlignment="Center" FontSize="18" FontWeight="Bold">Horas Trabalhadas por Dia</Label-->
+                <chartingToolkit:Chart Height="300" Width="470" HorizontalAlignment="Left" Margin="0,-53, 0, 0" Name="columnChart" VerticalAlignment="Bottom" BorderBrush="{x:Null}">
+                    <chartingToolkit:ColumnSeries DependentValuePath="Value" IndependentValuePath="Key" ItemsSource="{Binding}" />
+                </chartingToolkit:Chart>
             </StackPanel>
                
         </Grid>
