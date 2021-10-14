@@ -33,7 +33,7 @@
 
         <StackPanel Grid.Row="1" Orientation="Horizontal">
             <TextBlock Margin="10,5,0,0" Text="Título" VerticalAlignment="Top" HorizontalAlignment="Left" Width="34" Height="27" />
-            <TextBox  TextWrapping="Wrap" Text="" Margin="10,0,0,0" Background="White" Foreground="#FF0C0C0C" SelectionBrush="White" Width="142" BorderBrush="{x:Null}"/>
+            <TextBox x:Name="txbTitulo" TextWrapping="Wrap" Text="" Margin="10,0,0,0" Background="White" Foreground="#FF0C0C0C" SelectionBrush="White" Width="142" BorderBrush="{x:Null}"/>
         </StackPanel>
 
         <StackPanel Grid.Row="2" Orientation="Horizontal">
@@ -43,20 +43,20 @@
 
         <StackPanel Grid.Row="3" Orientation="Horizontal">
             <TextBlock Margin="10" Text="Horário"/>
-            <TextBox TextWrapping="Wrap" Text="" Width="137" Background="White" Margin="0,10,0,0" BorderBrush="#89FFFFFF"/>
+            <TextBox x:Name="txbHorario" TextWrapping="Wrap" Text="" Width="137" Background="White" Margin="0,10,0,0" BorderBrush="#89FFFFFF"/>
         </StackPanel>
 
         <StackPanel Grid.Row="4" Orientation="Horizontal">
             <TextBlock Margin="10" Text="Notificação"/>
-            <RadioButton Content="Receber " Background="#FF5AAA48"/>
+            <RadioButton x:Name="rbNotificacao" Content="Receber " Background="#FF5AAA48"/>
         </StackPanel>
 
         <StackPanel Grid.Row="5" Orientation="Horizontal">
             <TextBlock Margin="10" Text="Importância"/>
-            <TextBox TextWrapping="Wrap" Text="" Width="43" Background="White" Margin="0,10,0,48" Foreground="{x:Null}" SelectionBrush="{x:Null}" CaretBrush="{x:Null}" BorderBrush="#89FFFFFF"/>
+            <!--Trocar importância por um combobox com as três opções de importância, por enquanto será um textbox mesmo-->
+            <TextBox x:Name="txbImportancia" TextWrapping="Wrap" Text="" Width="43" Background="White" Margin="0,10,0,48" Foreground="{x:Null}" SelectionBrush="{x:Null}" CaretBrush="{x:Null}" BorderBrush="#89FFFFFF"/>
             <TextBlock Margin="10,10,0,0" Text="Codígo"/>
             <TextBox TextWrapping="Wrap" Text="" Width="104"  Background="White" Margin="10,9,0,48" HorizontalAlignment="Center" BorderBrush="#89FFFFFF"/>
-
         </StackPanel>
         
         <StackPanel Grid.ColumnSpan="2" Margin="470,0,10,0" Grid.RowSpan="6">
@@ -72,7 +72,7 @@
                 <materialDesign:PackIcon Kind="Edit" Width="45" Height="40" Foreground="Black"/>
             </Button>
             <TextBlock HorizontalAlignment="Center" Text="Editar Evento"/>
-            <Button HorizontalAlignment="Center" Margin="121,15" Background="#FF51C745" Height="55" Width="95" BorderBrush="{x:Null}" x:Name="bntSalvar">
+            <Button HorizontalAlignment="Center" Margin="121,15" Background="#FF51C745" Height="55" Width="95" BorderBrush="{x:Null}" x:Name="BntSalvar" Click="BntSalvar_Click">
                 <materialDesign:PackIcon Kind="ContentSave" Width="45" Height="50" Foreground="White"/>
             </Button>
             <TextBlock HorizontalAlignment="Center" Text="Salvar Evento"/>
