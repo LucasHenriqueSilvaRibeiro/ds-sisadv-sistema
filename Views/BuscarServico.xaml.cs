@@ -33,7 +33,7 @@ namespace SisAdv.Views
             {
                 listaServico.Add(new Servico()
                 {
-                    Cliente = "Joãozinho - " + i,
+                    //Cliente = "Joãozinho - " + i,
                     Tipo = "Civil - " + i,
                     //Data = "01/06/2021",
                 });

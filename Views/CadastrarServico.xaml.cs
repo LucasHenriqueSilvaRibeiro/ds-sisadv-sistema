@@ -54,27 +54,31 @@ namespace SisAdv.Views
         {
             try
             {
-                Servico servico = new Servico();
+                /*Código errado, com as FK, deixarei para lembrar
+               _servico.Fk_advogado = 1;
+               _servico.Fk_cliente = 1;
+               _servico.Fk_evento = 1;*/
+                //Deixarei dessa forma por enquanto até assistir as aulas do ID e como pegar os id de advogado, cliente e evento.
+                _servico.Advogado = 2;
+                _servico.Evento = 1;
+                _servico.Cliente = 2;
 
-                //Tentei utilizar o ToString, se não der, verificaro outra solução.
-                servico.Cliente = Convert.ToString(comboboxCliente.Text);
-                servico.Data = (DateTime)datepickerDataServico.SelectedDate;
-                servico.Valor = Convert.ToDouble(txbValor.Text);
+                if (double.TryParse(txbValor.Text, out double valor))
+                    _servico.Valor = valor;
 
-                //ver essas questões
-                servico.Fk_advogado = 1;
-                servico.Fk_cliente = 1;
-                servico.Fk_evento = 1;
+                if (datepickerDataServico.SelectedDate != null)
+                    _servico.Data = (DateTime)datepickerDataServico.SelectedDate;               
 
                 if (rbtipoEleitoral.IsChecked.Value)
-                    servico.Tipo = "Eleitoral";
+                    _servico.Tipo = "Eleitoral";
                 else if (rbtipoCriminal.IsChecked.Value)
-                    servico.Tipo = "Criminal";
+                    _servico.Tipo = "Criminal";
                 else if (rbtipoCivil.IsChecked.Value)
-                    servico.Tipo = "Civil";
+                    _servico.Tipo = "Civil";
 
+                //No código do professor tem um código para validação, ainda não cheguei nessas aulas, então ficará assim por enquanto
                 ServicoDAO servicoDAO = new ServicoDAO();
-                servicoDAO.Insert(servico);
+                servicoDAO.Insert(_servico);
 
                 MessageBox.Show("O Serviço foi cadastrado com sucesso!", "Sucesso", MessageBoxButton.OK, MessageBoxImage.Information);
 

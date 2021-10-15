@@ -33,20 +33,19 @@ namespace SisAdv.Models
             try
             {
                 var query = conn.Query();
-                query.CommandText = "INSERT INTO servico (cliente_serv, valor_serv, data_serv, tipo_serv, fk_advogado, fk_cliente, fk_evento) VALUES (@cliente, @valor, @data, @tipo, @fk_cliente, @fk_advogado, @fk_evento)";
+                query.CommandText = "CALL inserirServico(@valor, @data, @tipo, @advogado, @cliente, @evento)";
 
-                query.Parameters.AddWithValue("@cliente", t.Cliente);
                 query.Parameters.AddWithValue("@valor", t.Valor);
                 query.Parameters.AddWithValue("@data", t.Data.ToString("yyyy-MM-dd"));
                 query.Parameters.AddWithValue("@tipo", t.Tipo);
-                query.Parameters.AddWithValue("@fk_cliente", t.Fk_cliente);
-                query.Parameters.AddWithValue("@fk_advogado", t.Fk_advogado);
-                query.Parameters.AddWithValue("@fk_evento", t.Fk_evento);
+                query.Parameters.AddWithValue("@advogado", t.Advogado);
+                query.Parameters.AddWithValue("@cliente", t.Cliente);
+                query.Parameters.AddWithValue("@evento", t.Evento);
 
                 var result = query.ExecuteNonQuery();
 
-                if (result == 0)
-                    throw new Exception("O registro não será inserido. Tente novamente após corrigir algum erro.");
+                /*if (result == 0)
+                    throw new Exception("O registro não será inserido. Tente novamente após corrigir algum erro.");*/
 
             }
             catch (Exception e)

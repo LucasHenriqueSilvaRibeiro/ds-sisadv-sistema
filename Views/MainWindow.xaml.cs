@@ -37,7 +37,7 @@ namespace SisAdv.Views
                 listaServicos.Add(new Servico()
                 {
                     Id = i + 1,
-                    Cliente = "Clientão - " + i,
+                    //Cliente = "Clientão - " + i,
                     Valor = 5 * i,
                     Descricao = "Caso Civil" + 1,
                 });
