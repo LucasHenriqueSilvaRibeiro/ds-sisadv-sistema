@@ -12,6 +12,8 @@ namespace SisAdv.Models
 
         public int Cliente { get; set; }
 
+        public String ClienteTest { get; set; }
+
         public DateTime Data { get; set; }
 
         public String Tipo { get; set; }

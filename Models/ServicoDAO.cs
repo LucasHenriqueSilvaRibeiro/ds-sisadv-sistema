@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using SisAdv.Interface;
 using MySql.Data.MySqlClient;
 using SisAdv.Database;
+using SisAdv.Models;
 
 namespace SisAdv.Models
 {
@@ -60,7 +61,42 @@ namespace SisAdv.Models
 
         public List<Servico> List()
         {
-            throw new NotImplementedException();
+            try
+            {
+                List<Servico> list = new List<Servico>();
+
+                var query = conn.Query();
+                query.CommandText = "SELECT * FROM servico";
+
+                MySqlDataReader reader = query.ExecuteReader();
+
+                while (reader.Read())
+                {
+                    list.Add(new Servico()
+                    {
+                        Id = reader.GetInt32("id_servico"),
+                        ClienteTest = reader.GetString("cliente_serv"),
+                        Valor = reader.GetDouble("valor_serv"),
+                        Data = reader.GetDateTime("data_serv"),
+                        Tipo = reader.GetString("tipo_serv"),
+
+                        //Tem um cliente que está como Int, mas no banco de dados ele preenche o cliente String com o nome dele fazendo um select dentro de um PROCEDURE, espero dar certo
+                        Advogado = reader.GetInt32("fk_advogado"),
+                        Cliente = reader.GetInt32("fk_cliente"),                        
+                        Evento = reader.GetInt32("fk_evento")
+                    });                    
+                }
+
+                return list;
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+            finally
+            {
+                conn.Close();
+            }
         }
 
         public void Update(Servico t)

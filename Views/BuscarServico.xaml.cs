@@ -27,18 +27,23 @@ namespace SisAdv.Views
         }
         public void BuscarServico_Loaded(object sender, RoutedEventArgs e)
         {
-            List<Servico> listaServico = new List<Servico>();
+            LoadDataGrid();
+        }
 
-            for (int i = 0; i < 30; i++)
+        private void LoadDataGrid()
+        {
+            try
             {
-                listaServico.Add(new Servico()
-                {
-                    //Cliente = "Joãozinho - " + i,
-                    Tipo = "Civil - " + i,
-                    //Data = "01/06/2021",
-                });
+                var dao = new ServicoDAO();
+
+                dataGridBuscarServico.ItemsSource = dao.List();
             }
-            dataGridBuscarServico.ItemsSource = listaServico;
+            catch (Exception ex)
+            {
+
+                MessageBox.Show(ex.Message, "Exceção", MessageBoxButton.OK, MessageBoxImage.Error);
+
+            }
         }
         private void btn_excluir_Click(object sender, RoutedEventArgs e)
         {
