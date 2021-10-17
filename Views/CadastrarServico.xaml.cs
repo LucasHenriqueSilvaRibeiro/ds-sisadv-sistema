@@ -53,11 +53,6 @@ namespace SisAdv.Views
             buscarServico.ShowDialog();
         }
 
-        private void listArquivos_Drop(object sender, DragEventArgs e)
-        {
-
-        }
-
         private void btnCancelar_Click(object sender, RoutedEventArgs e)
         {
             this.Close();
@@ -65,48 +60,26 @@ namespace SisAdv.Views
 
         private void btnSalvar_Click(object sender, RoutedEventArgs e)
         {
-            try
-            {
-                /*Código errado, com as FK, deixarei para lembrar
-               _servico.Fk_advogado = 1;
-               _servico.Fk_cliente = 1;
-               _servico.Fk_evento = 1;*/
-                //Deixarei dessa forma por enquanto até assistir as aulas do ID e como pegar os id de advogado, cliente e evento.
-                _servico.Advogado = 2;
-                _servico.Evento = 1;
-                _servico.Cliente = 2;
+            //Deixarei dessa forma por enquanto até assistir as aulas do ID e como pegar os id de advogado, cliente e evento (Se der esse último(evento)).
+            _servico.Cliente = 2;
+            _servico.Advogado = 1;
 
-                if (double.TryParse(txbValor.Text, out double valor))
-                    _servico.Valor = valor;
+            _servico.Descricao = txbDescricao.Text;
 
-                if (datepickerDataServico.SelectedDate != null)
-                    _servico.Data = (DateTime)datepickerDataServico.SelectedDate;               
+            if (double.TryParse(txbValor.Text, out double valor))
+                _servico.Valor = valor;
 
-                if (rbtipoEleitoral.IsChecked.Value)
-                    _servico.Tipo = "Eleitoral";
-                else if (rbtipoCriminal.IsChecked.Value)
-                    _servico.Tipo = "Criminal";
-                else if (rbtipoCivil.IsChecked.Value)
-                    _servico.Tipo = "Civil";
+            if (datepickerDataServico.SelectedDate != null)
+                _servico.Data = (DateTime)datepickerDataServico.SelectedDate;
 
-                //No código do professor tem um código para validação, ainda não cheguei nessas aulas, então ficará assim por enquanto
-                ServicoDAO servicoDAO = new ServicoDAO();
-                servicoDAO.Insert(_servico);
+            if (rbtipoEleitoral.IsChecked.Value)
+                _servico.Tipo = "Eleitoral";
+            else if (rbtipoCriminal.IsChecked.Value)
+                _servico.Tipo = "Criminal";
+            else if (rbtipoCivil.IsChecked.Value)
+                _servico.Tipo = "Civil";
 
-                MessageBox.Show("O Serviço foi cadastrado com sucesso!", "Sucesso", MessageBoxButton.OK, MessageBoxImage.Information);
-
-                //Código do SpaceSistema (programa do professor).
-                var result = MessageBox.Show("Deseja continuar adicionando serviços?", "Continuar?", MessageBoxButton.YesNo, MessageBoxImage.Question);
-
-                if (result == MessageBoxResult.No)
-                    this.Close();
-                else
-                    ClearInputs();
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message, "Não executado", MessageBoxButton.OK, MessageBoxImage.Error);
-            }
+            SaveData();
         }
 
         private void btnAtribuirEvento_Click(object sender, RoutedEventArgs e)
@@ -117,6 +90,45 @@ namespace SisAdv.Views
         private void btnAdicionarServico_Click(object sender, RoutedEventArgs e)
         {
             ClearInputs();
+        }
+
+        private void SaveData()
+        {
+            try
+            {
+                var dao = new ServicoDAO();
+                var text = "atualizado";
+
+                if (_servico.Id == 0)
+                {
+                    dao.Insert(_servico);
+                    text = "adicionado";
+                }
+                else
+                    dao.Update(_servico);
+
+                MessageBox.Show($"O Servico foi {text} com sucesso!", "Sucesso", MessageBoxButton.OK, MessageBoxImage.Information);
+                CloseFormVerify();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Não Executado", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+        }
+
+        private void CloseFormVerify()
+        {
+            if (_servico.Id == 0)
+            {
+                var result = MessageBox.Show("Deseja continuar adicionando serviços?", "Continuar?", MessageBoxButton.YesNo, MessageBoxImage.Question);
+
+                if (result == MessageBoxResult.No)
+                    this.Close();
+                else
+                    ClearInputs();
+            }
+            else
+                this.Close();
         }
 
         private void FillForm()
@@ -137,20 +149,6 @@ namespace SisAdv.Views
                     rbtipoCriminal.Content = _servico.Tipo;
                 else if (rbtipoCivil.IsChecked.Value)
                     rbtipoCivil.Content = _servico.Tipo;
-
-                /*var dao = new FuncionarioDAO();
-                _funcionario = dao.GetById(_id);
-
-                txtId.Text = _funcionario.Id.ToString();
-                txtNome.Text = _funcionario.Nome;
-                txtCPF.Text = _funcionario.CPF;
-                txtRG.Text = _funcionario.RG;
-                dtPickerDataNascimento.SelectedDate = _funcionario.DataNascimento;
-                txtEmail.Text = _funcionario.Email;
-                txtCelular.Text = _funcionario.Celular;
-                txtFuncao.Text = _funcionario.Funcao;
-                txtSalario.Text = _funcionario.Salario.ToString();*/
-
             }
             catch (Exception ex)
             {
@@ -162,11 +160,12 @@ namespace SisAdv.Views
         {
             txbValor.Clear();
             txbDescricao.Clear();
-            /*txbEvento.Clear();
-            txbHorario.Clear();
-            datepickerDataEvento.SelectedDate = null*/;
             datepickerDataServico.SelectedDate = null;
             comboboxCliente = null;
+            comboboxAdvogado = null;
+            rbtipoCivil.IsChecked = false;
+            rbtipoCriminal.IsChecked = false;
+            rbtipoEleitoral.IsChecked = false;
         }
     }
 }

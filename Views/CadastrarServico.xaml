@@ -92,7 +92,7 @@
         <StackPanel Grid.Row="4" HorizontalAlignment="Center" VerticalAlignment="Center" Height="180" Width="320">
             <Label Margin="15 0 0 0" FontSize="18" Padding="20">Anexar Arquivos</Label>
             <!--Adicionar uma área para anexar arquivos, site da informação: http://www.linhadecodigo.com.br/artigo/3698/drag-e-drop-de-arquivos-em-wpf.aspx-->
-            <ListBox Width="300" Height="100" Margin="20 0 20 0" Name="listArquivos" Grid.Row="1" AllowDrop="True" Drop="listArquivos_Drop" Background="#FFB9B9B9"/>
+            <ListBox Width="300" Height="100" Margin="20 0 20 0" Name="listArquivos" Grid.Row="1" AllowDrop="True" Background="#FFB9B9B9"/>
         </StackPanel>
 
         <StackPanel Grid.Row="5" Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">

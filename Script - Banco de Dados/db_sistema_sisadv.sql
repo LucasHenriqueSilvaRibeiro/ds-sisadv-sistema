@@ -60,6 +60,7 @@ advogado_serv varchar (100),
 valor_serv double,
 data_serv date,
 tipo_serv varchar (50),
+descricao_serv varchar (200),
 fk_advogado int,
 fk_cliente int,
 foreign key (fk_cliente) references cliente (id_cliente),
@@ -270,7 +271,7 @@ select * from advogado;
 #Tabela servico--------------------------------------------------------------------------------------------------------------------------------------
 
 delimiter $$
-create procedure inserirServico(valor double, data date, tipo varchar (100), advogado int, cliente int)
+create procedure inserirServico(valor double, data date, tipo varchar (100), advogado int, cliente int, descricao varchar (200))
 begin
 declare testeadvogado int;
 declare testecliente int;
@@ -288,7 +289,7 @@ set verificarjaexistente = (select id_servico from servico where (advogado = fk_
 if (testeadvogado is not null) then
 	if (testecliente is not null) then
 		if (verificarjaexistente is null) then
-			insert into servico values (null, buscarnomecliente, buscarnomeadvogado, valor, data, tipo, advogado, cliente);
+			insert into servico values (null, buscarnomecliente, buscarnomeadvogado, valor, data, tipo, descricao, advogado, cliente);
 			select 'Serviço cadastrado no sistema.' as Confirmacao;
 		else
 			select 'Este serviço já foi cadastrado no sistema, tente outro.' as Alerta;
@@ -302,8 +303,9 @@ end if;
 end;
 $$ delimiter ;
 drop procedure inserirServico;
-call inserirServico (1000, '2021-08-31', 'Civil', 1, 2);
+call inserirServico (1000, '2021-08-31', 'Civil', 1, 2, 'Buscando se defender');
 call inserirServico (5000, '2021-08-20', 'Administrativo', 2, 2);
+call inserirServico (3410, '2021-05-20', 'Eleitoral', 2, 3);
 select * from servico;
 select * from cliente;
 select * from advogado;

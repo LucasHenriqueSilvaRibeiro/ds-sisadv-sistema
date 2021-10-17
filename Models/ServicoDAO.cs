@@ -91,20 +91,16 @@ namespace SisAdv.Models
             try
             {
                 var query = conn.Query();
-                query.CommandText = "CALL inserirServico(@valor, @data, @tipo, @advogado, @cliente, @evento)";
+                query.CommandText = "CALL inserirServico(@valor, @data, @tipo, @advogado, @cliente, @descricao)";
 
                 query.Parameters.AddWithValue("@valor", t.Valor);
                 query.Parameters.AddWithValue("@data", t.Data.ToString("yyyy-MM-dd"));
                 query.Parameters.AddWithValue("@tipo", t.Tipo);
                 query.Parameters.AddWithValue("@advogado", t.Advogado);
                 query.Parameters.AddWithValue("@cliente", t.Cliente);
-                query.Parameters.AddWithValue("@evento", t.Evento);
+                query.Parameters.AddWithValue("@descricao", t.Descricao);
 
                 var result = query.ExecuteNonQuery();
-
-                /*if (result == 0)
-                    throw new Exception("O registro não será inserido. Tente novamente após corrigir algum erro.");*/
-
             }
             catch (Exception e)
             {
