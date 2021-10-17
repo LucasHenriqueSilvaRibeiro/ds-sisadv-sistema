@@ -30,21 +30,23 @@ namespace SisAdv.Views
 
         private void MainWindow_Loaded(object sender, RoutedEventArgs e)
         {
-           List<Servico> listaServicos = new List<Servico>();
+            LoadDataGrid();
+        }
 
-            for (int i = 0; i < 30; i++)
+        private void LoadDataGrid()
+        {
+            try
             {
-                listaServicos.Add(new Servico()
-                {
-                    Id = i + 1,
-                    //Cliente = "Clientão - " + i,
-                    Valor = 5 * i,
-                    Descricao = "Caso Civil" + 1,
-                });
-            }
+                var dao = new ServicoDAO();
 
-            //Está dando um erro nesta linha, descobrir o que é!!
-            dataGridServicosRecentes.ItemsSource = listaServicos;
+                dataGridServicosRecentes.ItemsSource = dao.List();
+            }
+            catch (Exception ex)
+            {
+
+                MessageBox.Show(ex.Message, "Não foi possível carregar as listas de serviços. Verifique e tente novamente.", MessageBoxButton.OK, MessageBoxImage.Error);
+
+            }
         }
 
         private void ShowColumnChart()
@@ -65,9 +67,7 @@ namespace SisAdv.Views
         {
             funcoesadicionar.Visibility = Visibility.Visible;
             funcoesbuscar.Visibility = Visibility.Collapsed;
-        }
-
-        
+        }        
 
         private void btbuscar_Click(object sender, RoutedEventArgs e)
         {

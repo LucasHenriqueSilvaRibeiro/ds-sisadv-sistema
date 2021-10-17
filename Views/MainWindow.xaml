@@ -138,7 +138,7 @@
                       AutoGenerateColumns="False" AlternatingRowBackground="#FFE5E5E5" AlternationCount="2">
 
                 <DataGrid.Columns>
-                    <DataGridTextColumn Header="Cliente" Width="110" Binding="{Binding Cliente}"/>
+                    <DataGridTextColumn Header="Cliente" Width="110" Binding="{Binding ClienteNome}"/>
                     <DataGridTextColumn Header="Valor" Width="80" Binding="{Binding Valor, ConverterCulture='pt-BR', StringFormat=C}"/>
 
                     <DataGridTemplateColumn Width="50">
