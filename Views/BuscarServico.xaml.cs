@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using SisAdv.Models;
+using MySql.Data.MySqlClient;
 
 namespace SisAdv.Views
 {
@@ -25,10 +26,68 @@ namespace SisAdv.Views
             InitializeComponent();
             Loaded += BuscarServico_Loaded;
         }
+
         public void BuscarServico_Loaded(object sender, RoutedEventArgs e)
         {
             LoadDataGrid();
         }
+        
+        private void btn_excluir_Click(object sender, RoutedEventArgs e)
+        {
+            MessageBox.Show("Deseja excluir esse serviço?", "", MessageBoxButton.YesNo, MessageBoxImage.Question);
+        }
+
+        private void Btn_Update_Click(object sender, RoutedEventArgs e)
+        {
+            var servicoSelected = dataGridBuscarServico.SelectedItem as Servico;
+
+            var window = new CadastrarServico(servicoSelected.Id);
+
+            window.ShowDialog();
+
+            LoadDataGrid();
+        }
+
+        private void Btn_Delete_Click(object sender, RoutedEventArgs e)
+        {
+            var servicoSelected = dataGridBuscarServico.SelectedItem as Servico;
+
+            var result = MessageBox.Show($"Deseja realmente remover o servico do cliente `{servicoSelected.ClienteNome}`?", "Confirmação de Exclusão", MessageBoxButton.YesNo, MessageBoxImage.Warning);
+
+            try
+            {
+                if (result == MessageBoxResult.Yes)
+                {
+                    var dao = new ServicoDAO();
+                    dao.Delete(servicoSelected);
+                    LoadDataGrid();
+                }
+            }
+            catch (Exception ex)
+            {
+
+                MessageBox.Show(ex.Message, "Exceção", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+            /*var funcionarioSelected = dataGrid.SelectedItem as Funcionario;
+
+            var result = MessageBox.Show($"Deseja realmente remover o funcionário `{funcionarioSelected.Nome}`?", "Confirmação de Exclusão",
+                MessageBoxButton.YesNo, MessageBoxImage.Warning);
+
+            try
+            {
+                if (result == MessageBoxResult.Yes)
+                {
+                    var dao = new FuncionarioDAO();
+                    dao.Delete(funcionarioSelected);
+                    LoadDataGrid();
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Exceção", MessageBoxButton.OK, MessageBoxImage.Error);
+            }*/
+        }
+
 
         private void LoadDataGrid()
         {
@@ -41,13 +100,11 @@ namespace SisAdv.Views
             catch (Exception ex)
             {
 
-                MessageBox.Show(ex.Message, "Exceção", MessageBoxButton.OK, MessageBoxImage.Error);
+                MessageBox.Show(ex.Message, "Não foi possível carregar as listas de serviços. Verifique e tente novamente.", MessageBoxButton.OK, MessageBoxImage.Error);
 
             }
         }
-        private void btn_excluir_Click(object sender, RoutedEventArgs e)
-        {
-            MessageBox.Show("Deseja excluir esse serviço?", "", MessageBoxButton.YesNo, MessageBoxImage.Question);
-        }
+
+        
     }
 }

@@ -13,10 +13,10 @@
         TextOptions.TextRenderingMode="Auto"        
         Background="#FFAEAEAE"
         FontFamily="{DynamicResource MaterialDesignFont}"
-        Title="BuscarServico" Height="500" Width="550" WindowStartupLocation="CenterScreen" ResizeMode="NoResize">
+        Title="BuscarServico" Height="500" Width="750" WindowStartupLocation="CenterScreen" ResizeMode="NoResize">
     <Grid>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="400"/>
+            <ColumnDefinition Width="600"/>
             <ColumnDefinition Width="130"/>
         </Grid.ColumnDefinitions>
 
@@ -47,40 +47,39 @@
         </StackPanel>
 
         <!--Peguei do Mateus pois já era o modelo dos botões e a grid-->
-        <StackPanel Grid.Row="1" Grid.Column="1" HorizontalAlignment="Center">
+        <StackPanel Grid.Row="2" Grid.Column="1" HorizontalAlignment="Center">
             <Button Height="70" Width="100" Background="#FFF1F1F1" BorderBrush="{x:Null}" >
                 <materialDesign:PackIcon Kind="Search" Width="60" Height="40" Foreground="Black"/>
             </Button>
             <TextBlock FontSize="16" Foreground="White" HorizontalAlignment="Center" Text="Pesquisar"/>
         </StackPanel>
-        <StackPanel Grid.Row="2" Grid.Column="1" HorizontalAlignment="Center">
+        <StackPanel Grid.Row="3" Grid.Column="1" HorizontalAlignment="Center">
             <Button Height="70" Width="100" x:Name="btnexcluirservico" Background="#FFEE0707" BorderBrush="{x:Null}" Click="btn_excluir_Click">
                 <materialDesign:PackIcon Kind="Delete" Width="60" Height="40"/>
             </Button>
             <TextBlock FontSize="16" Foreground="White" HorizontalAlignment="Center" Text="excluir"/>
         </StackPanel>
-        <StackPanel Grid.Row="3" Grid.Column="1" HorizontalAlignment="Center">
+        <StackPanel Grid.Row="3" Grid.Column="1" HorizontalAlignment="Center" Margin="0 90 0 0">
             <Button Height="70" Width="100" BorderBrush="{x:Null}" Background="#FFF1F1F1">
                 <materialDesign:PackIcon Kind="Edit" Width="45" Height="40" Foreground="Black"/>
             </Button>
             <TextBlock FontSize="16" Foreground="White" HorizontalAlignment="Center" Text="Editar"/>
         </StackPanel>
-        <StackPanel Grid.Row="3" Grid.Column="1" HorizontalAlignment="Center" Margin="0 90 0 0">
-            <Button Height="70" Width="100" Background="#FFF1F1F1" BorderBrush="{x:Null}">
-                <materialDesign:PackIcon Kind="Visibility" Width="45" Height="40" Foreground="Black"/>
-            </Button>
-            <TextBlock FontSize="16" Foreground="White" HorizontalAlignment="Center" Text="visualizar"/>
-        </StackPanel>
 
-        <DataGrid Grid.Row="3" Margin="10 10 10 10" x:Name="dataGridBuscarServico" AlternationCount="2" AutoGenerateColumns="False" BorderBrush="#FF747474" Background="#FFECECEC">
+        <DataGrid Grid.Row="3" Margin="10 10 10 10" AlternatingRowBackground="#FFE5E5E5" x:Name="dataGridBuscarServico" AlternationCount="2" AutoGenerateColumns="False" BorderBrush="#FF747474">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Data" Binding="{Binding Data}"/>
-                <DataGridTextColumn Header="Cliente" Binding="{Binding Cliente}"/>
+                <DataGridTextColumn Header="Cliente" Binding="{Binding ClienteNome}"/>
                 <DataGridTextColumn Header="Tipo" Binding="{Binding Tipo}"/>
                 <DataGridTemplateColumn>
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
-                            <CheckBox/>
+                            <StackPanel Orientation="Horizontal">
+                                <Button Style="{StaticResource MaterialDesignIconForegroundButton}" Content="{materialDesign:PackIcon Eye}"
+                                        ToolTip="Visualizar Registro" Margin="0 0 5 0" Click="Btn_Update_Click" />
+                                <Button Style="{StaticResource MaterialDesignIconForegroundButton}" Content="{materialDesign:PackIcon Delete}"
+                                        ToolTip="Excluir Registro" Click="Btn_Delete_Click" />
+                            </StackPanel>
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>

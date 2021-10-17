@@ -41,6 +41,14 @@
             </ComboBox>
         </StackPanel>
 
+        <StackPanel Orientation="Horizontal" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center">
+            <Label FontSize="18">Advogado</Label>
+            <ComboBox Margin="10 0 0 0" Width="180" x:Name="comboboxAdvogado">
+                <ComboBoxItem Content="Sr. Delais"/>
+                <ComboBoxItem Content="Sr. Jackson"/>
+            </ComboBox>
+        </StackPanel>
+
         <StackPanel Grid.Row="1" Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
             <Label FontSize="18" Margin="-65 0 0 0">Valor</Label>
             <TextBox Margin="-10 0 0 0" Width="100" TextAlignment="Center" x:Name="txbValor"></TextBox>
@@ -51,7 +59,7 @@
             <DatePicker Margin="05 0 0 0" Width="120" x:Name="datepickerDataServico"/>
         </StackPanel>
 
-        <StackPanel Grid.Column="1" Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
+        <!--StackPanel Grid.Column="1" Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
             <Label FontSize="18" Margin="-60 0 0 0" >Evento</Label>
             <TextBox Margin="10 0 0 0" Width="100" TextAlignment="Center" x:Name="txbEvento"></TextBox>
         </StackPanel>
@@ -64,7 +72,7 @@
         <StackPanel Grid.Column="1" Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
             <Label FontSize="18" Margin="-60 0 0 0">Horário</Label>
             <TextBox Margin="10 0 0 0" Width="100" TextAlignment="Center" x:Name="txbHorario"></TextBox>
-        </StackPanel>
+        </StackPanel-->
         
         <!--Segunda metade da tela-->
 
@@ -76,9 +84,9 @@
         <!--Observação, será necessário colocar o tipo do serviço, acabei esquecendo no semestre passado, trabalharei melhor na parte estética depois.-->
         <StackPanel Grid.Row="3" HorizontalAlignment="Center" VerticalAlignment="Center" Orientation="Horizontal" Margin="0 100 0 0">
             <Label FontSize="18">Tipo do Serviço:</Label>
-            <RadioButton GroupName="tiposerv" x:Name="rbtipoEleitoral">Eleitoral</RadioButton>
-            <RadioButton GroupName="tiposerv" x:Name="rbtipoCriminal">Criminal</RadioButton>
-            <RadioButton GroupName="tiposerv" x:Name="rbtipoCivil">Civil</RadioButton>
+            <RadioButton GroupName="tiposerv" x:Name="rbtipoEleitoral" Content="Eleitoral"></RadioButton>
+            <RadioButton GroupName="tiposerv" x:Name="rbtipoCriminal" Content="Criminal"></RadioButton>
+            <RadioButton GroupName="tiposerv" x:Name="rbtipoCivil" Content="Civil"></RadioButton>
         </StackPanel>
 
         <StackPanel Grid.Row="4" HorizontalAlignment="Center" VerticalAlignment="Center" Height="180" Width="320">
@@ -89,7 +97,7 @@
 
         <StackPanel Grid.Row="5" Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
             <Label FontSize="18">Código</Label>
-            <TextBox Margin="10 0 0 10" Width="80" Text="01" FontSize="20" TextAlignment="Center" IsEnabled="False" Background="#FFA4A4A4"></TextBox>
+            <TextBox x:Name="txbId" Margin="10 0 0 10" Width="80" FontSize="20" TextAlignment="Center" IsEnabled="False" Background="#FFA4A4A4"></TextBox>
         </StackPanel>
         
         

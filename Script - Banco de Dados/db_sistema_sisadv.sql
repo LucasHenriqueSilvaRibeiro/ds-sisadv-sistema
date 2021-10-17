@@ -8,14 +8,9 @@
 
 #Banco de Dados:
  
+drop database db_sistema_sisadv;
 create database db_sistema_sisadv;
 use db_sistema_sisadv;
-
-desc servico;
-select * from servico;
-select * from advogado;
-select * from cliente;
-select * from evento;
 
 create table endereco(
 id_endereco int primary key auto_increment,
@@ -61,14 +56,13 @@ descricao_adv varchar (200)
 create table servico(
 id_servico int primary key auto_increment,
 cliente_serv varchar (100),
+advogado_serv varchar (100),
 valor_serv double,
 data_serv date,
 tipo_serv varchar (50),
 fk_advogado int,
 fk_cliente int,
-fk_evento int,
 foreign key (fk_cliente) references cliente (id_cliente),
-foreign key (fk_evento) references evento (id_evento),
 foreign key (fk_advogado) references advogado (id_advogado)
 );
 
@@ -276,20 +270,25 @@ select * from advogado;
 #Tabela servico--------------------------------------------------------------------------------------------------------------------------------------
 
 delimiter $$
-create procedure inserirServico(valor double, data date, tipo varchar (100), advogado int, cliente int, evento int)
+create procedure inserirServico(valor double, data date, tipo varchar (100), advogado int, cliente int)
 begin
 declare testeadvogado int;
 declare testecliente int;
 declare verificarjaexistente int;
 declare buscarnomecliente varchar (100);
+declare buscarnomeadvogado varchar (100);
+
 set buscarnomecliente = (select nome_cli from cliente where cliente = id_cliente);
+set buscarnomeadvogado = (select nome_adv from advogado where advogado = id_advogado);
+
 set testeadvogado = (select id_advogado from advogado where id_advogado = advogado);
 set testecliente = (select id_cliente from cliente where id_cliente = cliente);
+
 set verificarjaexistente = (select id_servico from servico where (advogado = fk_advogado) and (cliente = fk_cliente) and (data_serv = data));
 if (testeadvogado is not null) then
 	if (testecliente is not null) then
 		if (verificarjaexistente is null) then
-			insert into servico values (null, buscarnomecliente, valor, data, tipo, advogado, cliente, evento);
+			insert into servico values (null, buscarnomecliente, buscarnomeadvogado, valor, data, tipo, advogado, cliente);
 			select 'Serviço cadastrado no sistema.' as Confirmacao;
 		else
 			select 'Este serviço já foi cadastrado no sistema, tente outro.' as Alerta;
@@ -302,10 +301,12 @@ else
 end if;
 end;
 $$ delimiter ;
-
-call inserirServico (1000, '2021-08-31', 'Civil', 1, 1, null);
-call inserirServico (5000, '2021-08-20', 'Administrativo', 2, 2, null);
+drop procedure inserirServico;
+call inserirServico (1000, '2021-08-31', 'Civil', 1, 2);
+call inserirServico (5000, '2021-08-20', 'Administrativo', 2, 2);
 select * from servico;
+select * from cliente;
+select * from advogado;
 
 
 

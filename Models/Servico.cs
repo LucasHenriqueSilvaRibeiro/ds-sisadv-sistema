@@ -12,7 +12,7 @@ namespace SisAdv.Models
 
         public int Cliente { get; set; }
 
-        public String ClienteTest { get; set; }
+        public String ClienteNome { get; set; }
 
         public DateTime Data { get; set; }
 
@@ -23,6 +23,8 @@ namespace SisAdv.Models
         public String Descricao { get; set; }
 
         public int Advogado { get; set; }
+
+        public String AdvogadoNome { get; set; }
 
         public int Evento { get; set; }
     }

@@ -18,9 +18,12 @@ namespace SisAdv.Views
     /// <summary>
     /// Lógica interna para CadastrarServico.xaml
     /// </summary>
+
     public partial class CadastrarServico : Window
     {
-        private Servico _servico;
+        private int _id;
+
+        private Servico _servico;        
 
         public CadastrarServico()
         {
@@ -28,9 +31,19 @@ namespace SisAdv.Views
             Loaded += CadastrarServico_Loaded;
         }
 
+        public CadastrarServico(int id)
+        {
+            _id = id;
+            InitializeComponent();
+            Loaded += CadastrarServico_Loaded;
+        }
+
         private void CadastrarServico_Loaded(object sender, RoutedEventArgs e)
         {
             _servico = new Servico();
+
+            if (_id > 0)
+                FillForm();
         }
 
         private void btnPesquisarServico_Click(object sender, RoutedEventArgs e)
@@ -106,13 +119,52 @@ namespace SisAdv.Views
             ClearInputs();
         }
 
+        private void FillForm()
+        {
+            try
+            {
+                var dao = new ServicoDAO();
+                _servico = dao.GetById(_id);
+
+                txbId.Text = _servico.Id.ToString();
+                comboboxCliente.Text = _servico.ClienteNome;
+                datepickerDataServico.SelectedDate = _servico.Data;
+                txbValor.Text = _servico.Valor.ToString();
+
+                if (rbtipoEleitoral.IsChecked.Value)
+                    rbtipoEleitoral.Content = _servico.Tipo;
+                else if (rbtipoCriminal.IsChecked.Value)
+                    rbtipoCriminal.Content = _servico.Tipo;
+                else if (rbtipoCivil.IsChecked.Value)
+                    rbtipoCivil.Content = _servico.Tipo;
+
+                /*var dao = new FuncionarioDAO();
+                _funcionario = dao.GetById(_id);
+
+                txtId.Text = _funcionario.Id.ToString();
+                txtNome.Text = _funcionario.Nome;
+                txtCPF.Text = _funcionario.CPF;
+                txtRG.Text = _funcionario.RG;
+                dtPickerDataNascimento.SelectedDate = _funcionario.DataNascimento;
+                txtEmail.Text = _funcionario.Email;
+                txtCelular.Text = _funcionario.Celular;
+                txtFuncao.Text = _funcionario.Funcao;
+                txtSalario.Text = _funcionario.Salario.ToString();*/
+
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Exceção", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+        }
+
         private void ClearInputs()
         {
             txbValor.Clear();
             txbDescricao.Clear();
-            txbEvento.Clear();
+            /*txbEvento.Clear();
             txbHorario.Clear();
-            datepickerDataEvento.SelectedDate = null;
+            datepickerDataEvento.SelectedDate = null*/;
             datepickerDataServico.SelectedDate = null;
             comboboxCliente = null;
         }
