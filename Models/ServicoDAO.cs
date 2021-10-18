@@ -62,15 +62,15 @@ namespace SisAdv.Models
 
                 while (!reader.Read())
                 {
-                    servico.Id = reader.GetInt32("id_servico");
+                    servico.Id= reader.GetInt32("id_servico");
                     servico.ClienteNome = reader.GetString("cliente_serv");
                     servico.AdvogadoNome = reader.GetString("advogado_serv");
                     servico.Valor = reader.GetDouble("valor_serv");
                     servico.Data = reader.GetDateTime("data_serv");
-                    servico.Tipo = reader.GetString("tipo_serv");
-                    //servico.Descricao = reader.GetString("descricao_serv");
+                    servico.Descricao = reader.GetString("descricao_serv");
+                    servico.Cliente = reader.GetInt32("fk_cliente");
                     servico.Advogado = reader.GetInt32("fk_advogado");
-                    servico.Evento = reader.GetInt32("fk_evento");
+                    servico.Tipo = reader.GetString("tipo_serv");
                 }
 
                 return servico;
@@ -82,7 +82,7 @@ namespace SisAdv.Models
             }
             finally
             {
-                conn.Close();
+                conn.Query();
             }
         }
 
@@ -119,7 +119,7 @@ namespace SisAdv.Models
                 List<Servico> list = new List<Servico>();
 
                 var query = conn.Query();
-                query.CommandText = "SELECT data_serv, cliente_serv, tipo_serv FROM servico";
+                query.CommandText = "SELECT * FROM servico";
 
                 MySqlDataReader reader = query.ExecuteReader();
 
@@ -127,18 +127,21 @@ namespace SisAdv.Models
                 {
                     list.Add(new Servico()
                     {
-                        //Id = reader.GetInt32("id_servico"),
+                        Id = reader.GetInt32("id_servico"),
                         ClienteNome = reader.GetString("cliente_serv"),
-                        //Valor = reader.GetDouble("valor_serv"),
+                        AdvogadoNome = reader.GetString("advogado_serv"),
+                        Valor = reader.GetDouble("valor_serv"),
                         Data = reader.GetDateTime("data_serv"),
                         Tipo = reader.GetString("tipo_serv"),
+                        Descricao = reader.GetString("descricao_serv"),
+                        Cliente = reader.GetInt32("fk_cliente"),
+                        Advogado = reader.GetInt32("fk_advogado")
 
                         //Tem um cliente que está como Int, mas no banco de dados ele preenche o cliente String com o nome dele fazendo um select dentro de um PROCEDURE, espero dar certo
                         //Cliente = reader.GetInt32("fk_cliente"),
-                        
+
                         //Advogado = reader.GetInt32("fk_advogado"),
-                        //Evento = reader.GetInt32("fk_evento")
-                    });                    
+                    }) ;                    
                 }
 
                 return list;

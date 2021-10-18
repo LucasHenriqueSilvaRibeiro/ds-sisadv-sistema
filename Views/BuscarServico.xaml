@@ -29,12 +29,12 @@
 
         <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
             <Label  Content="Data" FontSize="16" Foreground="White" RenderTransformOrigin="-6.21,0.502"/>
-            <TextBox HorizontalAlignment="Center" VerticalAlignment="Center" Width="120"/>
+            <DatePicker HorizontalAlignment="Center" VerticalAlignment="Center" Width="120"/>
         </StackPanel>
 
         <StackPanel Orientation="Horizontal" Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Center">
             <Label FontSize="16" Foreground="White" Content="Cliente" RenderTransformOrigin="-6.21,0.502"/>
-            <ComboBox HorizontalAlignment="Left" VerticalAlignment="Center" Width="120"/>
+            <TextBox HorizontalAlignment="Left" VerticalAlignment="Center" Width="120"/>
         </StackPanel>
 
         <StackPanel Orientation="Horizontal" Grid.Row="2" HorizontalAlignment="Center">
@@ -68,9 +68,11 @@
 
         <DataGrid Grid.Row="3" Margin="10 10 10 10" AlternatingRowBackground="#FFE5E5E5" x:Name="dataGridBuscarServico" AlternationCount="2" AutoGenerateColumns="False" BorderBrush="#FF747474">
             <DataGrid.Columns>
+                <DataGridTextColumn Header="Id" Binding="{Binding Id}"/>
                 <DataGridTextColumn Header="Data" Binding="{Binding Data}"/>
                 <DataGridTextColumn Header="Cliente" Binding="{Binding ClienteNome}"/>
                 <DataGridTextColumn Header="Tipo" Binding="{Binding Tipo}"/>
+                <DataGridTextColumn Header="Advogado" Binding="{Binding AdvogadoNome}"/>
                 <DataGridTemplateColumn>
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>

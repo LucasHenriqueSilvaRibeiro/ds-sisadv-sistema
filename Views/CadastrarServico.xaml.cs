@@ -139,16 +139,34 @@ namespace SisAdv.Views
                 _servico = dao.GetById(_id);
 
                 txbId.Text = _servico.Id.ToString();
-                comboboxCliente.Text = _servico.ClienteNome;
                 datepickerDataServico.SelectedDate = _servico.Data;
                 txbValor.Text = _servico.Valor.ToString();
+                txbDescricao.Text = _servico.Descricao;
 
-                if (rbtipoEleitoral.IsChecked.Value)
-                    rbtipoEleitoral.Content = _servico.Tipo;
-                else if (rbtipoCriminal.IsChecked.Value)
-                    rbtipoCriminal.Content = _servico.Tipo;
-                else if (rbtipoCivil.IsChecked.Value)
-                    rbtipoCivil.Content = _servico.Tipo;
+                var testeid = txbId;
+                var testevalor = txbValor;
+                var testedescricao = txbDescricao;
+
+                MessageBox.Show($"O código desse serviço é {testeid}, {testevalor}, {testedescricao}, feche agora!", "Teste", MessageBoxButton.OK, MessageBoxImage.Information);
+                                          
+                
+                /*  
+                //Provavelmente essas buscas serão por ID como o professor fez na reunião, verificar isso
+                comboboxCliente.Text = _servico.ClienteNome;
+                comboboxAdvogado.Text = _servico.AdvogadoNome;
+
+                /laborar uma forma para preencher/checkar os radio buttons
+                talvez essa dê certo.Obs: Adicionar um textbox dentro do radio button
+                <TextBox Name="tbSettingText">  
+                Initial text contents of the TextBox.  
+                </TextBox>  
+
+                 * if (teste = "Eleitoral")
+                    rbtipoEleitoral.IsChecked = true;
+                else if (rbtipoCriminal.IsChecked.HasValue)
+                    rbtipoCriminal.IsChecked = true;
+                else
+                    rbtipoCivil.IsChecked = true;*/
             }
             catch (Exception ex)
             {

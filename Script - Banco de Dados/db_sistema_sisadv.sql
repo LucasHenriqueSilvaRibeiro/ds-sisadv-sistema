@@ -304,13 +304,12 @@ end;
 $$ delimiter ;
 drop procedure inserirServico;
 call inserirServico (1000, '2021-08-31', 'Civil', 1, 2, 'Buscando se defender');
-call inserirServico (5000, '2021-08-20', 'Administrativo', 2, 2);
-call inserirServico (3410, '2021-05-20', 'Eleitoral', 2, 3);
+call inserirServico (5000, '2021-08-20', 'Administrativo', 2, 2, 'Buscando se defender');
+call inserirServico (3410, '2021-05-20', 'Eleitoral', 2, 1, 'Buscando se defender');
 select * from servico;
 select * from cliente;
 select * from advogado;
-
-
+desc servico;
 
 #Tabela usuário--------------------------------------------------------------------------------------------------------------------------------------
 

@@ -68,24 +68,6 @@ namespace SisAdv.Views
 
                 MessageBox.Show(ex.Message, "Exceção", MessageBoxButton.OK, MessageBoxImage.Error);
             }
-            /*var funcionarioSelected = dataGrid.SelectedItem as Funcionario;
-
-            var result = MessageBox.Show($"Deseja realmente remover o funcionário `{funcionarioSelected.Nome}`?", "Confirmação de Exclusão",
-                MessageBoxButton.YesNo, MessageBoxImage.Warning);
-
-            try
-            {
-                if (result == MessageBoxResult.Yes)
-                {
-                    var dao = new FuncionarioDAO();
-                    dao.Delete(funcionarioSelected);
-                    LoadDataGrid();
-                }
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message, "Exceção", MessageBoxButton.OK, MessageBoxImage.Error);
-            }*/
         }
 
 

@@ -26,6 +26,6 @@ namespace SisAdv.Models
 
         public String AdvogadoNome { get; set; }
 
-        public int Evento { get; set; }
+        //public int Evento { get; set; }
     }
 }
