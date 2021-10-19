@@ -8,7 +8,7 @@
 
 #Banco de Dados:
  
-drop database db_sistema_sisadv;
+#drop database db_sistema_sisadv;
 create database db_sistema_sisadv;
 use db_sistema_sisadv;
 
@@ -53,27 +53,32 @@ telefone_adv varchar (20),
 descricao_adv varchar (200)
 );
 
-create table servico(
-id_servico int primary key auto_increment,
-cliente_serv varchar (100),
-advogado_serv varchar (100),
-valor_serv double,
-data_serv date,
-tipo_serv varchar (50),
-descricao_serv varchar (200),
-fk_advogado int,
-fk_cliente int,
-foreign key (fk_cliente) references cliente (id_cliente),
-foreign key (fk_advogado) references advogado (id_advogado)
-);
-
 create table usuario(
 id_user int primary key auto_increment,
 tipo_user varchar (100),
 login_user varchar (100),
 senha_user varchar (40),
-fk_advogado int,
-foreign key (fk_advogado) references advogado (id_advogado)
+nome_user varchar (100),
+cpf_user varchar (20),
+rg_user varchar (20),
+datanasc_user datetime,
+email_user varchar (100),
+telefone_user varchar (20),
+descricao_user varchar (200)
+);
+
+create table servico(
+id_servico int primary key auto_increment,
+cliente_serv varchar (100),
+usuario_serv varchar (100),
+valor_serv double,
+data_serv date,
+tipo_serv varchar (50),
+descricao_serv varchar (200),
+fk_usuario int,
+fk_cliente int,
+foreign key (fk_cliente) references cliente (id_cliente),
+foreign key (fk_usuario) references usuario (id_user)
 );
 
 create table login(
@@ -267,29 +272,56 @@ call inserirAdvogado ('Sr.Jackson', '04565645646', '5456465', '1995-09-14', 'Jac
 select * from advogado;
 
 
+#Tabela usuário--------------------------------------------------------------------------------------------------------------------------------------
+desc usuario;
+delimiter $$
+create procedure inserirUsuario(tipo varchar (100), login varchar (100), senha varchar (40), nome varchar(100), cpf varchar (20), 
+rg varchar (20), dataNascimento datetime, email varchar (100), telefone varchar (20), descricao varchar (200))
+begin
+declare verificacaologin varchar (100);
+set verificacaologin = (select login_user from usuario where (login_user = login));
+if (verificacaologin is null) then
+	#Quem ficou responsável por Cadastrar Usuário, verifique essas comparações!
+	#if (login = email) then
+		insert into usuario values (null,tipo, login, senha, nome, cpf, rg, dataNascimento, email, telefone, descricao);
+		select 'Usuário cadastrado com sucesso!' as Confirmacao;
+	#else
+		#select 'O e-mail inserido não condiz com o e-mail do advogado' as Alerta;
+	#end if;
+else
+	select 'Esse e-mail já foi cadastrado por um outro usuário!' as Alerta;
+end if;
+end;
+$$ delimiter ;
+#drop procedure inserirusuario;
+call inserirUsuario ('usuario acesso total','srdelais@gmail.com', 'testesenha', 'Vinicius Teste', '2309849032', '3984984 SSP', '2021-02-05', 'vinicius@gmail.com', '69 993898998', 'Advogado especializado em casos penais');
+call inserirUsuario ('usuario acesso parcial','Jackson@gmail.com', 'senhateste', 'Professor João IFRO', '324324432', '4839048', '2020-06-10', 'joao@gmail.com', '69 348902348930', 'Professor Advogado especializado em casos cibernéticos');
+select * from advogado;
+select * from usuario;
+
 
 #Tabela servico--------------------------------------------------------------------------------------------------------------------------------------
 
 delimiter $$
-create procedure inserirServico(valor double, data date, tipo varchar (100), advogado int, cliente int, descricao varchar (200))
+create procedure inserirServico(valor double, data date, tipo varchar (100), usuario int, cliente int, descricao varchar (200))
 begin
-declare testeadvogado int;
+declare testeusuario int;
 declare testecliente int;
 declare verificarjaexistente int;
 declare buscarnomecliente varchar (100);
-declare buscarnomeadvogado varchar (100);
+declare buscarnomeusuario varchar (100);
 
 set buscarnomecliente = (select nome_cli from cliente where cliente = id_cliente);
-set buscarnomeadvogado = (select nome_adv from advogado where advogado = id_advogado);
+set buscarnomeusuario = (select nome_user from usuario where usuario = id_user);
 
-set testeadvogado = (select id_advogado from advogado where id_advogado = advogado);
+set testeusuario = (select id_user from usuario where id_user = usuario);
 set testecliente = (select id_cliente from cliente where id_cliente = cliente);
 
-set verificarjaexistente = (select id_servico from servico where (advogado = fk_advogado) and (cliente = fk_cliente) and (data_serv = data));
-if (testeadvogado is not null) then
+set verificarjaexistente = (select id_servico from servico where (usuario = fk_usuario) and (cliente = fk_cliente) and (data_serv = data));
+if (testeusuario is not null) then
 	if (testecliente is not null) then
 		if (verificarjaexistente is null) then
-			insert into servico values (null, buscarnomecliente, buscarnomeadvogado, valor, data, tipo, descricao, advogado, cliente);
+			insert into servico values (null, buscarnomecliente, buscarnomeusuario, valor, data, tipo, descricao, usuario, cliente);
 			select 'Serviço cadastrado no sistema.' as Confirmacao;
 		else
 			select 'Este serviço já foi cadastrado no sistema, tente outro.' as Alerta;
@@ -302,42 +334,15 @@ else
 end if;
 end;
 $$ delimiter ;
-drop procedure inserirServico;
+#drop procedure inserirServico;
 call inserirServico (1000, '2021-08-31', 'Civil', 1, 2, 'Buscando se defender');
 call inserirServico (5000, '2021-08-20', 'Administrativo', 2, 2, 'Buscando se defender');
 call inserirServico (3410, '2021-05-20', 'Eleitoral', 2, 1, 'Buscando se defender');
 select * from servico;
+select * from usuario;
 select * from cliente;
 select * from advogado;
 desc servico;
-
-#Tabela usuário--------------------------------------------------------------------------------------------------------------------------------------
-
-delimiter $$
-create procedure inserirUsuario(tipo varchar (100), login varchar (100), senha varchar (40), advogado int)
-begin
-declare buscaremail varchar (100);
-declare verificacaologin varchar (100);
-set buscaremail = (select e_mail_adv from advogado where (id_advogado = advogado));
-set verificacaologin = (select login_user from usuario where (login_user = login));
-if (verificacaologin is null) then
-	if (login = buscaremail) then
-		insert into usuario values (null,tipo, login, senha, advogado);
-		select 'Usuário cadastrado com sucesso!' as Confirmacao;
-	else
-		select 'O e-mail inserido não condiz com o e-mail do advogado' as Alerta;
-	end if;
-else
-	select 'Esse e-mail já foi cadastrado por um outro usuário!' as Alerta;
-end if;
-end;
-$$ delimiter ;
-
-call inserirUsuario ('usuario acesso total','srdelais@gmail.com', 'testesenha', 1);
-call inserirUsuario ('usuario acesso parcial','Jackson@gmail.com', 'senhateste', 2);
-select * from advogado;
-select * from usuario;
-
 
 
 #Tabela login--------------------------------------------------------------------------------------------------------------------------------------

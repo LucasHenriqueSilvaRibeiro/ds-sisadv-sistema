@@ -129,10 +129,13 @@
     </ApplicationDefinition>
     <Compile Include="Database\Conexao.cs" />
     <Compile Include="Interface\IDAO.cs" />
+    <Compile Include="Models\ClienteDAO.cs" />
     <Compile Include="Models\Evento.cs" />
     <Compile Include="Models\EventoDAO.cs" />
     <Compile Include="Models\ServicoDAO.cs" />
     <Compile Include="Models\ServicoValidator.cs" />
+    <Compile Include="Models\Usuario.cs" />
+    <Compile Include="Models\UsuarioDAO.cs" />
     <Compile Include="Views\AcessarDiarioJustiça.xaml.cs">
       <DependentUpon>AcessarDiarioJustiça.xaml</DependentUpon>
     </Compile>

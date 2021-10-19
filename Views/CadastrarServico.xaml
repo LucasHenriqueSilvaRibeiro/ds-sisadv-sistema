@@ -32,20 +32,17 @@
         <!--Primeiras TEXTBOX-->
         <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
             <Label FontSize="18">Cliente</Label>
-            <ComboBox Margin="10 0 0 0" Width="180" x:Name="comboboxCliente">
-                <ComboBoxItem Content="João"/>
-                <ComboBoxItem Content="Maria"/>
-                <ComboBoxItem Content="Douglas"/>
-                <ComboBoxItem Content="Michael Jackson"/>
-                <ComboBoxItem Content="Pichote"/>
+            <ComboBox Margin="10 0 0 0" Width="180" x:Name="comboboxCliente"
+                DisplayMemberPath="Nome"
+                SelectedValuePath="Id">
             </ComboBox>
         </StackPanel>
 
         <StackPanel Orientation="Horizontal" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center">
             <Label FontSize="18">Advogado</Label>
-            <ComboBox Margin="10 0 0 0" Width="180" x:Name="comboboxAdvogado">
-                <ComboBoxItem Content="Sr. Delais"/>
-                <ComboBoxItem Content="Sr. Jackson"/>
+            <ComboBox Margin="10 0 0 0" Width="180" x:Name="comboboxAdvogado"
+                DisplayMemberPath="Nome"
+                SelectedValuePath="Id">
             </ComboBox>
         </StackPanel>
 

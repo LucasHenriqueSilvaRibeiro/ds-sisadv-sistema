@@ -42,6 +42,8 @@ namespace SisAdv.Views
         {
             _servico = new Servico();
 
+            LoadCombobox();
+
             if (_id > 0)
                 FillForm();
         }
@@ -61,8 +63,14 @@ namespace SisAdv.Views
         private void btnSalvar_Click(object sender, RoutedEventArgs e)
         {
             //Deixarei dessa forma por enquanto até assistir as aulas do ID e como pegar os id de advogado, cliente e evento (Se der esse último(evento)).
-            _servico.Cliente = 2;
-            _servico.Advogado = 1;
+            /*if (comboBoxSexo.SelectedItem != null)
+                _funcionario.Sexo = comboBoxSexo.SelectedItem as Sexo;*/
+
+            if (comboboxCliente.SelectedItem != null)
+                _servico.Cliente = comboboxCliente.SelectedItem as Cliente;
+
+            if (comboboxAdvogado.SelectedItem != null)
+                _servico.Usuario = comboboxAdvogado.SelectedItem as Usuario;
 
             _servico.Descricao = txbDescricao.Text;
 
@@ -89,7 +97,21 @@ namespace SisAdv.Views
 
         private void btnAdicionarServico_Click(object sender, RoutedEventArgs e)
         {
-            ClearInputs();
+            ClearInputs();            
+        }
+
+        private void LoadCombobox()
+        {
+            try
+            {
+                comboboxCliente.ItemsSource = new ClienteDAO().List();
+                comboboxAdvogado.ItemsSource = new UsuarioDAO().List();
+            }
+            catch (Exception ex)
+            {
+
+                MessageBox.Show(ex.Message, "Não Executado", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
         }
 
         private void SaveData()

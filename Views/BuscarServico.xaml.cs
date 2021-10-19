@@ -52,7 +52,7 @@ namespace SisAdv.Views
         {
             var servicoSelected = dataGridBuscarServico.SelectedItem as Servico;
 
-            var result = MessageBox.Show($"Deseja realmente remover o servico do cliente `{servicoSelected.ClienteNome}`?", "Confirmação de Exclusão", MessageBoxButton.YesNo, MessageBoxImage.Warning);
+            var result = MessageBox.Show($"Deseja realmente remover o servico do cliente `{servicoSelected.Cliente.Nome}`?", "Confirmação de Exclusão", MessageBoxButton.YesNo, MessageBoxImage.Warning);
 
             try
             {

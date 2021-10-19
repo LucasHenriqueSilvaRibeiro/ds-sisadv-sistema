@@ -10,9 +10,7 @@ namespace SisAdv.Models
     {
         public int Id { get; set; }
 
-        public int Cliente { get; set; }
-
-        public String ClienteNome { get; set; }
+        public Cliente Cliente { get; set; }
 
         public DateTime Data { get; set; }
 
@@ -22,9 +20,8 @@ namespace SisAdv.Models
 
         public String Descricao { get; set; }
 
-        public int Advogado { get; set; }
+        public Usuario Usuario { get; set; }
 
-        public String AdvogadoNome { get; set; }
 
         //public int Evento { get; set; }
     }
