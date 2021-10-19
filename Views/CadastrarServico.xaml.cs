@@ -114,23 +114,51 @@ namespace SisAdv.Views
             }
         }
 
+        private bool Validate()
+        {
+            var validator = new ServicoValidator();
+            var result = validator.Validate(_servico);
+
+            if (!result.IsValid)
+            {
+                string errors = null;
+                var count = 1;
+
+                foreach (var failure in result.Errors)
+                {
+                    errors += $"{count++} - {failure.ErrorMessage}\n";
+                }
+
+                MessageBox.Show(errors, "Validação de Dados", MessageBoxButton.OK, MessageBoxImage.Information);
+            }
+
+            return result.IsValid;
+        }
+
         private void SaveData()
         {
             try
             {
-                var dao = new ServicoDAO();
-                var text = "atualizado";
-
-                if (_servico.Id == 0)
+                if (Validate())
                 {
-                    dao.Insert(_servico);
-                    text = "adicionado";
+                    var dao = new ServicoDAO();
+                    var text = "atualizado";
+
+                    if (_servico.Id == 0)
+                    {
+                        dao.Insert(_servico);
+                        text = "adicionado";
+                    }
+                    else
+                        dao.Update(_servico);
+
+                    MessageBox.Show($"O Servico foi {text} com sucesso!", "Sucesso", MessageBoxButton.OK, MessageBoxImage.Information);
+                    CloseFormVerify();
                 }
                 else
-                    dao.Update(_servico);
-
-                MessageBox.Show($"O Servico foi {text} com sucesso!", "Sucesso", MessageBoxButton.OK, MessageBoxImage.Information);
-                CloseFormVerify();
+                {
+                    MessageBox.Show("Tem coisa errada aí meu irmão!");
+                }
             }
             catch (Exception ex)
             {

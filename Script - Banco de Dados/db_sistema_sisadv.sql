@@ -10,7 +10,6 @@
  
 #drop database db_sistema_sisadv;
 create database db_sistema_sisadv;
-use db_sistema_sisadv;
 
 create table endereco(
 id_endereco int primary key auto_increment,
