@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using SisAdv.Models;
+using SisAdv.Helpers;
 using MySql.Data.MySqlClient;
 
 namespace SisAdv.Views
@@ -31,11 +32,6 @@ namespace SisAdv.Views
         {
             LoadDataGrid();
         }
-        
-        private void btn_excluir_Click(object sender, RoutedEventArgs e)
-        {
-            MessageBox.Show("Deseja excluir esse serviço?", "", MessageBoxButton.YesNo, MessageBoxImage.Question);
-        }
 
         private void Btn_Update_Click(object sender, RoutedEventArgs e)
         {
@@ -52,7 +48,7 @@ namespace SisAdv.Views
         {
             var servicoSelected = dataGridBuscarServico.SelectedItem as Servico;
 
-            var result = MessageBox.Show($"Deseja realmente remover o servico do cliente `{servicoSelected.Cliente.Nome}`?", "Confirmação de Exclusão", MessageBoxButton.YesNo, MessageBoxImage.Warning);
+            var result = MessageBox.Show($"Deseja realmente remover o servico do cliente `{servicoSelected.Cliente}`?", "Confirmação de Exclusão", MessageBoxButton.YesNo, MessageBoxImage.Warning);
 
             try
             {
@@ -87,6 +83,68 @@ namespace SisAdv.Views
             }
         }
 
-        
+        private void Btn_Pesquisar_Click(object sender, RoutedEventArgs e)
+        {
+            if (TxbCliente.Text == "" && datePickerDataServ.SelectedDate == null && rbtipoCivil.IsChecked == false && rbtipoCriminal.IsChecked == false && rbtipoEleitoral.IsChecked == false)
+                MessageBox.Show("Nenhum dos campos foi inserido. Insira dados em algum dos campos para realizar uma consulta!", "Atenção", MessageBoxButton.OK, MessageBoxImage.Information);
+            else
+                ConsultaLoadDataGrid();
+        }
+
+        private void ConsultaLoadDataGrid()
+        {           
+
+            try
+            {
+                var dao = new ServicoDAO();
+                DateTime? data;
+                string cliente = null;
+                string dataconvertida = null;
+                string tipoServico = null;
+
+                if (datePickerDataServ.SelectedDate != null)
+                {
+                    DateTime? selectedDate = (DateTime?)datePickerDataServ.SelectedDate;
+                    data = selectedDate;
+                    dataconvertida = data?.ToString("yyyy-MM-dd");
+                }
+
+                if (TxbCliente.Text != null)
+                {
+                    string text = TxbCliente.Text;
+                    cliente = text;
+                }
+
+                if (rbtipoEleitoral.IsChecked.Value)
+                    tipoServico = "Eleitoral";
+                else if (rbtipoCriminal.IsChecked.Value)
+                    tipoServico = "Criminal";
+                else if (rbtipoCivil.IsChecked.Value)
+                    tipoServico = "Civil";
+                else
+                    tipoServico = null;
+
+                dataGridBuscarServico.ItemsSource = null;                
+                dataGridBuscarServico.ItemsSource = dao.ListConsulta(cliente, dataconvertida, tipoServico);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Exceção", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+        }
+
+        private void ClearInputs()
+        {
+            TxbCliente.Clear();
+            datePickerDataServ.SelectedDate = null;
+            rbtipoCivil.IsChecked = false;
+            rbtipoCriminal.IsChecked = false;
+            rbtipoEleitoral.IsChecked = false;
+        }
+
+        private void btnCancelar_Click(object sender, RoutedEventArgs e)
+        {
+            this.Close();
+        }
     }
 }

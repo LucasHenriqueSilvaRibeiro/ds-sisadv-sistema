@@ -185,38 +185,30 @@ namespace SisAdv.Views
         {
             try
             {
+                _id = 5;
                 var dao = new ServicoDAO();
                 _servico = dao.GetById(_id);
 
+                /*RESOLVER ESSAS QUESTÕES
                 txbId.Text = _servico.Id.ToString();
                 datepickerDataServico.SelectedDate = _servico.Data;
                 txbValor.Text = _servico.Valor.ToString();
                 txbDescricao.Text = _servico.Descricao;
+                comboboxCliente.Text = _servico.ClienteNome;
+                comboboxAdvogado.Text = _servico.UsuarioNome;
 
-                var testeid = txbId;
-                var testevalor = txbValor;
-                var testedescricao = txbDescricao;
+                if (_servico.Tipo == "Eleitoral")
+                    rbtipoEleitoral.IsChecked = true;
+                if (_servico.Tipo == "Civil")
+                    rbtipoCivil.IsChecked = true;
+                if (_servico.Tipo == "Criminal")
+                    rbtipoCriminal.IsChecked = true;*/
+
+                int testeid = _servico.Id;
+                double testevalor = _servico.Valor;
+                string testedescricao = _servico.Descricao;
 
                 MessageBox.Show($"O código desse serviço é {testeid}, {testevalor}, {testedescricao}, feche agora!", "Teste", MessageBoxButton.OK, MessageBoxImage.Information);
-                                          
-                
-                /*  
-                //Provavelmente essas buscas serão por ID como o professor fez na reunião, verificar isso
-                comboboxCliente.Text = _servico.ClienteNome;
-                comboboxAdvogado.Text = _servico.AdvogadoNome;
-
-                /laborar uma forma para preencher/checkar os radio buttons
-                talvez essa dê certo.Obs: Adicionar um textbox dentro do radio button
-                <TextBox Name="tbSettingText">  
-                Initial text contents of the TextBox.  
-                </TextBox>  
-
-                 * if (teste = "Eleitoral")
-                    rbtipoEleitoral.IsChecked = true;
-                else if (rbtipoCriminal.IsChecked.HasValue)
-                    rbtipoCriminal.IsChecked = true;
-                else
-                    rbtipoCivil.IsChecked = true;*/
             }
             catch (Exception ex)
             {

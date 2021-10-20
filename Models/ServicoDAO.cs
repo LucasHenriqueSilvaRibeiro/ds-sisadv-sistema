@@ -7,12 +7,15 @@ using SisAdv.Interface;
 using MySql.Data.MySqlClient;
 using SisAdv.Database;
 using SisAdv.Models;
+using SisAdv.Helpers;
+using SisAdv.Views;
 
 namespace SisAdv.Models
-{
+{    
     class ServicoDAO : IDAO<Servico>
     {
         private static Conexao conn;
+
 
         public ServicoDAO()
         {
@@ -62,14 +65,14 @@ namespace SisAdv.Models
 
                 while (!reader.Read())
                 {
-                    servico.Id= reader.GetInt32("id_servico");
-                    servico.Cliente.Nome = reader.GetString("cliente_serv");
-                    servico.Usuario.Nome = reader.GetString("advogado_serv");
+                    servico.Id = reader.GetInt32("id_servico");
+                    servico.ClienteNome = reader.GetString("cliente_serv");
+                    servico.UsuarioNome = reader.GetString("advogado_serv");
                     servico.Valor = reader.GetDouble("valor_serv");
                     servico.Data = reader.GetDateTime("data_serv");
                     servico.Descricao = reader.GetString("descricao_serv");
-                    servico.Cliente.Id = reader.GetInt32("fk_cliente");
-                    servico.Usuario.Id = reader.GetInt32("fk_advogado");
+                    //servico.Cliente.Id = reader.GetInt32("fk_cliente");
+                    //servico.Usuario.Id = reader.GetInt32("fk_advogado");
                     servico.Tipo = reader.GetString("tipo_serv");
                 }
 
@@ -94,7 +97,7 @@ namespace SisAdv.Models
                 query.CommandText = "CALL inserirServico(@valor, @data, @tipo, @advogado, @cliente, @descricao)";
 
                 query.Parameters.AddWithValue("@valor", t.Valor);
-                query.Parameters.AddWithValue("@data", t.Data.ToString("yyyy-MM-dd"));
+                query.Parameters.AddWithValue("@data", t.Data?.ToString("yyyy-MM-dd"));
                 query.Parameters.AddWithValue("@tipo", t.Tipo);
                 query.Parameters.AddWithValue("@advogado", t.Usuario.Id);
                 query.Parameters.AddWithValue("@cliente", t.Cliente.Id);
@@ -127,21 +130,13 @@ namespace SisAdv.Models
                 {
                     list.Add(new Servico()
                     {
-                        /*
                         Id = reader.GetInt32("id_servico"),
-                        Cliente = reader.GetString("id_cliente"),
-                        AdvogadoNome = reader.GetString("advogado_serv"),
-                        Valor = reader.GetDouble("valor_serv"),
-                        Data = reader.GetDateTime("data_serv"),
-                        Tipo = reader.GetString("tipo_serv"),
-                        Descricao = reader.GetString("descricao_serv"),
-                        Cliente = reader.GetInt32("fk_cliente"),
-                        Advogado = reader.GetInt32("fk_advogado")
-
-                        //Tem um cliente que está como Int, mas no banco de dados ele preenche o cliente String com o nome dele fazendo um select dentro de um PROCEDURE, espero dar certo
-                        //Cliente = reader.GetInt32("fk_cliente"),
-
-                        //Advogado = reader.GetInt32("fk_advogado"),*/
+                        Valor = DAOHelper.GetDouble(reader, "valor_serv"),
+                        ClienteNome = reader.GetString("cliente_serv"),
+                        UsuarioNome = reader.GetString("usuario_serv"),
+                        Data = DAOHelper.GetDateTime(reader, "data_serv"),
+                        Tipo = DAOHelper.GetString(reader, "tipo_serv"),
+                        Descricao = DAOHelper.GetString(reader,"descricao_serv")
                     }) ;                    
                 }
 
@@ -160,6 +155,71 @@ namespace SisAdv.Models
         public void Update(Servico t)
         {
             throw new NotImplementedException();
+        }
+
+        public List<Servico> ListConsulta(string cliente, string data, string tipoServico)
+        {
+            try
+            {
+                List<Servico> listConsulta = new List<Servico>();                
+
+                var query = conn.Query();
+
+                if ((cliente != null) && (data != null) && (tipoServico != null))
+                    query.CommandText = $"SELECT id_servico, data_serv, cliente_serv, usuario_serv, tipo_serv FROM servico WHERE cliente_serv LIKE '{cliente}%' AND data_serv = '{data}' AND tipo_serv = '{tipoServico}'";
+                else if ((cliente != null) && (data != null))
+                    query.CommandText = $"SELECT id_servico, data_serv, cliente_serv, usuario_serv, tipo_serv FROM servico WHERE cliente_serv LIKE '{cliente}%' AND data_serv = '{data}'";
+                else if ((cliente != null) && (tipoServico != null))
+                    query.CommandText = $"SELECT id_servico, data_serv, cliente_serv, usuario_serv, tipo_serv FROM servico WHERE cliente_serv LIKE '{cliente}%' AND tipo_serv = '{tipoServico}'";
+                else if ((tipoServico != null) && (data != null))
+                    query.CommandText = $"SELECT id_servico, data_serv, cliente_serv, usuario_serv, tipo_serv FROM servico WHERE data_serv = '{data}' AND tipo_serv = '{tipoServico}'";
+                else if (tipoServico != null)
+                    query.CommandText = $"SELECT id_servico, data_serv, cliente_serv, usuario_serv, tipo_serv FROM servico WHERE tipo_serv = '{tipoServico}'";                
+                else if (cliente != null)                
+                    query.CommandText = $"SELECT id_servico, data_serv, cliente_serv, usuario_serv, tipo_serv FROM servico WHERE cliente_serv LIKE '{cliente}%'";
+                else if (data != null)                
+                    query.CommandText = $"SELECT id_servico, data_serv, cliente_serv, usuario_serv, tipo_serv FROM servico WHERE data_serv = '{data}'";                
+
+                MySqlDataReader reader = query.ExecuteReader();
+
+                while (reader.Read())
+                {
+                    listConsulta.Add(new Servico()
+                    {
+                        Id = reader.GetInt32("id_servico"),
+                        ClienteNome = reader.GetString("cliente_serv"),
+                        UsuarioNome = reader.GetString("usuario_serv"),
+                        Data = DAOHelper.GetDateTime(reader, "data_serv"),
+                        Tipo = DAOHelper.GetString(reader, "tipo_serv"),
+                    });
+                }
+
+                return listConsulta;
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+
+
+            /*
+            string sql = @"select * from tabela where upper(nome) like '%" + textBox1.Text.ToUpper() + "%' or upper(endereco) like '%" + textBox1.Text.ToUpper() + "%';";
+
+            SqlConnection conn = new SqlConnection("sua string de conexao");
+            SqlCommand cmd = new SqlCommand(sql, conn);
+            conn.Open();
+
+            DataTable dt = new DataTable();
+            SqlDataAdapter da = new SqlDataAdapter(cmd);
+
+            da.Fill(dt);
+            conn.Close();
+            da.Dispose();
+
+
+            dataGridView1.DataSource = dt;*/
+
         }
     }
 }

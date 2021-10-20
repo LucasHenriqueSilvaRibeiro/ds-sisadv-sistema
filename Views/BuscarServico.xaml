@@ -29,35 +29,35 @@
 
         <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
             <Label  Content="Data" FontSize="16" Foreground="White" RenderTransformOrigin="-6.21,0.502"/>
-            <DatePicker HorizontalAlignment="Center" VerticalAlignment="Center" Width="120"/>
+            <DatePicker x:Name="datePickerDataServ" HorizontalAlignment="Center" VerticalAlignment="Center" Width="120"/>
         </StackPanel>
 
         <StackPanel Orientation="Horizontal" Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Center">
             <Label FontSize="16" Foreground="White" Content="Cliente" RenderTransformOrigin="-6.21,0.502"/>
-            <TextBox HorizontalAlignment="Left" VerticalAlignment="Center" Width="120"/>
+            <TextBox x:Name="TxbCliente" HorizontalAlignment="Left" VerticalAlignment="Center" Width="120"/>
         </StackPanel>
 
         <StackPanel Orientation="Horizontal" Grid.Row="2" HorizontalAlignment="Center">
             <Label FontSize="16" Foreground="White" Content="Tipo" HorizontalAlignment="Center" VerticalAlignment="Center" RenderTransformOrigin="-6.21,0.502"/>
             <StackPanel VerticalAlignment="Center" Margin="17 20 0 0">
-                <RadioButton GroupName="a" FontSize="16" Foreground="White" Content="Eleitoral" HorizontalAlignment="Center" VerticalAlignment="Center" RenderTransformOrigin="-6.21,0.502"/>
-                <RadioButton GroupName="a" Margin="-27 0 0 0" FontSize="16" Foreground="White" Content="Civil" HorizontalAlignment="Center" VerticalAlignment="Center" RenderTransformOrigin="-6.21,0.502"/>
+                <RadioButton GroupName="a" x:Name="rbtipoEleitoral" FontSize="16" Foreground="White" Content="Eleitoral" HorizontalAlignment="Center" VerticalAlignment="Center" RenderTransformOrigin="-6.21,0.502"/>
+                <RadioButton GroupName="a" x:Name="rbtipoCivil" Margin="-27 0 0 0" FontSize="16" Foreground="White" Content="Civil" HorizontalAlignment="Center" VerticalAlignment="Center" RenderTransformOrigin="-6.21,0.502"/>
             </StackPanel>
-            <RadioButton GroupName="a" Margin="25 0 0 0" FontSize="16" Foreground="White" Content="Criminal" HorizontalAlignment="Center" VerticalAlignment="Center" RenderTransformOrigin="-6.21,0.502"/>
+            <RadioButton GroupName="a" x:Name="rbtipoCriminal" Margin="25 0 0 0" FontSize="16" Foreground="White" Content="Criminal" HorizontalAlignment="Center" VerticalAlignment="Center" RenderTransformOrigin="-6.21,0.502"/>
         </StackPanel>
 
         <!--Peguei do Mateus pois já era o modelo dos botões e a grid-->
         <StackPanel Grid.Row="2" Grid.Column="1" HorizontalAlignment="Center">
-            <Button Height="70" Width="100" Background="#FFF1F1F1" BorderBrush="{x:Null}" >
+            <Button x:Name="Pesquisar" Height="70" Width="100" Background="#FFF1F1F1" BorderBrush="{x:Null}" Click="Btn_Pesquisar_Click">
                 <materialDesign:PackIcon Kind="Search" Width="60" Height="40" Foreground="Black"/>
             </Button>
             <TextBlock FontSize="16" Foreground="White" HorizontalAlignment="Center" Text="Pesquisar"/>
         </StackPanel>
         <StackPanel Grid.Row="3" Grid.Column="1" HorizontalAlignment="Center">
-            <Button Height="70" Width="100" x:Name="btnexcluirservico" Background="#FFEE0707" BorderBrush="{x:Null}" Click="btn_excluir_Click">
-                <materialDesign:PackIcon Kind="Delete" Width="60" Height="40"/>
+            <Button Height="70" Width="100" x:Name="btnCancelar" Background="#FFEE0707" BorderBrush="{x:Null}" Click="btnCancelar_Click">
+                <materialDesign:PackIcon Kind="CancelCircle" Width="60" Height="40"/>
             </Button>
-            <TextBlock FontSize="16" Foreground="White" HorizontalAlignment="Center" Text="excluir"/>
+            <TextBlock FontSize="16" Foreground="White" HorizontalAlignment="Center" Text="Cancelar"/>
         </StackPanel>
         <StackPanel Grid.Row="3" Grid.Column="1" HorizontalAlignment="Center" Margin="0 90 0 0">
             <Button Height="70" Width="100" BorderBrush="{x:Null}" Background="#FFF1F1F1">
@@ -72,7 +72,7 @@
                 <DataGridTextColumn Header="Data" Binding="{Binding Data}"/>
                 <DataGridTextColumn Header="Cliente" Binding="{Binding ClienteNome}"/>
                 <DataGridTextColumn Header="Tipo" Binding="{Binding Tipo}"/>
-                <DataGridTextColumn Header="Advogado" Binding="{Binding AdvogadoNome}"/>
+                <DataGridTextColumn Header="Advogado" Binding="{Binding UsuarioNome}"/>
                 <DataGridTemplateColumn>
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>

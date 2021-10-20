@@ -12,7 +12,7 @@ namespace SisAdv.Models
 
         public Cliente Cliente { get; set; }
 
-        public DateTime Data { get; set; }
+        public DateTime? Data { get; set; }
 
         public String Tipo { get; set; }
 
@@ -22,7 +22,10 @@ namespace SisAdv.Models
 
         public Usuario Usuario { get; set; }
 
+        //Variáveis para tentar resolver o problema do nome por enquanto
 
-        //public int Evento { get; set; }
+        public String ClienteNome { get; set; }
+
+        public String UsuarioNome { get; set; }
     }
 }
