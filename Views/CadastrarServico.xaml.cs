@@ -62,15 +62,15 @@ namespace SisAdv.Views
 
         private void btnSalvar_Click(object sender, RoutedEventArgs e)
         {
-            //Deixarei dessa forma por enquanto até assistir as aulas do ID e como pegar os id de advogado, cliente e evento (Se der esse último(evento)).
-            /*if (comboBoxSexo.SelectedItem != null)
-                _funcionario.Sexo = comboBoxSexo.SelectedItem as Sexo;*/
-
             if (comboboxCliente.SelectedItem != null)
                 _servico.Cliente = comboboxCliente.SelectedItem as Cliente;
+            else
+                MessageBox.Show("Insira o Cliente. Verifique e tente novamente.");
 
             if (comboboxAdvogado.SelectedItem != null)
                 _servico.Usuario = comboboxAdvogado.SelectedItem as Usuario;
+            else
+                MessageBox.Show("Insira o Advogado. Verifique e tente novamente.");
 
             _servico.Descricao = txbDescricao.Text;
 
@@ -185,30 +185,32 @@ namespace SisAdv.Views
         {
             try
             {
-                _id = 5;
                 var dao = new ServicoDAO();
                 _servico = dao.GetById(_id);
 
-                /*RESOLVER ESSAS QUESTÕES
                 txbId.Text = _servico.Id.ToString();
                 datepickerDataServico.SelectedDate = _servico.Data;
                 txbValor.Text = _servico.Valor.ToString();
                 txbDescricao.Text = _servico.Descricao;
-                comboboxCliente.Text = _servico.ClienteNome;
-                comboboxAdvogado.Text = _servico.UsuarioNome;
+
+                if (_servico.Cliente != null)
+                    comboboxCliente.SelectedValue = _servico.Cliente.Id;
+
+                if (_servico.Usuario != null)
+                comboboxAdvogado.SelectedValue = _servico.Usuario.Id;
 
                 if (_servico.Tipo == "Eleitoral")
                     rbtipoEleitoral.IsChecked = true;
                 if (_servico.Tipo == "Civil")
                     rbtipoCivil.IsChecked = true;
                 if (_servico.Tipo == "Criminal")
-                    rbtipoCriminal.IsChecked = true;*/
+                    rbtipoCriminal.IsChecked = true;
 
-                int testeid = _servico.Id;
-                double testevalor = _servico.Valor;
-                string testedescricao = _servico.Descricao;
+                /*
+                 * if (_funcionario.Sexo != null)
+                    comboBoxSexo.SelectedValue = _funcionario.Sexo.Id;
+                 */
 
-                MessageBox.Show($"O código desse serviço é {testeid}, {testevalor}, {testedescricao}, feche agora!", "Teste", MessageBoxButton.OK, MessageBoxImage.Information);
             }
             catch (Exception ex)
             {

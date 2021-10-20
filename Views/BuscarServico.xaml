@@ -70,9 +70,9 @@
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Id" Binding="{Binding Id}"/>
                 <DataGridTextColumn Header="Data" Binding="{Binding Data}"/>
-                <DataGridTextColumn Header="Cliente" Binding="{Binding ClienteNome}"/>
+                <DataGridTextColumn Header="Cliente" Binding="{Binding Cliente.Nome}"/>
                 <DataGridTextColumn Header="Tipo" Binding="{Binding Tipo}"/>
-                <DataGridTextColumn Header="Advogado" Binding="{Binding UsuarioNome}"/>
+                <DataGridTextColumn Header="Advogado" Binding="{Binding Usuario.Nome}"/>
                 <DataGridTemplateColumn>
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>

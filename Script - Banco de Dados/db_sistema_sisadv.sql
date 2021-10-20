@@ -10,6 +10,15 @@
  
 #drop database db_sistema_sisadv;
 create database db_sistema_sisadv;
+select * from servico;
+
+SELECT * FROM servico 
+LEFT JOIN sexo ON cod_sex = cod_sex_fk 
+WHERE data_serv = '2021-10-30';
+
+
+
+
 
 create table endereco(
 id_endereco int primary key auto_increment,

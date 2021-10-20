@@ -21,11 +21,5 @@ namespace SisAdv.Models
         public String Descricao { get; set; }
 
         public Usuario Usuario { get; set; }
-
-        //Variáveis para tentar resolver o problema do nome por enquanto
-
-        public String ClienteNome { get; set; }
-
-        public String UsuarioNome { get; set; }
     }
 }

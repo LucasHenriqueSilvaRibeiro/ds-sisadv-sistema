@@ -52,7 +52,7 @@ namespace SisAdv.Models
             try
             {
                 var query = conn.Query();
-                query.CommandText = "SELECT * FROM servico WHERE id_servico = @id";
+                query.CommandText = "SELECT * FROM servico LEFT JOIN cliente ON fk_cliente = id_cliente WHERE id_servico = @id ";
 
                 query.Parameters.AddWithValue("@id", id);
 
@@ -66,14 +66,22 @@ namespace SisAdv.Models
                 while (!reader.Read())
                 {
                     servico.Id = reader.GetInt32("id_servico");
-                    servico.ClienteNome = reader.GetString("cliente_serv");
-                    servico.UsuarioNome = reader.GetString("advogado_serv");
                     servico.Valor = reader.GetDouble("valor_serv");
                     servico.Data = reader.GetDateTime("data_serv");
                     servico.Descricao = reader.GetString("descricao_serv");
+                    servico.Tipo = reader.GetString("tipo_serv");
+
+                    //CÓDIGO AULA 1:N
+
+                    if (!DAOHelper.IsNull(reader, "fk_cliente"))
+                        servico.Cliente = new Cliente()
+                        {
+                            Id = reader.GetInt32("id_cliente"),
+                            Nome = reader.GetString("nome_cli")
+                        };
+
                     //servico.Cliente.Id = reader.GetInt32("fk_cliente");
                     //servico.Usuario.Id = reader.GetInt32("fk_advogado");
-                    servico.Tipo = reader.GetString("tipo_serv");
                 }
 
                 return servico;
@@ -103,7 +111,15 @@ namespace SisAdv.Models
                 query.Parameters.AddWithValue("@cliente", t.Cliente.Id);
                 query.Parameters.AddWithValue("@descricao", t.Descricao);
 
-                var result = query.ExecuteNonQuery();
+                MySqlDataReader reader = query.ExecuteReader();
+
+                while (reader.Read())
+                {
+                    if (reader.GetName(0).Equals("Alerta"))
+                    {
+                        throw new Exception(reader.GetString("Alerta"));
+                    }
+                }
             }
             catch (Exception e)
             {
@@ -132,11 +148,13 @@ namespace SisAdv.Models
                     {
                         Id = reader.GetInt32("id_servico"),
                         Valor = DAOHelper.GetDouble(reader, "valor_serv"),
-                        ClienteNome = reader.GetString("cliente_serv"),
-                        UsuarioNome = reader.GetString("usuario_serv"),
                         Data = DAOHelper.GetDateTime(reader, "data_serv"),
                         Tipo = DAOHelper.GetString(reader, "tipo_serv"),
-                        Descricao = DAOHelper.GetString(reader,"descricao_serv")
+                        Descricao = DAOHelper.GetString(reader,"descricao_serv"),
+
+                        //CÓDIGO AULA 1:N
+                        Cliente = DAOHelper.IsNull(reader, "cliente_serv") ? null : new Cliente() { Id = reader.GetInt32("fk_cliente"), Nome = reader.GetString("cliente_serv") },
+                        Usuario = DAOHelper.IsNull(reader, "usuario_serv") ? null : new Usuario() { Id = reader.GetInt32("fk_usuario"), Nome = reader.GetString("usuario_serv") }
                     }) ;                    
                 }
 
@@ -150,12 +168,7 @@ namespace SisAdv.Models
             {
                 conn.Close();
             }
-        }
-
-        public void Update(Servico t)
-        {
-            throw new NotImplementedException();
-        }
+        }       
 
         public List<Servico> ListConsulta(string cliente, string data, string tipoServico)
         {
@@ -166,19 +179,19 @@ namespace SisAdv.Models
                 var query = conn.Query();
 
                 if ((cliente != null) && (data != null) && (tipoServico != null))
-                    query.CommandText = $"SELECT id_servico, data_serv, cliente_serv, usuario_serv, tipo_serv FROM servico WHERE cliente_serv LIKE '{cliente}%' AND data_serv = '{data}' AND tipo_serv = '{tipoServico}'";
+                    query.CommandText = $"SELECT  * FROM servico LEFT JOIN cliente ON fk_cliente = id_cliente WHERE cliente_serv LIKE '{cliente}%' AND data_serv = '{data}' AND tipo_serv = '{tipoServico}'";
                 else if ((cliente != null) && (data != null))
-                    query.CommandText = $"SELECT id_servico, data_serv, cliente_serv, usuario_serv, tipo_serv FROM servico WHERE cliente_serv LIKE '{cliente}%' AND data_serv = '{data}'";
+                    query.CommandText = $"SELECT * FROM servico LEFT JOIN cliente ON fk_cliente = id_cliente WHERE cliente_serv LIKE '{cliente}%' AND data_serv = '{data}'";
                 else if ((cliente != null) && (tipoServico != null))
-                    query.CommandText = $"SELECT id_servico, data_serv, cliente_serv, usuario_serv, tipo_serv FROM servico WHERE cliente_serv LIKE '{cliente}%' AND tipo_serv = '{tipoServico}'";
+                    query.CommandText = $"SELECT * FROM servico LEFT JOIN cliente ON fk_cliente = id_cliente WHERE cliente_serv LIKE '{cliente}%' AND tipo_serv = '{tipoServico}'";
                 else if ((tipoServico != null) && (data != null))
-                    query.CommandText = $"SELECT id_servico, data_serv, cliente_serv, usuario_serv, tipo_serv FROM servico WHERE data_serv = '{data}' AND tipo_serv = '{tipoServico}'";
+                    query.CommandText = $"SELECT * FROM servico LEFT JOIN cliente ON fk_cliente = id_cliente WHERE data_serv = '{data}' AND tipo_serv = '{tipoServico}'";
                 else if (tipoServico != null)
-                    query.CommandText = $"SELECT id_servico, data_serv, cliente_serv, usuario_serv, tipo_serv FROM servico WHERE tipo_serv = '{tipoServico}'";                
+                    query.CommandText = $"SELECT * FROM servic LEFT JOIN cliente ON fk_cliente = id_clienteo WHERE tipo_serv = '{tipoServico}'";                
                 else if (cliente != null)                
-                    query.CommandText = $"SELECT id_servico, data_serv, cliente_serv, usuario_serv, tipo_serv FROM servico WHERE cliente_serv LIKE '{cliente}%'";
+                    query.CommandText = $"SELECT * FROM servico LEFT JOIN cliente ON fk_cliente = id_cliente WHERE cliente_serv LIKE '{cliente}%'";
                 else if (data != null)                
-                    query.CommandText = $"SELECT id_servico, data_serv, cliente_serv, usuario_serv, tipo_serv FROM servico WHERE data_serv = '{data}'";                
+                    query.CommandText = $"SELECT * FROM servico LEFT JOIN cliente ON fk_cliente = id_cliente WHERE data_serv = '{data}' ";                
 
                 MySqlDataReader reader = query.ExecuteReader();
 
@@ -187,10 +200,13 @@ namespace SisAdv.Models
                     listConsulta.Add(new Servico()
                     {
                         Id = reader.GetInt32("id_servico"),
-                        ClienteNome = reader.GetString("cliente_serv"),
-                        UsuarioNome = reader.GetString("usuario_serv"),
                         Data = DAOHelper.GetDateTime(reader, "data_serv"),
                         Tipo = DAOHelper.GetString(reader, "tipo_serv"),
+
+                        //CÓDIGO AULA 1:N
+                        Cliente = DAOHelper.IsNull(reader, "fk_cliente") ? null : new Cliente() { Id = reader.GetInt32("id_cliente"), Nome = reader.GetString("nome_cli"), 
+                            Cpf = reader.GetString("cpf_cli"), Rg = reader.GetString("rg_cli") }
+                        //Usuario = DAOHelper.IsNull(reader, "usuario_serv") ? null : new Usuario() { Id = reader.GetInt32("fk_usuario"), Nome = reader.GetString("usuario_serv") }
                     });
                 }
 
@@ -201,25 +217,11 @@ namespace SisAdv.Models
 
                 throw;
             }
+        }
 
-
-            /*
-            string sql = @"select * from tabela where upper(nome) like '%" + textBox1.Text.ToUpper() + "%' or upper(endereco) like '%" + textBox1.Text.ToUpper() + "%';";
-
-            SqlConnection conn = new SqlConnection("sua string de conexao");
-            SqlCommand cmd = new SqlCommand(sql, conn);
-            conn.Open();
-
-            DataTable dt = new DataTable();
-            SqlDataAdapter da = new SqlDataAdapter(cmd);
-
-            da.Fill(dt);
-            conn.Close();
-            da.Dispose();
-
-
-            dataGridView1.DataSource = dt;*/
-
+        public void Update(Servico t)
+        {
+            throw new NotImplementedException();
         }
     }
 }
