@@ -37,7 +37,7 @@ namespace SisAdv.Views
         {
             var servicoSelected = dataGridBuscarServico.SelectedItem as Servico;
 
-            var window = new CadastrarServico(servicoSelected.Id);
+            var window = new CadastrarServico(servicoSelected.Id);            
 
             window.ShowDialog();
 

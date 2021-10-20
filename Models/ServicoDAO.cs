@@ -16,7 +16,6 @@ namespace SisAdv.Models
     {
         private static Conexao conn;
 
-
         public ServicoDAO()
         {
             conn = new Conexao();
@@ -27,6 +26,8 @@ namespace SisAdv.Models
             try
             {
                 var query = conn.Query();
+                
+                //Verificar tabela processo;
                 query.CommandText = "DELETE FROM servico WHERE id_servico = @id";
 
                 query.Parameters.AddWithValue("@id", t.Id);
@@ -52,7 +53,8 @@ namespace SisAdv.Models
             try
             {
                 var query = conn.Query();
-                query.CommandText = "SELECT * FROM servico LEFT JOIN cliente ON fk_cliente = id_cliente WHERE id_servico = @id ";
+                query.CommandText = "SELECT * FROM servico LEFT JOIN cliente ON fk_cliente = id_cliente " +
+                                                           "LEFT JOIN usuario ON fk_usuario = id_user WHERE id_servico = @id";
 
                 query.Parameters.AddWithValue("@id", id);
 
@@ -63,7 +65,7 @@ namespace SisAdv.Models
 
                 var servico = new Servico();
 
-                while (!reader.Read())
+                while (reader.Read())
                 {
                     servico.Id = reader.GetInt32("id_servico");
                     servico.Valor = reader.GetDouble("valor_serv");
@@ -80,8 +82,12 @@ namespace SisAdv.Models
                             Nome = reader.GetString("nome_cli")
                         };
 
-                    //servico.Cliente.Id = reader.GetInt32("fk_cliente");
-                    //servico.Usuario.Id = reader.GetInt32("fk_advogado");
+                    if (!DAOHelper.IsNull(reader, "fk_usuario"))
+                        servico.Usuario = new Usuario()
+                        {
+                            Id = reader.GetInt32("id_user"),
+                            Nome = reader.GetString("nome_user")
+                        };
                 }
 
                 return servico;
@@ -179,19 +185,19 @@ namespace SisAdv.Models
                 var query = conn.Query();
 
                 if ((cliente != null) && (data != null) && (tipoServico != null))
-                    query.CommandText = $"SELECT  * FROM servico LEFT JOIN cliente ON fk_cliente = id_cliente WHERE cliente_serv LIKE '{cliente}%' AND data_serv = '{data}' AND tipo_serv = '{tipoServico}'";
+                    query.CommandText = $"SELECT  * FROM servico LEFT JOIN cliente ON fk_cliente = id_cliente LEFT JOIN usuario ON fk_usuario = id_user WHERE cliente_serv LIKE '{cliente}%' AND data_serv = '{data}' AND tipo_serv = '{tipoServico}'";
                 else if ((cliente != null) && (data != null))
-                    query.CommandText = $"SELECT * FROM servico LEFT JOIN cliente ON fk_cliente = id_cliente WHERE cliente_serv LIKE '{cliente}%' AND data_serv = '{data}'";
+                    query.CommandText = $"SELECT * FROM servico LEFT JOIN cliente ON fk_cliente = id_cliente LEFT JOIN usuario ON fk_usuario = id_user WHERE cliente_serv LIKE '{cliente}%' AND data_serv = '{data}'";
                 else if ((cliente != null) && (tipoServico != null))
-                    query.CommandText = $"SELECT * FROM servico LEFT JOIN cliente ON fk_cliente = id_cliente WHERE cliente_serv LIKE '{cliente}%' AND tipo_serv = '{tipoServico}'";
+                    query.CommandText = $"SELECT * FROM servico LEFT JOIN cliente ON fk_cliente = id_cliente LEFT JOIN usuario ON fk_usuario = id_user WHERE cliente_serv LIKE '{cliente}%' AND tipo_serv = '{tipoServico}'";
                 else if ((tipoServico != null) && (data != null))
-                    query.CommandText = $"SELECT * FROM servico LEFT JOIN cliente ON fk_cliente = id_cliente WHERE data_serv = '{data}' AND tipo_serv = '{tipoServico}'";
+                    query.CommandText = $"SELECT * FROM servico LEFT JOIN cliente ON fk_cliente = id_cliente LEFT JOIN usuario ON fk_usuario = id_user WHERE data_serv = '{data}' AND tipo_serv = '{tipoServico}'";
                 else if (tipoServico != null)
-                    query.CommandText = $"SELECT * FROM servic LEFT JOIN cliente ON fk_cliente = id_clienteo WHERE tipo_serv = '{tipoServico}'";                
+                    query.CommandText = $"SELECT * FROM servic LEFT JOIN cliente ON fk_cliente = id_clienteo LEFT JOIN usuario ON fk_usuario = id_user WHERE tipo_serv = '{tipoServico}'";                
                 else if (cliente != null)                
-                    query.CommandText = $"SELECT * FROM servico LEFT JOIN cliente ON fk_cliente = id_cliente WHERE cliente_serv LIKE '{cliente}%'";
+                    query.CommandText = $"SELECT * FROM servico LEFT JOIN cliente ON fk_cliente = id_cliente LEFT JOIN usuario ON fk_usuario = id_user WHERE cliente_serv LIKE '{cliente}%'";
                 else if (data != null)                
-                    query.CommandText = $"SELECT * FROM servico LEFT JOIN cliente ON fk_cliente = id_cliente WHERE data_serv = '{data}' ";                
+                    query.CommandText = $"SELECT * FROM servico LEFT JOIN cliente ON fk_cliente = id_cliente LEFT JOIN usuario ON fk_usuario = id_user WHERE data_serv = '{data}' ";                
 
                 MySqlDataReader reader = query.ExecuteReader();
 
@@ -204,9 +210,8 @@ namespace SisAdv.Models
                         Tipo = DAOHelper.GetString(reader, "tipo_serv"),
 
                         //CÓDIGO AULA 1:N
-                        Cliente = DAOHelper.IsNull(reader, "fk_cliente") ? null : new Cliente() { Id = reader.GetInt32("id_cliente"), Nome = reader.GetString("nome_cli"), 
-                            Cpf = reader.GetString("cpf_cli"), Rg = reader.GetString("rg_cli") }
-                        //Usuario = DAOHelper.IsNull(reader, "usuario_serv") ? null : new Usuario() { Id = reader.GetInt32("fk_usuario"), Nome = reader.GetString("usuario_serv") }
+                        Cliente = DAOHelper.IsNull(reader, "fk_cliente") ? null : new Cliente() { Id = reader.GetInt32("id_cliente"), Nome = reader.GetString("nome_cli") },
+                        Usuario = DAOHelper.IsNull(reader, "usuario_serv") ? null : new Usuario() { Id = reader.GetInt32("fk_usuario"), Nome = reader.GetString("usuario_serv") }
                     });
                 }
 
@@ -221,7 +226,40 @@ namespace SisAdv.Models
 
         public void Update(Servico t)
         {
-            throw new NotImplementedException();
+            try
+            {
+                var query = conn.Query();
+
+                query.CommandText = "UPDATE servico SET valor_serv = @valor, data_serv = @data, tipo_serv = @tipo, " +
+                                    "descricao_serv = @descricao, fk_usuario = @usuario, fk_cliente = @cliente, " + 
+                                    "usuario_serv = @usuarionome, cliente_serv = @clientenome WHERE id_servico = @id";
+
+                query.Parameters.AddWithValue("@valor", t.Valor);
+                query.Parameters.AddWithValue("@data", t.Data);
+                query.Parameters.AddWithValue("@tipo", t.Tipo);
+                query.Parameters.AddWithValue("@descricao", t.Descricao);
+                query.Parameters.AddWithValue("@usuario", t.Usuario.Id);
+                query.Parameters.AddWithValue("@cliente", t.Cliente.Id);
+                query.Parameters.AddWithValue("@clientenome", t.Cliente.Nome);
+                query.Parameters.AddWithValue("@usuarionome", t.Usuario.Nome);
+
+
+                query.Parameters.AddWithValue("@id", t.Id);
+
+                var result = query.ExecuteNonQuery();
+
+                if (result == 0)
+                    throw new Exception("Atualização do registro não foi realizada.");
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+            finally
+            {
+                conn.Close();
+            }
         }
     }
 }

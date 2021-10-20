@@ -79,6 +79,8 @@ namespace SisAdv.Views
 
             if (datepickerDataServico.SelectedDate != null)
                 _servico.Data = (DateTime)datepickerDataServico.SelectedDate;
+            else
+                MessageBox.Show("Insira a Data. Verifique e tente novamente.");
 
             if (rbtipoEleitoral.IsChecked.Value)
                 _servico.Tipo = "Eleitoral";
@@ -104,6 +106,7 @@ namespace SisAdv.Views
         {
             try
             {
+                datepickerDataServico.SelectedDate = DateTime.Now;
                 comboboxCliente.ItemsSource = new ClienteDAO().List();
                 comboboxAdvogado.ItemsSource = new UsuarioDAO().List();
             }
@@ -155,10 +158,6 @@ namespace SisAdv.Views
                     MessageBox.Show($"O Servico foi {text} com sucesso!", "Sucesso", MessageBoxButton.OK, MessageBoxImage.Information);
                     CloseFormVerify();
                 }
-                else
-                {
-                    MessageBox.Show("Tem coisa errada aí meu irmão!");
-                }
             }
             catch (Exception ex)
             {
@@ -205,12 +204,6 @@ namespace SisAdv.Views
                     rbtipoCivil.IsChecked = true;
                 if (_servico.Tipo == "Criminal")
                     rbtipoCriminal.IsChecked = true;
-
-                /*
-                 * if (_funcionario.Sexo != null)
-                    comboBoxSexo.SelectedValue = _funcionario.Sexo.Id;
-                 */
-
             }
             catch (Exception ex)
             {
@@ -222,9 +215,9 @@ namespace SisAdv.Views
         {
             txbValor.Clear();
             txbDescricao.Clear();
-            datepickerDataServico.SelectedDate = null;
-            comboboxCliente = null;
-            comboboxAdvogado = null;
+            datepickerDataServico.SelectedDate = DateTime.Now;
+            comboboxCliente.SelectedItem = null;
+            comboboxAdvogado.SelectedItem = null;
             rbtipoCivil.IsChecked = false;
             rbtipoCriminal.IsChecked = false;
             rbtipoEleitoral.IsChecked = false;
