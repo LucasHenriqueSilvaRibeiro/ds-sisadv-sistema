@@ -176,6 +176,17 @@ namespace SisAdv.Views
 
             configurarPreferenciasRecursos.ShowDialog();
         }
+
+        private void Btn_visualizarServico_Click(object sender, RoutedEventArgs e)
+        {
+            var servicoSelected = dataGridServicosRecentes.SelectedItem as Servico;
+
+            var window = new CadastrarServico(servicoSelected.Id);
+
+            window.ShowDialog();
+
+            LoadDataGrid();
+        }
     }
     }
     

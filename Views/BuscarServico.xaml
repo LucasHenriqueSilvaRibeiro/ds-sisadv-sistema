@@ -72,7 +72,7 @@
                 <DataGridTextColumn Header="Data" Binding="{Binding Data}"/>
                 <DataGridTextColumn Header="Cliente" Binding="{Binding Cliente.Nome}"/>
                 <DataGridTextColumn Header="Tipo" Binding="{Binding Tipo}"/>
-                <DataGridTextColumn Header="Advogado" Binding="{Binding Usuario.Nome}"/>
+                <DataGridTextColumn Header="Advogado" Binding="{Binding Advogado.Nome}"/>
                 <DataGridTemplateColumn>
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>

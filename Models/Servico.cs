@@ -20,6 +20,6 @@ namespace SisAdv.Models
 
         public String Descricao { get; set; }
 
-        public Usuario Usuario { get; set; }
+        public Advogado Advogado { get; set; }
     }
 }

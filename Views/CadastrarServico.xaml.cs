@@ -68,7 +68,7 @@ namespace SisAdv.Views
                 MessageBox.Show("Insira o Cliente. Verifique e tente novamente.");
 
             if (comboboxAdvogado.SelectedItem != null)
-                _servico.Usuario = comboboxAdvogado.SelectedItem as Usuario;
+                _servico.Advogado = comboboxAdvogado.SelectedItem as Advogado;
             else
                 MessageBox.Show("Insira o Advogado. Verifique e tente novamente.");
 
@@ -108,7 +108,7 @@ namespace SisAdv.Views
             {
                 datepickerDataServico.SelectedDate = DateTime.Now;
                 comboboxCliente.ItemsSource = new ClienteDAO().List();
-                comboboxAdvogado.ItemsSource = new UsuarioDAO().List();
+                comboboxAdvogado.ItemsSource = new AdvogadoDAO().List();
             }
             catch (Exception ex)
             {
@@ -195,8 +195,8 @@ namespace SisAdv.Views
                 if (_servico.Cliente != null)
                     comboboxCliente.SelectedValue = _servico.Cliente.Id;
 
-                if (_servico.Usuario != null)
-                comboboxAdvogado.SelectedValue = _servico.Usuario.Id;
+                if (_servico.Advogado != null)
+                comboboxAdvogado.SelectedValue = _servico.Advogado.Id;
 
                 if (_servico.Tipo == "Eleitoral")
                     rbtipoEleitoral.IsChecked = true;

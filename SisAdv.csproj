@@ -262,6 +262,8 @@
     <Compile Include="Database\Conexao.cs" />
     <Compile Include="Helpers\DAOHelper.cs" />
     <Compile Include="Interface\IDAO.cs" />
+    <Compile Include="Models\Advogado.cs" />
+    <Compile Include="Models\AdvogadoDAO.cs" />
     <Compile Include="Models\ClienteDAO.cs" />
     <Compile Include="Models\Evento.cs" />
     <Compile Include="Models\EventoDAO.cs" />

@@ -10,15 +10,12 @@
  
 #drop database db_sistema_sisadv;
 create database db_sistema_sisadv;
+use db_sistema_sisadv;
+
+desc servico;
+desc cliente;
+desc advogado;
 select * from servico;
-
-SELECT * FROM servico 
-LEFT JOIN sexo ON cod_sex = cod_sex_fk 
-WHERE data_serv = '2021-10-30';
-
-
-
-
 
 create table endereco(
 id_endereco int primary key auto_increment,
@@ -78,15 +75,15 @@ descricao_user varchar (200)
 create table servico(
 id_servico int primary key auto_increment,
 cliente_serv varchar (100),
-usuario_serv varchar (100),
+advogado_serv varchar (100),
 valor_serv double,
 data_serv date,
 tipo_serv varchar (50),
 descricao_serv varchar (200),
-fk_usuario int,
+fk_advogado int,
 fk_cliente int,
 foreign key (fk_cliente) references cliente (id_cliente),
-foreign key (fk_usuario) references usuario (id_user)
+foreign key (fk_advogado) references advogado (id_advogado)
 );
 
 create table login(
@@ -221,6 +218,8 @@ $$ delimiter ;
 
 call inserirCliente ('Maycon Douglas', '012340125', '46540125', '69912345671', 'vendedor', 'Busca processar sua empresa por danos morais', 3);
 call inserirCliente ('Raça Nega', '01246445525', '49840125', '6991254541', 'cantor', 'Busca processar sua agencia', 3);
+call inserirCliente ('Turma do Pagode', '01246445525', '49840125', '6991254541', 'cantor', 'Busca processar sua agencia', 3);
+call inserirCliente ('Exalta Samba', '01246445525', '49840125', '6991254541', 'cantor', 'Busca processar sua agencia', 3);
 
 select * from cliente;
 
@@ -307,29 +306,30 @@ call inserirUsuario ('usuario acesso parcial','Jackson@gmail.com', 'senhateste',
 select * from advogado;
 select * from usuario;
 
+desc servico;
 
 #Tabela servico--------------------------------------------------------------------------------------------------------------------------------------
 
 delimiter $$
-create procedure inserirServico(valor double, data date, tipo varchar (100), usuario int, cliente int, descricao varchar (200))
+create procedure inserirServico(valor double, data date, tipo varchar (100), advogado int, cliente int, descricao varchar (200))
 begin
-declare testeusuario int;
+declare testeadvogado int;
 declare testecliente int;
 declare verificarjaexistente int;
 declare buscarnomecliente varchar (100);
-declare buscarnomeusuario varchar (100);
+declare buscarnomeadvogado varchar (100);
 
 set buscarnomecliente = (select nome_cli from cliente where cliente = id_cliente);
-set buscarnomeusuario = (select nome_user from usuario where usuario = id_user);
+set buscarnomeadvogado = (select nome_adv from advogado where advogado = id_advogado);
 
-set testeusuario = (select id_user from usuario where id_user = usuario);
+set testeadvogado = (select id_advogado from advogado where id_advogado = advogado);
 set testecliente = (select id_cliente from cliente where id_cliente = cliente);
 
-set verificarjaexistente = (select id_servico from servico where (usuario = fk_usuario) and (cliente = fk_cliente) and (data_serv = data));
-if (testeusuario is not null) then
+set verificarjaexistente = (select id_servico from servico where (advogado = fk_advogado) and (cliente = fk_cliente) and (data_serv = data));
+if (testeadvogado is not null) then
 	if (testecliente is not null) then
 		if (verificarjaexistente is null) then
-			insert into servico values (null, buscarnomecliente, buscarnomeusuario, valor, data, tipo, descricao, usuario, cliente);
+			insert into servico values (null, buscarnomecliente, buscarnomeadvogado, valor, data, tipo, descricao, advogado, cliente);
 			select 'Serviço cadastrado no sistema.' as Confirmacao;
 		else
 			select 'Este serviço já foi cadastrado no sistema, tente outro.' as Alerta;

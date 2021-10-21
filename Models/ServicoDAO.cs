@@ -54,7 +54,7 @@ namespace SisAdv.Models
             {
                 var query = conn.Query();
                 query.CommandText = "SELECT * FROM servico LEFT JOIN cliente ON fk_cliente = id_cliente " +
-                                                           "LEFT JOIN usuario ON fk_usuario = id_user WHERE id_servico = @id";
+                                                           "LEFT JOIN advogado ON fk_advogado = id_advogado WHERE id_servico = @id";
 
                 query.Parameters.AddWithValue("@id", id);
 
@@ -82,11 +82,11 @@ namespace SisAdv.Models
                             Nome = reader.GetString("nome_cli")
                         };
 
-                    if (!DAOHelper.IsNull(reader, "fk_usuario"))
-                        servico.Usuario = new Usuario()
+                    if (!DAOHelper.IsNull(reader, "fk_advogado"))
+                        servico.Advogado = new Advogado()
                         {
-                            Id = reader.GetInt32("id_user"),
-                            Nome = reader.GetString("nome_user")
+                            Id = reader.GetInt32("id_advogado"),
+                            Nome = reader.GetString("nome_adv")
                         };
                 }
 
@@ -113,7 +113,7 @@ namespace SisAdv.Models
                 query.Parameters.AddWithValue("@valor", t.Valor);
                 query.Parameters.AddWithValue("@data", t.Data?.ToString("yyyy-MM-dd"));
                 query.Parameters.AddWithValue("@tipo", t.Tipo);
-                query.Parameters.AddWithValue("@advogado", t.Usuario.Id);
+                query.Parameters.AddWithValue("@advogado", t.Advogado.Id);
                 query.Parameters.AddWithValue("@cliente", t.Cliente.Id);
                 query.Parameters.AddWithValue("@descricao", t.Descricao);
 
@@ -160,7 +160,7 @@ namespace SisAdv.Models
 
                         //CÓDIGO AULA 1:N
                         Cliente = DAOHelper.IsNull(reader, "cliente_serv") ? null : new Cliente() { Id = reader.GetInt32("fk_cliente"), Nome = reader.GetString("cliente_serv") },
-                        Usuario = DAOHelper.IsNull(reader, "usuario_serv") ? null : new Usuario() { Id = reader.GetInt32("fk_usuario"), Nome = reader.GetString("usuario_serv") }
+                        Advogado = DAOHelper.IsNull(reader, "advogado_serv") ? null : new Advogado() { Id = reader.GetInt32("fk_advogado"), Nome = reader.GetString("advogado_serv") }
                     }) ;                    
                 }
 
@@ -180,24 +180,26 @@ namespace SisAdv.Models
         {
             try
             {
+                string textoSelect = "SELECT  * FROM servico LEFT JOIN cliente ON fk_cliente = id_cliente LEFT JOIN advogado ON fk_advogado = id_advogado WHERE";
+
                 List<Servico> listConsulta = new List<Servico>();                
 
                 var query = conn.Query();
 
                 if ((cliente != null) && (data != null) && (tipoServico != null))
-                    query.CommandText = $"SELECT  * FROM servico LEFT JOIN cliente ON fk_cliente = id_cliente LEFT JOIN usuario ON fk_usuario = id_user WHERE cliente_serv LIKE '{cliente}%' AND data_serv = '{data}' AND tipo_serv = '{tipoServico}'";
+                    query.CommandText = $"{textoSelect} cliente_serv LIKE '{cliente}%' AND data_serv = '{data}' AND tipo_serv = '{tipoServico}'";
                 else if ((cliente != null) && (data != null))
-                    query.CommandText = $"SELECT * FROM servico LEFT JOIN cliente ON fk_cliente = id_cliente LEFT JOIN usuario ON fk_usuario = id_user WHERE cliente_serv LIKE '{cliente}%' AND data_serv = '{data}'";
+                    query.CommandText = $"{textoSelect} cliente_serv LIKE '{cliente}%' AND data_serv = '{data}'";
                 else if ((cliente != null) && (tipoServico != null))
-                    query.CommandText = $"SELECT * FROM servico LEFT JOIN cliente ON fk_cliente = id_cliente LEFT JOIN usuario ON fk_usuario = id_user WHERE cliente_serv LIKE '{cliente}%' AND tipo_serv = '{tipoServico}'";
+                    query.CommandText = $"{textoSelect} cliente_serv LIKE '{cliente}%' AND tipo_serv = '{tipoServico}'";
                 else if ((tipoServico != null) && (data != null))
-                    query.CommandText = $"SELECT * FROM servico LEFT JOIN cliente ON fk_cliente = id_cliente LEFT JOIN usuario ON fk_usuario = id_user WHERE data_serv = '{data}' AND tipo_serv = '{tipoServico}'";
+                    query.CommandText = $"{textoSelect} data_serv = '{data}' AND tipo_serv = '{tipoServico}'";
                 else if (tipoServico != null)
-                    query.CommandText = $"SELECT * FROM servic LEFT JOIN cliente ON fk_cliente = id_clienteo LEFT JOIN usuario ON fk_usuario = id_user WHERE tipo_serv = '{tipoServico}'";                
+                    query.CommandText = $"{textoSelect} tipo_serv = '{tipoServico}'";                
                 else if (cliente != null)                
-                    query.CommandText = $"SELECT * FROM servico LEFT JOIN cliente ON fk_cliente = id_cliente LEFT JOIN usuario ON fk_usuario = id_user WHERE cliente_serv LIKE '{cliente}%'";
+                    query.CommandText = $"{textoSelect} cliente_serv LIKE '{cliente}%'";
                 else if (data != null)                
-                    query.CommandText = $"SELECT * FROM servico LEFT JOIN cliente ON fk_cliente = id_cliente LEFT JOIN usuario ON fk_usuario = id_user WHERE data_serv = '{data}' ";                
+                    query.CommandText = $"{textoSelect} data_serv = '{data}'";                
 
                 MySqlDataReader reader = query.ExecuteReader();
 
@@ -210,8 +212,8 @@ namespace SisAdv.Models
                         Tipo = DAOHelper.GetString(reader, "tipo_serv"),
 
                         //CÓDIGO AULA 1:N
-                        Cliente = DAOHelper.IsNull(reader, "fk_cliente") ? null : new Cliente() { Id = reader.GetInt32("id_cliente"), Nome = reader.GetString("nome_cli") },
-                        Usuario = DAOHelper.IsNull(reader, "usuario_serv") ? null : new Usuario() { Id = reader.GetInt32("fk_usuario"), Nome = reader.GetString("usuario_serv") }
+                        Cliente = DAOHelper.IsNull(reader, "cliente_serv") ? null : new Cliente() { Id = reader.GetInt32("fk_cliente"), Nome = reader.GetString("cliente_serv") },
+                        Advogado = DAOHelper.IsNull(reader, "advogado_serv") ? null : new Advogado() { Id = reader.GetInt32("fk_advogado"), Nome = reader.GetString("advogado_serv") }
                     });
                 }
 
@@ -231,17 +233,17 @@ namespace SisAdv.Models
                 var query = conn.Query();
 
                 query.CommandText = "UPDATE servico SET valor_serv = @valor, data_serv = @data, tipo_serv = @tipo, " +
-                                    "descricao_serv = @descricao, fk_usuario = @usuario, fk_cliente = @cliente, " + 
-                                    "usuario_serv = @usuarionome, cliente_serv = @clientenome WHERE id_servico = @id";
+                                    "descricao_serv = @descricao, fk_advogado = @advogado, fk_cliente = @cliente, " + 
+                                    "advogado_serv = @advogadonome, cliente_serv = @clientenome WHERE id_servico = @id";
 
                 query.Parameters.AddWithValue("@valor", t.Valor);
                 query.Parameters.AddWithValue("@data", t.Data);
                 query.Parameters.AddWithValue("@tipo", t.Tipo);
                 query.Parameters.AddWithValue("@descricao", t.Descricao);
-                query.Parameters.AddWithValue("@usuario", t.Usuario.Id);
+                query.Parameters.AddWithValue("@advogado", t.Advogado.Id);
                 query.Parameters.AddWithValue("@cliente", t.Cliente.Id);
                 query.Parameters.AddWithValue("@clientenome", t.Cliente.Nome);
-                query.Parameters.AddWithValue("@usuarionome", t.Usuario.Nome);
+                query.Parameters.AddWithValue("@advogadonome", t.Advogado.Nome);
 
 
                 query.Parameters.AddWithValue("@id", t.Id);

@@ -12,7 +12,7 @@ namespace SisAdv.Models
         public ServicoValidator()
         {
             RuleFor(x => x.Cliente).NotEmpty().WithMessage("O campo `Nome` é Obrigatório. Favor Preencher");
-            RuleFor(x => x.Usuario).NotEmpty().WithMessage("O campo `Advogado` é Obrigatório. Favor Preencher");
+            RuleFor(x => x.Advogado).NotEmpty().WithMessage("O campo `Advogado` é Obrigatório. Favor Preencher");
             RuleFor(x => x.Tipo).NotEmpty().WithMessage("Algum `Tipo de Serviço` é Obrigatório. Favor Preencher");
             RuleFor(x => x.Data).NotEmpty().WithMessage("O campo `Data` é Obrigatório. Favor Preencher");
 
