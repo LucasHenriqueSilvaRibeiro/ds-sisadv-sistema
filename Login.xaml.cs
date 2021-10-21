@@ -26,16 +26,29 @@ namespace SisAdv.Views
 
         private void btacessar_Click(object sender, RoutedEventArgs e)
         {
-            MainWindow mainWindow = new MainWindow();
-            this.Close();
-            mainWindow.Show();
+            string usuario = TxbLogin.Text;
+            string senha = PassWord.Password.ToString();
+
+            if (Models.Usuario.Login(usuario, senha))
+            {
+                var main = new MainWindow();
+                main.Show();
+                this.Close();
+            }
+            else
+            {
+                MessageBox.Show("Usuario e/ou senha incorretos! Tente novamente", "Autorização negada", MessageBoxButton.OK, MessageBoxImage.Warning);
+                _ = TxbLogin.Focus();
+            }
         }
 
         private void btnovousuario_Click(object sender, RoutedEventArgs e)
         {
-            CadastrarNovoUsuario cadastrarNovoUsuario = new CadastrarNovoUsuario();
-            this.Close();
-            cadastrarNovoUsuario.ShowDialog();
+            /*CadastrarNovoUsuario cadastrarNovoUsuario = new CadastrarNovoUsuario();
+            cadastrarNovoUsuario.ShowDialog();*/
+
+            CadastrarAdvogado cadastrarAdvogado = new CadastrarAdvogado();
+            cadastrarAdvogado.ShowDialog();
         }
 
         private void bttrocarsenha_Click(object sender, RoutedEventArgs e)

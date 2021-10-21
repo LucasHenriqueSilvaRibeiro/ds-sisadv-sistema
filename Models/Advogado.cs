@@ -22,12 +22,6 @@ namespace SisAdv.Models
 
         public String Email { get; set; }
 
-        public DateTime DataNasc { get; set; }
-
-        public String Tipo { get; set; }
-
-        public String Login { get; set; }
-
-        public String Senha { get; set; }
+        public DateTime? DataNasc { get; set; }
     }
 }

@@ -10,26 +10,37 @@ namespace SisAdv.Models
     {
         public int Id { get; set; }
 
-        public String Nome { get; set; }
-
-        public String Cpf { get; set; }
-
-        public String Rg { get; set; }
-
-        public String Telefone { get; set; }
-
-        public String Descricao { get; set; }
-
-        public String Email { get; set; }
-
-        public DateTime DataNasc { get; set; }
-
-        public String Tipo { get; set; }
-
-        public String Login { get; set; }
+        public String NomeUser { get; set; }
 
         public String Senha { get; set; }
 
+        public Advogado Advogado { get; set; }
 
+        private static Usuario _instance;
+
+        public Usuario() { }
+
+        public static Usuario GetInstance()
+        {
+            if (_instance == null)
+                _instance = new Usuario();
+
+            return _instance;
+        }
+
+        public static bool Login(string usuario, string senha)
+        {
+            var user = new UsuarioDAO().GetById(usuario, senha);
+
+            if (user != null)
+                return true;
+
+            return false;
+        }
+
+        public static int GetFuncionarioId()
+        {
+            return _instance.Advogado.Id;
+        }
     }
 }

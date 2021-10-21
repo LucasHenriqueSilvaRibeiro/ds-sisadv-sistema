@@ -30,7 +30,37 @@ namespace SisAdv.Models
 
         public void Insert(Advogado t)
         {
-            throw new NotImplementedException();
+            try
+            {
+                var query = conn.Query();
+                query.CommandText = "CALL inserirAdvogado(@nome, @cpf, @rg, @data, @email, @telefone, @descricao)";
+
+                query.Parameters.AddWithValue("@nome", t.Nome);
+                query.Parameters.AddWithValue("@data", t.DataNasc?.ToString("yyyy-MM-dd"));
+                query.Parameters.AddWithValue("@cpf", t.Cpf);
+                query.Parameters.AddWithValue("@rg", t.Rg);
+                query.Parameters.AddWithValue("@email", t.Email);
+                query.Parameters.AddWithValue("@telefone", t.Telefone);
+                query.Parameters.AddWithValue("@descricao", t.Descricao);
+
+                MySqlDataReader reader = query.ExecuteReader();
+
+                while (reader.Read())
+                {
+                    if (reader.GetName(0).Equals("Alerta"))
+                    {
+                        throw new Exception(reader.GetString("Alerta"));
+                    }
+                }
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+            finally
+            {
+                conn.Close();
+            }
         }
 
         public List<Advogado> List()

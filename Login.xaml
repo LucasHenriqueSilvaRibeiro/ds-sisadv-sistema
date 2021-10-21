@@ -28,12 +28,12 @@
         </StackPanel>
 
         <StackPanel Grid.Row="1" Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
-            <TextBlock Text="E-mail"/>
-            <TextBox Margin="10 -5 0 0" Width="230"/>
+            <TextBlock Text="Login"/>
+            <TextBox x:Name="TxbLogin" Margin="10 -5 0 0" Width="230"/>
         </StackPanel>
         <StackPanel Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
             <TextBlock Text="Senha" Margin="-75 0 0 0"/>
-            <TextBox Margin="-35 -5 0 0" Width="150"/>
+            <PasswordBox x:Name="PassWord" Margin="-35 -5 0 0" Width="150"/>
         </StackPanel>
 
         <StackPanel Grid.Row="3" Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">

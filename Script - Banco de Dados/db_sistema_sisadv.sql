@@ -12,10 +12,6 @@
 create database db_sistema_sisadv;
 use db_sistema_sisadv;
 
-desc servico;
-desc cliente;
-desc advogado;
-select * from servico;
 
 create table endereco(
 id_endereco int primary key auto_increment,
@@ -50,7 +46,7 @@ notificacao_even boolean
 create table advogado(
 id_advogado int primary key auto_increment,
 nome_adv varchar (100),
-cpf_adv varchar (11),
+cpf_adv varchar (20),
 rg_adv varchar (10),
 data_nasc_adv date,
 e_mail_adv varchar (150),
@@ -60,16 +56,10 @@ descricao_adv varchar (200)
 
 create table usuario(
 id_user int primary key auto_increment,
-tipo_user varchar (100),
-login_user varchar (100),
 senha_user varchar (40),
 nome_user varchar (100),
-cpf_user varchar (20),
-rg_user varchar (20),
-datanasc_user datetime,
-email_user varchar (100),
-telefone_user varchar (20),
-descricao_user varchar (200)
+fk_advogado int,
+foreign key (fk_advogado) references advogado (id_advogado)
 );
 
 create table servico(
@@ -218,8 +208,8 @@ $$ delimiter ;
 
 call inserirCliente ('Maycon Douglas', '012340125', '46540125', '69912345671', 'vendedor', 'Busca processar sua empresa por danos morais', 3);
 call inserirCliente ('Raça Nega', '01246445525', '49840125', '6991254541', 'cantor', 'Busca processar sua agencia', 3);
-call inserirCliente ('Turma do Pagode', '01246445525', '49840125', '6991254541', 'cantor', 'Busca processar sua agencia', 3);
-call inserirCliente ('Exalta Samba', '01246445525', '49840125', '6991254541', 'cantor', 'Busca processar sua agencia', 3);
+call inserirCliente ('Turma do Pagode', '01245259999', '4425', '69943541', 'cantor', 'Busca p', 3);
+call inserirCliente ('Exalta Samba', '0124644', '4353455', '69544541', 'cantor', 'Busca processaa', 3);
 
 select * from cliente;
 
@@ -276,36 +266,44 @@ $$ delimiter ;
 
 call inserirAdvogado ('Sr.Delais', '04564564654', '0214545', '1990-05-04', 'srdelais@gmail.com', '694564231554', 'Advogado desde 2005');
 call inserirAdvogado ('Sr.Jackson', '04565645646', '5456465', '1995-09-14', 'Jackson@gmail.com', '694564231554', 'Advogado desde 2010');
+call inserirAdvogado ('Teste Sem Usuario', '04565645634', '5456455', '1345-09-14', '894@gmail.com', '694587954231554', 'Advogado desde 2015');
+call inserirAdvogado ('Teste DOIS', '0456545634', '55456465', '1345-09-14', '222222@gmail.com', '694587955451554', 'Advogado desde 2015');
 select * from advogado;
+DESC ADVOGADO;
+#delete from advogado where id_advogado > 0;
 
 
 #Tabela usuário--------------------------------------------------------------------------------------------------------------------------------------
 desc usuario;
 delimiter $$
-create procedure inserirUsuario(tipo varchar (100), login varchar (100), senha varchar (40), nome varchar(100), cpf varchar (20), 
-rg varchar (20), dataNascimento datetime, email varchar (100), telefone varchar (20), descricao varchar (200))
+create procedure inserirUsuario(senha varchar (40), nome varchar(100), advogado int)
 begin
 declare verificacaologin varchar (100);
-set verificacaologin = (select login_user from usuario where (login_user = login));
+declare verificacaoadvogado int;
+
+set verificacaologin = (select nome_user from usuario where (nome_user = nome));
+set verificacaoadvogado = (select fk_advogado from usuario where (fk_advogado = advogado));
+
 if (verificacaologin is null) then
-	#Quem ficou responsável por Cadastrar Usuário, verifique essas comparações!
-	#if (login = email) then
-		insert into usuario values (null,tipo, login, senha, nome, cpf, rg, dataNascimento, email, telefone, descricao);
+	if (verificacaoadvogado is null) then
+		insert into usuario values (null, senha, nome, advogado);
 		select 'Usuário cadastrado com sucesso!' as Confirmacao;
-	#else
-		#select 'O e-mail inserido não condiz com o e-mail do advogado' as Alerta;
-	#end if;
+	else 
+		select 'Esse advogado já foi cadastrado! Altere e tente novamente.' as Alerta;
+    end if;
 else
-	select 'Esse e-mail já foi cadastrado por um outro usuário!' as Alerta;
+	select 'Esse nome de usuário já está sendo utilizado por um outro usuário! Altere e tente novamente.' as Alerta;
 end if;
 end;
 $$ delimiter ;
 #drop procedure inserirusuario;
-call inserirUsuario ('usuario acesso total','srdelais@gmail.com', 'testesenha', 'Vinicius Teste', '2309849032', '3984984 SSP', '2021-02-05', 'vinicius@gmail.com', '69 993898998', 'Advogado especializado em casos penais');
-call inserirUsuario ('usuario acesso parcial','Jackson@gmail.com', 'senhateste', 'Professor João IFRO', '324324432', '4839048', '2020-06-10', 'joao@gmail.com', '69 348902348930', 'Professor Advogado especializado em casos cibernéticos');
+call inserirUsuario ('testesenha', 'Vinicius Teste', 4);
+call inserirUsuario ('435345', 'Professor JÃO', 5);
+call inserirUsuario ('435345', 'Lucas Teste', 3);
+call inserirUsuario ('435345', 'Professor JACKSON', 2);
+CALL inserirUsuario ('12345', 'Lucas teste', 2);
 select * from advogado;
 select * from usuario;
-
 desc servico;
 
 #Tabela servico--------------------------------------------------------------------------------------------------------------------------------------

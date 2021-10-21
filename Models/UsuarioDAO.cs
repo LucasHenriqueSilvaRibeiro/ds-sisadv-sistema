@@ -9,70 +9,70 @@ using SisAdv.Interface;
 
 namespace SisAdv.Models
 {
-    class UsuarioDAO : IDAO<Usuario>
+    class UsuarioDAO : AbstractDAO<Usuario>
     {
-        private static Conexao conn;
-
-        public UsuarioDAO()
-        {
-            conn = new Conexao();
-        }
-
-        public void Delete(Usuario t)
-        {
-            throw new NotImplementedException();
-        }
-
-        public Usuario GetById(int id)
-        {
-            throw new NotImplementedException();
-        }
-
-        public void Insert(Usuario t)
-        {
-            throw new NotImplementedException();
-        }
-
-        public List<Usuario> List()
+        public Usuario GetById(string usuarioNome, string senha)
         {
             try
             {
-                List<Usuario> list = new List<Usuario>();
-
                 var query = conn.Query();
-                query.CommandText = "SELECT * FROM usuario";
+                query.CommandText = "SELECT * FROM usuario LEFT JOIN advogado ON fk_advogado = id_advogado " + 
+                    "WHERE nome_user = @usuario AND senha_user = @senha;";
+
+                query.Parameters.AddWithValue("@usuario", usuarioNome);
+                query.Parameters.AddWithValue("@senha", senha);
+
+                MySqlDataReader reader = query.ExecuteReader();
+
+                Usuario usuario = null;
+
+                while (reader.Read())
+                {
+                    usuario = Usuario.GetInstance();
+                    usuario.Id = reader.GetInt32("id_user");
+                    usuario.NomeUser = reader.GetString("nome_user");
+                    usuario.Advogado = new Advogado() { Id = reader.GetInt32("fk_advogado"), Nome = reader.GetString("nome_user") };
+                }
+
+                return usuario;
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+
+        public override void Insert(Usuario t)
+        {
+            try
+            {
+                var query = conn.Query();
+                query.CommandText = "CALL inserirUsuario (@senha, @nome, @advogado)";
+
+                query.Parameters.AddWithValue("@senha", t.Senha);
+                query.Parameters.AddWithValue("@nome", t.NomeUser);
+                query.Parameters.AddWithValue("@advogado", t.Advogado.Id);
 
                 MySqlDataReader reader = query.ExecuteReader();
 
                 while (reader.Read())
                 {
-                    list.Add(new Usuario()
+                    if (reader.GetName(0).Equals("Alerta"))
                     {
-                        Id = reader.GetInt32("id_user"),
-                        Nome = reader.GetString("nome_user"),
-                        Descricao = reader.GetString("descricao_user"),
-                        Rg = reader.GetString("rg_user"),
-                        Cpf = reader.GetString("cpf_user"),
-                        Telefone = reader.GetString("telefone_user"),
-                        Email = reader.GetString("email_user"),
-                        Login = reader.GetString("login_user"),
-                        Senha = reader.GetString("senha_user"),
-                        DataNasc = reader.GetDateTime("datanasc_user"),
-                        Tipo = reader.GetString("tipo_user")
-                    });
+                        throw new Exception(reader.GetString("Alerta"));
+                    }
                 }
-
-                return list;
             }
-            catch (Exception)
+            catch (Exception e)
             {
-                throw;
+                throw e;
+            }
+            finally
+            {
+                conn.Close();
             }
         }
 
-        public void Update(Usuario t)
-        {
-            throw new NotImplementedException();
-        }
     }
 }

@@ -262,8 +262,10 @@
     <Compile Include="Database\Conexao.cs" />
     <Compile Include="Helpers\DAOHelper.cs" />
     <Compile Include="Interface\IDAO.cs" />
+    <Compile Include="Models\AbstractDAO.cs" />
     <Compile Include="Models\Advogado.cs" />
     <Compile Include="Models\AdvogadoDAO.cs" />
+    <Compile Include="Models\AdvogadoValidator.cs" />
     <Compile Include="Models\ClienteDAO.cs" />
     <Compile Include="Models\Evento.cs" />
     <Compile Include="Models\EventoDAO.cs" />
@@ -279,6 +281,9 @@
     </Compile>
     <Compile Include="Views\BuscarLucro.xaml.cs">
       <DependentUpon>BuscarLucro.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\CadastrarAdvogado.xaml.cs">
+      <DependentUpon>CadastrarAdvogado.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\CadastrarEvento.xaml.cs">
       <DependentUpon>CadastrarEvento.xaml</DependentUpon>
@@ -326,6 +331,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\BuscarServico.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\CadastrarAdvogado.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
