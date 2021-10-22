@@ -91,8 +91,6 @@ namespace SisAdv.Views
             {
                 MessageBox.Show(ex.Message, "Exceção", MessageBoxButton.OK, MessageBoxImage.Error);
             }
-        }
-
-        
+        }        
     }
 }

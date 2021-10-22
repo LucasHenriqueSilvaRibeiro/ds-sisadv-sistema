@@ -9,7 +9,7 @@ namespace SisAdv.Models
     public class Despesa
     {
         public String Origem { get; set; }
-        public String Data { get; set; }
+        public DateTime? Data { get; set; }
         public Boolean Mensal { get; set; }
         public double Valor { get; set; }
     }

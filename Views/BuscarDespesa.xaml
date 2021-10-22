@@ -29,18 +29,18 @@
 
         <StackPanel Grid.Row="0" Orientation="Horizontal" HorizontalAlignment="Center">
             <TextBlock Text="Origem" FontSize="18" Margin="-30 25 0 0"/>
-            <TextBox Width="200" Height="30" Margin="10 0 0 0" MaxLength="90"/>
+            <TextBox x:Name="textOrigem" Width="200" Height="30" Margin="10 0 0 0" MaxLength="90"/>
         </StackPanel>
 
         <StackPanel Grid.Row="1" Orientation="Horizontal" HorizontalAlignment="Center">
             <TextBlock Text="Data" FontSize="18" Margin="-80 32 0 0"/>
-            <DatePicker Width="110" Height="30" Margin="-35 0 0 0"/>
+            <DatePicker x:Name="dataDespesa" Width="110" Height="30" Margin="-35 0 0 0"/>
         </StackPanel>
 
         <StackPanel Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Center">
             <TextBlock Text="Valor" FontSize="18" Margin="-90 30 0 0" />
             <!--Talvez seja necessário uma MASKED aqui!-->
-            <TextBox Width="100" Height="30" Margin="-40 0 0 0"/>
+            <TextBox x:Name="textValor" Width="100" Height="30" Margin="-40 0 0 0"/>
         </StackPanel>
 
         <!--Cor diferente só pra não me perder mesmo-->
@@ -62,7 +62,7 @@
         </DataGrid>
 
         <StackPanel Grid.Row="1" Grid.Column="1" HorizontalAlignment="Center">
-            <Button Height="70" Width="100" BorderBrush="{x:Null}" Background="#FFF1F1F1">
+            <Button x:Name="buttonPesquisar" Height="70" Width="100" BorderBrush="{x:Null}" Background="#FFF1F1F1" Click="buttonPesquisar_Click">
                 <materialDesign:PackIcon Kind="Search" Width="45" Height="40" Foreground="Black"/>
             </Button>
             <TextBlock FontSize="14" HorizontalAlignment="Center" Text="Pesquisar"/>

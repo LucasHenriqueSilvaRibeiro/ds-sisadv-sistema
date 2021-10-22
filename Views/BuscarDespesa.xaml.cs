@@ -28,25 +28,69 @@ namespace SisAdv.Views
 
         public void BuscarDespesa_Loaded(object sender, RoutedEventArgs e)
         {
-            List<Despesa> listaDespesa = new List<Despesa>();
 
-            for (int i = 0; i < 30; i++)
-            {
-                listaDespesa.Add(new Despesa()
-                {
-                    Data = "20/02/2020",
-                    Origem = "Despesa - " + i,
-                    Mensal = true,
-                    Valor = 20.30 + i,
-                });
-            }
-
-            dataGridBuscarDespesa.ItemsSource = listaDespesa;
         }
 
         private void buttonExcluir_Click(object sender, RoutedEventArgs e)
         {
             MessageBox.Show("Deseja excluir este(s) cadastros?", "", MessageBoxButton.YesNo, MessageBoxImage.Question);
+        }
+
+        private void LoadDataGrid()
+        {
+            try
+            {
+                var dao = new DespesaDAO();
+
+                dataGridBuscarDespesa.ItemsSource = dao.List();
+            }
+            catch (Exception ex)
+            {
+
+                MessageBox.Show(ex.Message, "Não foi possível carregar as listas de serviços. Verifique e tente novamente.", MessageBoxButton.OK, MessageBoxImage.Error);
+
+            }
+        }
+
+        private void buttonPesquisar_Click(object sender, RoutedEventArgs e)
+        {
+            if (textOrigem.Text == "" && dataDespesa.SelectedDate == null && textValor.Text == "")
+                MessageBox.Show("Nenhum dos campos foi inserido. Insira dados em algum dos campos para realizar uma consulta!", "Atenção", MessageBoxButton.OK, MessageBoxImage.Information);
+            else
+                ConsultaLoadDataGrid();
+        }
+
+        private void ConsultaLoadDataGrid()
+        {
+
+            try
+            {
+                var dao = new DespesaDAO();
+                DateTime? data;
+                string Origem = null;
+                string dataconvertida = null;
+                double valor = 0.0;
+
+                if (dataDespesa.SelectedDate != null)
+                {
+                    DateTime? selectedDate = (DateTime?)dataDespesa.SelectedDate;
+                    data = selectedDate;
+                    dataconvertida = data?.ToString("yyyy-MM-dd");
+                }
+
+                if (textOrigem.Text != null)
+                    Origem = textOrigem.Text;
+
+                if (double.TryParse(textValor.Text, out double salario))
+                    valor = salario;
+
+                dataGridBuscarDespesa.ItemsSource = null;
+                dataGridBuscarDespesa.ItemsSource = dao.ListConsulta(Origem, dataconvertida, valor);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Exceção", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
         }
     }
 }
