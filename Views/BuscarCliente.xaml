@@ -30,24 +30,23 @@
 
         <StackPanel Grid.Row="0" Orientation="Horizontal" HorizontalAlignment="Center">
             <TextBlock Text="Nome" FontSize="18" Margin="0 25 0 0"/>
-            <TextBox Width="200" Height="30" Margin="10 0 0 0"/>
+            <TextBox x:Name="textCliente" Width="200" Height="30" Margin="10 0 0 0"/>
         </StackPanel>
 
         <StackPanel Grid.Row="1" Orientation="Horizontal" HorizontalAlignment="Center">
             <TextBlock Text="RG" FontSize="18" Margin="-80 25 0 0"/>
-            <TextBox Width="100" Height="30" Margin="-40 0 0 0"/>
+            <TextBox x:Name="textRg" Width="100" Height="30" Margin="-40 0 0 0"/>
         </StackPanel>
 
         <StackPanel Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Center">
             <TextBlock Text="CPF" FontSize="18" Margin="-70 25 0 0" />
-            <!--Ficou Feio DEMAIS MDS, mas essa é a máscara colocada em aula, copiem se houver necessidade na tela de vocês!-->
-            <wpfTool:MaskedTextBox Height="25" Width="100" TextAlignment="Center" Margin="-20 -10 0 0" Mask="000\.000\.000-00" />
+            <TextBox x:Name="textcpf" Height="25" Width="100" TextAlignment="Center" Margin="-20 -10 0 0" />
         </StackPanel>
         
         <!--Cor diferente só pra não me perder mesmo-->
         <DataGrid Grid.Row="3" Margin="10 10 10 30" x:Name="dataGridBuscarCliente" AlternationCount="2" AutoGenerateColumns="False" BorderBrush="#FF747474" Background="#FFECECEC">
             <DataGrid.Columns>
-                <DataGridTextColumn Header="" Binding="{Binding Id}"/>
+                <DataGridTextColumn Header="Id" Binding="{Binding Id}"/>
                 <DataGridTextColumn Header="Nome" Binding="{Binding Nome}"/>
                 <DataGridTextColumn Header="CPF" Binding="{Binding Cpf}"/>
                 <DataGridTextColumn Header="RG" Binding="{Binding Rg}"/>
@@ -63,7 +62,7 @@
         </DataGrid>
 
         <StackPanel Grid.Row="1" Grid.Column="1" HorizontalAlignment="Center">
-            <Button x:Name="buttonPesquisar" Height="70" Width="100" BorderBrush="{x:Null}" Background="#FFF1F1F1">
+            <Button x:Name="buttonPesquisar" Height="70" Width="100" BorderBrush="{x:Null}" Background="#FFF1F1F1" Click="buttonPesquisar_Click">
                 <materialDesign:PackIcon Kind="Search" Width="45" Height="40" Foreground="Black"/>
             </Button>
             <TextBlock FontSize="14" HorizontalAlignment="Center" Text="Pesquisar"/>

@@ -67,6 +67,53 @@ namespace SisAdv.Models
             }
         }
 
+        public List<Cliente> ListConsulta(string nome, string rg, string cpf)
+        {
+            try
+            {
+                string textoSelect = "SELECT  * FROM cliente WHERE";
+
+                List<Cliente> listConsulta = new List<Cliente>();
+
+                var query = conn.Query();
+
+                if ((nome != null) && (rg != null) && (cpf != null))
+                    query.CommandText = $"{textoSelect} nome_cli like '%{nome}%' and rg_cli like '{rg}%' and cpf_cli like '{cpf}%'";
+                else if ((nome != null) && (rg != null))
+                    query.CommandText = $"{textoSelect} nome_cli like '%{nome}%' and rg_cli like '{rg}%'";
+                else if ((nome != null) && (cpf != null))
+                    query.CommandText = $"{textoSelect} nome_cli like '%{nome}%' and cpf_cli like '{cpf}%'";
+                else if ((cpf != null) && (rg != null))
+                    query.CommandText = $"{textoSelect} rg_cli like '{rg}%' and cpf_cli like '{cpf}%'";
+                else if (cpf != null)
+                    query.CommandText = $"{textoSelect} cpf_cli like '{cpf}%'";
+                else if (nome != null)
+                    query.CommandText = $"{textoSelect} nome_cli like '%{nome}%'";
+                else if (rg != null)
+                    query.CommandText = $"{textoSelect} rg_cli like '{rg}%'";
+
+                MySqlDataReader reader = query.ExecuteReader();
+
+                while (reader.Read())
+                {
+                    listConsulta.Add(new Cliente()
+                    {
+                        Id = reader.GetInt32("id_cliente"),
+                        Nome = reader.GetString("nome_cli"),
+                        Rg = reader.GetString("rg_cli"),
+                        Cpf = reader.GetString("cpf_cli")
+                    });
+                }
+
+                return listConsulta;
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+
         public void Update(Cliente t)
         {
             throw new NotImplementedException();
