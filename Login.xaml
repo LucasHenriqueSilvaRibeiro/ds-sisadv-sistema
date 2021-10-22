@@ -37,22 +37,16 @@
         </StackPanel>
 
         <StackPanel Grid.Row="3" Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
-            <StackPanel Margin="0 0 10 0">
-                <Button Width="90" Height="40" x:Name="btacessar" Background="White" BorderBrush="{x:Null}" Foreground="Black" Click="btacessar_Click" >
+            <StackPanel>
+                <Button  Width="180" Height="40" x:Name="btacessar" Background="White" BorderBrush="{x:Null}" Foreground="Black" Click="btacessar_Click" >
                     <materialDesign:PackIcon Kind="Login" Width="40" Height="30" Foreground="Black"/>
                 </Button>
-                <TextBlock Text="Acessar" HorizontalAlignment="Center"/>
-            </StackPanel>
-            <StackPanel Margin="10 0 0 0">
-                <Button Width="90" Height="40" x:Name="btnovousuario" Background="White" BorderBrush="{x:Null}" Foreground="Black" Click="btnovousuario_Click">
-                    <materialDesign:PackIcon Kind="UserAdd" Width="40" Height="30" Foreground="Black"/>
-                </Button>
-                <TextBlock Text="Adicionar Usuário" HorizontalAlignment="Center"/>
+                <TextBlock Margin="0 5 0 0" Text="Acessar" HorizontalAlignment="Center"/>
             </StackPanel>
         </StackPanel>
 
         <StackPanel Grid.Row="4" HorizontalAlignment="Center" VerticalAlignment="Center">
-            <Button FontSize="11" Height="20" x:Name="bttrocarsenha" Background="White" BorderBrush="{x:Null}" Foreground="Black" Click="bttrocarsenha_Click">Esqueceu sua Senha?</Button>
+            <Button FontSize="11" Height="25" x:Name="bttrocarsenha" Background="White" BorderBrush="{x:Null}" Foreground="Black" Click="bttrocarsenha_Click">Esqueceu sua Senha?</Button>
         </StackPanel>
     </Grid>
 </Window>

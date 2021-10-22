@@ -23,13 +23,19 @@ namespace SisAdv.Models
             RuleFor(x => x.Cpf).Must(CPFValidator).WithMessage("CPF inválido");
 
             //CRIAR UM PARA TELEFONE
-            //RuleFor(x => x.Cpf).NotEqual("(__) _ ____-____").WithMessage("Algum `Telefone` é Obrigatório. Favor Preencher");
+            RuleFor(x => x.Telefone).NotEqual("(__) _ ____-____").WithMessage("Algum `Telefone` é Obrigatório. Favor Preencher");
+            RuleFor(x => x.Telefone).Must(PhoneValidator).WithMessage("Telefone inválido");
         }
 
         public bool CPFValidator(string cpf)
         {
             return true;
         }
-        
+
+        public bool PhoneValidator(string telefone)
+        {
+            return true;
+        }
+
     }
 }

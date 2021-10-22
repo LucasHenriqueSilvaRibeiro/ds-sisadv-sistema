@@ -50,8 +50,6 @@ namespace SisAdv.Views
             _advogado.Descricao = "Teste de inserção ADVOGADO, INSERIR TXB DPS";
 
             SaveData();
-
-            CarregarCadastrarUsuario();
         }
 
         private void CarregarCadastrarUsuario()
@@ -77,9 +75,9 @@ namespace SisAdv.Views
                     else
                         dao.Update(_advogado);
 
-                    MessageBox.Show($"Advogado {text} com sucesso!", "Sucesso", MessageBoxButton.OK, MessageBoxImage.Information);                    
+                    MessageBox.Show($"Advogado {text} com sucesso!", "Sucesso", MessageBoxButton.OK, MessageBoxImage.Information);
 
-                    this.Close();
+                    CloseFormVerify();
                 }
 
             }
@@ -87,6 +85,30 @@ namespace SisAdv.Views
             {
                 MessageBox.Show(ex.Message, "Não Executado", MessageBoxButton.OK, MessageBoxImage.Error);
             }
+        }
+
+        private void CloseFormVerify()
+        {
+            if (_advogado.Id == 0)
+            {
+                var result1 = MessageBox.Show("Deseja adicionar um usuário para este Advogado?","Adicionar?", MessageBoxButton.YesNo, MessageBoxImage.Question);
+
+                if (result1 == MessageBoxResult.Yes)
+                {
+                    CarregarCadastrarUsuario();
+                }
+                else
+                {
+                    var result2 = MessageBox.Show("Deseja continuar adicionando advogados?", "Continuar?", MessageBoxButton.YesNo, MessageBoxImage.Question);
+
+                    if (result2 == MessageBoxResult.No)
+                        this.Close();
+                    else
+                        ClearInputs();
+                }                
+            }
+            else
+                this.Close();
         }
 
         private bool Validate()
@@ -108,6 +130,16 @@ namespace SisAdv.Views
             }
 
             return result.IsValid;
+        }
+
+        private void ClearInputs()
+        {
+            TxbCpf.Text = null;
+            TxbEmail.Text = null;
+            TxbNome.Text = null;
+            TxbRg.Text = null;
+            TxbTelefone.Text = null;
+            datePickerNascimento.SelectedDate = null;
         }
     }
 }

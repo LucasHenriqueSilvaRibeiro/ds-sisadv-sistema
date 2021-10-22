@@ -42,15 +42,6 @@ namespace SisAdv.Views
             }
         }
 
-        private void btnovousuario_Click(object sender, RoutedEventArgs e)
-        {
-            /*CadastrarNovoUsuario cadastrarNovoUsuario = new CadastrarNovoUsuario();
-            cadastrarNovoUsuario.ShowDialog();*/
-
-            CadastrarAdvogado cadastrarAdvogado = new CadastrarAdvogado();
-            cadastrarAdvogado.ShowDialog();
-        }
-
         private void bttrocarsenha_Click(object sender, RoutedEventArgs e)
         {
             AlterarSenha alterarSenha = new AlterarSenha();

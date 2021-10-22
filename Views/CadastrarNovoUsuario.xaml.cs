@@ -53,14 +53,6 @@ namespace SisAdv.Views
             _usuario.Advogado = ComboboxAdvogado.SelectedItem as Advogado;
 
             SaveData();
-
-            ChamarTelaPrincipal();
-        }
-
-        private void ChamarTelaPrincipal()
-        {
-            Login login = new Login();
-            login.ShowDialog();
         }
 
         private void BtnCancelar_Click(object sender, RoutedEventArgs e)
@@ -76,11 +68,26 @@ namespace SisAdv.Views
 
             MessageBox.Show($"Usuário cadastrado com sucesso!", "Sucesso", MessageBoxButton.OK, MessageBoxImage.Information);
 
-            this.Close();
+            var result = MessageBox.Show($"Deseja cadastrar outros Usuários?!", "Deseja?", MessageBoxButton.YesNo, MessageBoxImage.Question);
+
+            if (result == MessageBoxResult.Yes)
+            {
+                ClearInputs();
+            }
+            else
+                Close();
         }
         private void LoadCombobox()
         {
             ComboboxAdvogado.ItemsSource = new AdvogadoDAO().List();
+        }
+
+        private void ClearInputs()
+        {
+            TxbLogin.Text = null;
+            PassSenha.Password = null;
+            PassConfirmarSenha.Password = null;
+            ComboboxAdvogado.SelectedItem = null;
         }
     }
 }

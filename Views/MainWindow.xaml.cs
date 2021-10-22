@@ -187,6 +187,18 @@ namespace SisAdv.Views
 
             LoadDataGrid();
         }
+
+        private void btaddAdvogado_Click(object sender, RoutedEventArgs e)
+        {
+            CadastrarAdvogado cadastrarAdvogado = new CadastrarAdvogado();
+            cadastrarAdvogado.ShowDialog();
+        }
+
+        private void btaddUsuario_Click(object sender, RoutedEventArgs e)
+        {
+            CadastrarNovoUsuario cadastrarNovoUsuario = new CadastrarNovoUsuario();
+            cadastrarNovoUsuario.ShowDialog();
+        }
     }
     }
     
