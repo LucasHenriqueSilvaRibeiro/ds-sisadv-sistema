@@ -54,7 +54,12 @@
                 <DataGridTemplateColumn>
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
-                            <CheckBox/>
+                            <StackPanel Orientation="Horizontal">
+                                <Button Style="{StaticResource MaterialDesignIconForegroundButton}" Content="{materialDesign:PackIcon Eye}"
+                                        ToolTip="Visualizar Registro" Margin="0 0 5 0" Click="Btn_Update_Click" />
+                                <Button Style="{StaticResource MaterialDesignIconForegroundButton}" Content="{materialDesign:PackIcon Delete}"
+                                        ToolTip="Excluir Registro" Click="Btn_Delete_Click" />
+                            </StackPanel>
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>

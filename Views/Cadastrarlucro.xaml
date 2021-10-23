@@ -30,24 +30,24 @@
 
                 <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
                     <Label Content="Valor" Margin="13 0 0 0" FontSize="16" FontWeight="Bold" Foreground="White"/>
-                    <TextBox Width="100"  Height="30" FontSize="16" Foreground="White"/>
+                    <TextBox x:Name="textvalor" Width="100"  Height="30" FontSize="16" Foreground="White"/>
                 </StackPanel>
                 <StackPanel Grid.Row="1" Orientation="Horizontal" VerticalAlignment="Center">
                     <Label Content="Data" Margin="13 0 0 0"  FontSize="16" FontWeight="Bold" Foreground="White"/>
-                    <DatePicker Width="100" Height="30" FontSize="16" Foreground="White"/>
+                    <DatePicker x:Name="dateLucro" Width="100" Height="30" FontSize="16" Foreground="White"/>
                 </StackPanel>
                 <StackPanel Grid.Row="2" Orientation="Horizontal" VerticalAlignment="Center">
                     <Label Content="Descrição" Margin="13 0 0 0"  FontSize="16" FontWeight="Bold" Foreground="White"/>
-                    <TextBox Width="160" Height="100" FontSize="16" Background="White"/>
+                <TextBox x:Name="textDescricao" Width="160" Height="100" FontSize="16" Background="White"/>
                 </StackPanel>
                 <StackPanel Grid.Column="1" Orientation="Horizontal" VerticalAlignment="Center">
                     <Label Content="Origem" FontSize="16" FontWeight="Bold" Foreground="White"/>
-                    <TextBox Width="170" Height="30" FontSize="16" Foreground="White"/>
+                <TextBox x:Name="textOrigem" Width="170" Height="30" FontSize="16" Foreground="White"/>
                 </StackPanel>
                 <StackPanel Grid.Row="1" Grid.Column="1" Orientation="Horizontal" VerticalAlignment="Center">
                     <Label Content="Mensal" FontSize="16" FontWeight="Bold" Foreground="White"/>
                     <!--hellen slide-->
-                    <ToggleButton Margin="10 0 0 0" Style="{StaticResource MaterialDesignSwitchToggleButton}" ToolTip="Default ToggleButton Style" Background="White" Foreground="White" />
+                    <ToggleButton x:Name="opcaoMensal" Margin="10 0 0 0" Style="{StaticResource MaterialDesignSwitchToggleButton}" ToolTip="Default ToggleButton Style" Background="White" Foreground="White" />
                 </StackPanel>
 
                 <Button Grid.Column="2" Width="100" Height="65" BorderBrush="{x:Null}" Background="#FF1090FB" Foreground="black">
@@ -88,14 +88,14 @@
 
                 <StackPanel Margin="13 0 0 0" >
                     <Label FontSize="16" FontWeight="Bold" Foreground="White">Forma de Pagamento</Label>
-                    <RadioButton FontSize="16" Foreground="White">Cartão</RadioButton>
-                    <RadioButton FontSize="16" Foreground="White">Dinheiro</RadioButton>
-                    <RadioButton FontSize="16" Foreground="White">Transferência</RadioButton>
+                <RadioButton x:Name="rbCartao" FontSize="16" Foreground="White">Cartão</RadioButton>
+                <RadioButton x:Name="rbDinheiro" FontSize="16" Foreground="White">Dinheiro</RadioButton>
+                <RadioButton x:Name="rbTransferência" FontSize="16" Foreground="White">Transferência</RadioButton>
                 </StackPanel>
 
                 <StackPanel Margin="0 80 0 0" Orientation="Horizontal">
                     <Label FontSize="16" Margin="13 30 0 0"  FontWeight="Bold" Foreground="White">Código</Label>
-                    <TextBox Width="70" Height="30" Margin="5 0 0 0" FontSize="16" Foreground="White" IsEnabled="False"/>
+                <TextBox x:Name="textId" Width="70" Height="30" Margin="5 0 0 0" FontSize="16" Foreground="White" IsEnabled="False"/>
                 </StackPanel>
             </Grid>
         </DockPanel>

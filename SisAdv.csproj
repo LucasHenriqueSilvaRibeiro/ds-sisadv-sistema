@@ -266,12 +266,15 @@
     <Compile Include="Models\Advogado.cs" />
     <Compile Include="Models\AdvogadoDAO.cs" />
     <Compile Include="Models\AdvogadoValidator.cs" />
+    <Compile Include="Models\Caixa.cs" />
     <Compile Include="Models\ClienteDAO.cs" />
     <Compile Include="Models\ClienteValidator.cs" />
     <Compile Include="Models\DespesaDAO.cs" />
     <Compile Include="Models\Evento.cs" />
     <Compile Include="Models\EventoDAO.cs" />
     <Compile Include="Models\LucroDAO.cs" />
+    <Compile Include="Models\LucroValidator.cs" />
+    <Compile Include="Models\Processo.cs" />
     <Compile Include="Models\ServicoDAO.cs" />
     <Compile Include="Models\ServicoValidator.cs" />
     <Compile Include="Models\Usuario.cs" />

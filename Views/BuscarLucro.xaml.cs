@@ -28,7 +28,7 @@ namespace SisAdv.Views
         
         public void BuscarLucro_Loaded(object sender, RoutedEventArgs e)
         {
-            
+            LoadDataGrid();
         }
 
         private void buttonExcluir_Click(object sender, RoutedEventArgs e)
@@ -91,6 +91,39 @@ namespace SisAdv.Views
             {
                 MessageBox.Show(ex.Message, "Exceção", MessageBoxButton.OK, MessageBoxImage.Error);
             }
-        }        
+        }
+
+        private void Btn_Update_Click(object sender, RoutedEventArgs e)
+        {
+            var lucroSelected = dataGridBuscarLucro.SelectedItem as Lucro;
+
+            var window = new Cadastrarlucro(lucroSelected.Id);
+
+            window.ShowDialog();
+
+            LoadDataGrid();
+        }
+
+        private void Btn_Delete_Click(object sender, RoutedEventArgs e)
+        {
+            var lucroSelected = dataGridBuscarLucro.SelectedItem as Lucro;
+
+            var result = MessageBox.Show($"Deseja realmente remover o lucro`{lucroSelected.Origem}`?", "Confirmação de Exclusão", MessageBoxButton.YesNo, MessageBoxImage.Warning);
+
+            try
+            {
+                if (result == MessageBoxResult.Yes)
+                {
+                    var dao = new LucroDAO();
+                    dao.Delete(lucroSelected);
+                    LoadDataGrid();
+                }
+            }
+            catch (Exception ex)
+            {
+
+                MessageBox.Show(ex.Message, "Exceção", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+        }
     }
 }

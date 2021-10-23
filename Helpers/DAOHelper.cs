@@ -19,6 +19,16 @@ namespace SisAdv.Helpers
             return text;
         }
 
+        public static string GetBoolean(MySqlDataReader reader, string column_name)
+        {
+            string text = string.Empty;
+
+            if (!reader.IsDBNull(reader.GetOrdinal(column_name)))
+                text = reader.GetString(column_name);
+
+            return text;
+        }
+
         public static double GetDouble(MySqlDataReader reader, string column_name)
         {
             double value = 0.0;

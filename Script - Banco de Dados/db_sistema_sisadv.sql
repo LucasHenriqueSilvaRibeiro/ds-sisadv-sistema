@@ -11,8 +11,15 @@
 #drop database db_sistema_sisadv;
 create database db_sistema_sisadv;
 use db_sistema_sisadv;
-desc cliente;
-select * from cliente;
+desc lucro;
+select * from usuario;
+select * from advogado;
+desc processo;
+desc caixa;
+SELECT * FROM servico 
+LEFT JOIN cliente ON fk_cliente = id_cliente 
+LEFT JOIN advogado ON fk_advogado = id_advogado 
+WHERE id_lucro = @id
 
 create table endereco(
 id_endereco int primary key auto_increment,
