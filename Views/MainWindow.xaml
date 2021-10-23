@@ -66,6 +66,8 @@
                     Content="Buscar Cliente" Background="White" BorderBrush="{x:Null}" Foreground="Black" Click="btbuscarcliente_Click"/>
                     <Button Margin="0 5 0 0" x:Name="btbuscaservico" Width="150" FontSize="11"
                     Content="Buscar Serviço" Background="White" BorderBrush="{x:Null}" Foreground="Black" Click="btbuscaservico_Click"/>
+                    <Button Margin="0 5 0 0" x:Name="btbuscaAdvogado" Width="150" FontSize="11"
+                    Content="Buscar Advogado" Background="White" BorderBrush="{x:Null}" Foreground="Black" Click="btbuscaAdvogado_Click" />
                 </StackPanel>
 
                 <Button Margin="0 20 0 0" x:Name="btconfiguracoes"

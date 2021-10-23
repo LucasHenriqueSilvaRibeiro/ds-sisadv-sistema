@@ -26,8 +26,8 @@ namespace SisAdv.Views
 
         private void btacessar_Click(object sender, RoutedEventArgs e)
         {
-            string usuario = TxbLogin.Text;
-            string senha = PassWord.Password.ToString();
+            string usuario = "srde";//TxbLogin.Text;
+            string senha = "123";//PassWord.Password.ToString();
 
             if (Models.Usuario.Login(usuario, senha))
             {

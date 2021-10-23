@@ -199,6 +199,12 @@ namespace SisAdv.Views
             CadastrarNovoUsuario cadastrarNovoUsuario = new CadastrarNovoUsuario();
             cadastrarNovoUsuario.ShowDialog();
         }
+
+        private void btbuscaAdvogado_Click(object sender, RoutedEventArgs e)
+        {
+            BuscarAdvogado buscarAdvogado = new BuscarAdvogado();
+            buscarAdvogado.ShowDialog();
+        }
     }
     }
     

@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using MySql.Data.MySqlClient;
 using SisAdv.Database;
 using SisAdv.Interface;
+using SisAdv.Helpers;
 
 namespace SisAdv.Models
 {
@@ -20,12 +21,69 @@ namespace SisAdv.Models
     
         public void Delete(Advogado t)
         {
-            throw new NotImplementedException();
+            try
+            {
+                var query = conn.Query();
+
+                //Verificar tabela processo;
+                query.CommandText = "DELETE FROM advogado WHERE id_advogado = @id";
+
+                query.Parameters.AddWithValue("@id", t.Id);
+
+                var result = query.ExecuteNonQuery();
+
+                if (result == 0)
+                    throw new Exception("Registro não foi deletado da base de dados. Verifique e tente novamente.");
+
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+            finally
+            {
+                conn.Close();
+            }
         }
 
         public Advogado GetById(int id)
         {
-            throw new NotImplementedException();
+            try
+            {
+                var query = conn.Query();
+                query.CommandText = "SELECT * FROM advogado WHERE id_advogado = @id";
+
+                query.Parameters.AddWithValue("@id", id);
+
+                MySqlDataReader reader = query.ExecuteReader();
+
+                if (!reader.HasRows)
+                    throw new Exception("Nenhum registro foi encontrado!");
+
+                var advogado = new Advogado();
+
+                while (reader.Read())
+                {
+                    advogado.Id = reader.GetInt32("id_advogado");
+                    advogado.Nome = reader.GetString("nome_adv");
+                    advogado.DataNasc = DAOHelper.GetDateTime(reader, "data_nasc_adv");
+                    advogado.Descricao = reader.GetString("descricao_adv");
+                    advogado.Rg = reader.GetString("rg_adv");
+                    advogado.Telefone = reader.GetString("telefone_adv");
+                    advogado.Cpf = reader.GetString("cpf_adv");
+                    advogado.Email = reader.GetString("e_mail_adv");
+                }
+
+                return advogado;
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+            finally
+            {
+                conn.Query();
+            }
         }
 
         public void Insert(Advogado t)
@@ -99,7 +157,38 @@ namespace SisAdv.Models
 
         public void Update(Advogado t)
         {
-            throw new NotImplementedException();
+            try
+            {
+                var query = conn.Query();
+
+                query.CommandText = "UPDATE advogado SET nome_adv = @nome, cpf_adv = @cpf, rg_adv = @rg, data_nasc_adv = @data," +
+                                    "e_mail_adv = @email, telefone_adv = @telefone, descricao_adv = @descricao WHERE id_advogado = 1";
+
+                query.Parameters.AddWithValue("@nome", t.Nome);
+                query.Parameters.AddWithValue("@cpf", t.Cpf);
+                query.Parameters.AddWithValue("@rg", t.Rg);
+                query.Parameters.AddWithValue("@data", t.DataNasc);
+                query.Parameters.AddWithValue("@email", t.Email);
+                query.Parameters.AddWithValue("@telefone", t.Telefone);
+                query.Parameters.AddWithValue("@descricao", t.Descricao);
+
+
+                query.Parameters.AddWithValue("@id", t.Id);
+
+                var result = query.ExecuteNonQuery();
+
+                if (result == 0)
+                    throw new Exception("Atualização do registro não foi realizada.");
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+            finally
+            {
+                conn.Close();
+            }
         }
     }
 }

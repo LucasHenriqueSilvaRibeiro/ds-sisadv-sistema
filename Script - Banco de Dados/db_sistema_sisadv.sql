@@ -14,12 +14,11 @@ use db_sistema_sisadv;
 desc lucro;
 select * from usuario;
 select * from advogado;
-desc processo;
-desc caixa;
-SELECT * FROM servico 
-LEFT JOIN cliente ON fk_cliente = id_cliente 
-LEFT JOIN advogado ON fk_advogado = id_advogado 
-WHERE id_lucro = @id
+desc advogado;
+select email;
+UPDATE advogado SET nome_adv = 'Sr.Del', cpf_adv = 'testeupdate', rg_adv = 'testerg', 
+data_nasc_adv = '1995-09-14', 
+e_mail_adv = 'testeupdate@email.com', telefone_adv = '49890234', descricao_adv = 'Descricao update' WHERE id_advogado = 1;
 
 create table endereco(
 id_endereco int primary key auto_increment,

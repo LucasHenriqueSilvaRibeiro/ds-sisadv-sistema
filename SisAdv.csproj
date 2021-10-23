@@ -283,6 +283,9 @@
     <Compile Include="Views\AcessarDiarioJustiça.xaml.cs">
       <DependentUpon>AcessarDiarioJustiça.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\BuscarAdvogado.xaml.cs">
+      <DependentUpon>BuscarAdvogado.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\BuscarDespesa.xaml.cs">
       <DependentUpon>BuscarDespesa.xaml</DependentUpon>
     </Compile>
@@ -322,6 +325,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\AlterarSenha.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\BuscarAdvogado.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

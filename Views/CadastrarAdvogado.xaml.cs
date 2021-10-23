@@ -21,16 +21,74 @@ namespace SisAdv.Views
     public partial class CadastrarAdvogado : Window
     {
         private Advogado _advogado;
+        private int _id;
+
         public CadastrarAdvogado()
         {
             InitializeComponent();
             Loaded += CadastrarAdvogado_Loaded;
         }
 
+        public CadastrarAdvogado(int id)
+        {
+            _id = id;
+            InitializeComponent();
+            Loaded += CadastrarAdvogado_Loaded;
+        }
+
         private void CadastrarAdvogado_Loaded(object sender, RoutedEventArgs e)
         {
+            labeltexto.Content = "Observação: Todos os campos são necessários\n para um melhor gerenciamento dos usuários.";
             _advogado = new Advogado();
+
+            if (_id > 0)
+                FillForm();
         }
+
+
+        /* colocar o botão editar pra evitar possíveis updates indesejados
+        private void LiberacaoEditionAdd()
+        {
+            TxbCpf.IsEnabled = false;
+            TxbEmail.IsEnabled = false;
+            TxbNome.IsEnabled = false;
+            TxbRg.IsEnabled = false;
+            TxbTelefone.IsEnabled = false; 
+            datePickerNascimento.IsEnabled = false;
+            TxbId.IsEnabled = true;
+        }
+
+        private void EditionBlock()
+        {
+            TxbCpf.IsEnabled = true;
+            TxbEmail.IsEnabled = true;
+            TxbNome.IsEnabled = true;
+            TxbRg.IsEnabled = true;
+            TxbTelefone.IsEnabled = true;
+            datePickerNascimento.IsEnabled = true;
+            TxbId.IsEnabled = true;
+        }*/
+
+        private void FillForm()
+        {
+            try
+            {
+                var dao = new AdvogadoDAO();
+                _advogado = dao.GetById(_id);
+
+                TxbCpf.Text = _advogado.Cpf;
+                TxbEmail.Text = _advogado.Email;
+                TxbNome.Text = _advogado.Nome;
+                TxbRg.Text = _advogado.Rg;
+                TxbTelefone.Text = _advogado.Telefone;
+                datePickerNascimento.SelectedDate = _advogado.DataNasc;
+                TxbId.Text = _advogado.Id.ToString();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Exceção", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+        }        
 
         private void BtnSalvarAdvogado_Click(object sender, RoutedEventArgs e)
         {
@@ -146,6 +204,11 @@ namespace SisAdv.Views
         {
             CadastrarNovoUsuario cadastrarNovoUsuario = new CadastrarNovoUsuario();
             cadastrarNovoUsuario.ShowDialog();
+        }
+
+        private void BtnCancelar_Click(object sender, RoutedEventArgs e)
+        {
+            Close();
         }
     }
 }
