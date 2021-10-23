@@ -21,8 +21,31 @@ namespace SisAdv.Models
 
         public void Delete(Cliente t)
         {
-            throw new NotImplementedException();
+            try
+            {
+                var query = conn.Query();
+
+                //Verificar tabela processo;
+                query.CommandText = "DELETE FROM cliente WHERE id_cliente = @id";
+
+                query.Parameters.AddWithValue("@id", t.Id);
+
+                var result = query.ExecuteNonQuery();
+
+                if (result == 0)
+                    throw new Exception("Registro não foi deletado da base de dados. Verifique e tente novamente.");
+
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+            finally
+            {
+                conn.Close();
+            }
         }
+    
 
         public Cliente GetById(int id)
         {

@@ -20,8 +20,16 @@ namespace SisAdv.Views
     /// </summary>
     public partial class BuscarCliente : Window
     {
+        private int _id;
         public BuscarCliente()
         {
+            InitializeComponent();
+            Loaded += BuscarCliente_Loaded;
+        }
+
+        public BuscarCliente(int id)
+        {
+            _id = id;
             InitializeComponent();
             Loaded += BuscarCliente_Loaded;
         }
@@ -85,6 +93,33 @@ namespace SisAdv.Views
                 MessageBox.Show(ex.Message, "Não foi possível carregar as listas de Clientes. Verifique e tente novamente.", MessageBoxButton.OK, MessageBoxImage.Error);
 
             }
+        }
+
+        private void Btn_Delete_Click(object sender, RoutedEventArgs e)
+        {
+            var clienteselected = dataGridBuscarCliente.SelectedItem as Cliente;
+
+            var result = MessageBox.Show($"Deseja realmente remover o cliente '{clienteselected.Nome}`?", "Confirmação de Exclusão", MessageBoxButton.YesNo, MessageBoxImage.Warning);
+
+            try
+            {
+                if (result == MessageBoxResult.Yes)
+                {
+                    var dao = new ClienteDAO();
+                    dao.Delete(clienteselected);
+                    LoadDataGrid();
+                }
+            }
+            catch (Exception ex)
+            {
+
+                MessageBox.Show(ex.Message, "Exceção", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+        }
+
+        private void Btn_Update_Click(object sender, RoutedEventArgs e)
+        {
+
         }
     }
 }
