@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using MySql.Data.MySqlClient;
 using SisAdv.Database;
 using SisAdv.Interface;
-using SisAdv.Models;
+using System.Windows;//tirar dps
 
 namespace SisAdv.Models
 {
@@ -49,7 +49,44 @@ namespace SisAdv.Models
 
         public Cliente GetById(int id)
         {
-            throw new NotImplementedException();
+            try
+            {
+                var query = conn.Query();
+                query.CommandText = "SELECT * FROM cliente WHERE id_cliente = @id";
+
+                query.Parameters.AddWithValue("@id", id);
+
+                MySqlDataReader reader = query.ExecuteReader();
+
+                if (!reader.HasRows)
+                    throw new Exception("Nenhum registro foi encontrado!");
+
+                var cliente = new Cliente();
+
+                while (reader.Read())
+                {
+                    cliente.Id = reader.GetInt32("id_cliente");                    
+                    cliente.Profissao = reader.GetString("profissao_cli");
+                    //cliente.Cpf = reader.GetString("cpf_cli");
+                    cliente.Descricao = reader.GetString("descricao_cli");
+                    cliente.Nome = reader.GetString("nome_cli");
+                    cliente.Rg = reader.GetString("rg_cli");
+                }
+
+                MessageBox.Show($"nome {cliente.Nome} descrição {cliente.Descricao} email {cliente.Email} profissão {cliente.Profissao} telefone {cliente.Telefone}", "", MessageBoxButton.OK, MessageBoxImage.Information);
+
+
+                return cliente;
+
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+            finally
+            {
+                conn.Query();
+            }
         }
 
         public void Insert(Cliente t)
@@ -139,7 +176,36 @@ namespace SisAdv.Models
 
         public void Update(Cliente t)
         {
-            throw new NotImplementedException();
+            try
+            {
+                var query = conn.Query();
+
+                query.CommandText = "SET nome_cli = @nome, cpf_cli = @cpf, rg_cli = @rg, telefone_cli = @telefone," +  
+                                    "profissao_cli = @profissao, descricao_cli = @descricao WHERE id_cliente = @id";
+
+                query.Parameters.AddWithValue("@nome", t.Nome);
+                query.Parameters.AddWithValue("@cpf", t.Cpf);
+                query.Parameters.AddWithValue("@rg", t.Rg);
+                query.Parameters.AddWithValue("@telefone", t.Telefone);
+                query.Parameters.AddWithValue("@profissao", t.Profissao);
+                query.Parameters.AddWithValue("@descricao", t.Descricao);
+
+                query.Parameters.AddWithValue("@id", t.Id);
+
+                var result = query.ExecuteNonQuery();
+
+                if (result == 0)
+                    throw new Exception("Atualização do registro não foi realizada.");
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+            finally
+            {
+                conn.Close();
+            }
         }
     }
 }

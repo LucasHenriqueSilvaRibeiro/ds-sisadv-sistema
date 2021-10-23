@@ -8,8 +8,7 @@ namespace SisAdv.Models
 {
     public class Cliente
     {
-        public String Nome { get; set; }
-        public String Cpf { get; set; }
+        public String Nome { get; set; }        
         public String Rg { get; set; }
         public int Id { get; set; }
         public String Profissao { get; set; }
@@ -19,5 +18,6 @@ namespace SisAdv.Models
 
         //adicionar email no banco de dados, pelo que eu vi não colocaram
         public String Email { get; set; }
+        public String Cpf { get; set; }
     }
 }

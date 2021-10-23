@@ -267,6 +267,7 @@
     <Compile Include="Models\AdvogadoDAO.cs" />
     <Compile Include="Models\AdvogadoValidator.cs" />
     <Compile Include="Models\ClienteDAO.cs" />
+    <Compile Include="Models\ClienteValidator.cs" />
     <Compile Include="Models\DespesaDAO.cs" />
     <Compile Include="Models\Evento.cs" />
     <Compile Include="Models\EventoDAO.cs" />

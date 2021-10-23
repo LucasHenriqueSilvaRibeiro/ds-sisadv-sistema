@@ -11,7 +11,8 @@
 #drop database db_sistema_sisadv;
 create database db_sistema_sisadv;
 use db_sistema_sisadv;
-
+desc cliente;
+select * from cliente;
 
 create table endereco(
 id_endereco int primary key auto_increment,
@@ -298,10 +299,10 @@ end;
 $$ delimiter ;
 #drop procedure inserirusuario;
 call inserirUsuario ('testesenha', 'Vinicius Teste', 4);
-call inserirUsuario ('435345', 'Professor JÃO', 5);
-call inserirUsuario ('435345', 'Lucas Teste', 3);
-call inserirUsuario ('435345', 'Professor JACKSON', 2);
-CALL inserirUsuario ('12345', 'Lucas teste', 2);
+#call inserirUsuario ('435345', 'Professor JÃO', 5);
+#call inserirUsuario ('435345', 'Lucas Teste', 3);
+#call inserirUsuario ('435345', 'Professor JACKSON', 2);
+#CALL inserirUsuario ('12345', 'Lucas teste', 2);
 select * from advogado;
 select * from usuario;
 desc servico;

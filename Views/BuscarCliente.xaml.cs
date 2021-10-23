@@ -20,16 +20,8 @@ namespace SisAdv.Views
     /// </summary>
     public partial class BuscarCliente : Window
     {
-        private int _id;
         public BuscarCliente()
         {
-            InitializeComponent();
-            Loaded += BuscarCliente_Loaded;
-        }
-
-        public BuscarCliente(int id)
-        {
-            _id = id;
             InitializeComponent();
             Loaded += BuscarCliente_Loaded;
         }
@@ -37,11 +29,6 @@ namespace SisAdv.Views
         public void BuscarCliente_Loaded(object sender, RoutedEventArgs e)
         {
             LoadDataGrid();
-        }
-
-        private void buttonExcluir_Click(object sender, RoutedEventArgs e)
-        {
-            MessageBox.Show("Deseja excluir este(s) cadastro(s)?", "", MessageBoxButton.YesNo, MessageBoxImage.Question);
         }
 
         private void buttonPesquisar_Click(object sender, RoutedEventArgs e)
@@ -119,7 +106,13 @@ namespace SisAdv.Views
 
         private void Btn_Update_Click(object sender, RoutedEventArgs e)
         {
+            var cliente_selected = dataGridBuscarCliente.SelectedItem as Cliente;
 
+            var window = new Cadastrarcliente(cliente_selected.Id);
+
+            window.ShowDialog();
+
+            LoadDataGrid();
         }
     }
 }

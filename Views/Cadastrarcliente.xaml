@@ -33,18 +33,18 @@
 
         <StackPanel Margin="20 0 0 0" Orientation="Horizontal" VerticalAlignment="Center">
             <Label Foreground="#FFE8E8E8" FontWeight="Bold">Nome</Label>
-            <TextBox Width="170" Margin="10"/>
+            <TextBox x:Name="textNome" Width="170" Margin="10"/>
         </StackPanel>
 
         <StackPanel Margin="20 0 0 0" Orientation="Horizontal" VerticalAlignment="Center" Grid.Row="1">
             <Label Foreground="#FFE8E8E8"  FontWeight="Bold">Telefone</Label>
-            <TextBox Width="100" Margin="10"/>
+            <TextBox x:Name="textTelefone" Width="100" Margin="10"/>
         </StackPanel>
 
         <StackPanel Margin="20 0 0 0" Grid.Row="2">
             <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
                 <Label Foreground="#FFE8E8E8" FontWeight="Bold">E-mail</Label>
-                <TextBox Width="190" Margin="10"/>
+                <TextBox x:Name="textemail" Width="190" Margin="10"/>
             </StackPanel>
 
             <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
@@ -58,24 +58,19 @@
         <StackPanel Margin="20 0 0 0" Orientation="Horizontal" VerticalAlignment="Center" Grid.Row="3">
             <Label Foreground="#FFE8E8E8" FontWeight="Bold">Bairro</Label>
             <TextBox Width="180" Margin="10"/>
-        </StackPanel>
-        <StackPanel Margin="20 0 0 0" Orientation="Horizontal" VerticalAlignment="Center" Grid.Row="4">
-            <Label Foreground="#FFE8E8E8" FontWeight="Bold">Data</Label>
-            <Label Foreground="#FFE8E8E8" FontWeight="Bold">Nasc</Label>
-            <TextBox Width="100" Margin="10"/>
-        </StackPanel>
+        </StackPanel> 
         <StackPanel Margin="20 0 0 0" Orientation="Horizontal" VerticalAlignment="Center" Grid.Row="5">
             <Label Foreground="#FFE8E8E8" FontWeight="Bold">Profissão</Label>
-            <TextBox Width="170" Margin="10"/>
+            <TextBox x:Name="textProfissao" Width="170" Margin="10"/>
         </StackPanel>
         <StackPanel Margin="20 0 0 0" Orientation="Horizontal" VerticalAlignment="Center" Grid.Row="6">
             <Label Foreground="#FFE8E8E8" FontWeight="Bold">Descrição</Label>
-            <TextBox Width="170" Height="70" Margin="10"/>
+            <TextBox x:Name="textDescricao" Width="170" Height="70" Margin="10"/>
         </StackPanel>
         <StackPanel Margin="20 0 0 0" Orientation="Horizontal" VerticalAlignment="Center" Grid.Row="7">
             <Label Foreground="#FFE8E8E8" FontWeight="Bold">Código</Label>
             <!--Não pode estar habilitado, procurar propriedade-->
-            <TextBox Width="170" Margin="10" IsEnabled="False"/>
+            <TextBox x:Name="textId" Width="170" Margin="10" IsEnabled="False"/>
         </StackPanel>
         <StackPanel Margin="20 0 0 0" Orientation="Horizontal" VerticalAlignment="Center" Grid.Row="0" Grid.Column="1">
             <Label Foreground="#FFE8E8E8" FontWeight="Bold">RG</Label>
