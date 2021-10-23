@@ -74,5 +74,11 @@
                 <materialDesign:PackIcon Kind="CancelCircle" Width="40" Height="30" Foreground="#FFE4E4E4"/>
             </Button>
         </StackPanel>
+
+        <StackPanel Grid.Row="3" Grid.Column="1" Orientation ="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Center">
+            <Button x:Name="BtnAdicionarUsuario" Width="100" Height="65" BorderBrush="{x:Null}" Foreground="black" Background="White" Click="BtnAdicionarUsuario_Click">
+                <materialDesign:PackIcon Kind="UserAdd" Width="40" Height="30" Foreground="Black"/>
+            </Button>
+        </StackPanel>
     </Grid>
 </Window>

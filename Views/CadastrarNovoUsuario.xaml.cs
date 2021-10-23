@@ -36,21 +36,14 @@ namespace SisAdv.Views
 
         private void BtnSalvarUsuario_Click(object sender, RoutedEventArgs e)
         {
-            /*fazer validações
-
             if(TxbLogin.Text != null)
                 _usuario.NomeUser = TxbLogin.Text;
-            else
-                MessageBox.Show("Preencha o campo Login. Verifique e tente novamente.", "Alerta", MessageBoxButton.OK, MessageBoxImage.Warning);
 
             if (PassConfirmarSenha.Password == PassSenha.Password)
                 _usuario.Senha = PassSenha.Password;
-            else
-                MessageBox.Show("As senhas estão diferentes. Verifique e tente novamente.", "Alerta", MessageBoxButton.OK, MessageBoxImage.Warning);*/
 
-            _usuario.NomeUser = TxbLogin.Text;
-            _usuario.Senha = PassSenha.Password;
-            _usuario.Advogado = ComboboxAdvogado.SelectedItem as Advogado;
+            if(ComboboxAdvogado.SelectedItem != null)
+                _usuario.Advogado = ComboboxAdvogado.SelectedItem as Advogado;
 
             SaveData();
         }
@@ -60,23 +53,53 @@ namespace SisAdv.Views
             this.Close();
         }        
 
-        public void SaveData()
+        private bool Validate()
         {
-            var dao = new UsuarioDAO();
+            var validator = new UsuarioValidator();
+            var result = validator.Validate(_usuario);
 
-            dao.Insert(_usuario);
-
-            MessageBox.Show($"Usuário cadastrado com sucesso!", "Sucesso", MessageBoxButton.OK, MessageBoxImage.Information);
-
-            var result = MessageBox.Show($"Deseja cadastrar outros Usuários?!", "Deseja?", MessageBoxButton.YesNo, MessageBoxImage.Question);
-
-            if (result == MessageBoxResult.Yes)
+            if (!result.IsValid)
             {
-                ClearInputs();
+                string errors = null;
+                var count = 1;
+
+                foreach (var failure in result.Errors)
+                {
+                    errors += $"{count++} - {failure.ErrorMessage}\n";
+                }
+
+                MessageBox.Show(errors, "Validação de Dados", MessageBoxButton.OK, MessageBoxImage.Information);
             }
-            else
-                Close();
+
+            return result.IsValid;
         }
+
+        private void SaveData()
+        {
+            try
+            {
+                if (Validate())
+                {
+                    var dao = new UsuarioDAO();
+                    var text = "atualizado";
+
+                    if (_usuario.Id == 0)
+                    {
+                        dao.Insert(_usuario);
+                        text = "adicionado";
+                    }
+                    else
+                        dao.Update(_usuario);
+
+                    MessageBox.Show($"O Usuário foi {text} com sucesso!", "Sucesso", MessageBoxButton.OK, MessageBoxImage.Information);
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Não Executado", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+        }
+
         private void LoadCombobox()
         {
             ComboboxAdvogado.ItemsSource = new AdvogadoDAO().List();

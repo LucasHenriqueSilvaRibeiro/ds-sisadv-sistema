@@ -141,5 +141,11 @@ namespace SisAdv.Views
             TxbTelefone.Text = null;
             datePickerNascimento.SelectedDate = null;
         }
+
+        private void BtnAdicionarUsuario_Click(object sender, RoutedEventArgs e)
+        {
+            CadastrarNovoUsuario cadastrarNovoUsuario = new CadastrarNovoUsuario();
+            cadastrarNovoUsuario.ShowDialog();
+        }
     }
 }

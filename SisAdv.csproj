@@ -276,6 +276,7 @@
     <Compile Include="Models\ServicoValidator.cs" />
     <Compile Include="Models\Usuario.cs" />
     <Compile Include="Models\UsuarioDAO.cs" />
+    <Compile Include="Models\UsuarioValidator.cs" />
     <Compile Include="Views\AcessarDiarioJustiça.xaml.cs">
       <DependentUpon>AcessarDiarioJustiça.xaml</DependentUpon>
     </Compile>
