@@ -46,6 +46,8 @@
                     Content="Adicionar Advogado" Background="White" BorderBrush="{x:Null}" Foreground="Black" Click="btaddAdvogado_Click"/>
                     <Button Margin="0 5 0 0" x:Name="btaddUsuario" Width="150" FontSize="11"
                     Content="Adicionar Usuário" Background="White" BorderBrush="{x:Null}" Foreground="Black" Click="btaddUsuario_Click"/>
+                    <Button Margin="0 5 0 0" x:Name="btaddProcesso" Width="150" FontSize="11"
+                    Content="Adicionar Processo" Background="White" BorderBrush="{x:Null}" Foreground="Black" Click="btaddProcesso_Click"/>
                 </StackPanel>
 
                 <!--Menu para buscar dados-->

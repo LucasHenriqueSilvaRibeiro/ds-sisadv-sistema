@@ -205,6 +205,12 @@ namespace SisAdv.Views
             BuscarAdvogado buscarAdvogado = new BuscarAdvogado();
             buscarAdvogado.ShowDialog();
         }
+
+        private void btaddProcesso_Click(object sender, RoutedEventArgs e)
+        {
+            CadastrarProcesso cadastrarProcesso = new CadastrarProcesso();
+            cadastrarProcesso.ShowDialog();
+        }
     }
     }
     
