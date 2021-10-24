@@ -5,6 +5,8 @@ using System.Text;
 using System.Threading.Tasks;
 using SisAdv.Interface;
 using SisAdv.Database;
+using MySql.Data.MySqlClient;
+using SisAdv.Helpers;
 
 namespace SisAdv.Models
 {
@@ -32,20 +34,24 @@ namespace SisAdv.Models
             try
             {
                 var query = conn.Query();
-                query.CommandText = "INSERT INTO evento (titulo_even, horario_even, data_even, descricao_even, importancia_even, notificacao_even)" + 
-                    "VALUES (@titulo, @horario, @data, @descricao, @importancia, @notificacao)";
+                query.CommandText = "CALL inserirEvento (@titulo,  @data, @horario, @descricao, @importancia, @notificacao)";
 
                 query.Parameters.AddWithValue("@titulo", t.Titulo);
                 query.Parameters.AddWithValue("@horario", t.Horario);
-                query.Parameters.AddWithValue("@data", t.Data.ToString("yyyy-MM-dd"));
+                query.Parameters.AddWithValue("@data", t.Data);
                 query.Parameters.AddWithValue("@descricao", t.Descricao);
                 query.Parameters.AddWithValue("@importancia", t.Importancia);
                 query.Parameters.AddWithValue("@notificacao", t.Notificacao);
 
-                var result = query.ExecuteNonQuery();
+                MySqlDataReader reader = query.ExecuteReader();
 
-                if (result == 0)
-                    throw new Exception("O registro não será inserido. Tente novamente após corrigir algum erro.");
+                while (reader.Read())
+                {
+                    if (reader.GetName(0).Equals("Alerta"))
+                    {
+                        throw new Exception(reader.GetString("Alerta"));
+                    }
+                }
 
             }
             catch (Exception e)
@@ -60,7 +66,39 @@ namespace SisAdv.Models
 
         public List<Evento> List()
         {
-            throw new NotImplementedException();
+            try
+            {
+                List<Evento> list = new List<Evento>();
+
+                var query = conn.Query();
+                query.CommandText = "SELECT * FROM evento";
+
+                MySqlDataReader reader = query.ExecuteReader();
+
+                while (reader.Read())
+                {
+                    list.Add(new Evento()
+                    {
+                        Id = reader.GetInt32("id_evento"),
+                        Importancia = reader.GetString("importancia_even"),
+                        Horario = DAOHelper.GetString(reader, "horario_even"),
+                        Data = DAOHelper.GetDateTime(reader, "data_even"),
+                        Descricao = DAOHelper.GetString(reader, "descricao_even"),
+                        Notificacao = reader.GetBoolean("notificacao_even"),
+                        Titulo = DAOHelper.GetString(reader, "titulo_even")
+                    });
+                }
+
+                return list;
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+            finally
+            {
+                conn.Close();
+            }
         }
 
         public void Update(Evento t)

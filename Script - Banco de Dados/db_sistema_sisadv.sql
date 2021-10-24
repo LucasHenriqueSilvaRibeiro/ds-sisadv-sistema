@@ -11,14 +11,7 @@
 #drop database db_sistema_sisadv;
 create database db_sistema_sisadv;
 use db_sistema_sisadv;
-desc lucro;
-select * from usuario;
-select * from advogado;
-desc advogado;
-select email;
-UPDATE advogado SET nome_adv = 'Sr.Del', cpf_adv = 'testeupdate', rg_adv = 'testerg', 
-data_nasc_adv = '1995-09-14', 
-e_mail_adv = 'testeupdate@email.com', telefone_adv = '49890234', descricao_adv = 'Descricao update' WHERE id_advogado = 1;
+
 
 create table endereco(
 id_endereco int primary key auto_increment,
@@ -46,7 +39,7 @@ titulo_even varchar (50),
 data_even date,
 horario_even varchar (10),
 descricao_even varchar (200),
-importancia_even int,
+importancia_even varchar (10),
 notificacao_even boolean
 );
 
@@ -225,7 +218,7 @@ select * from cliente;
 #Tabela evento--------------------------------------------------------------------------------------------------------------------------------------
 
 delimiter $$
-create procedure inserirEvento(titulo varchar (50), data date, horario varchar (5), descricao varchar (50), importancia int, notificacao boolean)
+create procedure inserirEvento(titulo varchar (50), data date, horario varchar (10), descricao varchar (150), importancia varchar(10), notificacao boolean)
 begin
 declare verificartitulodata int;
 set verificartitulodata = (select id_evento from evento where (titulo = titulo_even) and (data_even = data));
@@ -238,9 +231,9 @@ end if;
 end;
 $$ delimiter ;
 
-
-call inserirEvento ('Audiência com cliente Raça Negra', '2021-08-31', '14:00', 'Audiência, levar documentos', 2, true);
-
+call inserirEvento ('Audiência com cliente Raça Negra', '2021-08-31', '14:00', 'Audiência, levar documentos', 'Alta', true);
+call inserirEvento ('Audiência com cliente Raça N', '2021-08-31', '14:00 PM', 'Audiência, levar documentos', 'baixa', true);
+desc evento;
 select * from evento;
 
 

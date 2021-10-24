@@ -20,33 +20,46 @@ namespace SisAdv.Views
     /// </summary>
     public partial class Cadastraeventonov : Window
     {
+        public Evento _evento;
         public Cadastraeventonov()
         {
             InitializeComponent();
+            Loaded += Cadastraeventonov_Loaded;
+        }
+
+        private void Cadastraeventonov_Loaded(object sender, RoutedEventArgs e)
+        {
+            _evento = new Evento();
         }
 
         private void BntSalvar_Click(object sender, RoutedEventArgs e)
         {
-            Evento evento = new Evento();
-
-            evento.Titulo = txbTitulo.Text;
+            _evento.Titulo = txbTitulo.Text;
             //Falta adicionar uma caixa para descrição, adicionar na próxima commit
-            evento.Descricao = "Audiência Teste";
-            evento.Horario = txbHorario.Text;
-            evento.Data = (DateTime)datepickerDataServico.SelectedDate;
-            evento.Importancia = txbImportancia.Text;
+            _evento.Descricao = txbDescricao.Text;
+            _evento.Horario = txbHorario.Text;
+            _evento.Data = (DateTime)datepickerDataServico.SelectedDate;
+
+            if (boxImportancia.Text == "Baixa")
+                _evento.Importancia = "Baixa";
+            else if (boxImportancia.Text == "Média")
+                _evento.Importancia = "Média";
+            else
+                _evento.Importancia = "Alta";
+
 
             if (rbNotificacao.IsChecked.Value)
             {
-                evento.Notificacao = true;
+                _evento.Notificacao = true;
             }
             else
             {
-                evento.Notificacao = false;
+                _evento.Notificacao = false;
             }
 
-            EventoDAO eventoDAO = new EventoDAO();
-            eventoDAO.Insert(evento);
+            var eventoDAO = new EventoDAO();
+            eventoDAO.Insert(_evento);
+
             MessageBox.Show("O Evento foi registrado com sucesso!", "Sucesso", MessageBoxButton.OK, MessageBoxImage.Information);
         }
     }
