@@ -37,12 +37,12 @@
                 <Label Content="Status do " HorizontalAlignment="Right" FontSize="16"/>
                 <Label Content="Processo*" HorizontalAlignment="Right" FontSize="16"/>
             </StackPanel>
-            <Label Grid.Row="1" Content="Valor*" VerticalAlignment="Center" HorizontalAlignment="Right" FontSize="16"/>
+            <Label Grid.Row="1" Content="Resultado" VerticalAlignment="Center" HorizontalAlignment="Right" FontSize="16"/>
             <Label Grid.Row="3" Content="Id" VerticalAlignment="Center" HorizontalAlignment="Right" FontSize="16"/>
 
-            <DatePicker x:Name="DatePickerDataInício" Grid.Column="1" Width="110" Height="55" Margin="5 0 0 0" VerticalAlignment="Center" HorizontalAlignment="Left" Background="Black"
+            <DatePicker x:Name="DataPickerDataInício" Grid.Column="1" Width="120" Height="55" Margin="5 0 0 0" VerticalAlignment="Center" HorizontalAlignment="Left" Background="Black"
                     Style="{StaticResource MaterialDesignOutlinedDatePicker}"/>
-            <TextBox x:Name="TxbValor" Grid.Column="1" Grid.Row="1" Width="90" Margin="5 0 0 0" VerticalAlignment="Center" HorizontalAlignment="Left" BorderBrush="Black"
+            <TextBox x:Name="TxbResultado" Grid.Column="1" Grid.Row="1" Width="135" Margin="5 0 0 0" VerticalAlignment="Center" HorizontalAlignment="Left" BorderBrush="Black"
                  Style="{StaticResource MaterialDesignOutlinedTextBox}"/>
             <TextBox x:Name="TxbStatus" Grid.Row="2" Grid.Column="1" Width="130" Height="55" Margin="5 0 0 0" VerticalAlignment="Center" HorizontalAlignment="Left" BorderBrush="Black"
                   Style="{StaticResource MaterialDesignOutlinedTextBox}"/>
@@ -68,8 +68,10 @@
             
             <TextBox x:Name="TxbDescricao" Grid.Row="1" Grid.Column="1" Width="160" Height="70" Margin="5 10 0 0" Padding="6" HorizontalAlignment="Left" VerticalAlignment="Top" BorderBrush="Black"
                 AcceptsReturn="True" TextWrapping="Wrap" VerticalScrollBarVisibility="Auto" Style="{StaticResource MaterialDesignOutlinedTextBox}"/>
-            <ComboBox x:Name="ComboboxServico" Width="160" Grid.Column="1" Height="40" Margin="5 0 0 0" Padding="6" HorizontalAlignment="Left" BorderBrush="Black"
-                  Style="{StaticResource MaterialDesignOutlinedComboBox}"/>
+            <ComboBox x:Name="ComboboxServico" Width="160" Grid.Column="1" Height="40" Margin="5 0 0 0" Padding="6" HorizontalAlignment="Left"
+                    Style="{StaticResource MaterialDesignOutlinedComboBox}"
+                    DisplayMemberPath="Nome"
+                    SelectedValuePath="Id"/>
 
             <StackPanel Grid.Column="1" Grid.Row="3" Orientation="Horizontal">
                 <Button Width="80" Height="55" Margin="10 0 0 0" Background="#FF56EC35" BorderBrush="{x:Null}" x:Name="btnSalvar" Click="btnSalvar_Click" >

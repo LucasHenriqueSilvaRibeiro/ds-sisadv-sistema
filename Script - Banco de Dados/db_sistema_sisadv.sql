@@ -11,7 +11,7 @@
 #drop database db_sistema_sisadv;
 create database db_sistema_sisadv;
 use db_sistema_sisadv;
-select * from despesa;
+
 
 create table endereco(
 id_endereco int primary key auto_increment,
@@ -386,28 +386,20 @@ select * from login;
 #Tabela processo--------------------------------------------------------------------------------------------------------------------------------------
 
 delimiter $$ 
-create procedure registrarProcesso(descricao varchar (150), datadeinicio date, status varchar (100), resultado varchar (100), cliente int, advogado int, servico int)
+create procedure registrarProcesso(descricao varchar (150), datadeinicio date, status varchar (100), resultado varchar (100), servico int)
 begin
-declare verificarcliente int;
-declare verificaradvogado int;
 declare verificarservico int;
 declare valorprocesso double;
-set verificarcliente = (select id_cliente from cliente where cliente = id_cliente);
-set verificaradvogado = (select id_advogado from advogado where advogado = id_advogado);
+declare buscaridcliente int;
+declare buscaridadvogado int;
 set verificarservico = (select id_servico from servico where servico = id_servico);
 set valorprocesso = (select valor_serv from servico where id_servico = servico);
+SET buscaridcliente = (select fk_cliente from servico where id_servico = servico);
+SET buscaridadvogado = (select fk_advogado from servico where id_servico = servico);
 if (descricao <> "") then
 	if (verificarservico is not null) then
-		if (verificarcliente is not null) then
-			if (verificaradvogado is not null) then
-				insert into processo values(null,valorprocesso, descricao, datadeinicio, status, resultado, cliente, advogado, servico);
-				select 'Processo registrado no sistema!' as Confirmacao;
-			else
-				select 'O advogado não foi inserido ou inserido de forma errada, tente novamente!' as Alerta;
-			end if;
-		else
-			select 'O cliente não foi inserido ou inserido de forma errada, tente novamente!' as Alerta;
-		end if;
+		insert into processo values(null,valorprocesso, descricao, datadeinicio, status, resultado, buscaridcliente, buscaridadvogado, servico);
+		select 'Processo registrado no sistema!' as Confirmacao;
 	else
 		select 'O serviço que está relacionado a este processo não foi inserido, tente novamente.' as Alerta;
 	end if;
@@ -417,12 +409,12 @@ end if;
 end;
 $$ delimiter ;
 
-call registrarProcesso('Processo devido a danos morais', '2021-03-05','em andamento', 'sem resultado', 1, 1, 1);
-call registrarProcesso('Processo devido a má administração', '2021-06-30','em andamento', 'sem resultado', 2, 2, 2);
+call registrarProcesso('Processo devido a danos morais', '2021-03-05','em andamento', 'sem resultado', 1);
+call registrarProcesso('Processo devido a má administração', '2021-06-30','em andamento', 'sem resultado', 2);
 select * from processo;
 select * from cliente;
-
-
+select * from servico;
+desc processo;
 
 #Tabela Diário--------------------------------------------------------------------------------------------------------------------------------------
 

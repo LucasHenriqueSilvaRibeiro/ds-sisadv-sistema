@@ -276,6 +276,8 @@
     <Compile Include="Models\LucroDAO.cs" />
     <Compile Include="Models\LucroValidator.cs" />
     <Compile Include="Models\Processo.cs" />
+    <Compile Include="Models\ProcessoDAO.cs" />
+    <Compile Include="Models\ProcessoValidator.cs" />
     <Compile Include="Models\ServicoDAO.cs" />
     <Compile Include="Models\ServicoValidator.cs" />
     <Compile Include="Models\Usuario.cs" />
