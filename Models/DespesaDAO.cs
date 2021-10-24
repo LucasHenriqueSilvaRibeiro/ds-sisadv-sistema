@@ -32,7 +32,36 @@ namespace SisAdv.Models
 
         public void Insert(Despesa t)
         {
-            throw new NotImplementedException();
+            try
+            {
+                var query = conn.Query();
+                query.CommandText = "CALL inserirDespesa(@data, @valor, @origem, @descricao, @mensal, @pagamento)";
+
+                query.Parameters.AddWithValue("@data", t.Data?.ToString("yyyy-MM-dd"));
+                query.Parameters.AddWithValue("@valor", t.Valor);
+                query.Parameters.AddWithValue("@origem", t.Origem);
+                query.Parameters.AddWithValue("@descricao", t.Descricao);
+                query.Parameters.AddWithValue("@mensal", t.Mensal);
+                query.Parameters.AddWithValue("@pagamento", t.FormaPagamento);
+
+                MySqlDataReader reader = query.ExecuteReader();
+
+                while (reader.Read())
+                {
+                    if (reader.GetName(0).Equals("Alerta"))
+                    {
+                        throw new Exception(reader.GetString("Alerta"));
+                    }
+                }
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+            finally
+            {
+                conn.Close();
+            }
         }
 
         public List<Despesa> List()

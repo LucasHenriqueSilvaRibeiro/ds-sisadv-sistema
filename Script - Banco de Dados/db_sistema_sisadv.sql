@@ -11,7 +11,7 @@
 #drop database db_sistema_sisadv;
 create database db_sistema_sisadv;
 use db_sistema_sisadv;
-
+select * from despesa;
 
 create table endereco(
 id_endereco int primary key auto_increment,
@@ -138,6 +138,8 @@ origem_desp varchar (100),
 descricao_desp varchar (200),
 mensal_desp bool
 );
+
+ALTER TABLE despesa ADD forma_pagamento VARCHAR (30);
 
 create table pagamento(
 id_pagamento int primary key auto_increment,
@@ -539,10 +541,10 @@ select * from caixa;
 #Tabela Despesa--------------------------------------------------------------------------------------------------------------------------------------
 
 delimiter $$
-create procedure inserirDespesa(data date, valor double, origem varchar (100), descricao varchar (200), mensal boolean)
+create procedure inserirDespesa(data date, valor double, origem varchar (100), descricao varchar (200), mensal boolean, formapagamento varchar (30))
 begin
 if(valor > 0) then
-	insert into despesa values (null, data, valor, origem, descricao, mensal);
+	insert into despesa values (null, data, valor, origem, descricao, mensal, formapagamento);
     select 'Despesa inserida com sucesso' as Confirmacao;
 else
 	select 'O valor inserido precisa ser maior que 0.00R$' as Alerta;
@@ -550,8 +552,8 @@ end if;
 end;
 $$ delimiter ;
 
-call inserirDespesa('2020-09-10', 200, 'Conta de luz', 'Conta do escritório', false);
-call inserirDespesa('2020-09-25', 50, 'Conta de Água', 'Conta do escritório', false);
+call inserirDespesa('2020-09-10', 200, 'Conta de luz', 'Conta do escritório', false, null);
+call inserirDespesa('2020-09-25', 50, 'Conta de Água', 'Conta do escritório', false, null);
 select * from despesa;
 
 

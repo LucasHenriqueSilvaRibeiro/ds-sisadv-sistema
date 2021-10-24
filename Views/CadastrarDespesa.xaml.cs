@@ -20,25 +20,129 @@ namespace SisAdv.Views
     /// </summary>
     public partial class CadastrarDespesa : Window
     {
+        private Despesa _despesa;
+        private int _id;
+
         public CadastrarDespesa()
         {
             InitializeComponent();
             Loaded += CadastrarDespesa_Loaded;
         }
 
+        public CadastrarDespesa(int id)
+        {
+            _id = id;
+            InitializeComponent();
+            Loaded += CadastrarDespesa_Loaded;
+        }
+
         public void CadastrarDespesa_Loaded(object sender, RoutedEventArgs e)
         {
-            List<Despesa> listaDespesa = new List<Despesa>();
+            _despesa = new Despesa();
+        }
 
-            for (int i = 0; i < 10; i++)
+        private void btnSalvar_Click(object sender, RoutedEventArgs e)
+        {
+            _despesa.Origem = TxBOrigem.Text;
+            _despesa.Descricao = TxBDescricao.Text;
+
+            if (datadopagamento.SelectedDate != null)
             {
-                listaDespesa.Add(new Despesa()
-                {
-                    Valor = i + 10,
-                });
+                _despesa.Data = (DateTime)datadopagamento.SelectedDate;
             }
 
-            gridcadastrardespesa.ItemsSource = listaDespesa;
+            if (double.TryParse(TxBValor.Text, out double valor))
+            {
+                _despesa.Valor = valor;
+            }
+
+            if (chavemensal.IsChecked.Value)
+            {
+                _despesa.Mensal = true;
+            }
+            else
+            {
+                _despesa.Mensal = false;
+            }
+                
+            /*Testar esse código do Lucas mais a Hellen*/
+            if (RadioCartao.IsChecked.Value)
+            {
+                _despesa.FormaPagamento = "Cartão";
+            }
+            else if (RadioDinheiro.IsChecked.Value)
+            {
+                _despesa.FormaPagamento = "Dinheiro";
+            }
+            else if (RadioTransf.IsChecked.Value)
+            {
+                _despesa.FormaPagamento = "Transferência";
+            }
+
+            SaveData();
+        }
+
+        private bool Validate()
+        {
+            var validator = new DespesaValidator();
+            var result = validator.Validate(_despesa);
+
+            if (!result.IsValid)
+            {
+                string errors = null;
+                var count = 1;
+
+                foreach (var failure in result.Errors)
+                {
+                    errors += $"{count++} - {failure.ErrorMessage}\n";
+                }
+
+                MessageBox.Show(errors, "Validação de Dados", MessageBoxButton.OK, MessageBoxImage.Information);
+            }
+
+            return result.IsValid;
+        }
+
+        private void SaveData()
+        {
+            try
+            {
+                if (Validate())
+                {
+                    var dao = new DespesaDAO();
+                    var text = "atualizada";
+
+                    if (_despesa.Id == 0)
+                    {
+                        dao.Insert(_despesa);
+                        text = "adicionada";
+                    }
+                    else
+                        dao.Update(_despesa);
+
+                    MessageBox.Show($"A despesa foi {text} com sucesso ao sistema!", "Sucesso", MessageBoxButton.OK, MessageBoxImage.Information);
+                    CloseFormVerify();
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Não Executado", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+        }
+
+        private void CloseFormVerify()
+        {
+            if (_despesa.Id == 0)
+            {
+                var result = MessageBox.Show("Deseja continuar adicionando serviços?", "Continuar?", MessageBoxButton.YesNo, MessageBoxImage.Question);
+
+                if (result == MessageBoxResult.No)
+                    this.Close();
+                /*else
+                    ClearInputs();*/
+            }
+            else
+                this.Close();
         }
     }
 }

@@ -72,7 +72,7 @@ namespace SisAdv.Views
             else
                 MessageBox.Show("Insira o Advogado. Verifique e tente novamente.");
 
-            _servico.Descricao = txbDescricao.Text;
+            _servico.Descricao = txbDescricao.Text;            
 
             if (double.TryParse(txbValor.Text, out double valor))
                 _servico.Valor = valor;
