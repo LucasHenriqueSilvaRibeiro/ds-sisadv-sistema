@@ -28,12 +28,7 @@ namespace SisAdv.Views
 
         public void BuscarDespesa_Loaded(object sender, RoutedEventArgs e)
         {
-
-        }
-
-        private void buttonExcluir_Click(object sender, RoutedEventArgs e)
-        {
-            MessageBox.Show("Deseja excluir este(s) cadastros?", "", MessageBoxButton.YesNo, MessageBoxImage.Question);
+            LoadDataGrid();
         }
 
         private void LoadDataGrid()
@@ -41,14 +36,11 @@ namespace SisAdv.Views
             try
             {
                 var dao = new DespesaDAO();
-
                 dataGridBuscarDespesa.ItemsSource = dao.List();
             }
             catch (Exception ex)
             {
-
                 MessageBox.Show(ex.Message, "Não foi possível carregar as listas de serviços. Verifique e tente novamente.", MessageBoxButton.OK, MessageBoxImage.Error);
-
             }
         }
 
@@ -91,6 +83,44 @@ namespace SisAdv.Views
             {
                 MessageBox.Show(ex.Message, "Exceção", MessageBoxButton.OK, MessageBoxImage.Error);
             }
+        }
+
+        private void Btn_Delete_Click(object sender, RoutedEventArgs e)
+        {
+            var despesaSelecionada = dataGridBuscarDespesa.SelectedItem as Despesa;
+
+            var result = MessageBox.Show($"Deseja realmente remover a despesa de origem `{despesaSelecionada.Origem}`?", "Confirmação de Exclusão", MessageBoxButton.YesNo, MessageBoxImage.Warning);
+
+            try
+            {
+                if (result == MessageBoxResult.Yes)
+                {
+                    var dao = new DespesaDAO();
+                    dao.Delete(despesaSelecionada);
+                    LoadDataGrid();
+                }
+            }
+            catch (Exception ex)
+            {
+
+                MessageBox.Show(ex.Message, "Exceção", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+        }
+
+        private void Btn_Update_Click(object sender, RoutedEventArgs e)
+        {
+            var despesaSelecionada = dataGridBuscarDespesa.SelectedItem as Despesa;
+
+            var window = new CadastrarDespesa(despesaSelecionada.Id);
+
+            window.ShowDialog();
+
+            LoadDataGrid();
+        }
+
+        private void buttonCancelar_Click(object sender, RoutedEventArgs e)
+        {
+            this.Close();
         }
     }
 }

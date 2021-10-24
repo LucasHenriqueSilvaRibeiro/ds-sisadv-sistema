@@ -46,15 +46,20 @@
         <!--Cor diferente só pra não me perder mesmo-->
         <DataGrid Grid.Row="3" Margin="10 10 10 50" AlternationCount="2" x:Name="dataGridBuscarDespesa" AutoGenerateColumns="False" BorderBrush="#FF747474" Background="#FFECECEC">
             <DataGrid.Columns>
+                <DataGridTextColumn Header="Id" Binding="{Binding Id}"/>
                 <DataGridTextColumn Header="Data" Binding="{Binding Data}"/>
                 <DataGridTextColumn Header="Origem" Binding="{Binding Origem}"/>
-                <DataGridTextColumn Header="Mensal" Binding="{Binding Mensal}"/>
                 <DataGridTextColumn Header="Valor" Binding="{Binding Valor, ConverterCulture='pt-BR', StringFormat=C}"/>
 
                 <DataGridTemplateColumn>
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
-                            <CheckBox/>
+                            <StackPanel Orientation="Horizontal">
+                                <Button Style="{StaticResource MaterialDesignIconForegroundButton}" Content="{materialDesign:PackIcon Eye}"
+                                        ToolTip="Visualizar Registro" Margin="0 0 5 0" Click="Btn_Update_Click" />
+                                <Button Style="{StaticResource MaterialDesignIconForegroundButton}" Content="{materialDesign:PackIcon Delete}"
+                                        ToolTip="Excluir Registro" Click="Btn_Delete_Click" />
+                            </StackPanel>
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>
@@ -68,22 +73,10 @@
             <TextBlock FontSize="14" HorizontalAlignment="Center" Text="Pesquisar"/>
         </StackPanel>
         <StackPanel Grid.Row="2" Grid.Column="1" HorizontalAlignment="Center">
-            <Button x:Name="buttonExcluir" Height="70" Width="100" Background="#FFEE0707" BorderBrush="{x:Null}" Click="buttonExcluir_Click">
-                <materialDesign:PackIcon Kind="Delete" Width="60" Height="40"/>
+            <Button x:Name="buttonCancelar" Height="70" Width="100" Background="#FFEE0707" BorderBrush="{x:Null}" Click="buttonCancelar_Click">
+                <materialDesign:PackIcon Kind="CancelCircle" Width="60" Height="40"/>
             </Button>
-            <TextBlock FontSize="14" HorizontalAlignment="Center" Text="excluir"/>
-        </StackPanel>
-        <StackPanel Grid.Row="3" Grid.Column="1" HorizontalAlignment="Center">
-            <Button Height="70" Width="100" BorderBrush="{x:Null}" Background="#FFF1F1F1">
-                <materialDesign:PackIcon Kind="Edit" Width="45" Height="40" Foreground="Black"/>
-            </Button>
-            <TextBlock FontSize="14" HorizontalAlignment="Center" Text="Editar"/>
-        </StackPanel>
-        <StackPanel Grid.Row="3" Grid.Column="1" HorizontalAlignment="Center" Margin="0 90 0 0">
-            <Button Height="70" Width="100" Background="#FFF1F1F1" BorderBrush="{x:Null}">
-                <materialDesign:PackIcon Kind="Visibility" Width="45" Height="40" Foreground="Black"/>
-            </Button>
-            <TextBlock FontSize="14" HorizontalAlignment="Center" Text="visualizar"/>
+            <TextBlock FontSize="14" HorizontalAlignment="Center" Text="Cancelar"/>
         </StackPanel>
     </Grid>
 </Window>

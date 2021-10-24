@@ -39,6 +39,11 @@ namespace SisAdv.Views
         public void CadastrarDespesa_Loaded(object sender, RoutedEventArgs e)
         {
             _despesa = new Despesa();
+
+            if(_id > 0)
+            {
+                FillForm();
+            }
         }
 
         private void btnSalvar_Click(object sender, RoutedEventArgs e)
@@ -127,6 +132,37 @@ namespace SisAdv.Views
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message, "Não Executado", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+        }
+
+        private void FillForm()
+        {
+            try
+            {
+                var dao = new DespesaDAO();
+                _despesa = dao.GetById(_id);
+
+                TxbCodigo.Text = _despesa.Id.ToString();
+                datadopagamento.SelectedDate = _despesa.Data;
+                TxBValor.Text = _despesa.Valor.ToString();
+                TxBDescricao.Text = _despesa.Descricao;
+                TxBOrigem.Text = _despesa.Origem;
+
+                if (_despesa.Mensal == true)
+                    chavemensal.IsChecked = true;
+                else
+                    chavemensal.IsChecked = false;
+
+                if (_despesa.FormaPagamento == "Dinheiro")
+                    RadioDinheiro.IsChecked = true;
+                else if (_despesa.FormaPagamento == "Cartão")
+                    RadioCartao.IsChecked = true;
+                else
+                    RadioTransf.IsChecked = true;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Exceção", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
 
