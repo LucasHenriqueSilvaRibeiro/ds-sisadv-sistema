@@ -267,6 +267,8 @@
     <Compile Include="Models\AdvogadoDAO.cs" />
     <Compile Include="Models\AdvogadoValidator.cs" />
     <Compile Include="Models\Caixa.cs" />
+    <Compile Include="Models\CaixaDAO.cs" />
+    <Compile Include="Models\CaixaValidator.cs" />
     <Compile Include="Models\ClienteDAO.cs" />
     <Compile Include="Models\ClienteValidator.cs" />
     <Compile Include="Models\DespesaDAO.cs" />
@@ -289,6 +291,9 @@
     <Compile Include="Views\BuscarAdvogado.xaml.cs">
       <DependentUpon>BuscarAdvogado.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\BuscarCaixa.xaml.cs">
+      <DependentUpon>BuscarCaixa.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\BuscarDespesa.xaml.cs">
       <DependentUpon>BuscarDespesa.xaml</DependentUpon>
     </Compile>
@@ -300,6 +305,9 @@
     </Compile>
     <Compile Include="Views\CadastrarAdvogado.xaml.cs">
       <DependentUpon>CadastrarAdvogado.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Cadastrarcaixa.xaml.cs">
+      <DependentUpon>Cadastrarcaixa.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\CadastrarEvento.xaml.cs">
       <DependentUpon>CadastrarEvento.xaml</DependentUpon>
@@ -341,6 +349,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Views\BuscarCaixa.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\BuscarCliente.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -362,6 +374,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\CadastrarAdvogado.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Cadastrarcaixa.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

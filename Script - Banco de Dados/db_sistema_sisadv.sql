@@ -11,6 +11,7 @@
 #drop database db_sistema_sisadv;
 create database db_sistema_sisadv;
 use db_sistema_sisadv;
+select * from despesa;
 
 create table endereco(
 id_endereco int primary key auto_increment,
@@ -454,9 +455,23 @@ end;
 $$ delimiter ;
 
 call cadastrarCaixa('Setembro/2021');
-select * from caixa;
 
-
+delimiter $$
+create procedure cadastrarCaixaInicial(mes varchar (100), saldoinicial double)
+begin
+declare teste varchar (100);
+SET teste = (SELECT mes_cx FROM caixa WHERE (mes_cx = mes));
+if (teste is null) then
+    insert into caixa values (null, mes, saldoinicial, 0, 0, 0);
+    select concat('Caixa de ', mes, ' cadastrado com sucesso!') as Confirmacao;
+else
+	select 'Esse mês já foi cadastrado em outro caixa, tente novamente.' as Alerta;
+end if;
+end;
+$$ delimiter ;
+desc caixa;
+call cadastrarcaixainicial('Teste Caixa', 1500);
+select * from caixa; 
 
 
 #Tabela Lucro--------------------------------------------------------------------------------------------------------------------------------------
@@ -555,6 +570,8 @@ update caixa set saldo_final_cx = saldo_inicial_cx + total_lucro_cx - total_desp
 end;
 $$ delimiter ;
 
+select * from pagamento;
+select * from caixa;
 
 delimiter $$
 create trigger atualizarPagamentoUpdate after update on pagamento
@@ -615,6 +632,7 @@ $$ delimiter ;
 
 call registrarPagamento ('No Cartão de Crédito', '2021-07-20', 1, 2);
 call registrarPagamento ('No Cartão de Crédito', '2021-07-20', 2, 2);
+call registrarPagamento ('No Dinheiro', '2021-08-20', 3, 2);
 select * from pagamento;
 select * from despesa;
 select * from caixa;

@@ -222,6 +222,13 @@ namespace SisAdv.Views
             funcoesbuscar.Visibility = Visibility.Collapsed;
             buscarProcesso.ShowDialog();
         }
+
+        private void btaddCaixa_Click(object sender, RoutedEventArgs e)
+        {
+            Cadastrarcaixa cadastrarcaixa = new Cadastrarcaixa();
+            funcoesbuscar.Visibility = Visibility.Collapsed;
+            cadastrarcaixa.ShowDialog();
+        }
     }
-    }
+}
     

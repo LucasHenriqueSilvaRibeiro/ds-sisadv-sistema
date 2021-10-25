@@ -13,7 +13,7 @@
         TextOptions.TextRenderingMode="Auto"         
         Background="#FFD6D5D5" 
         FontFamily="{DynamicResource MaterialDesignFont}" 
-        Title="Cadastrarcaixa" Height="350" Width="750">
+        Title="Cadastrarcaixa" Height="350" Width="750" WindowStartupLocation="CenterScreen" ResizeMode="NoResize">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="100"/>
@@ -44,28 +44,28 @@
 
         <StackPanel Grid.Row="1" Margin="10 0 0 0" Orientation="Horizontal" HorizontalAlignment="Stretch" VerticalAlignment="Center">
             <Label Content="Total Lucro" FontSize="16" FontWeight="Bold" Margin="0 20 0 0"/>
-            <TextBox x:Name="Txbtotallucro" Width="100"  FontSize="16" Foreground="Black" 
+            <TextBox x:Name="Txbtotallucro" Width="100"  FontSize="16" Foreground="Black"  IsEnabled="False"
                        Style="{StaticResource MaterialDesignOutlinedTextBox}"
                        Margin="0 10 0 0" CaretBrush="Black" BorderBrush="#BC000000" />
         </StackPanel>
 
-        <StackPanel Grid.Column="2" Margin="10 0 0 0" Orientation="Horizontal" HorizontalAlignment="Stretch" VerticalAlignment="Center">
+        <StackPanel Grid.Column="1" Grid.Row="2" Margin="25 0 0 0" Orientation="Horizontal" HorizontalAlignment="Stretch" VerticalAlignment="Center">
             <Label Content="Saldo Final" FontSize="16" FontWeight="Bold" Margin="0 20 0 0"/>
-            <TextBox x:Name="Txbsaldofinal" Width="100"  FontSize="16" Foreground="Black" 
+            <TextBox x:Name="Txbsaldofinal" Width="100"  FontSize="16" Foreground="Black" IsEnabled="False"
                        Style="{StaticResource MaterialDesignOutlinedTextBox}"
                        Margin="0 10 0 0" CaretBrush="Black" BorderBrush="#BC000000" />
         </StackPanel>
 
         <StackPanel Grid.Row="1" Grid.Column="1" Orientation="Horizontal" HorizontalAlignment="Stretch" VerticalAlignment="Center">
             <Label Content="Total Despesa" FontSize="16" FontWeight="Bold" Margin="0 20 0 0"/>
-            <TextBox x:Name="Txbtotaldespesa" Width="100"  FontSize="16" Foreground="Black" 
+            <TextBox x:Name="Txbtotaldespesa" Width="100"  FontSize="16" Foreground="Black"  IsEnabled="False"
                        Style="{StaticResource MaterialDesignOutlinedTextBox}"
                        Margin="0 10 0 0" CaretBrush="Black" BorderBrush="#BC000000" />
         </StackPanel>
 
         <StackPanel Margin="75 0 0 0" Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Stretch" VerticalAlignment="Center">
             <Label Content="Id" FontSize="16" FontWeight="Bold" Margin="0 20 0 0"/>
-            <TextBox x:Name="Txbid" Width="100"  FontSize="16" Foreground="Black" 
+            <TextBox x:Name="Txbid" Width="100"  FontSize="16" Foreground="Black"  IsEnabled="False"
                        Style="{StaticResource MaterialDesignOutlinedTextBox}"
                        Margin="0 10 0 0" CaretBrush="Black" BorderBrush="#BC000000" />
         </StackPanel>
