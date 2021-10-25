@@ -146,12 +146,107 @@ namespace SisAdv.Models
 
         public List<Caixa> List()
         {
-            throw new NotImplementedException();
+            try
+            {
+                List<Caixa> list = new List<Caixa>();
+
+                var query = conn.Query();
+                query.CommandText = "SELECT * FROM caixa";
+
+                MySqlDataReader reader = query.ExecuteReader();
+
+                while (reader.Read())
+                {
+                    list.Add(new Caixa()
+                    {
+                        Id = reader.GetInt32("id_cx"),
+                        Mes = DAOHelper.GetString(reader, "mes_cx"),
+                        SaldoInicial = DAOHelper.GetDouble(reader, "saldo_inicial_cx"),
+                        SaldoFinal = DAOHelper.GetDouble(reader, "saldo_final_cx"),
+                        TotalDespesa = DAOHelper.GetDouble(reader, "total_despesa_cx"),
+                        TotalLucro = DAOHelper.GetDouble(reader, "total_lucro_cx"),
+                    });
+                }
+
+                return list;
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+            finally
+            {
+                conn.Close();
+            }
+        }
+
+        public List<Caixa> ListConsulta(string mes, double valorinicial)
+        {
+            try
+            {
+                List<Caixa> list = new List<Caixa>();
+                var query = conn.Query();
+
+                if ((mes != null) && (valorinicial != 0.0))
+                    query.CommandText = $"SELECT * FROM caixa WHERE mes_cx LIKE '%{mes}%' AND saldo_inicial_cx = {valorinicial}";
+                else if (mes != null)
+                    query.CommandText = $"SELECT * FROM caixa WHERE mes_cx LIKE '%{mes}%'";
+                else if (valorinicial != 0.0)
+                    query.CommandText = $"SELECT * FROM caixa WHERE saldo_inicial_cx = {valorinicial}";
+
+                MySqlDataReader reader = query.ExecuteReader();
+
+                while (reader.Read())
+                {
+                    list.Add(new Caixa()
+                    {
+                        Id = reader.GetInt32("id_cx"),
+                        Mes = DAOHelper.GetString(reader, "mes_cx"),
+                        SaldoInicial = DAOHelper.GetDouble(reader, "saldo_inicial_cx"),
+                        SaldoFinal = DAOHelper.GetDouble(reader, "saldo_final_cx"),
+                        TotalDespesa = DAOHelper.GetDouble(reader, "total_despesa_cx"),
+                        TotalLucro = DAOHelper.GetDouble(reader, "total_lucro_cx"),
+                    });
+                }
+
+                return list;
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+            finally
+            {
+                conn.Close();
+            }
         }
 
         public void Update(Caixa t)
         {
-            throw new NotImplementedException();
+            try
+            {
+                var query = conn.Query();
+
+                query.CommandText = "UPDATE caixa SET mes_cx = @mes WHERE id_cx = @id";
+
+                query.Parameters.AddWithValue("@mes", t.Mes);
+
+                query.Parameters.AddWithValue("@id", t.Id);
+
+                var result = query.ExecuteNonQuery();
+
+                if (result == 0)
+                    throw new Exception("Atualização do registro não foi realizada.");
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+            finally
+            {
+                conn.Close();
+            }
         }
     }
 }

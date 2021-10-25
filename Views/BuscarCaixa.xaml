@@ -62,9 +62,9 @@
                 <DataGrid Grid.Row="3" AlternatingRowBackground="#FFE5E5E5" x:Name="dataGridBuscarCaixa" AlternationCount="2" AutoGenerateColumns="False" BorderBrush="#FF747474">
                     <DataGrid.Columns>
                         <DataGridTextColumn Header="Id" Binding="{Binding Id}"/>
-                        <DataGridTextColumn Header="Nome" Binding="{Binding Cliente.Nome}"/>
-                        <DataGridTextColumn Header="Valor" Binding="{Binding Valor, ConverterCulture='pt-BR', StringFormat=C}"/>
-                        <DataGridTextColumn Header="Status" Binding="{Binding Status}"/>
+                        <DataGridTextColumn Header="Nome" Binding="{Binding Mes}"/>
+                        <DataGridTextColumn Header="Status" Binding="{Binding SaldoInicial, ConverterCulture='pt-BR', StringFormat=C}"/>
+                        <DataGridTextColumn Header="Valor" Binding="{Binding SaldoFinal, ConverterCulture='pt-BR', StringFormat=C}"/>
                         <DataGridTemplateColumn>
                             <DataGridTemplateColumn.CellTemplate>
                                 <DataTemplate>
