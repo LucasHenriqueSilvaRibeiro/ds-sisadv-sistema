@@ -173,7 +173,7 @@ namespace SisAdv.Views
         private void btconfiguracoes_Click(object sender, RoutedEventArgs e)
         {
             ConfigurarPreferenciasRecursos configurarPreferenciasRecursos = new ConfigurarPreferenciasRecursos();
-
+            funcoesadicionar.Visibility = Visibility.Collapsed;
             configurarPreferenciasRecursos.ShowDialog();
         }
 
@@ -191,25 +191,36 @@ namespace SisAdv.Views
         private void btaddAdvogado_Click(object sender, RoutedEventArgs e)
         {
             CadastrarAdvogado cadastrarAdvogado = new CadastrarAdvogado();
+            funcoesadicionar.Visibility = Visibility.Collapsed;
             cadastrarAdvogado.ShowDialog();
         }
 
         private void btaddUsuario_Click(object sender, RoutedEventArgs e)
         {
             CadastrarNovoUsuario cadastrarNovoUsuario = new CadastrarNovoUsuario();
+            funcoesadicionar.Visibility = Visibility.Collapsed;
             cadastrarNovoUsuario.ShowDialog();
         }
 
         private void btbuscaAdvogado_Click(object sender, RoutedEventArgs e)
         {
             BuscarAdvogado buscarAdvogado = new BuscarAdvogado();
+            funcoesbuscar.Visibility = Visibility.Collapsed;
             buscarAdvogado.ShowDialog();
         }
 
         private void btaddProcesso_Click(object sender, RoutedEventArgs e)
         {
             CadastrarProcesso cadastrarProcesso = new CadastrarProcesso();
+            funcoesbuscar.Visibility = Visibility.Collapsed;
             cadastrarProcesso.ShowDialog();
+        }
+
+        private void btbuscaProcesso_Click(object sender, RoutedEventArgs e)
+        {
+            BuscarProcesso buscarProcesso = new BuscarProcesso();
+            funcoesbuscar.Visibility = Visibility.Collapsed;
+            buscarProcesso.ShowDialog();
         }
     }
     }

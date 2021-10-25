@@ -12,7 +12,6 @@
 create database db_sistema_sisadv;
 use db_sistema_sisadv;
 
-
 create table endereco(
 id_endereco int primary key auto_increment,
 rua_end varchar (70),
@@ -91,13 +90,13 @@ descricao_proc varchar (150),
 data_inicio_proc date,
 status_proc varchar (100),
 resultado varchar (100),
+cliente_proc varchar (100),
 fk_cliente int,
 fk_advogado int,
-fk_servico int,
 foreign key (fk_cliente) references cliente (id_cliente),
-foreign key (fk_advogado) references advogado (id_advogado),
-foreign key (fk_servico) references servico (id_servico)
+foreign key (fk_advogado) references advogado (id_advogado)
 );
+
 
 create table diarioJustica(
 id_busca_diar int primary key auto_increment,
@@ -300,7 +299,7 @@ end;
 $$ delimiter ;
 #drop procedure inserirusuario;
 call inserirUsuario ('testesenha', 'Vinicius Teste', 4);
-#call inserirUsuario ('435345', 'Professor JÃO', 5);
+call inserirUsuario ('123', 'srde', 1);
 #call inserirUsuario ('435345', 'Lucas Teste', 3);
 #call inserirUsuario ('435345', 'Professor JACKSON', 2);
 #CALL inserirUsuario ('12345', 'Lucas teste', 2);
@@ -386,33 +385,28 @@ select * from login;
 #Tabela processo--------------------------------------------------------------------------------------------------------------------------------------
 
 delimiter $$ 
-create procedure registrarProcesso(descricao varchar (150), datadeinicio date, status varchar (100), resultado varchar (100), servico int)
+create procedure registrarProcesso(descricao varchar (150), valor double, datadeinicio date, status varchar (100), resultado varchar (100), cliente int, advogado int)
 begin
-declare verificarservico int;
-declare valorprocesso double;
-declare buscaridcliente int;
-declare buscaridadvogado int;
-set verificarservico = (select id_servico from servico where servico = id_servico);
-set valorprocesso = (select valor_serv from servico where id_servico = servico);
-SET buscaridcliente = (select fk_cliente from servico where id_servico = servico);
-SET buscaridadvogado = (select fk_advogado from servico where id_servico = servico);
+declare nomecliente varchar (100);
+set nomecliente = (select nome_cli from cliente where id_cliente = cliente);
 if (descricao <> "") then
-	if (verificarservico is not null) then
-		insert into processo values(null,valorprocesso, descricao, datadeinicio, status, resultado, buscaridcliente, buscaridadvogado, servico);
+	if (cliente <> 0) then
+		insert into processo values(null, valor, descricao, datadeinicio, status, resultado, nomecliente, cliente, advogado);
 		select 'Processo registrado no sistema!' as Confirmacao;
 	else
-		select 'O serviço que está relacionado a este processo não foi inserido, tente novamente.' as Alerta;
+		select 'O Cliente não pode ser nulo, tente novamente.' as Alerta;
 	end if;
 else
 	select 'Insira uma descrição para o processo!' as Alerta;
 end if;
 end;
 $$ delimiter ;
-
-call registrarProcesso('Processo devido a danos morais', '2021-03-05','em andamento', 'sem resultado', 1);
-call registrarProcesso('Processo devido a má administração', '2021-06-30','em andamento', 'sem resultado', 2);
+#drop procedure registrarprocesso;
+call registrarProcesso('Processo devido a danos morais', 450.00, '2021-03-05','em andamento', 'sem resultado', 1, 2);
+call registrarProcesso('Processo devido a má administração', 800.00, '2021-06-30','em andamento', 'sem resultado', 2, 4);
 select * from processo;
 select * from cliente;
+select * from advogado;
 select * from servico;
 desc processo;
 

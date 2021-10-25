@@ -13,7 +13,7 @@
         TextOptions.TextRenderingMode="Auto"        
         Background="#FFD6D5D5"
         FontFamily="{DynamicResource MaterialDesignFont}"
-        Title="CadastrarProcesso" Height="370" Width="570" WindowStartupLocation="CenterScreen" ResizeMode="NoResize">
+        Title="CadastrarProcesso" Height="440" Width="570" WindowStartupLocation="CenterScreen" ResizeMode="NoResize">
     <DockPanel Margin="5">
         <Grid DockPanel.Dock="Left" Width="260">
             <Grid.ColumnDefinitions>
@@ -38,7 +38,8 @@
                 <Label Content="Processo*" HorizontalAlignment="Right" FontSize="16"/>
             </StackPanel>
             <Label Grid.Row="1" Content="Resultado" VerticalAlignment="Center" HorizontalAlignment="Right" FontSize="16"/>
-            <Label Grid.Row="3" Content="Id" VerticalAlignment="Center" HorizontalAlignment="Right" FontSize="16"/>
+            <Label Grid.Row="3" Content="Valor" VerticalAlignment="Center" HorizontalAlignment="Right" FontSize="16"/>
+            <Label Grid.Row="4" Content="Id" VerticalAlignment="Center" HorizontalAlignment="Right" FontSize="16"/>
 
             <DatePicker x:Name="DataPickerDataInício" Grid.Column="1" Width="120" Height="55" Margin="5 0 0 0" VerticalAlignment="Center" HorizontalAlignment="Left" Background="Black"
                     Style="{StaticResource MaterialDesignOutlinedDatePicker}"/>
@@ -46,13 +47,15 @@
                  Style="{StaticResource MaterialDesignOutlinedTextBox}"/>
             <TextBox x:Name="TxbStatus" Grid.Row="2" Grid.Column="1" Width="130" Height="55" Margin="5 0 0 0" VerticalAlignment="Center" HorizontalAlignment="Left" BorderBrush="Black"
                   Style="{StaticResource MaterialDesignOutlinedTextBox}"/>
-            <TextBox x:Name="TxbIdProcesso" IsEnabled="False" Grid.Column="1" Grid.Row="3" Width="50" Height="55" Margin="5 0 0 0" VerticalAlignment="Center" HorizontalAlignment="Left" BorderBrush="Black"
+            <TextBox x:Name="TxbValor"  Grid.Column="1" Grid.Row="3" Width="90" Height="55" Margin="5 0 0 0" VerticalAlignment="Center" HorizontalAlignment="Left" BorderBrush="Black"
+                 Style="{StaticResource MaterialDesignOutlinedTextBox}"/>
+            <TextBox x:Name="TxbIdProcesso" IsEnabled="False" Grid.Column="1" Grid.Row="4" Width="50" Height="55" Margin="5 0 0 0" VerticalAlignment="Center" HorizontalAlignment="Left" BorderBrush="Black"
                  Style="{StaticResource MaterialDesignOutlinedTextBox}"/>
         </Grid>
 
         <Grid DockPanel.Dock="Right" Width="260">
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="80"/>
+                <ColumnDefinition Width="87"/>
                 <ColumnDefinition Width="180"/>
             </Grid.ColumnDefinitions>
 
@@ -61,19 +64,25 @@
                 <RowDefinition Height="80"/>
                 <RowDefinition Height="80"/>
                 <RowDefinition Height="80"/>
+                <RowDefinition Height="70"/>
             </Grid.RowDefinitions>
 
-            <Label Grid.Row="1" Content="Descrição:" HorizontalAlignment="Right" FontSize="16"/>
-            <Label Content="Serviço*" HorizontalAlignment="Right" FontSize="16" VerticalAlignment="Center"/>
+            <Label Grid.Row="2" Content="Descrição*" HorizontalAlignment="Right" FontSize="16"/>
+            <Label Content="Cliente*" HorizontalAlignment="Right" FontSize="16" VerticalAlignment="Center"/>
+            <Label Grid.Row="1" Content="Advogado*" HorizontalAlignment="Right" FontSize="16" VerticalAlignment="Center"/>
             
-            <TextBox x:Name="TxbDescricao" Grid.Row="1" Grid.Column="1" Width="160" Height="70" Margin="5 10 0 0" Padding="6" HorizontalAlignment="Left" VerticalAlignment="Top" BorderBrush="Black"
+            <TextBox x:Name="TxbDescricao" Grid.Row="2" Grid.Column="1" Width="160" Height="70" Margin="5 10 0 0" Padding="6" HorizontalAlignment="Left" VerticalAlignment="Top" BorderBrush="Black"
                 AcceptsReturn="True" TextWrapping="Wrap" VerticalScrollBarVisibility="Auto" Style="{StaticResource MaterialDesignOutlinedTextBox}"/>
-            <ComboBox x:Name="ComboboxServico" Width="160" Grid.Column="1" Height="40" Margin="5 0 0 0" Padding="6" HorizontalAlignment="Left"
+            <ComboBox x:Name="ComboboxCliente" Width="160" Grid.Column="1" Height="40" Margin="5 0 0 0" Padding="6" HorizontalAlignment="Left" BorderBrush="Black"
+                    Style="{StaticResource MaterialDesignOutlinedComboBox}"
+                    DisplayMemberPath="Nome"
+                    SelectedValuePath="Id"/>
+            <ComboBox x:Name="ComboboxAdvogado" Width="160" Grid.Column="1" Grid.Row="1" Height="40" Margin="5 0 0 0" Padding="6" HorizontalAlignment="Left" BorderBrush="Black"
                     Style="{StaticResource MaterialDesignOutlinedComboBox}"
                     DisplayMemberPath="Nome"
                     SelectedValuePath="Id"/>
 
-            <StackPanel Grid.Column="1" Grid.Row="3" Orientation="Horizontal">
+            <StackPanel Grid.Column="1" Grid.Row="4" Orientation="Horizontal">
                 <Button Width="80" Height="55" Margin="10 0 0 0" Background="#FF56EC35" BorderBrush="{x:Null}" x:Name="btnSalvar" Click="btnSalvar_Click" >
                     <materialDesign:PackIcon Kind="ContentSave" Width="40" Height="30" Foreground="White"/>
                 </Button>
@@ -82,7 +91,7 @@
                 </Button>
             </StackPanel>
 
-            <Button Grid.Row="3" Width="80" Height="55" Background="White" BorderBrush="{x:Null}" x:Name="btnPesquisar" Click="btnPesquisar_Click" >
+            <Button Grid.Row="4" Width="80" Height="55" Background="White" BorderBrush="{x:Null}" x:Name="btnPesquisar" Click="btnPesquisar_Click" >
                 <materialDesign:PackIcon Kind="Search" Width="40" Height="30" Foreground="Black"/>
             </Button>
 

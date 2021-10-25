@@ -9,13 +9,19 @@ namespace SisAdv.Models
     public class Processo
     {
         public int Id { get; set; }
+
         public double Valor { get; set; }
+
         public string Descricao { get; set; }
+
         public DateTime? DataProcesso { get; set; }
+
         public string Status { get; set; }
+
         public string Resultado { get; set; }
 
-        //acho que dá pra pegar o código de cliente e advogado pelo próprio servico, verifique isso no banco de dados quem for ficar com essa tela
-        public Servico Servico { get; set; }
+        public Cliente Cliente { get; set; }
+
+        public Advogado Advogado { get; set; }
     }
 }

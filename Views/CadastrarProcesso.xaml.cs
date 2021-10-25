@@ -41,6 +41,9 @@ namespace SisAdv.Views
         {
             _processo = new Processo();
             LoadCombobox();
+
+            if (_id > 0)
+                FillForm();
         }
 
         private void btnPesquisar_Click(object sender, RoutedEventArgs e)
@@ -54,11 +57,17 @@ namespace SisAdv.Views
             _processo.Descricao = TxbDescricao.Text;
             _processo.Resultado = TxbResultado.Text;
 
-            if (ComboboxServico.SelectedItem != null)
-                _processo.Servico = ComboboxServico.SelectedItem as Servico;
+            if (ComboboxCliente.SelectedItem != null)
+                _processo.Cliente = ComboboxCliente.SelectedItem as Cliente;
+
+            if (ComboboxAdvogado.SelectedItem != null)
+                _processo.Advogado = ComboboxAdvogado.SelectedItem as Advogado;
 
             if (DataPickerDataInício.SelectedDate != null)
                 _processo.DataProcesso = (DateTime)DataPickerDataInício.SelectedDate;
+
+            if (double.TryParse(TxbValor.Text, out double salario))
+                _processo.Valor = salario;
 
             SaveData();
         }
@@ -73,7 +82,8 @@ namespace SisAdv.Views
             try
             {
                 DataPickerDataInício.SelectedDate = DateTime.Now;
-                ComboboxServico.ItemsSource = new ServicoDAO().List();
+                ComboboxCliente.ItemsSource = new ClienteDAO().List();
+                ComboboxAdvogado.ItemsSource = new AdvogadoDAO().List();
             }
             catch (Exception ex)
             {
@@ -145,36 +155,31 @@ namespace SisAdv.Views
                 this.Close();
         }
 
-        /*private void FillForm()
+        private void FillForm()
         {
             try
             {
-                var dao = new ServicoDAO();
+                var dao = new ProcessoDAO();
                 _processo = dao.GetById(_id);
 
-                txbId.Text = _servico.Id.ToString();
-                datepickerDataServico.SelectedDate = _servico.Data;
-                txbValor.Text = _servico.Valor.ToString();
-                txbDescricao.Text = _servico.Descricao;
+                TxbIdProcesso.Text = _processo.Id.ToString();
+                DataPickerDataInício.SelectedDate = _processo.DataProcesso;
+                TxbResultado.Text = _processo.Resultado;
+                TxbDescricao.Text = _processo.Descricao;
+                TxbStatus.Text = _processo.Status;
+                TxbValor.Text = _processo.Valor.ToString();
 
-                if (_servico.Cliente != null)
-                    comboboxCliente.SelectedValue = _servico.Cliente.Id;
+                if (_processo.Cliente != null)
+                    ComboboxCliente.SelectedValue = _processo.Cliente.Id;
 
-                if (_servico.Advogado != null)
-                    comboboxAdvogado.SelectedValue = _servico.Advogado.Id;
-
-                if (_servico.Tipo == "Eleitoral")
-                    rbtipoEleitoral.IsChecked = true;
-                if (_servico.Tipo == "Civil")
-                    rbtipoCivil.IsChecked = true;
-                if (_servico.Tipo == "Criminal")
-                    rbtipoCriminal.IsChecked = true;
+                if (_processo.Advogado != null)
+                    ComboboxAdvogado.SelectedValue = _processo.Advogado.Id;
             }
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message, "Exceção", MessageBoxButton.OK, MessageBoxImage.Error);
             }
-        }*/
+        }
 
         private void ClearInputs()
         {
@@ -182,7 +187,8 @@ namespace SisAdv.Views
             TxbIdProcesso.Clear();
             TxbStatus.Clear();
             TxbResultado.Clear();
-            ComboboxServico.SelectedItem = null;
+            ComboboxCliente.SelectedItem = null;
+            ComboboxAdvogado.SelectedItem = null;
             DataPickerDataInício.SelectedDate = null;
         }
     }

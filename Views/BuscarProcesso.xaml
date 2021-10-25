@@ -1,4 +1,4 @@
-﻿<Window x:Class="SisAdv.Views.BuscarAdvogado"
+﻿<Window x:Class="SisAdv.Views.BuscarProcesso"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
@@ -13,7 +13,7 @@
         TextOptions.TextRenderingMode="Auto"        
         Background="#FFAEAEAE"
         FontFamily="{DynamicResource MaterialDesignFont}"
-        Title="BuscarAdvogado" Height="600" Width="600" WindowStartupLocation="CenterScreen" ResizeMode="NoResize">
+        Title="BuscarProcesso" Height="600" Width="600" WindowStartupLocation="CenterScreen" ResizeMode="NoResize">
     <DockPanel>
         <Grid DockPanel.Dock="Top" Margin="10" Height="260">
             <Grid.ColumnDefinitions>
@@ -28,13 +28,18 @@
             </Grid.RowDefinitions>
 
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
-                <Label FontSize="16" Foreground="White" Content="Advogado" RenderTransformOrigin="-6.21,0.502"/>
-                <TextBox x:Name="TxbNomeAdvogado" HorizontalAlignment="Left" VerticalAlignment="Center" Width="120"/>
+                <Label FontSize="16" Foreground="White" Content="Status" RenderTransformOrigin="-6.21,0.502"/>
+                <TextBox x:Name="TxbStatus" HorizontalAlignment="Left" VerticalAlignment="Center" Width="120"/>
             </StackPanel>
 
             <StackPanel Grid.Row="1" Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
-                <Label  Content="CPF" FontSize="16" Foreground="White" RenderTransformOrigin="-6.21,0.502"/>
-                <TextBox x:Name="TxbCpf" HorizontalAlignment="Left" VerticalAlignment="Center" Width="120"/>
+                <Label FontSize="16" Foreground="White" Content="Cliente" RenderTransformOrigin="-6.21,0.502"/>
+                <TextBox x:Name="TxbNomeCliente" HorizontalAlignment="Left" VerticalAlignment="Center" Width="120"/>
+            </StackPanel>
+
+            <StackPanel Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
+                <Label  Content="Valor" FontSize="16" Foreground="White" RenderTransformOrigin="-6.21,0.502"/>
+                <TextBox x:Name="TxbValor" HorizontalAlignment="Left" VerticalAlignment="Center" Width="120"/>
             </StackPanel>
 
             <StackPanel Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center">
@@ -58,11 +63,12 @@
         </Grid>
 
         <Grid DockPanel.Dock="Bottom" Margin="10" Height="300">
-            <DataGrid Grid.Row="3" AlternatingRowBackground="#FFE5E5E5" x:Name="dataGridBuscarAdvogado" AlternationCount="2" AutoGenerateColumns="False" BorderBrush="#FF747474">
+            <DataGrid Grid.Row="3" AlternatingRowBackground="#FFE5E5E5" x:Name="dataGridBuscarProcesso" AlternationCount="2" AutoGenerateColumns="False" BorderBrush="#FF747474">
                 <DataGrid.Columns>
                     <DataGridTextColumn Header="Id" Binding="{Binding Id}"/>
-                    <DataGridTextColumn Header="Nome" Binding="{Binding Nome}"/>
-                    <DataGridTextColumn Header="Cpf" Binding="{Binding Cpf}"/>
+                    <DataGridTextColumn Header="Nome" Binding="{Binding Cliente.Nome}"/>
+                    <DataGridTextColumn Header="Valor" Binding="{Binding Valor, ConverterCulture='pt-BR', StringFormat=C}"/>
+                    <DataGridTextColumn Header="Status" Binding="{Binding Status}"/>
                     <DataGridTemplateColumn>
                         <DataGridTemplateColumn.CellTemplate>
                             <DataTemplate>

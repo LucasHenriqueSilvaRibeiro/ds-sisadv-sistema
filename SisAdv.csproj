@@ -295,6 +295,9 @@
     <Compile Include="Views\BuscarLucro.xaml.cs">
       <DependentUpon>BuscarLucro.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\BuscarProcesso.xaml.cs">
+      <DependentUpon>BuscarProcesso.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\CadastrarAdvogado.xaml.cs">
       <DependentUpon>CadastrarAdvogado.xaml</DependentUpon>
     </Compile>
@@ -347,6 +350,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\BuscarLucro.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\BuscarProcesso.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

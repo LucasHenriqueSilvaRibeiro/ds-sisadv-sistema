@@ -89,5 +89,11 @@ namespace SisAdv.Views
         {
             Close();
         }
+
+        private void btnAdicionarNovoProcesso_Click(object sender, RoutedEventArgs e)
+        {
+            CadastrarAdvogado cadastrarAdvogado = new CadastrarAdvogado();
+            cadastrarAdvogado.ShowDialog();
+        }
     }
 }
