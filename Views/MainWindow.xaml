@@ -124,7 +124,8 @@
             </Grid.RowDefinitions>
 
             <StackPanel Width="450" Margin="10 10">
-                <Calendar x:Name="agendacompromissos" Width="300" Height="350" HorizontalAlignment="Center" />
+                <Calendar  x:Name="agendacompromissos" Width="300" Height="350" HorizontalAlignment="Center" />
+                <Button x:Name="BtnVisualizarDia" Width="90" Content="teste" Background="#FF555555" BorderBrush="{x:Null}" Click="BtnVisualizarDia_Click"/>
             </StackPanel>
 
             <StackPanel Width="450" Grid.Row="1" Margin="65 0 0 0">

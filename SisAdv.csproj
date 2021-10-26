@@ -269,6 +269,7 @@
     <Compile Include="Models\Caixa.cs" />
     <Compile Include="Models\CaixaDAO.cs" />
     <Compile Include="Models\CaixaValidator.cs" />
+    <Compile Include="Models\Calendar.cs" />
     <Compile Include="Models\ClienteDAO.cs" />
     <Compile Include="Models\ClienteValidator.cs" />
     <Compile Include="Models\DespesaDAO.cs" />

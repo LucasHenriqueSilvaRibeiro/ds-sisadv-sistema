@@ -7,6 +7,8 @@ using SisAdv.Interface;
 using SisAdv.Database;
 using MySql.Data.MySqlClient;
 using SisAdv.Helpers;
+using SisAdv.Views;
+using System.Windows.Controls;
 
 namespace SisAdv.Models
 {
@@ -99,7 +101,73 @@ namespace SisAdv.Models
             {
                 conn.Close();
             }
-        }        
+        }
+
+        public List<Evento> ListDataCalendar(System.Windows.Controls.Calendar teste)
+        {
+            try
+            {
+                List<Evento> list = new List<Evento>();
+
+                var query = conn.Query();
+                query.CommandText = "SELECT data_even FROM evento";
+
+                MySqlDataReader reader = query.ExecuteReader();
+
+                DateTime?[] vetoooor = new DateTime?[100];
+                int i = 0;
+
+                while (reader.Read())
+                {
+                    i += 1;
+
+                    list.Add(new Evento()
+                    {
+                        Data = DAOHelper.GetDateTime(reader, "data_even")
+                    });
+
+                    teste.SelectionMode = CalendarSelectionMode.MultipleRange;
+                    teste.SelectedDates.Add(new DateTime(list));
+                }
+
+                return list;
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+            finally
+            {
+                conn.Close();
+            }
+        }
+
+        /* Código do calendário, vou tentar implementar esse que achei na internet
+         string _query = "SELECT * FROM calendario WHERE estado=1 AND utilizador=@user;";
+
+            using (MySqlConnection con  = new MySqlConnection(ConSql))
+            {
+                using (MySqlCommand cmd = new MySqlCommand(_query, con))
+                {
+                    con.Open();
+                    cmd.Prepare();
+                    cmd.Parameters.AddWithValue("@user", Sessao.Id);
+
+                    MySqlDataReader reader = cmd.ExecuteReader();
+
+                    if (reader.HasRows)
+                    {
+                        while (reader.Read())
+                        {
+                            		monthCalendar1.AddBoldedDate(DateTime.Parse(funcao.OutHoras(reader["dataAviso"].ToString())));
+
+                        }
+                        reader.Close();
+                    }
+                }
+                con.Close();
+            }
+         * */
 
         public List<Evento> ListConsulta(string dataAgenda)
         {

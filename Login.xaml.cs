@@ -22,6 +22,12 @@ namespace SisAdv.Views
         public Login()
         {
             InitializeComponent();
+            Loaded += Login_Loaded;
+        }
+
+        private void Login_Loaded(object sender, RoutedEventArgs e)
+        {
+            TxbLogin.Focus();
         }
 
         private void btacessar_Click(object sender, RoutedEventArgs e)
