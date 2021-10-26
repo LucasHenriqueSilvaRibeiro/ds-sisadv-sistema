@@ -66,10 +66,10 @@
         <Grid DockPanel.Dock="Bottom" Margin="10" Height="300">
             <DataGrid Grid.Row="3" AlternatingRowBackground="#FFE5E5E5" x:Name="gridpagamento" AlternationCount="2" AutoGenerateColumns="False" BorderBrush="#FF747474">
                 <DataGrid.Columns>
-                    <DataGridTextColumn Header="Id" Binding="{Binding Id}"/>
-                    <DataGridTextColumn Header="Nome" Binding="{Binding Cliente.Nome}"/>
-                    <DataGridTextColumn Header="Valor" Binding="{Binding Valor, ConverterCulture='pt-BR', StringFormat=C}"/>
-                    <DataGridTextColumn Header="Status" Binding="{Binding Status}"/>
+                    <DataGridTextColumn Header="Id" Width="auto" Binding="{Binding Id}"/>
+                    <DataGridTextColumn Header="Data" Width="100" Binding="{Binding DataPagamento}"/>
+                    <DataGridTextColumn Header="Nome" Width="auto" Binding="{Binding Despesa.Origem}"/>
+                    <DataGridTextColumn Header="Valor" Width="auto" Binding="{Binding Valor, ConverterCulture='pt-BR', StringFormat=C}"/>
                     <DataGridTemplateColumn>
                         <DataGridTemplateColumn.CellTemplate>
                             <DataTemplate>

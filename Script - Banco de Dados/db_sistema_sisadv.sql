@@ -600,7 +600,8 @@ $$ delimiter ;
 select * from pagamento;
 select * from caixa;*/
 
-
+ALTER TABLE pagamento ADD origem_despesa VARCHAR (150);
+desc pagamento;
 delimiter $$
 create procedure registrarPagamento(tipo varchar (50), data date, despesa int, caixa int)
 begin
@@ -608,6 +609,8 @@ declare testedespesa int;
 declare testecx int;
 declare verificarpagamentos int;
 declare valorpagamento double;
+declare origem VARCHAR (150);
+set origem = (select origem_desp from despesa where id_despesa = despesa);
 set verificarpagamentos = (select id_pagamento from pagamento where (data = data_pagamento) and (fk_despesa = despesa) or (fk_despesa = despesa));
 set testedespesa = (select id_despesa from despesa where despesa = id_despesa);
 set testecx = (select id_cx from caixa where caixa = id_cx);
@@ -615,7 +618,7 @@ set valorpagamento = (select valor_desp from despesa where despesa = id_despesa)
 if (testecx is not null) then
 	if(testedespesa is not null) then
 		if(verificarpagamentos is null) then
-			insert into pagamento values (null, tipo, data, valorpagamento, despesa, caixa);
+			insert into pagamento values (null, tipo, data, valorpagamento, despesa, caixa, origem);
 			select 'Pagamento realizado com sucesso' as Confirmacao;
 		else
 			select 'Essa despesa já foi paga!' as Alerta;
@@ -635,7 +638,6 @@ call registrarPagamento ('No Dinheiro', '2021-08-20', 3, 2);
 select * from pagamento;
 select * from despesa;
 select * from caixa;
-
 
 
 

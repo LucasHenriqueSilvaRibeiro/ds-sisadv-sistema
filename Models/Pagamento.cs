@@ -21,7 +21,9 @@ namespace SisAdv.Models
         public int Id { get; set; }
         public DateTime? DataPagamento { get; set; }
         public String TipoPagamento { get; set; }
+        public String Origem { get; set; }
         public Despesa Despesa { get; set; }
         public Caixa Caixa { get; set; }
+        public double Valor { get; set; }
     }
 }

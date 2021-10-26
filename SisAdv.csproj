@@ -279,6 +279,7 @@
     <Compile Include="Models\LucroValidator.cs" />
     <Compile Include="Models\Pagamento.cs" />
     <Compile Include="Models\PagamentoDAO.cs" />
+    <Compile Include="Models\PagamentoValidator.cs" />
     <Compile Include="Models\Processo.cs" />
     <Compile Include="Models\ProcessoDAO.cs" />
     <Compile Include="Models\ProcessoValidator.cs" />

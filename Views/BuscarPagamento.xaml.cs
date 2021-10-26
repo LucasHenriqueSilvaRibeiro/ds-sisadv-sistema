@@ -11,6 +11,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using SisAdv.Models;
 
 namespace SisAdv.Views
 {
@@ -22,6 +23,12 @@ namespace SisAdv.Views
         public BuscarPagamento()
         {
             InitializeComponent();
+            Loaded += BuscarPagamento_Loaded;
+        }
+
+        private void BuscarPagamento_Loaded(object sender, RoutedEventArgs e)
+        {
+            LoadDataGrid();
         }
 
         private void Btn_Pesquisar_Click(object sender, RoutedEventArgs e)
@@ -29,10 +36,20 @@ namespace SisAdv.Views
 
         }
 
-        private void btnCancelar_Click(object sender, RoutedEventArgs e)
+        private void LoadDataGrid()
         {
-
+            try
+            {
+                var dao = new PagamentoDAO();
+                gridpagamento.ItemsSource = dao.List();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Não foi possível carregar as listas de Pagamentos. Verifique e tente novamente.", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
         }
+
+        private void btnCancelar_Click(object sender, RoutedEventArgs e) => Close();
 
         private void btnAdicionar_Click(object sender, RoutedEventArgs e)
         {
@@ -42,12 +59,35 @@ namespace SisAdv.Views
 
         private void Btn_Delete_Click(object sender, RoutedEventArgs e)
         {
+            var pagamento = gridpagamento.SelectedItem as Pagamento;
 
+            var result = MessageBox.Show($"Deseja realmente remover a despesa de `{pagamento.Despesa.Origem}`?", "Confirmação de Exclusão", MessageBoxButton.YesNo, MessageBoxImage.Warning);
+
+            try
+            {
+                if (result == MessageBoxResult.Yes)
+                {
+                    var dao = new PagamentoDAO();
+                    dao.Delete(pagamento);
+                    LoadDataGrid();
+                }
+            }
+            catch (Exception ex)
+            {
+
+                MessageBox.Show(ex.Message, "Exceção", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
         }
 
         private void Btn_Update_Click(object sender, RoutedEventArgs e)
         {
+            var pagamento = gridpagamento.SelectedItem as Pagamento;
 
+            var window = new CadastrarPagamento(pagamento.Id);
+
+            window.ShowDialog();
+
+            LoadDataGrid();
         }
     }
 }

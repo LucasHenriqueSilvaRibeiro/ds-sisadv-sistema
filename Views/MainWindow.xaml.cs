@@ -286,6 +286,18 @@ namespace SisAdv.Views
             funcoesbuscar.Visibility = Visibility.Collapsed;
             cadastrarcaixa.ShowDialog();
         }
+
+        private void btaddpagamento_Click(object sender, RoutedEventArgs e)
+        {
+            CadastrarPagamento cadastrarPagamento = new CadastrarPagamento();
+            cadastrarPagamento.ShowDialog();
+        }
+
+        private void btbuscapagamento_Click(object sender, RoutedEventArgs e)
+        {
+            BuscarPagamento buscarPagamento = new BuscarPagamento();
+            buscarPagamento.ShowDialog();
+        }
     }
 }
     
