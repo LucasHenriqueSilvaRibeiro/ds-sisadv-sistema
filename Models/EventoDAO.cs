@@ -99,6 +99,77 @@ namespace SisAdv.Models
             {
                 conn.Close();
             }
+        }        
+
+        public List<Evento> ListConsulta(string dataAgenda)
+        {
+            try
+            {
+                List<Evento> list = new List<Evento>();
+
+                var query = conn.Query();
+                query.CommandText = $"SELECT * FROM evento WHERE data_even = '{dataAgenda}'";
+
+                MySqlDataReader reader = query.ExecuteReader();
+
+                while (reader.Read())
+                {
+                    list.Add(new Evento()
+                    {
+                        Id = reader.GetInt32("id_evento"),
+                        Importancia = DAOHelper.GetString(reader, "importancia_even"),
+                        Horario = DAOHelper.GetString(reader, "horario_even"),
+                        Data = DAOHelper.GetDateTime(reader, "data_even"),
+                        Descricao = DAOHelper.GetString(reader, "descricao_even"),
+                        Notificacao = reader.GetBoolean("notificacao_even"),
+                        Titulo = DAOHelper.GetString(reader, "titulo_even")
+                    });
+                }                
+
+                return list;
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+            finally
+            {
+                conn.Close();
+            }
+            /*Implementar aqui
+            try
+            {
+                string textoSelect = "SELECT  * FROM servico LEFT JOIN cliente ON fk_cliente = id_cliente LEFT JOIN advogado ON fk_advogado = id_advogado WHERE";
+
+                List<Servico> listConsulta = new List<Servico>();
+
+                var query = conn.Query();
+
+                
+
+                MySqlDataReader reader = query.ExecuteReader();
+
+                while (reader.Read())
+                {
+                    listConsulta.Add(new Servico()
+                    {
+                        Id = reader.GetInt32("id_servico"),
+                        Data = DAOHelper.GetDateTime(reader, "data_serv"),
+                        Tipo = DAOHelper.GetString(reader, "tipo_serv"),
+
+                        //CÓDIGO AULA 1:N
+                        Cliente = DAOHelper.IsNull(reader, "cliente_serv") ? null : new Cliente() { Id = reader.GetInt32("fk_cliente"), Nome = reader.GetString("cliente_serv") },
+                        Advogado = DAOHelper.IsNull(reader, "advogado_serv") ? null : new Advogado() { Id = reader.GetInt32("fk_advogado"), Nome = reader.GetString("advogado_serv") }
+                    });
+                }
+
+                return listConsulta;
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }*/
         }
 
         public void Update(Evento t)

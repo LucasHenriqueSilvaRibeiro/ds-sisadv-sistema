@@ -14,15 +14,16 @@
         TextOptions.TextRenderingMode="Auto"        
         Background="#FFAEAEAE"
         FontFamily="{DynamicResource MaterialDesignFont}"
-        Title="SISADV" Height="700" Width="1300" WindowStartupLocation="CenterScreen">
-    <DockPanel>       
+        Title="SISADV" Height="710" Width="1300" WindowStartupLocation="CenterScreen">
+    <DockPanel>
         <Grid DockPanel.Dock="Left" Width="200" HorizontalAlignment="Center">
             <Grid.RowDefinitions>
-                <RowDefinition Height="570"/>
+                <RowDefinition Height="295"/>
+                <RowDefinition Height="275"/>
                 <RowDefinition Height="100"/>
             </Grid.RowDefinitions>
 
-            <StackPanel>
+            <StackPanel Grid.RowSpan="2" Height="550">
                 <!--Menu para adicionar dados-->
                 <Button x:Name="btadicionar" Margin="0 20 0 0" 
                     Style="{StaticResource MaterialDesignFloatingActionButton}"
@@ -104,22 +105,22 @@
                     Diário da Justiça
                 </Button>
             </StackPanel>
-            
+
             <!--Observação: estudar uma forma de fazer com que a imagem apareça-->
-            <StackPanel Grid.Row="1">
+            <StackPanel Grid.Row="2" Margin="0 0 0 -20">
                 <Image Source="/imagem/imgtelaprincipal.png"  Width="90" Height="90" IsEnabled="False"/>
             </StackPanel>
-        </Grid>        
+        </Grid>
 
-        <Grid DockPanel.Dock="Left" Width="600" Margin="20" x:Name="gridCentral"> 
+        <Grid DockPanel.Dock="Left" Width="600" Margin="20" x:Name="gridCentral">
             <Grid.RowDefinitions>
                 <RowDefinition Height="400"/>
                 <RowDefinition Height="270"/>
                 <RowDefinition Height="30"/>
-            </Grid.RowDefinitions>      
+            </Grid.RowDefinitions>
 
             <StackPanel Width="450" Margin="10 10">
-                <Calendar x:Name="agendacompromissos" Width="300" Height="350" HorizontalAlignment="Center"/>
+                <Calendar x:Name="agendacompromissos" Width="300" Height="350" HorizontalAlignment="Center" />
             </StackPanel>
 
             <StackPanel Width="450" Grid.Row="1" Margin="65 0 0 0">
@@ -128,10 +129,10 @@
                     <chartingToolkit:ColumnSeries DependentValuePath="Value" IndependentValuePath="Key" ItemsSource="{Binding}" />
                 </chartingToolkit:Chart>
             </StackPanel>
-               
+
         </Grid>
 
-        <Grid DockPanel.Dock="Right" Margin="30" Width="320" x:Name="gridDireitaRecentes">
+        <Grid DockPanel.Dock="Right" Margin="30" Width="350" x:Name="gridDireitaRecentes">
             <Grid.RowDefinitions>
                 <RowDefinition Height="60"/>
                 <RowDefinition Height="600"/>
@@ -146,14 +147,14 @@
                 </Button>
             </StackPanel>
 
-            <DataGrid Grid.Row="1" Margin="0 15 0 0" x:Name="dataGridServicosRecentes" IsReadOnly="true"
+            <DataGrid Grid.Row="1" Margin="0 15 0 0" x:Name="dataGridServicosRecentes" IsReadOnly="true" Width="350"
                       AutoGenerateColumns="False" AlternatingRowBackground="#FFE5E5E5" AlternationCount="2">
 
                 <DataGrid.Columns>
                     <DataGridTextColumn Header="Cliente" Width="100" Binding="{Binding Cliente.Nome}"/>
                     <DataGridTextColumn Header="Valor" Width="80" Binding="{Binding Valor, ConverterCulture='pt-BR', StringFormat=C}"/>
 
-                    <DataGridTemplateColumn Width="40">
+                    <DataGridTemplateColumn Width="50">
                         <DataGridTemplateColumn.CellTemplate>
                             <DataTemplate>
                                 <Button Padding="-10" Margin="0 0 0 -5" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="{x:Null}" >
@@ -162,7 +163,7 @@
                             </DataTemplate>
                         </DataGridTemplateColumn.CellTemplate>
                     </DataGridTemplateColumn>
-                    <DataGridTemplateColumn Width="40">
+                    <DataGridTemplateColumn Width="50">
                         <DataGridTemplateColumn.CellTemplate>
                             <DataTemplate>
                                 <Button Padding="-10" Margin="0 0 0 -5" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="{x:Null}" >
@@ -171,7 +172,7 @@
                             </DataTemplate>
                         </DataGridTemplateColumn.CellTemplate>
                     </DataGridTemplateColumn>
-                    <DataGridTemplateColumn Width="40">
+                    <DataGridTemplateColumn Width="50">
                         <DataGridTemplateColumn.CellTemplate>
                             <DataTemplate>
                                 <Button x:Name="BtnvisualizarServico" Padding="-10" Margin="0 0 0 -5" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="{x:Null}" Click="Btn_visualizarServico_Click" >
@@ -180,7 +181,7 @@
                             </DataTemplate>
                         </DataGridTemplateColumn.CellTemplate>
                     </DataGridTemplateColumn>
-                </DataGrid.Columns>                
+                </DataGrid.Columns>
             </DataGrid>
         </Grid>
     </DockPanel>

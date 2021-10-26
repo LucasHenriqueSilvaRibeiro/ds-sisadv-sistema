@@ -31,6 +31,16 @@ namespace SisAdv.Views
         private void MainWindow_Loaded(object sender, RoutedEventArgs e)
         {
             LoadDataGrid();
+
+            //Agenda();
+        }
+
+        private void Teste()
+        {
+            DateTime data = agendacompromissos.SelectedDate.Value;
+            string teste = data.ToString();
+
+            MessageBox.Show(teste);
         }
 
         private void LoadDataGrid()
@@ -48,6 +58,53 @@ namespace SisAdv.Views
 
             }
         }
+
+        private void Agenda()
+        {
+            try
+            {
+                string dataCalendario = null;
+                DateTime? data = null;
+
+                DateTime? selectedDate = (DateTime?)agendacompromissos.SelectedDate.Value;
+                data = selectedDate;
+                dataCalendario = data?.ToString("yyyy-MM-dd");
+
+                GridAgenda gridAgenda = new GridAgenda(dataCalendario);
+                gridAgenda.ShowDialog();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Exceção", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+        }
+
+        /* Código do calendário, vou tentar implementar esse que achei na internet
+         string _query = "SELECT * FROM calendario WHERE estado=1 AND utilizador=@user;";
+
+            using (MySqlConnection con  = new MySqlConnection(ConSql))
+            {
+                using (MySqlCommand cmd = new MySqlCommand(_query, con))
+                {
+                    con.Open();
+                    cmd.Prepare();
+                    cmd.Parameters.AddWithValue("@user", Sessao.Id);
+
+                    MySqlDataReader reader = cmd.ExecuteReader();
+
+                    if (reader.HasRows)
+                    {
+                        while (reader.Read())
+                        {
+                            		monthCalendar1.AddBoldedDate(DateTime.Parse(funcao.OutHoras(reader["dataAviso"].ToString())));
+
+                        }
+                        reader.Close();
+                    }
+                }
+                con.Close();
+            }
+         * */
 
         private void ShowColumnChart()
         {

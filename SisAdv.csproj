@@ -413,6 +413,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Views\GridAgenda.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\ImprimirRelatorio.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -440,6 +444,9 @@
     </Compile>
     <Compile Include="Views\CadastrarServico.xaml.cs">
       <DependentUpon>CadastrarServico.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\GridAgenda.xaml.cs">
+      <DependentUpon>GridAgenda.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\ImprimirRelatorio.xaml.cs">
       <DependentUpon>ImprimirRelatorio.xaml</DependentUpon>
