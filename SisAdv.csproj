@@ -277,6 +277,8 @@
     <Compile Include="Models\EventoDAO.cs" />
     <Compile Include="Models\LucroDAO.cs" />
     <Compile Include="Models\LucroValidator.cs" />
+    <Compile Include="Models\Pagamento.cs" />
+    <Compile Include="Models\PagamentoDAO.cs" />
     <Compile Include="Models\Processo.cs" />
     <Compile Include="Models\ProcessoDAO.cs" />
     <Compile Include="Models\ProcessoValidator.cs" />
@@ -299,6 +301,9 @@
     </Compile>
     <Compile Include="Views\BuscarLucro.xaml.cs">
       <DependentUpon>BuscarLucro.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\BuscarPagamento.xaml.cs">
+      <DependentUpon>BuscarPagamento.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\BuscarProcesso.xaml.cs">
       <DependentUpon>BuscarProcesso.xaml</DependentUpon>
@@ -325,6 +330,9 @@
       <DependentUpon>CadastrarNovoUsuario.xaml</DependentUpon>
     </Compile>
     <Compile Include="Models\Cliente.cs" />
+    <Compile Include="Views\CadastrarPagamento.xaml.cs">
+      <DependentUpon>CadastrarPagamento.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\CadastrarProcesso.xaml.cs">
       <DependentUpon>CadastrarProcesso.xaml</DependentUpon>
     </Compile>
@@ -365,6 +373,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Views\BuscarPagamento.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\BuscarProcesso.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -398,6 +410,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\CadastrarNovoUsuario.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\CadastrarPagamento.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
