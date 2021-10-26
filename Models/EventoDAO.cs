@@ -103,7 +103,7 @@ namespace SisAdv.Models
             }
         }
 
-        public List<Evento> ListDataCalendar(System.Windows.Controls.Calendar teste)
+        /*public List<Evento> ListDataCalendar(System.Windows.Controls.Calendar teste)
         {
             try
             {
@@ -125,6 +125,8 @@ namespace SisAdv.Models
                     {
                         Data = DAOHelper.GetDateTime(reader, "data_even")
                     });
+
+                    vetoooor[i] = list.;
 
                     teste.SelectionMode = CalendarSelectionMode.MultipleRange;
                     teste.SelectedDates.Add(new DateTime(list));
