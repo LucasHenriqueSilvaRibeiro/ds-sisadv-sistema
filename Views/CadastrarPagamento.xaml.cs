@@ -41,7 +41,6 @@ namespace SisAdv.Views
             LoadCombobox();
             if (_id > 0)
             {
-                //fazer essa
                 FillForm();
             }
         }
@@ -131,10 +130,16 @@ namespace SisAdv.Views
                 textvalor.Text = _pagamento.Valor.ToString();
 
                 if (_pagamento.Despesa != null)
+                {
                     boxdespesa.SelectedValue = _pagamento.Despesa.Id;
+                    boxdespesa.IsEnabled = false;
+                }
 
                 if (_pagamento.Caixa != null)
+                {
                     boxcaixa.SelectedValue = _pagamento.Caixa.Id;
+                    boxcaixa.IsEnabled = false;
+                }                    
 
                 if (_pagamento.TipoPagamento == "Á vista")
                     boxtipopagamento.SelectedItem = vista;
@@ -185,6 +190,7 @@ namespace SisAdv.Views
         {
             textvalor.Clear();
             textid.Clear();
+            boxtipopagamento.SelectedItem = null;
             datapagamento.SelectedDate = null;
             boxcaixa.SelectedItem = null;
             boxdespesa.SelectedItem = null;

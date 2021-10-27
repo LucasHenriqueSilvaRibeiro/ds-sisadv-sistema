@@ -156,13 +156,14 @@
                       AutoGenerateColumns="False" AlternatingRowBackground="#FFE5E5E5" AlternationCount="2">
 
                 <DataGrid.Columns>
+                    <DataGridTextColumn x:Name="Id" Header="Id" Width="50" Binding="{Binding Cliente.Id}"/>
                     <DataGridTextColumn Header="Cliente" Width="100" Binding="{Binding Cliente.Nome}"/>
                     <DataGridTextColumn Header="Valor" Width="80" Binding="{Binding Valor, ConverterCulture='pt-BR', StringFormat=C}"/>
 
                     <DataGridTemplateColumn Width="50">
                         <DataGridTemplateColumn.CellTemplate>
                             <DataTemplate>
-                                <Button Padding="-10" Margin="0 0 0 -5" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="{x:Null}" >
+                                <Button x:Name="BtnDeletar" Padding="-10" Margin="0 0 0 -5" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="{x:Null}" Click="BtnDeletar_Click" >
                                     <materialDesign:PackIcon Kind="Delete" Width="20" Height="25" Foreground="#FFE02121" />
                                 </Button>
                             </DataTemplate>
@@ -171,7 +172,7 @@
                     <DataGridTemplateColumn Width="50">
                         <DataGridTemplateColumn.CellTemplate>
                             <DataTemplate>
-                                <Button Padding="-10" Margin="0 0 0 -5" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="{x:Null}" >
+                                <Button x:Name="BtnFixar" Padding="-10" Margin="0 0 0 -5" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="{x:Null}" Click="BtnFixar_Click" >
                                     <materialDesign:PackIcon Kind="PinOutline" Width="20" Height="25" Foreground="Blue"/>
                                 </Button>
                             </DataTemplate>
@@ -186,6 +187,7 @@
                             </DataTemplate>
                         </DataGridTemplateColumn.CellTemplate>
                     </DataGridTemplateColumn>
+                    
                 </DataGrid.Columns>
             </DataGrid>
         </Grid>

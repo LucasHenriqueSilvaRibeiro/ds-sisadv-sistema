@@ -155,6 +155,46 @@ namespace SisAdv.Models
             }
         }
 
+        public List<Advogado> ListConsulta(string nomeAdvogado, string cpfAdvogado)
+        {
+            try
+            {
+                string textoSelect = "SELECT * FROM advogado WHERE";
+
+                List<Advogado> list = new List<Advogado>();
+                var query = conn.Query();
+
+                if ((nomeAdvogado != null) && (cpfAdvogado != null))
+                    query.CommandText = $"{textoSelect} nome_adv LIKE '%{nomeAdvogado}%' AND cpf_adv LIKE '{cpfAdvogado}%'";
+                else if (nomeAdvogado != null)
+                    query.CommandText = $"{textoSelect} nome_adv LIKE '%{nomeAdvogado}%'";
+                else if (cpfAdvogado != null)
+                    query.CommandText = $"{textoSelect} cpf_adv LIKE '{cpfAdvogado}%'";
+
+                MySqlDataReader reader = query.ExecuteReader();
+
+                while (reader.Read())
+                {
+                    list.Add(new Advogado()
+                    {
+                        Id = reader.GetInt32("id_advogado"),
+                        Nome = reader.GetString("nome_adv"),
+                        Descricao = reader.GetString("descricao_adv"),
+                        Rg = reader.GetString("rg_adv"),
+                        Cpf = reader.GetString("cpf_adv"),
+                        Telefone = reader.GetString("telefone_adv"),
+                        Email = reader.GetString("e_mail_adv"),
+                        DataNasc = reader.GetDateTime("data_nasc_adv")
+                    });
+                }
+
+                return list;
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
         public void Update(Advogado t)
         {
             try
@@ -162,7 +202,7 @@ namespace SisAdv.Models
                 var query = conn.Query();
 
                 query.CommandText = "UPDATE advogado SET nome_adv = @nome, cpf_adv = @cpf, rg_adv = @rg, data_nasc_adv = @data," +
-                                    "e_mail_adv = @email, telefone_adv = @telefone, descricao_adv = @descricao WHERE id_advogado = 1";
+                                    "e_mail_adv = @email, telefone_adv = @telefone, descricao_adv = @descricao WHERE id_advogado = @id";
 
                 query.Parameters.AddWithValue("@nome", t.Nome);
                 query.Parameters.AddWithValue("@cpf", t.Cpf);

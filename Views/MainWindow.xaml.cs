@@ -33,6 +33,9 @@ namespace SisAdv.Views
             LoadDataGrid();
 
             LoadEventosCalendar();
+
+            dataGridServicosRecentes.CanUserReorderColumns = true;
+            dataGridServicosRecentes.CanUserSortColumns = true;
         }
 
         private void LoadDataGrid()
@@ -40,8 +43,10 @@ namespace SisAdv.Views
             try
             {
                 var dao = new ServicoDAO();
-
                 dataGridServicosRecentes.ItemsSource = dao.List();
+                /*dataGridServicosRecentes.SortMode = sor
+                dataGridServicosRecentes.Sorting(dataGridServicosRecentes.Columns[Id], System.ComponentModel.ListSortDirection.Descending);
+                //dataGridServicosRecentes.Columns[].SortMode = dataGridServicosRecentes.UpdateLayout;*/
             }
             catch (Exception ex)
             {
@@ -280,6 +285,33 @@ namespace SisAdv.Views
         private void BtnVisualizarDia_Click(object sender, RoutedEventArgs e)
         {
             Agenda();
+        }
+
+        private void BtnFixar_Click(object sender, RoutedEventArgs e)
+        {
+            //Verificar se tem uma forma de subir as linhas
+        }
+
+        private void BtnDeletar_Click(object sender, RoutedEventArgs e)
+        {
+            var servicoSelected = dataGridServicosRecentes.SelectedItem as Servico;
+
+            var result = MessageBox.Show($"Deseja realmente remover o servico do cliente `{servicoSelected.Cliente.Nome}`?", "Confirmação de Exclusão", MessageBoxButton.YesNo, MessageBoxImage.Warning);
+
+            try
+            {
+                if (result == MessageBoxResult.Yes)
+                {
+                    var dao = new ServicoDAO();
+                    dao.Delete(servicoSelected);
+                    LoadDataGrid();
+                }
+            }
+            catch (Exception ex)
+            {
+
+                MessageBox.Show(ex.Message, "Exceção", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
         }
     }
 }

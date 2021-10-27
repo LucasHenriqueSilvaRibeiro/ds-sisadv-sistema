@@ -33,7 +33,13 @@ namespace SisAdv.Views
 
         private void Btn_Pesquisar_Click(object sender, RoutedEventArgs e)
         {
-
+            if (TxbNomeAdvogado.Text == "" && TxbCpf.Text == "")
+            {
+                MessageBox.Show("Nenhum dos campos foi inserido. Insira dados em algum dos campos para realizar uma consulta!", "Atenção", MessageBoxButton.OK, MessageBoxImage.Information);
+                LoadDataGrid();
+            }
+            else
+                ConsultaLoadDataGrid();
         }
 
         private void LoadDataGrid()
@@ -49,6 +55,33 @@ namespace SisAdv.Views
 
                 MessageBox.Show(ex.Message, "Não foi possível carregar as listas de serviços. Verifique e tente novamente.", MessageBoxButton.OK, MessageBoxImage.Error);
 
+            }
+        }
+
+        private void ConsultaLoadDataGrid()
+        {
+            try
+            {
+                var dao = new AdvogadoDAO();
+                string nomeAdvogado = null;
+                string cpfAdvogado = null;
+
+                if (TxbNomeAdvogado.Text != null)
+                {
+                    nomeAdvogado = TxbNomeAdvogado.Text;
+                }
+
+                if (TxbCpf.Text != null)
+                {
+                    cpfAdvogado = TxbCpf.Text;
+                }
+
+                dataGridBuscarAdvogado.ItemsSource = null;
+                dataGridBuscarAdvogado.ItemsSource = dao.ListConsulta(nomeAdvogado, cpfAdvogado);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Exceção", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
 

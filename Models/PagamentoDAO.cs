@@ -228,17 +228,11 @@ namespace SisAdv.Models
             {
                 var query = conn.Query();
 
-                //não estou conseguindo atualizar valor e nem a origem na grid
-                query.CommandText = "UPDATE pagamento SET tipo_pagamento = @tipo, data_pagamento = @data, " +
-                                    "fk_despesa = @despesa, fk_caixa = @caixa, origem_despesa = @origem " +
-                                    "WHERE id_pagamento = @id";
+                //Deixarei atualizar somente data e a forma de pagamento
+                query.CommandText = "UPDATE pagamento SET tipo_pagamento = @tipo, data_pagamento = @data WHERE id_pagamento = @id";
 
                 query.Parameters.AddWithValue("@tipo", t.TipoPagamento);
                 query.Parameters.AddWithValue("@data", t.DataPagamento?.ToString("yyyy-MM-dd"));
-                query.Parameters.AddWithValue("@despesa", t.Despesa.Id);
-                query.Parameters.AddWithValue("@origem", t.Despesa.Origem);
-                query.Parameters.AddWithValue("@caixa", t.Caixa.Id);
-                query.Parameters.AddWithValue("@valor", t.Despesa.Valor);
 
                 query.Parameters.AddWithValue("@id", t.Id);
 
