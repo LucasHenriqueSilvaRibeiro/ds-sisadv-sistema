@@ -39,6 +39,11 @@
             </StackPanel>
 
             <StackPanel Grid.Row="1" Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
+                <Label  Content="Origem" FontSize="16" Foreground="White" RenderTransformOrigin="-6.21,0.502"/>
+                <TextBox x:Name="Txborigem" HorizontalAlignment="Left" VerticalAlignment="Center" Width="120"/>
+            </StackPanel>
+
+            <StackPanel Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
                 <Label  Content="Valor" FontSize="16" Foreground="White" RenderTransformOrigin="-6.21,0.502"/>
                 <TextBox x:Name="TxbValor" HorizontalAlignment="Left" VerticalAlignment="Center" Width="120"/>
             </StackPanel>

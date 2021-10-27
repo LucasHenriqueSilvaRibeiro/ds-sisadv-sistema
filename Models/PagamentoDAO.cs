@@ -12,8 +12,6 @@ namespace SisAdv.Models
 {
     class PagamentoDAO : IDAO<Pagamento>
     {
-        //Lembrar de testar todos depois e adicionar no cadastrar.cs
-
         private Conexao conn;
         public PagamentoDAO()
         {
@@ -167,6 +165,63 @@ namespace SisAdv.Models
             }
         }
 
+        public List<Pagamento> ListBusca(string datapagamento, double valor, string origem)
+        {
+            try
+            {
+                List<Pagamento> list = new List<Pagamento>();
+
+                var query = conn.Query();
+                string textoSelect = "SELECT * FROM pagamento LEFT JOIN despesa ON fk_despesa = id_despesa " +
+                                    "LEFT JOIN caixa ON fk_caixa = id_cx WHERE";
+
+                if ((datapagamento != null) && (valor != 0) && (origem != null))
+                    query.CommandText = $"{textoSelect} data_pagamento = '{datapagamento}' AND valor_pagamento = {valor} AND origem_despesa LIKE '%{origem}%'";
+                
+                else if ((datapagamento != null) && (origem != null))
+                    query.CommandText = $"{textoSelect} data_pagamento = '{datapagamento}' AND origem_despesa LIKE '%{origem}%'";
+                
+                else if ((datapagamento != null) && (valor != 0))
+                    query.CommandText = $"{textoSelect} data_pagamento = '{datapagamento}' AND valor_pagamento = {valor} ";
+                
+                else if (datapagamento != null)
+                    query.CommandText = $"{textoSelect} data_pagamento = '{datapagamento}'";
+                
+                else if (valor != 0)
+                    query.CommandText = $"{textoSelect} valor_pagamento = {valor}";
+               
+                else
+                    query.CommandText = $"{textoSelect} origem_despesa LIKE '%{origem}%'";
+
+                MySqlDataReader reader = query.ExecuteReader();
+
+                while (reader.Read())
+                {
+                    list.Add(new Pagamento()
+                    {
+                        Id = reader.GetInt32("id_pagamento"),
+                        TipoPagamento = DAOHelper.GetString(reader, "tipo_pagamento"),
+                        DataPagamento = DAOHelper.GetDateTime(reader, "data_pagamento"),
+                        Valor = DAOHelper.GetDouble(reader, "valor_pagamento"),
+
+                        Despesa = DAOHelper.IsNull(reader, "fk_despesa") ? null : new Despesa() { Id = reader.GetInt32("fk_despesa"), Origem = reader.GetString("origem_despesa") },
+                        Caixa = DAOHelper.IsNull(reader, "fk_caixa") ? null : new Caixa() { Id = reader.GetInt32("fk_caixa") }
+                    });
+                }
+
+                return list;
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+            finally
+            {
+                conn.Close();
+            }
+        }
+
+
         public void Update(Pagamento t)
         {
             try
@@ -175,14 +230,15 @@ namespace SisAdv.Models
 
                 //não estou conseguindo atualizar valor e nem a origem na grid
                 query.CommandText = "UPDATE pagamento SET tipo_pagamento = @tipo, data_pagamento = @data, " +
-                                    "fk_despesa = @despesa, fk_caixa = @caixa WHERE id_pagamento = @id";
+                                    "fk_despesa = @despesa, fk_caixa = @caixa, origem_despesa = @origem " +
+                                    "WHERE id_pagamento = @id";
 
                 query.Parameters.AddWithValue("@tipo", t.TipoPagamento);
                 query.Parameters.AddWithValue("@data", t.DataPagamento?.ToString("yyyy-MM-dd"));
                 query.Parameters.AddWithValue("@despesa", t.Despesa.Id);
+                query.Parameters.AddWithValue("@origem", t.Despesa.Origem);
                 query.Parameters.AddWithValue("@caixa", t.Caixa.Id);
-                //decidir se pode ou não alterar valor
-                //query.Parameters.AddWithValue("@valor", t.Valor);
+                query.Parameters.AddWithValue("@valor", t.Despesa.Valor);
 
                 query.Parameters.AddWithValue("@id", t.Id);
 

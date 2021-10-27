@@ -29,12 +29,7 @@ namespace SisAdv.Views
         private void BuscarPagamento_Loaded(object sender, RoutedEventArgs e)
         {
             LoadDataGrid();
-        }
-
-        private void Btn_Pesquisar_Click(object sender, RoutedEventArgs e)
-        {
-
-        }
+        }        
 
         private void LoadDataGrid()
         {
@@ -50,6 +45,53 @@ namespace SisAdv.Views
         }
 
         private void btnCancelar_Click(object sender, RoutedEventArgs e) => Close();
+
+        private void Btn_Pesquisar_Click(object sender, RoutedEventArgs e)
+        {
+            if (datapagamento.SelectedDate == null && TxbValor.Text == "" && Txborigem.Text == "")
+            {
+                MessageBox.Show("Nenhum dos campos foi inserido. Insira dados em algum dos campos para realizar uma consulta!", "Atenção", MessageBoxButton.OK, MessageBoxImage.Information);
+                LoadDataGrid();
+            }
+            else
+                ConsultaLoadDataGrid();
+        }
+
+        private void ConsultaLoadDataGrid()
+        {
+            try
+            {
+                var dao = new PagamentoDAO();
+                DateTime? data = null;
+                string datafinal = null;
+                string origem = null;
+                double valor = 0.0;
+
+                if (double.TryParse(TxbValor.Text, out double valorpagamento))
+                {
+                    valor = valorpagamento;
+                }
+
+                if (datapagamento.SelectedDate != null)
+                {
+                    DateTime? selectedDate = (DateTime?)datapagamento.SelectedDate;
+                    data = selectedDate;
+                    datafinal = data?.ToString("yyyy-MM-dd");
+                }
+
+                if(Txborigem.Text != null)
+                {
+                    origem = Txborigem.Text;
+                }
+
+                gridpagamento.ItemsSource = null;
+                gridpagamento.ItemsSource = dao.ListBusca(datafinal, valor, origem);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Exceção", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+        }
 
         private void btnAdicionar_Click(object sender, RoutedEventArgs e)
         {
