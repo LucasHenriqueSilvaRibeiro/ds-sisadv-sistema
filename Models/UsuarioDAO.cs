@@ -74,5 +74,31 @@ namespace SisAdv.Models
             }
         }
 
+        public override void Update(Usuario t)
+        {
+            try
+            {
+                var query = conn.Query();
+
+                query.CommandText = "UPDATE usuario SET senha_user = @senha WHERE fk_advogado = @advogado";
+
+                query.Parameters.AddWithValue("@senha", t.Senha);
+                query.Parameters.AddWithValue("@advogado", t.Advogado.Id);
+
+                var result = query.ExecuteNonQuery();
+
+                if (result == 0)
+                    throw new Exception("Atualização do registro não foi realizada.");
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+            finally
+            {
+                conn.Close();
+            }
+        }
     }
 }

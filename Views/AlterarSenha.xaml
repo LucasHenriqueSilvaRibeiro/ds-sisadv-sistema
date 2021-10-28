@@ -13,10 +13,10 @@
         TextOptions.TextRenderingMode="Auto"        
         Background="#FFAEAEAE"
         FontFamily="{DynamicResource MaterialDesignFont}"
-        Title="AlterarSenha" Height="370" Width="500" WindowStartupLocation="CenterScreen" ResizeMode="NoResize">
+        Title="AlterarSenha" Height="370" Width="520" WindowStartupLocation="CenterScreen" ResizeMode="NoResize">
     <Grid>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="350"/>
+            <ColumnDefinition Width="370"/>
             <ColumnDefinition Width="150"/>
         </Grid.ColumnDefinitions>
         
@@ -28,18 +28,20 @@
         </Grid.RowDefinitions>
 
         <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
-            <TextBlock FontSize="16" Foreground="White">Email:</TextBlock>
-            <TextBox Margin="15 0 0 0" Width="200" Foreground="White"/>
+            <TextBlock FontSize="16" Foreground="White">Usuário (Advogado)</TextBlock>
+            <ComboBox x:Name="ComboBoxAdvogado" Margin="15 0 0 0" Width="200"
+                      DisplayMemberPath="Nome"
+                      SelectedValuePath="Id"/>
         </StackPanel>
 
         <StackPanel Grid.Row="1" Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
-            <TextBlock  FontSize="16" Foreground="White">Nova Senha</TextBlock>
-            <PasswordBox Margin="15 0 0 0" Width="120" Foreground="White"/>
+            <TextBlock FontSize="16" Foreground="White">Nova Senha</TextBlock>
+            <PasswordBox x:Name="TxbNovaSenha" Margin="15 0 0 0" Width="120" Foreground="White"/>
         </StackPanel>
         
         <StackPanel Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
             <TextBlock  FontSize="16" Foreground="White">Confirme</TextBlock>
-            <PasswordBox Margin="20 0 0 0" Width="120" Foreground="White"/>
+            <PasswordBox x:Name="TxbConfirmarSenha" Margin="20 0 0 0" Width="120" Foreground="White"/>
         </StackPanel>
 
         <TextBlock Grid.Row="3" HorizontalAlignment="Center" VerticalAlignment="Center" Width="300" FontSize="18" Background="#FF7E7E7E" Foreground="#DDFFFFFF">Confirme o e-mail que será enviado!</TextBlock>
