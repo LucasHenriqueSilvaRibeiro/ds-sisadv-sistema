@@ -28,84 +28,86 @@
                 <Button x:Name="btadicionar" Margin="0 20 0 0" 
                     Style="{StaticResource MaterialDesignFloatingActionButton}"
                     ToolTip="MaterialDesignFloatingActionButton"  
-                    Click="btadicionar_Click" Background="White" BorderBrush="{x:Null}" Foreground="Black">
+                    Click="Menu_Button_Click" Background="White" BorderBrush="{x:Null}" Foreground="Black">
                     <materialDesign:PackIcon Kind="Add" Width="30" Height="30"/>
                 </Button>
 
                 <StackPanel Visibility="Collapsed" x:Name="funcoesadicionar">
                     <Button Margin="0 5 0 0" x:Name="btaddrevento" Width="150" FontSize="11"
-                    Content="Adicionar evento" Background="White" BorderBrush="{x:Null}" Foreground="Black" Click="btaddrevento_Click"/>
+                    Content="Adicionar evento" Background="White" BorderBrush="{x:Null}" Foreground="Black" Click="Menu_Button_Click"/>
                     <Button Margin="0 5 0 0" x:Name="btaddcliente" Width="150" FontSize="11"
-                    Content="Adicionar Cliente" Background="White" BorderBrush="{x:Null}" Foreground="Black" Click="btaddcliente_Click"/>
+                    Content="Adicionar Cliente" Background="White" BorderBrush="{x:Null}" Foreground="Black" Click="Menu_Button_Click"/>
                     <Button Margin="0 5 0 0" x:Name="btaaddservico" Width="150" FontSize="11"
-                    Content="Adicionar Serviço" Background="White" BorderBrush="{x:Null}" Foreground="Black" Click="btaaddservico_Click"/>
+                    Content="Adicionar Serviço" Background="White" BorderBrush="{x:Null}" Foreground="Black" Click="Menu_Button_Click"/>
                     <Button Margin="0 5 0 0" x:Name="btadddespesa" Width="150" FontSize="11"
-                    Content="Adicionar Despesa" Background="White" BorderBrush="{x:Null}" Foreground="Black" Click="btadddespesa_Click"/>
+                    Content="Adicionar Despesa" Background="White" BorderBrush="{x:Null}" Foreground="Black" Click="Menu_Button_Click"/>
                     <Button Margin="0 5 0 0" x:Name="btaddlucro" Width="150" FontSize="11"
-                    Content="Adicionar Lucro" Background="White" BorderBrush="{x:Null}" Foreground="Black" Click="btaddlucro_Click"/>
+                    Content="Adicionar Lucro" Background="White" BorderBrush="{x:Null}" Foreground="Black" Click="Menu_Button_Click"/>
                     <Button Margin="0 5 0 0" x:Name="btaddAdvogado" Width="150" FontSize="11"
-                    Content="Adicionar Advogado" Background="White" BorderBrush="{x:Null}" Foreground="Black" Click="btaddAdvogado_Click"/>
+                    Content="Adicionar Advogado" Background="White" BorderBrush="{x:Null}" Foreground="Black" Click="Menu_Button_Click"/>
                     <Button Margin="0 5 0 0" x:Name="btaddUsuario" Width="150" FontSize="11"
-                    Content="Adicionar Usuário" Background="White" BorderBrush="{x:Null}" Foreground="Black" Click="btaddUsuario_Click"/>
+                    Content="Adicionar Usuário" Background="White" BorderBrush="{x:Null}" Foreground="Black" Click="Menu_Button_Click"/>
                     <Button Margin="0 5 0 0" x:Name="btaddProcesso" Width="150" FontSize="11"
-                    Content="Adicionar Processo" Background="White" BorderBrush="{x:Null}" Foreground="Black" Click="btaddProcesso_Click"/>
+                    Content="Adicionar Processo" Background="White" BorderBrush="{x:Null}" Foreground="Black" Click="Menu_Button_Click"/>
                     <Button Margin="0 5 0 0" x:Name="btaddCaixa" Width="150" FontSize="11"
-                    Content="Adicionar Caixa" Background="White" BorderBrush="{x:Null}" Foreground="Black" Click="btaddCaixa_Click"/>
+                    Content="Adicionar Caixa" Background="White" BorderBrush="{x:Null}" Foreground="Black" Click="Menu_Button_Click"/>
                     <Button Margin="0 5 0 0" x:Name="btaddPagamento" Width="150" FontSize="11"
-                    Content="Adicionar Pagamento" Background="White" BorderBrush="{x:Null}" Foreground="Black" Click="btaddpagamento_Click"/>
+                    Content="Adicionar Pagamento" Background="White" BorderBrush="{x:Null}" Foreground="Black" Click="Menu_Button_Click"/>
                 </StackPanel>
 
                 <!--Menu para buscar dados-->
 
                 <Button x:Name="btbuscar" Margin="0 20 0 0" 
                     Style="{StaticResource MaterialDesignFloatingActionButton}"
-                    ToolTip="MaterialDesignFloatingActionButton" Click="btbuscar_Click" 
+                    ToolTip="MaterialDesignFloatingActionButton" Click="Menu_Button_Click" 
                     Background="White" BorderBrush="{x:Null}" Foreground="Black">
                     <materialDesign:PackIcon Kind="Magnify" Width="30" Height="30"/>
                 </Button>
 
                 <StackPanel Visibility="Collapsed" x:Name="funcoesbuscar">
                     <Button Margin="0 5 0 0" x:Name="btbuscardespesa" Width="150" FontSize="11"
-                    Content="Buscar Despesa" Background="White" BorderBrush="{x:Null}" Foreground="Black" Click="btbuscardespesa_Click"/>
+                    Content="Buscar Despesa" Background="White" BorderBrush="{x:Null}" Foreground="Black" Click="Menu_Button_Click"/>
                     <Button Margin="0 5 0 0" x:Name="btbuscarlucro" Width="150" FontSize="11"
-                    Content="Buscar Lucro" Background="White" BorderBrush="{x:Null}" Foreground="Black" Click="btbuscarlucro_Click"/>
+                    Content="Buscar Lucro" Background="White" BorderBrush="{x:Null}" Foreground="Black" Click="Menu_Button_Click"/>
                     <Button Margin="0 5 0 0" x:Name="btbuscarcliente" Width="150" FontSize="11"
-                    Content="Buscar Cliente" Background="White" BorderBrush="{x:Null}" Foreground="Black" Click="btbuscarcliente_Click"/>
+                    Content="Buscar Cliente" Background="White" BorderBrush="{x:Null}" Foreground="Black" Click="Menu_Button_Click"/>
                     <Button Margin="0 5 0 0" x:Name="btbuscaservico" Width="150" FontSize="11"
-                    Content="Buscar Serviço" Background="White" BorderBrush="{x:Null}" Foreground="Black" Click="btbuscaservico_Click"/>
+                    Content="Buscar Serviço" Background="White" BorderBrush="{x:Null}" Foreground="Black" Click="Menu_Button_Click"/>
                     <Button Margin="0 5 0 0" x:Name="btbuscaAdvogado" Width="150" FontSize="11"
-                    Content="Buscar Advogado" Background="White" BorderBrush="{x:Null}" Foreground="Black" Click="btbuscaAdvogado_Click" />
+                    Content="Buscar Advogado" Background="White" BorderBrush="{x:Null}" Foreground="Black" Click="Menu_Button_Click" />
                     <Button Margin="0 5 0 0" x:Name="btbuscaProcesso" Width="150" FontSize="11"
-                    Content="Buscar Processo" Background="White" BorderBrush="{x:Null}" Foreground="Black" Click="btbuscaProcesso_Click" />
+                    Content="Buscar Processo" Background="White" BorderBrush="{x:Null}" Foreground="Black" Click="Menu_Button_Click" />
                     <Button Margin="0 5 0 0" x:Name="btbuscaPagamento" Width="150" FontSize="11"
-                    Content="Buscar Pagamento" Background="White" BorderBrush="{x:Null}" Foreground="Black" Click="btbuscapagamento_Click" />
+                    Content="Buscar Pagamento" Background="White" BorderBrush="{x:Null}" Foreground="Black" Click="Menu_Button_Click" />
+                    <Button Margin="0 5 0 0" x:Name="btbuscaCaixa" Width="150" FontSize="11"
+                    Content="Buscar Caixa" Background="White" BorderBrush="{x:Null}" Foreground="Black" Click="Menu_Button_Click" />
                 </StackPanel>
 
                 <Button Margin="0 20 0 0" x:Name="btconfiguracoes"
                     Style="{StaticResource MaterialDesignFloatingActionButton}"
                     ToolTip="MaterialDesignFloatingActionButton"
-                    Background="White" BorderBrush="{x:Null}" Foreground="Black" Click="btconfiguracoes_Click">
+                    Background="White" BorderBrush="{x:Null}" Foreground="Black" Click="Menu_Button_Click">
                     <materialDesign:PackIcon Kind="Cog" Width="30" Height="30"/>
                 </Button>
 
                 <Button Margin="0 20 0 0" x:Name="btImprimirRelatorio"
                     Style="{StaticResource MaterialDesignFloatingActionButton}"
                     ToolTip="MaterialDesignFloatingActionButton"
-                    Background="White" BorderBrush="{x:Null}" Foreground="Black" Click="btImprimirRelatorio_Click">
+                    Background="White" BorderBrush="{x:Null}" Foreground="Black" Click="Menu_Button_Click">
                     <materialDesign:PackIcon Kind="ChartBar" Width="30" Height="30"/>
                 </Button>
 
                 <Button Margin="0 20 0 0" x:Name="btsair"
                     Style="{StaticResource MaterialDesignFloatingActionButton}"
                     ToolTip="MaterialDesignFloatingActionButton"
-                    Background="White" BorderBrush="{x:Null}" Foreground="Black" Click="btsair_Click">
+                    Background="White" BorderBrush="{x:Null}" Foreground="Black" Click="Menu_Button_Click">
                     <materialDesign:PackIcon Kind="ExitRun" Width="30" Height="30"/>
                 </Button>
 
                 <Button Margin="0 20 0 0" Height="50" Width="150" x:Name="btacessardiariojustica"
                     Style="{StaticResource MaterialDesignRaisedLightButton}"
                     ToolTip="Resource name: MaterialDesignRaisedLightButton"
-                    Background="White" BorderBrush="{x:Null}" Foreground="Black" Click="btacessardiariojustica_Click">
+                    Background="White" BorderBrush="{x:Null}" Foreground="Black" Click="Menu_Button_Click">
                     Diário da Justiça
                 </Button>
             </StackPanel>
@@ -125,7 +127,12 @@
 
             <StackPanel Width="450" Margin="10 10">
                 <Calendar  x:Name="agendacompromissos" Width="300" Height="350" HorizontalAlignment="Center" />
-                <Button x:Name="BtnVisualizarDia" Width="90" Content="teste" Background="#FF555555" BorderBrush="{x:Null}" Click="BtnVisualizarDia_Click"/>
+                <Button Padding="-15" x:Name="BtnVisualizarDia" Width="120" Background="#FFEAEAEA" BorderBrush="{x:Null}" Click="Menu_Button_Click" Foreground="Black">
+                    <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+                        <materialDesign:PackIcon Kind="Eye" Width="28" Height="20" Margin="-10 -2 0 0"/>
+                        <TextBlock FontSize="12">Compromissos</TextBlock>
+                    </StackPanel>
+                </Button>
             </StackPanel>
 
             <StackPanel Width="450" Grid.Row="1" Margin="65 0 0 0">
@@ -147,7 +154,7 @@
                 <TextBlock FontSize="22" FontWeight="Black" Margin="-20 18 0 0" x:Name="textRecente">Recentes</TextBlock>
                 <Button x:Name="btOcultarServicos" Margin="10 0 0 0" Height="40" Width="40"
                     Style="{StaticResource MaterialDesignFloatingActionButton}"
-                    ToolTip="MaterialDesignFloatingActionButton" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="Black" Click="btOcultarServicos_Click">
+                    ToolTip="MaterialDesignFloatingActionButton" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="Black" Click="Menu_Button_Click">
                     <materialDesign:PackIcon Kind="Visibility" Width="30" Height="30"/>
                 </Button>
             </StackPanel>

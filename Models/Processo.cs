@@ -23,5 +23,7 @@ namespace SisAdv.Models
         public Cliente Cliente { get; set; }
 
         public Advogado Advogado { get; set; }
+
+        public Servico Servico { get; set; }
     }
 }

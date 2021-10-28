@@ -47,7 +47,7 @@
                  Style="{StaticResource MaterialDesignOutlinedTextBox}"/>
             <TextBox x:Name="TxbStatus" Grid.Row="2" Grid.Column="1" Width="130" Height="55" Margin="5 0 0 0" VerticalAlignment="Center" HorizontalAlignment="Left" BorderBrush="Black"
                   Style="{StaticResource MaterialDesignOutlinedTextBox}"/>
-            <TextBox x:Name="TxbValor"  Grid.Column="1" Grid.Row="3" Width="90" Height="55" Margin="5 0 0 0" VerticalAlignment="Center" HorizontalAlignment="Left" BorderBrush="Black"
+            <TextBox IsEnabled="False" x:Name="TxbValor"  Grid.Column="1" Grid.Row="3" Width="90" Height="55" Margin="5 0 0 0" VerticalAlignment="Center" HorizontalAlignment="Left" BorderBrush="Black"
                  Style="{StaticResource MaterialDesignOutlinedTextBox}"/>
             <TextBox x:Name="TxbIdProcesso" IsEnabled="False" Grid.Column="1" Grid.Row="4" Width="50" Height="55" Margin="5 0 0 0" VerticalAlignment="Center" HorizontalAlignment="Left" BorderBrush="Black"
                  Style="{StaticResource MaterialDesignOutlinedTextBox}"/>
@@ -67,17 +67,22 @@
                 <RowDefinition Height="70"/>
             </Grid.RowDefinitions>
 
-            <Label Grid.Row="2" Content="Descrição*" HorizontalAlignment="Right" FontSize="16"/>
-            <Label Content="Cliente*" HorizontalAlignment="Right" FontSize="16" VerticalAlignment="Center"/>
-            <Label Grid.Row="1" Content="Advogado*" HorizontalAlignment="Right" FontSize="16" VerticalAlignment="Center"/>
+            <Label Grid.Row="3" Content="Descrição" HorizontalAlignment="Right" FontSize="16"/>
+            <Label Grid.Row="1" Content="Cliente*" HorizontalAlignment="Right" FontSize="16" VerticalAlignment="Center"/>
+            <Label Grid.Row="2" Content="Advogado" HorizontalAlignment="Right" FontSize="16" VerticalAlignment="Center"/>
+            <Label Content="Servico*" HorizontalAlignment="Right" FontSize="16" VerticalAlignment="Center"/>
             
-            <TextBox x:Name="TxbDescricao" Grid.Row="2" Grid.Column="1" Width="160" Height="70" Margin="5 10 0 0" Padding="6" HorizontalAlignment="Left" VerticalAlignment="Top" BorderBrush="Black"
+            <TextBox x:Name="TxbDescricao" Grid.Row="3" Grid.Column="1" Width="160" Height="70" Margin="5 10 0 0" Padding="6" HorizontalAlignment="Left" VerticalAlignment="Top" BorderBrush="Black"
                 AcceptsReturn="True" TextWrapping="Wrap" VerticalScrollBarVisibility="Auto" Style="{StaticResource MaterialDesignOutlinedTextBox}"/>
-            <ComboBox x:Name="ComboboxCliente" Width="160" Grid.Column="1" Height="40" Margin="5 0 0 0" Padding="6" HorizontalAlignment="Left" BorderBrush="Black"
+            <ComboBox x:Name="ComboboxServico" Width="160" Grid.Column="1" Height="40" Margin="5 0 0 0" Padding="6" HorizontalAlignment="Left" BorderBrush="Black"
+                    Style="{StaticResource MaterialDesignOutlinedComboBox}"
+                    DisplayMemberPath="Descricao"
+                    SelectedValuePath="Id"/>
+            <ComboBox IsEnabled="false" x:Name="ComboboxCliente" Width="160" Grid.Row="1" Grid.Column="1" Height="40" Margin="5 0 0 0" Padding="6" HorizontalAlignment="Left" BorderBrush="Black"
                     Style="{StaticResource MaterialDesignOutlinedComboBox}"
                     DisplayMemberPath="Nome"
                     SelectedValuePath="Id"/>
-            <ComboBox x:Name="ComboboxAdvogado" Width="160" Grid.Column="1" Grid.Row="1" Height="40" Margin="5 0 0 0" Padding="6" HorizontalAlignment="Left" BorderBrush="Black"
+            <ComboBox IsEnabled="False" x:Name="ComboboxAdvogado" Width="160" Grid.Column="1" Grid.Row="2" Height="40" Margin="5 0 0 0" Padding="6" HorizontalAlignment="Left" BorderBrush="Black"
                     Style="{StaticResource MaterialDesignOutlinedComboBox}"
                     DisplayMemberPath="Nome"
                     SelectedValuePath="Id"/>

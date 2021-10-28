@@ -33,8 +33,11 @@ namespace SisAdv.Views
 
         private void Btn_Pesquisar_Click(object sender, RoutedEventArgs e)
         {
-            if (TxbNomeCliente.Text == null && TxbValor.Text == null && TxbStatus.Text == null)
+            if (TxbNomeCliente.Text == "" && TxbValor.Text == "" && TxbStatus.Text == "")
+            {
                 MessageBox.Show("Nenhum dos campos foi inserido. Insira dados em algum dos campos para realizar uma consulta!", "Atenção", MessageBoxButton.OK, MessageBoxImage.Information);
+                LoadDataGrid();
+            }
             else
                 ConsultaLoadDataGrid();
         }
