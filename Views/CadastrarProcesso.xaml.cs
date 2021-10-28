@@ -48,7 +48,8 @@ namespace SisAdv.Views
 
         private void btnPesquisar_Click(object sender, RoutedEventArgs e)
         {
-
+            BuscarProcesso buscarProcesso = new BuscarProcesso();
+            buscarProcesso.ShowDialog();
         }
 
         private void btnSalvar_Click(object sender, RoutedEventArgs e)
@@ -57,11 +58,8 @@ namespace SisAdv.Views
             _processo.Descricao = TxbDescricao.Text;
             _processo.Resultado = TxbResultado.Text;
 
-            if (ComboboxCliente.SelectedItem != null)
-                _processo.Cliente = ComboboxCliente.SelectedItem as Cliente;
-
-            if (ComboboxAdvogado.SelectedItem != null)
-                _processo.Advogado = ComboboxAdvogado.SelectedItem as Advogado;
+            if (ComboboxServico.SelectedItem != null)
+                _processo.Servico = ComboboxServico.SelectedItem as Servico;
 
             if (DataPickerDataInício.SelectedDate != null)
                 _processo.DataProcesso = (DateTime)DataPickerDataInício.SelectedDate;
@@ -84,6 +82,7 @@ namespace SisAdv.Views
                 DataPickerDataInício.SelectedDate = DateTime.Now;
                 ComboboxCliente.ItemsSource = new ClienteDAO().List();
                 ComboboxAdvogado.ItemsSource = new AdvogadoDAO().List();
+                ComboboxServico.ItemsSource = new ServicoDAO().List();
             }
             catch (Exception ex)
             {
@@ -174,6 +173,9 @@ namespace SisAdv.Views
 
                 if (_processo.Advogado != null)
                     ComboboxAdvogado.SelectedValue = _processo.Advogado.Id;
+
+                if (_processo.Servico != null)
+                    ComboboxServico.SelectedValue = _processo.Servico.Id;
             }
             catch (Exception ex)
             {
@@ -189,6 +191,7 @@ namespace SisAdv.Views
             TxbResultado.Clear();
             ComboboxCliente.SelectedItem = null;
             ComboboxAdvogado.SelectedItem = null;
+            ComboboxServico.SelectedItem = null;
             DataPickerDataInício.SelectedDate = null;
         }
     }

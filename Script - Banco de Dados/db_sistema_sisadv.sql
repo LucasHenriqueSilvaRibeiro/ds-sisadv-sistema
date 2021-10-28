@@ -91,12 +91,13 @@ data_inicio_proc date,
 status_proc varchar (100),
 resultado varchar (100),
 cliente_proc varchar (100),
+fk_servico int,
 fk_cliente int,
 fk_advogado int,
 foreign key (fk_cliente) references cliente (id_cliente),
-foreign key (fk_advogado) references advogado (id_advogado)
+foreign key (fk_advogado) references advogado (id_advogado),
+foreign key (fk_servico) references servico (id_servico)
 );
-
 
 create table diarioJustica(
 id_busca_diar int primary key auto_increment,
@@ -385,29 +386,36 @@ select * from login;
 #Tabela processo--------------------------------------------------------------------------------------------------------------------------------------
 
 delimiter $$ 
-create procedure registrarProcesso(descricao varchar (150), valor double, datadeinicio date, status varchar (100), resultado varchar (100), cliente int, advogado int)
+create procedure registrarProcesso(descricao varchar (150), datadeinicio date, status varchar (100), resultado varchar (100), servico int)
 begin
 declare nomecliente varchar (100);
-set nomecliente = (select nome_cli from cliente where id_cliente = cliente);
+declare idCliente varchar (100);
+declare idAdvogado varchar (100);
+declare valor double;
+declare verificarServico int;
+set nomecliente = (select cliente_serv from servico where id_servico = servico);
+set idCliente = (select fk_cliente from servico where id_servico = servico);
+set idAdvogado = (select fk_advogado from servico where id_servico = servico);
+set valor = (select valor_serv from servico where id_servico = servico);
 if (descricao <> "") then
-	if (cliente <> 0) then
-		insert into processo values(null, valor, descricao, datadeinicio, status, resultado, nomecliente, cliente, advogado);
+	if (servico <> 0) then
+		insert into processo values(null, valor, descricao, datadeinicio, status, resultado, nomecliente, servico, idCliente, idAdvogado);
 		select 'Processo registrado no sistema!' as Confirmacao;
 	else
-		select 'O Cliente não pode ser nulo, tente novamente.' as Alerta;
+		select 'O Serviço não pode ser nulo, tente novamente.' as Alerta;
 	end if;
 else
 	select 'Insira uma descrição para o processo!' as Alerta;
 end if;
 end;
 $$ delimiter ;
-#drop procedure registrarprocesso;
-call registrarProcesso('Processo devido a danos morais', 450.00, '2021-03-05','em andamento', 'sem resultado', 1, 2);
-call registrarProcesso('Processo devido a má administração', 800.00, '2021-06-30','em andamento', 'sem resultado', 2, 4);
+
+call registrarProcesso('Processo devido a danos morais', '2021-03-05','em andamento', 'sem resultado', 1);
+call registrarProcesso('Processo devido a má administração', '2021-06-30','em andamento', 'sem resultado', 2);
 select * from processo;
+select * from servico;
 select * from cliente;
 select * from advogado;
-select * from servico;
 desc processo;
 
 #Tabela Diário--------------------------------------------------------------------------------------------------------------------------------------

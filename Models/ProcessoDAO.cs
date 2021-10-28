@@ -54,7 +54,7 @@ namespace SisAdv.Models
             {
                 var query = conn.Query();
                 query.CommandText = "SELECT * FROM processo LEFT JOIN cliente ON fk_cliente = id_cliente " +
-                                                           "LEFT JOIN advogado ON fk_advogado = id_advogado WHERE id_proc = @id";
+                                                           "LEFT JOIN advogado ON fk_advogado = id_advogado LEFT JOIN servico ON fk_servico = id_servico WHERE id_proc = @id";
 
                 query.Parameters.AddWithValue("@id", id);
 
@@ -89,6 +89,13 @@ namespace SisAdv.Models
                             Id = reader.GetInt32("id_advogado"),
                             Nome = reader.GetString("nome_adv")
                         };
+
+                    if (!DAOHelper.IsNull(reader, "fk_servico"))
+                        processo.Servico = new Servico()
+                        {
+                            Id = reader.GetInt32("id_servico"),
+                            Descricao = reader.GetString("descricao_serv")
+                        };
                 }
 
                 return processo;
@@ -109,15 +116,14 @@ namespace SisAdv.Models
             try
             {
                 var query = conn.Query();
-                query.CommandText = "CALL registrarProcesso(@descricao, @valor, @data, @status, @resultado, @cliente, @advogado)";
+                query.CommandText = "CALL registrarProcesso(@descricao, @data, @status, @resultado, @servico)";
 
                 query.Parameters.AddWithValue("@descricao", t.Descricao);
-                query.Parameters.AddWithValue("@valor", t.Valor);
+                //query.Parameters.AddWithValue("@valor", t.Valor);
                 query.Parameters.AddWithValue("@data", t.DataProcesso?.ToString("yyyy-MM-dd"));
                 query.Parameters.AddWithValue("@status", t.Status);
                 query.Parameters.AddWithValue("@resultado", t.Resultado);
-                query.Parameters.AddWithValue("@cliente", t.Cliente.Id);
-                query.Parameters.AddWithValue("@advogado", t.Advogado.Id);
+                query.Parameters.AddWithValue("@servico", t.Servico.Id);
 
                 MySqlDataReader reader = query.ExecuteReader();
 
@@ -162,7 +168,8 @@ namespace SisAdv.Models
                         Valor = DAOHelper.GetDouble(reader, "valor_proc"),
 
                         Cliente = DAOHelper.IsNull(reader, "fk_cliente") ? null : new Cliente() { Id = reader.GetInt32("fk_cliente"), Nome = reader.GetString("cliente_proc") },
-                        Advogado = DAOHelper.IsNull(reader, "fk_advogado") ? null : new Advogado() { Id = reader.GetInt32("fk_advogado") }
+                        Advogado = DAOHelper.IsNull(reader, "fk_advogado") ? null : new Advogado() { Id = reader.GetInt32("fk_advogado") },
+                        Servico = DAOHelper.IsNull(reader, "fk_servico") ? null : new Servico() { Id = reader.GetInt32("fk_servico") },
                     });
                 }
 
@@ -215,8 +222,9 @@ namespace SisAdv.Models
                         Descricao = DAOHelper.GetString(reader, "descricao_proc"),
                         Valor = DAOHelper.GetDouble(reader, "valor_proc"),
 
-                        Cliente = DAOHelper.IsNull(reader, "fk_cliente") ? null : new Cliente() { Id = reader.GetInt32("fk_cliente"), Nome = reader.GetString("cliente_proc") }
+                        Cliente = DAOHelper.IsNull(reader, "fk_cliente") ? null : new Cliente() { Id = reader.GetInt32("fk_cliente"), Nome = reader.GetString("cliente_proc") },
                         //Advogado = DAOHelper.IsNull(reader, "fk_advogado") ? null : new Advogado() { Id = reader.GetInt32("fk_advogado") }
+                        //Servico = DAOHelper.IsNull(reader, "fk_servico") ? null : new Servico() { Id = reader.GetInt32("fk_servico") }
                     });
                 }
 
@@ -238,17 +246,20 @@ namespace SisAdv.Models
             {
                 var query = conn.Query();
 
-                query.CommandText = "UPDATE processo SET valor_proc = @valor, descricao_proc = @descricao, data_inicio_proc = @data," +
-                                    "status_proc = @status, resultado = @resultado, cliente_proc = @clientenome, fk_cliente = @cliente, fk_advogado = @advogado WHERE id_proc = @id";
+                query.CommandText = "UPDATE processo SET descricao_proc = @descricao, data_inicio_proc = @data, " +
+                                    "status_proc = @status, resultado = @resultado, " +
+                                    "cliente_proc = (select cliente_serv from servico where id_servico = @servico), " +
+                                    "fk_cliente = (select fk_cliente from servico where id_servico = @servico), " +
+                                    "fk_advogado = (select fk_advogado from servico where id_servico = @servico), " +
+                                    "valor_proc = (select valor_serv from servico where id_servico = @servico), " +
+                                    "fk_servico = @servico WHERE id_proc = @id ";
 
-                query.Parameters.AddWithValue("@descricao", t.Descricao);
                 query.Parameters.AddWithValue("@valor", t.Valor);
+                query.Parameters.AddWithValue("@descricao", t.Descricao);
                 query.Parameters.AddWithValue("@data", t.DataProcesso?.ToString("yyyy-MM-dd"));
                 query.Parameters.AddWithValue("@status", t.Status);
                 query.Parameters.AddWithValue("@resultado", t.Resultado);
-                query.Parameters.AddWithValue("@clientenome", t.Cliente.Nome);
-                query.Parameters.AddWithValue("@cliente", t.Cliente.Id);
-                query.Parameters.AddWithValue("@advogado", t.Advogado.Id);
+                query.Parameters.AddWithValue("@servico", t.Servico.Id);
 
                 query.Parameters.AddWithValue("@id", t.Id);
 

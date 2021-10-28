@@ -38,7 +38,7 @@
 
         <StackPanel Grid.Row="3" Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
             <StackPanel>
-                <Button  Width="180" Height="40" x:Name="btacessar" Background="White" BorderBrush="{x:Null}" Foreground="Black" Click="btacessar_Click" >
+                <Button  Width="180" Height="40" x:Name="btacessar" Background="White" BorderBrush="{x:Null}" Foreground="Black" Click="btacessar_Click">
                     <materialDesign:PackIcon Kind="Login" Width="40" Height="30" Foreground="Black"/>
                 </Button>
                 <TextBlock Margin="0 5 0 0" Text="Acessar" HorizontalAlignment="Center"/>

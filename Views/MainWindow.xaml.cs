@@ -38,6 +38,143 @@ namespace SisAdv.Views
             dataGridServicosRecentes.CanUserSortColumns = true;
         }
 
+        private void Menu_Button_Click(object sender, RoutedEventArgs e)
+        {
+            Button button = sender as Button;
+            Window window;
+
+            switch (button.Name)
+            {
+                case "btadicionar":
+                    funcoesadicionar.Visibility = Visibility.Visible;
+                    funcoesbuscar.Visibility = Visibility.Collapsed;
+                    break;
+                case "btaddrevento":
+                    window = new Cadastraeventonov();
+                    ColapsarButtons();
+                    window.ShowDialog();
+                    break;
+                case "btaddcliente":
+                    window = new Cadastrarcliente();
+                    ColapsarButtons();
+                    window.ShowDialog();
+                    break;
+                case "btaaddservico":
+                    window = new CadastrarServico();
+                    ColapsarButtons();
+                    window.ShowDialog();
+                    break;
+                case "btadddespesa":
+                    window = new CadastrarDespesa();
+                    ColapsarButtons();
+                    window.ShowDialog();
+                    break;
+                case "btaddlucro":
+                    window = new Cadastrarlucro();
+                    ColapsarButtons();
+                    window.ShowDialog();
+                    break;
+                case "btaddAdvogado":
+                    window = new CadastrarAdvogado();
+                    ColapsarButtons();
+                    window.ShowDialog();
+                    break;
+                case "btaddUsuario":
+                    window = new CadastrarNovoUsuario();
+                    ColapsarButtons();
+                    window.ShowDialog();
+                    break;
+                case "btaddProcesso":
+                    window = new CadastrarProcesso();
+                    ColapsarButtons();
+                    window.ShowDialog();
+                    break;
+                case "btaddCaixa":
+                    window = new Cadastrarcaixa();
+                    ColapsarButtons();
+                    window.ShowDialog();
+                    break;
+                case "btaddPagamento":
+                    window = new CadastrarPagamento();
+                    ColapsarButtons();
+                    window.ShowDialog();
+                    break;
+                case "btbuscar":
+                    funcoesbuscar.Visibility = Visibility.Visible;
+                    funcoesadicionar.Visibility = Visibility.Collapsed;
+                    break;
+                case "btbuscardespesa":
+                    window = new BuscarDespesa();
+                    ColapsarButtons();
+                    window.ShowDialog();
+                    break;
+                case "btbuscarlucro":
+                    window = new BuscarLucro();
+                    ColapsarButtons();
+                    window.ShowDialog();
+                    break;
+                case "btbuscarcliente":
+                    window = new BuscarCliente();
+                    ColapsarButtons();
+                    window.ShowDialog();
+                    break;
+                case "btbuscaservico":
+                    window = new BuscarServico();
+                    ColapsarButtons();
+                    window.ShowDialog();
+                    break;
+                case "btbuscaAdvogado":
+                    window = new BuscarAdvogado();
+                    ColapsarButtons();
+                    window.ShowDialog();
+                    break;
+                case "btbuscaProcesso":
+                    window = new BuscarProcesso();
+                    ColapsarButtons();
+                    window.ShowDialog();
+                    break;
+                case "btbuscaPagamento":
+                    window = new BuscarPagamento();
+                    ColapsarButtons();
+                    window.ShowDialog();
+                    break;
+                case "btbuscaCaixa":
+                    window = new BuscarPagamento();
+                    ColapsarButtons();
+                    window.ShowDialog();
+                    break;
+                case "btconfiguracoes":
+                    window = new ConfigurarPreferenciasRecursos();
+                    ColapsarButtons();
+                    window.ShowDialog();
+                    break;
+                case "btImprimirRelatorio":
+                    window = new ImprimirRelatorio();
+                    ColapsarButtons();
+                    window.ShowDialog();
+                    break;
+                case "btacessardiariojustica":
+                    window = new AcessarDiarioJustiça();
+                    ColapsarButtons();
+                    window.ShowDialog();
+                    break;
+                case "btOcultarServicos":
+                    dataGridServicosRecentes.Visibility = Visibility.Collapsed;
+                    textRecente.Visibility = Visibility.Collapsed;
+                    gridDireitaRecentes.Width = 80;
+                    gridCentral.Width = 800;
+                    break;
+                case "btsair":
+                    MessageBoxResult result = MessageBox.Show("Deseja Realmente Sair?", "Save error", MessageBoxButton.YesNo, MessageBoxImage.Question);
+                    if (result == MessageBoxResult.Yes)
+                        this.Close();
+                    break;
+                case "BtnVisualizarDia":
+                    Agenda();
+                    break;
+            }
+        }        
+
         private void LoadDataGrid()
         {
             try
@@ -101,121 +238,7 @@ namespace SisAdv.Views
 
             //Setting data for column chart
             columnChart.DataContext = valueList;
-        }
-
-        private void btadicionar_Click(object sender, RoutedEventArgs e)
-        {
-            funcoesadicionar.Visibility = Visibility.Visible;
-            funcoesbuscar.Visibility = Visibility.Collapsed;
-        }        
-
-        private void btbuscar_Click(object sender, RoutedEventArgs e)
-        {
-            funcoesbuscar.Visibility = Visibility.Visible;
-            funcoesadicionar.Visibility = Visibility.Collapsed;
-        }
-
-
-        private void btaddrevento_Click(object sender, RoutedEventArgs e)
-        {
-            Cadastraeventonov cadastrarEvento = new Cadastraeventonov();
-
-            cadastrarEvento.ShowDialog();
-        }
-
-        private void btImprimirRelatorio_Click(object sender, RoutedEventArgs e)
-        {
-            ImprimirRelatorio imprimirRelatorio = new ImprimirRelatorio();
-
-            imprimirRelatorio.ShowDialog();
-        }
-
-        private void btbuscarcliente_Click(object sender, RoutedEventArgs e)
-        {
-            BuscarCliente buscarCliente = new BuscarCliente();
-            funcoesbuscar.Visibility = Visibility.Collapsed;
-            buscarCliente.ShowDialog();            
-        }
-
-        private void btbuscaservico_Click(object sender, RoutedEventArgs e)
-        {
-            BuscarServico buscarServico = new BuscarServico();
-            funcoesbuscar.Visibility = Visibility.Collapsed;
-            buscarServico.ShowDialog();
-        }
-
-        private void btsair_Click(object sender, RoutedEventArgs e)
-        {
-            MessageBoxResult result = MessageBox.Show("Deseja Realmente Sair?", "Save error", MessageBoxButton.YesNo, MessageBoxImage.Question);
-
-            if (result == MessageBoxResult.Yes)
-                this.Close();
-        }
-
-        private void btOcultarServicos_Click(object sender, RoutedEventArgs e)
-        {
-            //Código inicial para ocultar a grid dos serviços recentes :)
-            dataGridServicosRecentes.Visibility = Visibility.Collapsed;
-            textRecente.Visibility = Visibility.Collapsed;
-            gridDireitaRecentes.Width = 80;
-            gridCentral.Width = 800;
-        }
-
-        private void btbuscardespesa_Click(object sender, RoutedEventArgs e)
-        {
-            BuscarDespesa buscarDespesa = new BuscarDespesa();
-            funcoesbuscar.Visibility = Visibility.Collapsed;
-            buscarDespesa.ShowDialog();
-        }
-
-        private void btbuscarlucro_Click(object sender, RoutedEventArgs e)
-        {
-            BuscarLucro buscarLucro = new BuscarLucro();
-            funcoesbuscar.Visibility = Visibility.Collapsed;
-            buscarLucro.ShowDialog();
-        }
-
-        private void btaaddservico_Click(object sender, RoutedEventArgs e)
-        {
-            CadastrarServico cadastrarServico = new CadastrarServico();
-            funcoesadicionar.Visibility = Visibility.Collapsed;
-            cadastrarServico.ShowDialog();
-        }
-
-        private void btacessardiariojustica_Click(object sender, RoutedEventArgs e)
-        {
-            AcessarDiarioJustiça acessarDiarioJustiça = new AcessarDiarioJustiça();
-
-            acessarDiarioJustiça.ShowDialog();
-        }
-
-        private void btaddcliente_Click(object sender, RoutedEventArgs e)
-        {
-            Cadastrarcliente cadastrarCliente = new Cadastrarcliente();
-            funcoesadicionar.Visibility = Visibility.Collapsed;
-            cadastrarCliente.ShowDialog();
-        }
-
-        private void btadddespesa_Click(object sender, RoutedEventArgs e)
-        {
-            CadastrarDespesa cadastrarDespesa = new CadastrarDespesa();
-            funcoesadicionar.Visibility = Visibility.Collapsed;
-            cadastrarDespesa.ShowDialog();
-        }
-
-        private void btaddlucro_Click(object sender, RoutedEventArgs e)
-        {
-            Cadastrarlucro cadastrarLucro = new Cadastrarlucro();
-            funcoesadicionar.Visibility = Visibility.Collapsed;
-            cadastrarLucro.ShowDialog();
-        }
-
-        private void btconfiguracoes_Click(object sender, RoutedEventArgs e)
-        {
-            ConfigurarPreferenciasRecursos configurarPreferenciasRecursos = new ConfigurarPreferenciasRecursos();
-            funcoesadicionar.Visibility = Visibility.Collapsed;
-            configurarPreferenciasRecursos.ShowDialog();
-        }
+        }   
 
         private void Btn_visualizarServico_Click(object sender, RoutedEventArgs e)
         {
@@ -228,68 +251,15 @@ namespace SisAdv.Views
             LoadDataGrid();
         }
 
-        private void btaddAdvogado_Click(object sender, RoutedEventArgs e)
-        {
-            CadastrarAdvogado cadastrarAdvogado = new CadastrarAdvogado();
-            funcoesadicionar.Visibility = Visibility.Collapsed;
-            cadastrarAdvogado.ShowDialog();
-        }
-
-        private void btaddUsuario_Click(object sender, RoutedEventArgs e)
-        {
-            CadastrarNovoUsuario cadastrarNovoUsuario = new CadastrarNovoUsuario();
-            funcoesadicionar.Visibility = Visibility.Collapsed;
-            cadastrarNovoUsuario.ShowDialog();
-        }
-
-        private void btbuscaAdvogado_Click(object sender, RoutedEventArgs e)
-        {
-            BuscarAdvogado buscarAdvogado = new BuscarAdvogado();
-            funcoesbuscar.Visibility = Visibility.Collapsed;
-            buscarAdvogado.ShowDialog();
-        }
-
-        private void btaddProcesso_Click(object sender, RoutedEventArgs e)
-        {
-            CadastrarProcesso cadastrarProcesso = new CadastrarProcesso();
-            funcoesbuscar.Visibility = Visibility.Collapsed;
-            cadastrarProcesso.ShowDialog();
-        }
-
-        private void btbuscaProcesso_Click(object sender, RoutedEventArgs e)
-        {
-            BuscarProcesso buscarProcesso = new BuscarProcesso();
-            funcoesbuscar.Visibility = Visibility.Collapsed;
-            buscarProcesso.ShowDialog();
-        }
-
-        private void btaddCaixa_Click(object sender, RoutedEventArgs e)
-        {
-            Cadastrarcaixa cadastrarcaixa = new Cadastrarcaixa();
-            funcoesbuscar.Visibility = Visibility.Collapsed;
-            cadastrarcaixa.ShowDialog();
-        }
-
-        private void btaddpagamento_Click(object sender, RoutedEventArgs e)
-        {
-            CadastrarPagamento cadastrarPagamento = new CadastrarPagamento();
-            cadastrarPagamento.ShowDialog();
-        }
-
-        private void btbuscapagamento_Click(object sender, RoutedEventArgs e)
-        {
-            BuscarPagamento buscarPagamento = new BuscarPagamento();
-            buscarPagamento.ShowDialog();
-        }
-
-        private void BtnVisualizarDia_Click(object sender, RoutedEventArgs e)
-        {
-            Agenda();
-        }
-
         private void BtnFixar_Click(object sender, RoutedEventArgs e)
         {
             //Verificar se tem uma forma de subir as linhas
+        }
+
+        private void ColapsarButtons()
+        {
+            funcoesbuscar.Visibility = Visibility.Collapsed;
+            funcoesadicionar.Visibility = Visibility.Collapsed;
         }
 
         private void BtnDeletar_Click(object sender, RoutedEventArgs e)
