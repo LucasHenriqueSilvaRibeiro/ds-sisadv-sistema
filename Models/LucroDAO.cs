@@ -172,7 +172,7 @@ namespace SisAdv.Models
                     {
                         Origem = reader.GetString("origem_luc"),
                         Data = DAOHelper.GetDateTime(reader, "data_luc"),
-                        Valor = DAOHelper.GetDouble(reader, ("valor_luc"))
+                        Valor = DAOHelper.GetDouble(reader, "valor_luc")
                     });
                 }
 

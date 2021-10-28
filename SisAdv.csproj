@@ -346,6 +346,9 @@
     </Compile>
     <Compile Include="Models\Lucro.cs" />
     <Compile Include="Models\Servico.cs" />
+    <Compile Include="Views\RelatorioAlternativo.xaml.cs">
+      <DependentUpon>RelatorioAlternativo.xaml</DependentUpon>
+    </Compile>
     <Page Include="Views\AcessarDiarioJustiça.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -472,6 +475,10 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="Views\RelatorioAlternativo.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs">

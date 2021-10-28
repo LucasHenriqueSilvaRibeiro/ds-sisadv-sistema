@@ -27,24 +27,22 @@
         </Grid.RowDefinitions>
 
         <StackPanel Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Center">
-            <Label Content="Mês-Ano" Height="39" Width="88" FontSize="20"/>
-            <ComboBox Width="120" Height="26" Margin="10 0" >
-                <ComboBoxItem Content="Janeiro - 2021"/>
-                <ComboBoxItem Content="Fevereiro - 2021"/>
-                <ComboBoxItem Content="Março - 2021"/>
-                <ComboBoxItem Content="Maio - 2021"/>
-                <ComboBoxItem Content="Junho - 2021"/>
+            <Label Content="Mês/Ano" Height="39" Width="88" FontSize="20"/>
+            <ComboBox Width="120" Height="26" Margin="10 0" 
+                      DisplayMemberPath="Mes"
+                      SelectedValuePath="Id"
+                      x:Name="comboboxcaixa">
             </ComboBox>
         </StackPanel>
 
         <StackPanel Grid.Row="1" Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Center">
             <Label Content="Data" Height="34" Width="58" FontSize="20"/>
             <!--O calendário que tem no protótipo da tela é na verdade o DataPicker quando clica pra abrir o calendário-->
-            <DatePicker Width="140" />
+            <DatePicker Width="140" x:Name="dateEscolha"/>
         </StackPanel>
 
         <StackPanel Grid.Column="1"  HorizontalAlignment="Center" Margin="6">
-            <Button Width="80" Height="70" Background="#FFF1F1F1" BorderBrush="{x:Null}">
+            <Button x:Name="btnvisualizar" Width="80" Height="70" Background="#FFF1F1F1" BorderBrush="{x:Null}" Click="btnvisualizar_Click">
                 <materialDesign:PackIcon Kind="Visibility" Width="45" Height="50" Foreground="Black"/>
             </Button>
             <Label Content="visualizar" Width="70" FontSize="15"/>
