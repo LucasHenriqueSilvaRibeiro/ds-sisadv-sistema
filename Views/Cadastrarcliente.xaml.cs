@@ -63,7 +63,7 @@ namespace SisAdv.Views
                     else
                         dao.Update(_cliente);
 
-                    MessageBox.Show($"O Servico foi {text} com sucesso!", "Sucesso", MessageBoxButton.OK, MessageBoxImage.Information);
+                    MessageBox.Show($"O Cliente foi {text} com sucesso!", "Sucesso", MessageBoxButton.OK, MessageBoxImage.Information);
                     CloseFormVerify();
                 }
             }
@@ -117,12 +117,21 @@ namespace SisAdv.Views
             textId.Text = _cliente.Id.ToString();
             textNome.Text = _cliente.Nome;
             textDescricao.Text = _cliente.Descricao;
-            //textemail.Text = _cliente.Email;
+            textemail.Text = _cliente.Email;
             textProfissao.Text = _cliente.Profissao;
             textTelefone.Text = _cliente.Telefone;
+            txtCpf.Text = _cliente.Cpf;
+            txtRg.Text = _cliente.Rg;
 
-            //MessageBox.Show($"nome {_cliente.Nome} descrição {_cliente.Descricao} email {_cliente.Email} profissão {_cliente.Profissao} telefone {_cliente.Telefone}", "", MessageBoxButton.OK, MessageBoxImage.Information);
+            if (_cliente.Endereco != null)
+            {
+                txtRua.Text = _cliente.Endereco.Rua;
+                txtNumero.Text = _cliente.Endereco.Numero.ToString();
+                txtBairro.Text = _cliente.Endereco.Bairro;
+                txtCidade.Text = _cliente.Endereco.Cidade;
 
+                comboboxEstado.SelectedValue = _cliente.Endereco.Estado;
+            }
         }
 
         private void ClearInputs()

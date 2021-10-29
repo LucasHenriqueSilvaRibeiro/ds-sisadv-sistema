@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using MySql.Data.MySqlClient;
 using SisAdv.Database;
 using SisAdv.Interface;
-using System.Windows;//tirar dps
+using SisAdv.Helpers;
 
 namespace SisAdv.Models
 {
@@ -51,8 +51,9 @@ namespace SisAdv.Models
         {
             try
             {
+                //Verificar código do Mateus, com minhas alterações, parou de funcionar
                 var query = conn.Query();
-                query.CommandText = "SELECT * FROM cliente WHERE id_cliente = @id";
+                query.CommandText = "SELECT * FROM cliente LEFT JOIN endereco ON id_endereco = fk_endereco WHERE id_cliente = @id";
 
                 query.Parameters.AddWithValue("@id", id);
 
@@ -66,15 +67,25 @@ namespace SisAdv.Models
                 while (reader.Read())
                 {
                     cliente.Id = reader.GetInt32("id_cliente");                    
-                    cliente.Profissao = reader.GetString("profissao_cli");
-                    //cliente.Cpf = reader.GetString("cpf_cli");
-                    cliente.Descricao = reader.GetString("descricao_cli");
+                    cliente.Cpf = reader.GetString("cpf_cli");
                     cliente.Nome = reader.GetString("nome_cli");
                     cliente.Rg = reader.GetString("rg_cli");
-                }
+                    cliente.Email = reader.GetString("email_cli");
+                    cliente.Telefone = reader.GetString("telefone_cli");
+                    cliente.Profissao = DAOHelper.GetString(reader, "profissao_cli");
+                    cliente.Descricao = DAOHelper.GetString(reader, "descricao_cli");
 
-                MessageBox.Show($"nome {cliente.Nome} descrição {cliente.Descricao} email {cliente.Email} profissão {cliente.Profissao} telefone {cliente.Telefone}", "", MessageBoxButton.OK, MessageBoxImage.Information);
-
+                    if (!DAOHelper.IsNull(reader, "fk_endereco"))
+                        cliente.Endereco = new Endereco()
+                        {
+                            Id = reader.GetInt32("id_endereco"),
+                            Rua = reader.GetString("rua_end"),
+                            Numero = reader.GetInt32("numero_residencia_end"),
+                            Bairro = reader.GetString("bairro_end"),
+                            Cidade = reader.GetString("cidade_end"),
+                            Estado = reader.GetString("estado")
+                        };
+                }               
 
                 return cliente;
 
@@ -219,7 +230,7 @@ namespace SisAdv.Models
 
                 var query = conn.Query();
 
-                query.CommandText = "SET nome_cli = @nome, cpf_cli = @cpf, rg_cli = @rg, telefone_cli = @telefone," +  
+                query.CommandText = "UPDATE cliente SET nome_cli = @nome, cpf_cli = @cpf, rg_cli = @rg, telefone_cli = @telefone," +  
                                     "profissao_cli = @profissao, descricao_cli = @descricao, email_cli = @email, fk_endereco = @enderecoID WHERE id_cliente = @id";
 
                 query.Parameters.AddWithValue("@nome", t.Nome);
