@@ -91,7 +91,41 @@ namespace SisAdv.Models
 
         public void Insert(Cliente t)
         {
-            throw new NotImplementedException();
+            try
+            {
+                //inserção endereco cliente
+                var enderecoId = new EnderecoDAO().Insert(t.Endereco);
+
+                var query = conn.Query();
+                query.CommandText = "CALL inserirCliente(@nome, @email, @cpf, @rg, @telefone, @profissao, @descricao, @enderecoID)";
+
+                query.Parameters.AddWithValue("@nome", t.Nome);
+                query.Parameters.AddWithValue("@email", t.Email);
+                query.Parameters.AddWithValue("@cpf", t.Cpf);
+                query.Parameters.AddWithValue("@rg", t.Rg);
+                query.Parameters.AddWithValue("@telefone", t.Telefone);
+                query.Parameters.AddWithValue("@profissao", t.Profissao);
+                query.Parameters.AddWithValue("@descricao", t.Descricao);
+                query.Parameters.AddWithValue("@enderecoID", enderecoId);
+
+                MySqlDataReader reader = query.ExecuteReader();
+
+                while (reader.Read())
+                {
+                    if (reader.GetName(0).Equals("Alerta"))
+                    {
+                        throw new Exception(reader.GetString("Alerta"));
+                    }
+                }
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+            finally
+            {
+                conn.Close();
+            }
         }
 
         public List<Cliente> List()
@@ -107,9 +141,6 @@ namespace SisAdv.Models
 
                 while (reader.Read())
                 {
-                    /*Observação: vou deixar esse comentário aqui pra vc Bruno, faltam coisas para 
-                     * adicionar no Cliente.Cs (Model), 
-                     * no banco de dados tem muito mais atributos.*/
                     list.Add(new Cliente()
                     {
                         Id = reader.GetInt32("id_cliente"),
@@ -178,10 +209,18 @@ namespace SisAdv.Models
         {
             try
             {
+                long enderecoId = t.Endereco.Id;
+                var endDAO = new EnderecoDAO();
+
+                if (enderecoId > 0)
+                    endDAO.Update(t.Endereco);
+                else
+                    enderecoId = endDAO.Insert(t.Endereco);
+
                 var query = conn.Query();
 
                 query.CommandText = "SET nome_cli = @nome, cpf_cli = @cpf, rg_cli = @rg, telefone_cli = @telefone," +  
-                                    "profissao_cli = @profissao, descricao_cli = @descricao WHERE id_cliente = @id";
+                                    "profissao_cli = @profissao, descricao_cli = @descricao, email_cli = @email, fk_endereco = @enderecoID WHERE id_cliente = @id";
 
                 query.Parameters.AddWithValue("@nome", t.Nome);
                 query.Parameters.AddWithValue("@cpf", t.Cpf);
@@ -189,6 +228,8 @@ namespace SisAdv.Models
                 query.Parameters.AddWithValue("@telefone", t.Telefone);
                 query.Parameters.AddWithValue("@profissao", t.Profissao);
                 query.Parameters.AddWithValue("@descricao", t.Descricao);
+                query.Parameters.AddWithValue("@email", t.Email);
+                query.Parameters.AddWithValue("@enderecoID", enderecoId);
 
                 query.Parameters.AddWithValue("@id", t.Id);
 

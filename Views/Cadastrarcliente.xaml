@@ -49,15 +49,15 @@
 
             <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
                 <Label Foreground="#FFE8E8E8" FontWeight="Bold">Rua</Label>
-                <TextBox Width="170" Margin="10"/>
+                <TextBox x:Name="txtRua" Width="170" Margin="10"/>
                 <Label Foreground="#FFE8E8E8" FontWeight="Bold" Margin="15 0 0 0">Nº</Label>
-                <TextBox Width="50" Margin="10"/>
+                <TextBox x:Name="txtNumero" Width="50" Margin="10"/>
             </StackPanel>
         </StackPanel>
 
         <StackPanel Margin="20 0 0 0" Orientation="Horizontal" VerticalAlignment="Center" Grid.Row="3">
             <Label Foreground="#FFE8E8E8" FontWeight="Bold">Bairro</Label>
-            <TextBox Width="180" Margin="10"/>
+            <TextBox x:Name="txtBairro" Width="180" Margin="10"/>
         </StackPanel> 
         <StackPanel Margin="20 0 0 0" Orientation="Horizontal" VerticalAlignment="Center" Grid.Row="5">
             <Label Foreground="#FFE8E8E8" FontWeight="Bold">Profissão</Label>
@@ -75,23 +75,28 @@
         <StackPanel Margin="20 0 0 0" Orientation="Horizontal" VerticalAlignment="Center" Grid.Row="0" Grid.Column="1">
             <Label Foreground="#FFE8E8E8" FontWeight="Bold">RG</Label>
             <!---->
-            <TextBox Width="90" Margin="10"/>
+            <TextBox x:Name="txtRg" Width="90" Margin="10"/>
         </StackPanel>
         <StackPanel Margin="20 0 0 0" Orientation="Horizontal" VerticalAlignment="Center" Grid.Row="1" Grid.Column="1">
             <Label Foreground="#FFE8E8E8" FontWeight="Bold">CPF</Label>
             <!---->
-            <TextBox  Width="120" Margin="10"/>
+            <TextBox x:Name="txtCpf" Width="120" Margin="10"/>
         </StackPanel>
         <StackPanel Orientation="Horizontal" VerticalAlignment="Center" Grid.Row="2" Grid.Column="1" Margin="20 22 0 0">
             <Label Foreground="#FFE8E8E8" FontWeight="Bold">Cidade</Label>
             <!---->
-            <TextBox Width="170" Margin="10"/>
+            <TextBox x:Name="txtCidade" Width="170" Margin="10"/>
+        </StackPanel>
+
+        <StackPanel Orientation="Horizontal" VerticalAlignment="Center" Grid.Row="3" Grid.Column="1" Margin="20 22 0 0">
+            <Label Foreground="#FFE8E8E8" FontWeight="Bold">Estado</Label>
+            <ComboBox x:Name="comboboxEstado" Width="150" Margin="10"/>
         </StackPanel>
 
         <!--Botoes - Colocar um stack dentor do outro-->
         <StackPanel Margin="-5 0 0 0" VerticalAlignment="Center" HorizontalAlignment="Right" Grid.Row="6" Grid.Column="1">
             <!--Salvar-->
-            <Button Width="90" Height="60" Margin="10" Background="#FF00FF17" BorderBrush="{x:Null}">
+            <Button x:Name="btnSalvar" Width="90" Height="60" Margin="10" Background="#FF00FF17" BorderBrush="{x:Null}" Click="btnSalvar_Click">
                 <materialDesign:PackIcon Kind="ContentSave" Width="40" Height="30" Foreground="Black"/>
             </Button>
             <Label Margin=" 30 0 0 0" Foreground="#FFE8E8E8" FontWeight="Bold">Salvar</Label>

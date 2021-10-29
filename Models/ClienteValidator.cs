@@ -12,9 +12,9 @@ namespace SisAdv.Models
         public ClienteValidator()
         {
             RuleFor(x => x.Nome).NotEmpty().WithMessage("O campo `Nome` é Obrigatório. Favor Preencher");
-            RuleFor(x => x.Rg).NotEmpty().WithMessage("O campo `Advogado` é Obrigatório. Favor Preencher");
-            RuleFor(x => x.Email).NotEmpty().WithMessage("Algum `Tipo de Serviço` é Obrigatório. Favor Preencher");
-            RuleFor(x => x.Telefone).NotEmpty().WithMessage("O campo `Data` é Obrigatório. Favor Preencher");
+            RuleFor(x => x.Cpf).NotEmpty().WithMessage("O campo `Cpf` é Obrigatório. Favor Preencher");
+            RuleFor(x => x.Email).NotEmpty().WithMessage("Algum `Email` é Obrigatório. Favor Preencher");
+            RuleFor(x => x.Telefone).NotEmpty().WithMessage("O campo `Telefone` é Obrigatório. Favor Preencher");
 
             
             //CÓDIGO DE CPF TAMBÉM

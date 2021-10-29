@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using SisAdv.Models;
+using SisAdv.Helpers;
 
 namespace SisAdv.Views
 {
@@ -38,6 +39,8 @@ namespace SisAdv.Views
         private void Cadastrarcliente_Loaded(object sender, RoutedEventArgs e)
         {
             _cliente = new Cliente();
+
+            comboboxEstado.ItemsSource = Estado.List();
 
             if (_id > 0)
                 FillForm();
@@ -95,7 +98,7 @@ namespace SisAdv.Views
         {
             if (_cliente.Id == 0)
             {
-                var result = MessageBox.Show("Deseja continuar adicionando serviços?", "Continuar?", MessageBoxButton.YesNo, MessageBoxImage.Question);
+                var result = MessageBox.Show("Deseja continuar adicionando Clientes?", "Continuar?", MessageBoxButton.YesNo, MessageBoxImage.Question);
 
                 if (result == MessageBoxResult.No)
                     this.Close();
@@ -126,6 +129,31 @@ namespace SisAdv.Views
         {
             //implementar, coloquei uma mensagem só para teste
             MessageBox.Show("Campos limpos", "", MessageBoxButton.OK, MessageBoxImage.Information);
+        }
+
+        private void btnSalvar_Click(object sender, RoutedEventArgs e)
+        {
+            _cliente.Nome = textNome.Text;
+            _cliente.Descricao = textDescricao.Text;
+            _cliente.Profissao = textProfissao.Text;
+            _cliente.Cpf = txtCpf.Text;
+            _cliente.Rg = txtRg.Text;
+            _cliente.Telefone = textTelefone.Text;
+            _cliente.Email = textemail.Text;
+
+            _cliente.Endereco = new Endereco();
+
+            _cliente.Endereco.Rua = txtRua.Text;
+            _cliente.Endereco.Bairro = txtBairro.Text;
+            _cliente.Endereco.Cidade = txtCidade.Text;
+
+            if (int.TryParse(txtNumero.Text, out int numero))
+                _cliente.Endereco.Numero = numero;
+
+            if (comboboxEstado.SelectedItem != null)
+                _cliente.Endereco.Estado = comboboxEstado.SelectedItem as string;
+
+            SaveData();
         }
     }
 }
