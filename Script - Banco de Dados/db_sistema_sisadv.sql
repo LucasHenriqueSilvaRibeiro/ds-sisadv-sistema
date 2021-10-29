@@ -37,6 +37,7 @@ foreign key (fk_endereco) references endereco(id_endereco)
 );
 
 ALTER TABLE cliente ADD COLUMN email_cli VARCHAR(120);
+ALTER TABLE cliente MODIFY COLUMN cpf_cli varchar (20);
 DESC cliente;
 
 create table evento(
@@ -185,7 +186,7 @@ desc endereco;
 #Tabela cliente--------------------------------------------------------------------------------------------------------------------------------------
 
 delimiter $$
-create procedure inserirCliente(nome varchar(100), email varchar (120), cpf varchar (11), rg varchar (10), telefone varchar(12), profissao varchar (50), descricao varchar(200), endereco int)
+create procedure inserirCliente(nome varchar(100), email varchar (120), cpf varchar (20), rg varchar (10), telefone varchar(20), profissao varchar (50), descricao varchar(200), endereco int)
 begin
 declare verificacaocpf varchar (11);
 declare verificacaorg varchar (10);
@@ -208,13 +209,14 @@ end if;
 end;
 $$ delimiter ;
 #drop procedure inserirCliente;
-call inserirCliente ('Douglas Costa', 'emaildouglas@gmail.com', '808423', '803928', '69912345671', 'vendedor', 'Busca processar sua empresa por danos morais', 3);
-/*call inserirCliente ('Maycon Douglas', '012340125', '46540125', '69912345671', 'vendedor', 'Busca processar sua empresa por danos morais', 3);
+/*call inserirCliente ('Douglas Costa', 'emaildouglas@gmail.com', '808423', '803928', '69912345671', 'vendedor', 'Busca processar sua empresa por danos morais', 3);
+call inserirCliente ('Maycon Douglas', '012340125', '46540125', '69912345671', 'vendedor', 'Busca processar sua empresa por danos morais', 3);
 call inserirCliente ('Raça Nega', '01246445525', '49840125', '6991254541', 'cantor', 'Busca processar sua agencia', 3);
 call inserirCliente ('Turma do Pagode', '01245259999', '4425', '69943541', 'cantor', 'Busca p', 3);
 call inserirCliente ('Exalta Samba', '0124644', '4353455', '69544541', 'cantor', 'Busca processaa', 3);*/
 select * from cliente;
 select * from endereco;
+desc cliente;
 
 
 
@@ -234,8 +236,8 @@ end if;
 end;
 $$ delimiter ;
 
-call inserirEvento ('Audiência com cliente Raça Negra', '2021-08-31', '14:00', 'Audiência, levar documentos', 'Alta', true);
-call inserirEvento ('Audiência com cliente Raça N', '2021-08-31', '14:00 PM', 'Audiência, levar documentos', 'baixa', true);
+/*call inserirEvento ('Audiência com cliente Raça Negra', '2021-08-31', '14:00', 'Audiência, levar documentos', 'Alta', true);
+call inserirEvento ('Audiência com cliente Raça N', '2021-08-31', '14:00 PM', 'Audiência, levar documentos', 'baixa', true);*/
 desc evento;
 select * from evento;
 
@@ -267,10 +269,10 @@ end if;
 end;
 $$ delimiter ;
 
-call inserirAdvogado ('Sr.Delais', '04564564654', '0214545', '1990-05-04', 'srdelais@gmail.com', '694564231554', 'Advogado desde 2005');
+/*call inserirAdvogado ('Sr.Delais', '04564564654', '0214545', '1990-05-04', 'srdelais@gmail.com', '694564231554', 'Advogado desde 2005');
 call inserirAdvogado ('Sr.Jackson', '04565645646', '5456465', '1995-09-14', 'Jackson@gmail.com', '694564231554', 'Advogado desde 2010');
 call inserirAdvogado ('Teste Sem Usuario', '04565645634', '5456455', '1345-09-14', '894@gmail.com', '694587954231554', 'Advogado desde 2015');
-call inserirAdvogado ('Teste DOIS', '0456545634', '55456465', '1345-09-14', '222222@gmail.com', '694587955451554', 'Advogado desde 2015');
+call inserirAdvogado ('Teste DOIS', '0456545634', '55456465', '1345-09-14', '222222@gmail.com', '694587955451554', 'Advogado desde 2015');*/
 select * from advogado;
 DESC ADVOGADO;
 #delete from advogado where id_advogado > 0;
@@ -300,11 +302,11 @@ end if;
 end;
 $$ delimiter ;
 #drop procedure inserirusuario;
-call inserirUsuario ('testesenha', 'Vinicius Teste', 4);
+/*call inserirUsuario ('testesenha', 'Vinicius Teste', 4);
 call inserirUsuario ('123', 'srde', 1);
 #call inserirUsuario ('435345', 'Lucas Teste', 3);
 #call inserirUsuario ('435345', 'Professor JACKSON', 2);
-#CALL inserirUsuario ('12345', 'Lucas teste', 2);
+#CALL inserirUsuario ('12345', 'Lucas teste', 2);*/
 select * from advogado;
 select * from usuario;
 desc servico;
@@ -339,9 +341,9 @@ end if;
 end;
 $$ delimiter ;
 #drop procedure inserirServico;
-call inserirServico (1000, '2021-08-31', 'Civil', 1, 2, 'Buscando se defender');
+/*call inserirServico (1000, '2021-08-31', 'Civil', 1, 2, 'Buscando se defender');
 call inserirServico (5000, '2021-08-20', 'Administrativo', 2, 2, 'Buscando se defender');
-call inserirServico (3410, '2021-05-20', 'Eleitoral', 2, 1, 'Buscando se defender');
+call inserirServico (3410, '2021-05-20', 'Eleitoral', 2, 1, 'Buscando se defender');*/
 select * from servico;
 select * from usuario;
 select * from cliente;
@@ -373,8 +375,8 @@ end if;
 end;
 $$ delimiter ;
 
-call inserirLogin('2021-05-03', '14:00', 1);
-call inserirLogin('2021-05-03', '1500', 2);
+/*call inserirLogin('2021-05-03', '14:00', 1);
+call inserirLogin('2021-05-03', '1500', 2);*/
 select * from login;
 
 
@@ -406,8 +408,8 @@ end if;
 end;
 $$ delimiter ;
 
-call registrarProcesso('Processo devido a danos morais', '2021-03-05','em andamento', 'sem resultado', 1);
-call registrarProcesso('Processo devido a má administração', '2021-06-30','em andamento', 'sem resultado', 2);
+/*call registrarProcesso('Processo devido a danos morais', '2021-03-05','em andamento', 'sem resultado', 1);
+call registrarProcesso('Processo devido a má administração', '2021-06-30','em andamento', 'sem resultado', 2);*/
 select * from processo;
 select * from servico;
 select * from cliente;
@@ -432,8 +434,8 @@ end if;
 end;
 $$ delimiter ;
 
-call registrarDiario (1, 2000);
-call registrarDiario (3, 1970);
+/*call registrarDiario (1, 2000);
+call registrarDiario (3, 1970);*/
 select * from diariojustica;
 
 
@@ -457,7 +459,7 @@ end if;
 end;
 $$ delimiter ;
 
-call cadastrarCaixa('Setembro/2021');
+/*call cadastrarCaixa('Setembro/2021');*/
 
 delimiter $$
 create procedure cadastrarCaixaInicial(mes varchar (100), saldoinicial double)
@@ -473,7 +475,7 @@ end if;
 end;
 $$ delimiter ;
 desc caixa;
-call cadastrarcaixainicial('Teste Caixa', 1500);
+#call cadastrarcaixainicial('Teste Caixa', 1500);
 select * from caixa; 
 
 
@@ -491,7 +493,7 @@ call cadastrarLucro ('2021-02-24', 'Raça Negra', 'Processo', 'A vista no dinhei
 select * from servico;
 select * from caixa;
 select * from lucro;
-
+update caixa set total_lucro_cx = 0 where id_cx = 6;
 
 delimiter $$
 create trigger atualizarLucroUpdate after update on lucro
@@ -543,8 +545,8 @@ end if;
 end;
 $$ delimiter ;
 
-call cadastrarLucro ('2021-02-24', 'Maycon Douglas', 'Processo', 'A vista no dinheiro', false, 2, 2);
-call cadastrarLucro ('2021-02-24', 'Raça Negra', 'Processo', 'A vista no dinheiro', false, 3, 1);
+/*call cadastrarLucro ('2021-02-24', 'Maycon Douglas', 'Processo', 'A vista no dinheiro', false, 2, 2);
+call cadastrarLucro ('2021-02-24', 'Raça Negra', 'Processo', 'A vista no dinheiro', false, 3, 1);*/
 select * from lucro;
 select * from servico;
 select * from caixa;
@@ -565,8 +567,8 @@ end if;
 end;
 $$ delimiter ;
 
-call inserirDespesa('2020-09-10', 200, 'Conta de luz', 'Conta do escritório', false, null);
-call inserirDespesa('2020-09-25', 50, 'Conta de Água', 'Conta do escritório', false, null);
+/*call inserirDespesa('2020-09-10', 200, 'Conta de luz', 'Conta do escritório', false, null);
+call inserirDespesa('2020-09-25', 50, 'Conta de Água', 'Conta do escritório', false, null);*/
 select * from despesa;
 
 
@@ -584,7 +586,9 @@ $$ delimiter ;
 
 select * from pagamento;
 select * from caixa;
+select * from despesa;
 
+/*FICOU FALTANDO UPDATE PAGAMENTO
 delimiter $$
 create trigger atualizarPagamentoUpdate after update on pagamento
 for each row
@@ -593,7 +597,7 @@ update caixa set total_despesa_cx = total_despesa_cx + new.valor_pagamento where
 update caixa set total_despesa_cx = total_despesa_cx - old.valor_pagamento where (id_cx = new.fk_caixa);
 update caixa set saldo_final_cx = saldo_inicial_cx + total_lucro_cx - total_despesa_cx where (id_cx = new.fk_caixa);
 end;
-$$ delimiter ;
+$$ delimiter ;*/
 
 /*update pagamento set valor_pagamento = 100 where id_pagamento = 3;
 select * from caixa;*/
@@ -645,9 +649,9 @@ end if;
 end;
 $$ delimiter ;
 
-call registrarPagamento ('No Cartão de Crédito', '2021-07-20', 1, 2);
+/*call registrarPagamento ('No Cartão de Crédito', '2021-07-20', 1, 2);
 call registrarPagamento ('No Cartão de Crédito', '2021-07-20', 2, 2);
-call registrarPagamento ('No Dinheiro', '2021-08-20', 3, 2);
+call registrarPagamento ('No Dinheiro', '2021-08-20', 3, 2);*/
 select * from pagamento;
 select * from despesa;
 select * from caixa;

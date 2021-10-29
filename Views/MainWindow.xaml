@@ -163,7 +163,6 @@
                       AutoGenerateColumns="False" AlternatingRowBackground="#FFE5E5E5" AlternationCount="2">
 
                 <DataGrid.Columns>
-                    <DataGridTextColumn x:Name="Id" Header="Id" Width="50" Binding="{Binding Cliente.Id}"/>
                     <DataGridTextColumn Header="Cliente" Width="100" Binding="{Binding Cliente.Nome}"/>
                     <DataGridTextColumn Header="Valor" Width="80" Binding="{Binding Valor, ConverterCulture='pt-BR', StringFormat=C}"/>
 

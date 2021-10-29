@@ -20,6 +20,7 @@
                   Style="{StaticResource MaterialDesignDataGrid}">
 
             <DataGrid.Columns>
+                <DataGridTextColumn Header="Título" Binding="{Binding Titulo}"/>
                 <DataGridTextColumn Header="Data" Width="100" Binding="{Binding Data}"/>
                 <DataGridTextColumn Header="Horário" Width="auto" Binding="{Binding Horario}"/>
                 <DataGridTextColumn Header="Importância" Width="auto" Binding="{Binding Importancia}"/>

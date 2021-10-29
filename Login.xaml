@@ -13,7 +13,7 @@
         TextOptions.TextRenderingMode="Auto"        
         Background="#FFD6D5D5"  
         FontFamily="{DynamicResource MaterialDesignFont}"
-        Title="Login" Height="470" Width="350" WindowStartupLocation="CenterScreen" ResizeMode="NoResize">
+        Title="Login" Height="440" Width="350" WindowStartupLocation="CenterScreen" ResizeMode="NoResize">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="200"/>
@@ -43,10 +43,6 @@
                 </Button>
                 <TextBlock Margin="0 5 0 0" Text="Acessar" HorizontalAlignment="Center"/>
             </StackPanel>
-        </StackPanel>
-
-        <StackPanel Grid.Row="4" HorizontalAlignment="Center" VerticalAlignment="Center">
-            <Button FontSize="11" Height="25" x:Name="bttrocarsenha" Background="White" BorderBrush="{x:Null}" Foreground="Black" Click="bttrocarsenha_Click">Esqueceu sua Senha?</Button>
         </StackPanel>
     </Grid>
 </Window>

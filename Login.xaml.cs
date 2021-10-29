@@ -32,8 +32,8 @@ namespace SisAdv.Views
 
         private void btacessar_Click(object sender, RoutedEventArgs e)
         {
-            string usuario = "srde";//TxbLogin.Text;
-            string senha = "123";//PassWord.Password.ToString();
+            string usuario = TxbLogin.Text;
+            string senha = PassWord.Password.ToString();
 
             if (Models.Usuario.Login(usuario, senha))
             {
@@ -46,13 +46,6 @@ namespace SisAdv.Views
                 MessageBox.Show("Usuario e/ou senha incorretos! Tente novamente", "Autorização negada", MessageBoxButton.OK, MessageBoxImage.Warning);
                 _ = TxbLogin.Focus();
             }
-        }
-
-        private void bttrocarsenha_Click(object sender, RoutedEventArgs e)
-        {
-            AlterarSenha alterarSenha = new AlterarSenha();
-
-            alterarSenha.ShowDialog();
         }
     }
 }

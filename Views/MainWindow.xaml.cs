@@ -139,7 +139,7 @@ namespace SisAdv.Views
                     window.ShowDialog();
                     break;
                 case "btbuscaCaixa":
-                    window = new BuscarPagamento();
+                    window = new BuscarCaixa();
                     ColapsarButtons();
                     window.ShowDialog();
                     break;

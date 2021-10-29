@@ -187,17 +187,17 @@ namespace SisAdv.Models
                 var query = conn.Query();
 
                 if ((cliente != null) && (data != null) && (tipoServico != null))
-                    query.CommandText = $"{textoSelect} cliente_serv LIKE '{cliente}%' AND data_serv = '{data}' AND tipo_serv = '{tipoServico}'";
+                    query.CommandText = $"{textoSelect} cliente_serv LIKE '%{cliente}%' AND data_serv = '{data}' AND tipo_serv = '{tipoServico}'";
                 else if ((cliente != null) && (data != null))
-                    query.CommandText = $"{textoSelect} cliente_serv LIKE '{cliente}%' AND data_serv = '{data}'";
+                    query.CommandText = $"{textoSelect} cliente_serv LIKE '%{cliente}%' AND data_serv = '{data}'";
                 else if ((cliente != null) && (tipoServico != null))
-                    query.CommandText = $"{textoSelect} cliente_serv LIKE '{cliente}%' AND tipo_serv = '{tipoServico}'";
+                    query.CommandText = $"{textoSelect} cliente_serv LIKE '%{cliente}%' AND tipo_serv = '{tipoServico}'";
                 else if ((tipoServico != null) && (data != null))
                     query.CommandText = $"{textoSelect} data_serv = '{data}' AND tipo_serv = '{tipoServico}'";
                 else if (tipoServico != null)
                     query.CommandText = $"{textoSelect} tipo_serv = '{tipoServico}'";                
                 else if (cliente != null)                
-                    query.CommandText = $"{textoSelect} cliente_serv LIKE '{cliente}%'";
+                    query.CommandText = $"{textoSelect} cliente_serv LIKE '%{cliente}%'";
                 else if (data != null)                
                     query.CommandText = $"{textoSelect} data_serv = '{data}'";                
 

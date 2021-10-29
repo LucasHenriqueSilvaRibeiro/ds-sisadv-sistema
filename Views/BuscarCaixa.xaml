@@ -63,8 +63,7 @@
                     <DataGrid.Columns>
                         <DataGridTextColumn Header="Id" Binding="{Binding Id}"/>
                         <DataGridTextColumn Header="Nome" Binding="{Binding Mes}"/>
-                        <DataGridTextColumn Header="Status" Binding="{Binding SaldoInicial, ConverterCulture='pt-BR', StringFormat=C}"/>
-                        <DataGridTextColumn Header="Valor" Binding="{Binding SaldoFinal, ConverterCulture='pt-BR', StringFormat=C}"/>
+                        <DataGridTextColumn Header="Valor Inicial" Binding="{Binding SaldoInicial, ConverterCulture='pt-BR', StringFormat=C}"/>
                         <DataGridTemplateColumn>
                             <DataGridTemplateColumn.CellTemplate>
                                 <DataTemplate>

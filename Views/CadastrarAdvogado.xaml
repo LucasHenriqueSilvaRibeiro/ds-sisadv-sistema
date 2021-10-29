@@ -31,19 +31,19 @@
         <StackPanel Margin="10 0 0 0" Orientation="Horizontal" HorizontalAlignment="Stretch" VerticalAlignment="Center">
             <Label Content="Nome*" FontSize="16" FontWeight="Bold" Margin="0 20 0 0"/>
             <TextBox x:Name="TxbNome" Width="200"  FontSize="16" Foreground="Black" 
-                       Style="{StaticResource MaterialDesignOutlinedTextBox}"
+                       Style="{StaticResource MaterialDesignFloatingHintTextBox}"
                        Margin="0 10 0 0" CaretBrush="Black" BorderBrush="#BC000000" />
         </StackPanel>
         <StackPanel Grid.Row="1" Margin="8 0 0 0" Grid.Column="1" Orientation="Horizontal" HorizontalAlignment="Stretch" VerticalAlignment="Center">
             <Label Content="CPF*" FontSize="16" FontWeight="Bold" Margin="0 20 0 0"/>
             <wpfTool:MaskedTextBox  Mask="000\.000\.000-00" MaxLength="14"  x:Name="TxbCpf" Width="150"  FontSize="16" Foreground="Black" 
-                       Style="{StaticResource MaterialDesignOutlinedTextBox}"
+                       Style="{StaticResource MaterialDesignFloatingHintTextBox}"
                        Margin="0 10 0 0" CaretBrush="Black" BorderBrush="#BC000000" />
         </StackPanel>
         <StackPanel Margin="33 0 0 0" Grid.Row="1" Orientation="Horizontal" HorizontalAlignment="Stretch" VerticalAlignment="Center">
             <Label Content="RG*" FontSize="16" FontWeight="Bold" Margin="0 20 0 0"/>
             <TextBox x:Name="TxbRg" Width="150"  FontSize="16" Foreground="Black" 
-                       Style="{StaticResource MaterialDesignOutlinedTextBox}"
+                       Style="{StaticResource MaterialDesignFloatingHintTextBox}"
                        Margin="0 10 0 0" CaretBrush="Black" BorderBrush="#BC000000" />
         </StackPanel>
         <StackPanel Margin="15 0 0 0" Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Stretch" VerticalAlignment="Center">
@@ -52,20 +52,20 @@
                 <Label Margin="0 -10 0 0" Content="Nasc.*" FontSize="16" FontWeight="Bold" />
             </StackPanel>
             <DatePicker x:Name="datePickerNascimento" Width="150"  FontSize="16" Foreground="Black" 
-                       Style="{StaticResource MaterialDesignOutlinedDatePicker}"
+                       Style="{StaticResource MaterialDesignFloatingHintDatePicker}"
                        BorderBrush="#BC000000" Background="Black"/>
         </StackPanel>
         <StackPanel Grid.Row="0" Grid.Column="1" Orientation="Horizontal" HorizontalAlignment="Stretch" VerticalAlignment="Center">
             <Label Content="Email*" FontSize="16" FontWeight="Bold" Margin="0 20 0 0"/>
             <TextBox x:Name="TxbEmail" Width="260"  FontSize="16" Foreground="Black" 
-                       Style="{StaticResource MaterialDesignOutlinedTextBox}"
+                       Style="{StaticResource MaterialDesignFloatingHintTextBox}"
                        Margin="0 10 0 0" CaretBrush="Black" BorderBrush="#BC000000" />
         </StackPanel>
 
         <StackPanel Grid.Row="3" Orientation="Horizontal" HorizontalAlignment="Stretch" VerticalAlignment="Center">
             <Label Content="Telefone*" FontSize="16" FontWeight="Bold" Margin="0 20 0 0"/>
             <wpfTool:MaskedTextBox Mask="(00) 0 0000-0000" x:Name="TxbTelefone" Width="160" MaxLength="16"  FontSize="16" Foreground="Black" 
-                       Style="{StaticResource MaterialDesignOutlinedTextBox}"
+                       Style="{StaticResource MaterialDesignFloatingHintTextBox}"
                        Margin="0 10 0 0" CaretBrush="Black" BorderBrush="#BC000000" />
         </StackPanel>
 
@@ -97,7 +97,7 @@
         <StackPanel Margin="55 0 0 0" Grid.Row="4" Orientation="Horizontal" HorizontalAlignment="Stretch" VerticalAlignment="Center">
             <Label Content="ID" FontSize="16" FontWeight="Bold" Margin="0 20 0 0"/>
             <TextBox x:Name="TxbId" Width="90"  FontSize="16" Foreground="Black" IsEnabled="False"
-                       Style="{StaticResource MaterialDesignOutlinedTextBox}"
+                       Style="{StaticResource MaterialDesignFloatingHintTextBox}"
                        Margin="0 10 0 0" CaretBrush="Black" BorderBrush="#BC000000" />
         </StackPanel>
     </Grid>
