@@ -20,6 +20,10 @@ cidade_end varchar (50),
 numero_residencia_end varchar (5)
 );
 
+ALTER TABLE endereco ADD COLUMN estado varchar (40);
+ALTER TABLE endereco MODIFY COLUMN numero_residencia_end int;
+desc endereco;
+
 create table cliente(
 id_cliente int primary key auto_increment,
 nome_cli varchar (100) not null,
@@ -31,6 +35,9 @@ descricao_cli varchar (300),
 fk_endereco int,
 foreign key (fk_endereco) references endereco(id_endereco)
 );
+
+ALTER TABLE cliente ADD COLUMN email_cli VARCHAR(120);
+DESC cliente;
 
 create table evento(
 id_evento int primary key auto_increment,
@@ -161,31 +168,24 @@ poderá criar um gatilho no lugar de uma regra de negócio, caso seja o caso.*/
 #Tabela endereço--------------------------------------------------------------------------------------------------------------------------------------
 
 delimiter $$
-create procedure inserirEndereco(rua varchar(100), bairro varchar(50), cidade varchar(70), numero varchar (10))
+create procedure inserirEndereco(rua varchar(100), bairro varchar(50), cidade varchar(70), numero int, estado varchar (30))
 begin
-declare testenum varchar(100);
-set testenum = (select numero_residencia_end from endereco where numero = numero_residencia_end);
-if (bairro <> '') then
-	if (testenum is null) then
-		insert into endereco values (null, rua, bairro, cidade, numero);
-		select 'O endereço foi cadastrado com sucesso' as Confirmacao;	
-	else
-		select 'Este endereço já foi cadastrado no sistema!' as Alerta;
-	end if;
-end if;
+insert into endereco values (null, rua, bairro, cidade, numero, estado);
+select 'O endereço foi cadastrado com sucesso' as Confirmacao;
 end;
 $$ delimiter ;
-
-call inserirEndereco ('K5', 'Nova Brasília', 'Ji-Paraná', '2054');
+#drop procedure inserirendereco;
+/*call inserirEndereco ('K5', 'Nova Brasília', 'Ji-Paraná', 2055, 1);
+call inserirEndereco ('K5', 'Nova Brasília', 'Ji-Paraná', '2054', 1);
 call inserirEndereco ('Avenida Monte Castelo', '2 de Abril', 'Ji-Paraná', '2050');
 call inserirEndereco ('Rua dos Clientes', '2 de Abril', 'Ji-Paraná', '1360');
-select * from endereco;
-
+select * from endereco;*/
+desc endereco;
 
 #Tabela cliente--------------------------------------------------------------------------------------------------------------------------------------
 
 delimiter $$
-create procedure inserirCliente(nome varchar(100), cpf varchar (11), rg varchar (10), telefone varchar(12), profissao varchar (50), descricao varchar(200), endereco int)
+create procedure inserirCliente(nome varchar(100), email varchar (120), cpf varchar (11), rg varchar (10), telefone varchar(12), profissao varchar (50), descricao varchar(200), endereco int)
 begin
 declare verificacaocpf varchar (11);
 declare verificacaorg varchar (10);
@@ -194,7 +194,7 @@ set verificacaorg = (select rg_cli from cliente where rg = rg_cli);
 if (nome <> '') then
 	if (verificacaocpf is null) then
 		if (verificacaorg is null) then
-			insert into cliente values (null, nome, cpf, rg, telefone, profissao, descricao, endereco);
+			insert into cliente values (null, nome, cpf, rg, telefone, profissao, descricao, endereco, email);
 			select 'Cliente inserido com sucesso' as Confirmacao;	
 		else
 			select 'Esse rg já foi cadastrado, portanto, esse cliente já foi cadastrado!' as Alerta;
@@ -207,12 +207,12 @@ else
 end if;
 end;
 $$ delimiter ;
-
-call inserirCliente ('Maycon Douglas', '012340125', '46540125', '69912345671', 'vendedor', 'Busca processar sua empresa por danos morais', 3);
+drop procedure inserirCliente;
+call inserirCliente ('Douglas Costa', 'emaildouglas@gmail.com', '808423', '803928', '69912345671', 'vendedor', 'Busca processar sua empresa por danos morais', 3);
+/*call inserirCliente ('Maycon Douglas', '012340125', '46540125', '69912345671', 'vendedor', 'Busca processar sua empresa por danos morais', 3);
 call inserirCliente ('Raça Nega', '01246445525', '49840125', '6991254541', 'cantor', 'Busca processar sua agencia', 3);
 call inserirCliente ('Turma do Pagode', '01245259999', '4425', '69943541', 'cantor', 'Busca p', 3);
-call inserirCliente ('Exalta Samba', '0124644', '4353455', '69544541', 'cantor', 'Busca processaa', 3);
-
+call inserirCliente ('Exalta Samba', '0124644', '4353455', '69544541', 'cantor', 'Busca processaa', 3);*/
 select * from cliente;
 
 

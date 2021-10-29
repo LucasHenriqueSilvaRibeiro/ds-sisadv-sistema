@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using SisAdv.Models;
+using SisAdv.Helpers;
 
 namespace SisAdv.Views
 {
@@ -39,6 +40,8 @@ namespace SisAdv.Views
         {
             _cliente = new Cliente();
 
+            comboboxEstado.ItemsSource = Estado.List();
+
             if (_id > 0)
                 FillForm();
         }
@@ -60,7 +63,7 @@ namespace SisAdv.Views
                     else
                         dao.Update(_cliente);
 
-                    MessageBox.Show($"O Servico foi {text} com sucesso!", "Sucesso", MessageBoxButton.OK, MessageBoxImage.Information);
+                    MessageBox.Show($"O Cliente foi {text} com sucesso!", "Sucesso", MessageBoxButton.OK, MessageBoxImage.Information);
                     CloseFormVerify();
                 }
             }
@@ -95,7 +98,7 @@ namespace SisAdv.Views
         {
             if (_cliente.Id == 0)
             {
-                var result = MessageBox.Show("Deseja continuar adicionando serviços?", "Continuar?", MessageBoxButton.YesNo, MessageBoxImage.Question);
+                var result = MessageBox.Show("Deseja continuar adicionando Clientes?", "Continuar?", MessageBoxButton.YesNo, MessageBoxImage.Question);
 
                 if (result == MessageBoxResult.No)
                     this.Close();
@@ -114,18 +117,52 @@ namespace SisAdv.Views
             textId.Text = _cliente.Id.ToString();
             textNome.Text = _cliente.Nome;
             textDescricao.Text = _cliente.Descricao;
-            //textemail.Text = _cliente.Email;
+            textemail.Text = _cliente.Email;
             textProfissao.Text = _cliente.Profissao;
             textTelefone.Text = _cliente.Telefone;
+            txtCpf.Text = _cliente.Cpf;
+            txtRg.Text = _cliente.Rg;
 
-            //MessageBox.Show($"nome {_cliente.Nome} descrição {_cliente.Descricao} email {_cliente.Email} profissão {_cliente.Profissao} telefone {_cliente.Telefone}", "", MessageBoxButton.OK, MessageBoxImage.Information);
+            if (_cliente.Endereco != null)
+            {
+                txtRua.Text = _cliente.Endereco.Rua;
+                txtNumero.Text = _cliente.Endereco.Numero.ToString();
+                txtBairro.Text = _cliente.Endereco.Bairro;
+                txtCidade.Text = _cliente.Endereco.Cidade;
 
+                comboboxEstado.SelectedValue = _cliente.Endereco.Estado;
+            }
         }
 
         private void ClearInputs()
         {
             //implementar, coloquei uma mensagem só para teste
             MessageBox.Show("Campos limpos", "", MessageBoxButton.OK, MessageBoxImage.Information);
+        }
+
+        private void btnSalvar_Click(object sender, RoutedEventArgs e)
+        {
+            _cliente.Nome = textNome.Text;
+            _cliente.Descricao = textDescricao.Text;
+            _cliente.Profissao = textProfissao.Text;
+            _cliente.Cpf = txtCpf.Text;
+            _cliente.Rg = txtRg.Text;
+            _cliente.Telefone = textTelefone.Text;
+            _cliente.Email = textemail.Text;
+
+            _cliente.Endereco = new Endereco();
+
+            _cliente.Endereco.Rua = txtRua.Text;
+            _cliente.Endereco.Bairro = txtBairro.Text;
+            _cliente.Endereco.Cidade = txtCidade.Text;
+
+            if (int.TryParse(txtNumero.Text, out int numero))
+                _cliente.Endereco.Numero = numero;
+
+            if (comboboxEstado.SelectedItem != null)
+                _cliente.Endereco.Estado = comboboxEstado.SelectedItem as string;
+
+            SaveData();
         }
     }
 }

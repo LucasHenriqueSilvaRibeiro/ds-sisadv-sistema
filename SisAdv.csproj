@@ -261,6 +261,7 @@
     </ApplicationDefinition>
     <Compile Include="Database\Conexao.cs" />
     <Compile Include="Helpers\DAOHelper.cs" />
+    <Compile Include="Helpers\Estado.cs" />
     <Compile Include="Interface\IDAO.cs" />
     <Compile Include="Models\AbstractDAO.cs" />
     <Compile Include="Models\Advogado.cs" />
@@ -273,6 +274,8 @@
     <Compile Include="Models\ClienteValidator.cs" />
     <Compile Include="Models\DespesaDAO.cs" />
     <Compile Include="Models\DespesaValidator.cs" />
+    <Compile Include="Models\Endereco.cs" />
+    <Compile Include="Models\EnderecoDAO.cs" />
     <Compile Include="Models\Evento.cs" />
     <Compile Include="Models\EventoDAO.cs" />
     <Compile Include="Models\LucroDAO.cs" />
