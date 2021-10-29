@@ -43,7 +43,7 @@ namespace SisAdv.Views
                 try
                 {
                     var dao = new PagamentoDAO();
-                    griddespesas.ItemsSource = dao.ListBusca(dataescolhida, 0, null);
+                    griddespesas.ItemsSource = dao.ListBusca(dataescolhida, 0, null, 0);
                 }
                 catch (Exception ex)
                 {
@@ -53,7 +53,30 @@ namespace SisAdv.Views
                 try
                 {
                     var dao1 = new LucroDAO();
-                    gridlucros.ItemsSource = dao1.ListConsulta(null, dataescolhida, 0);
+                    gridlucros.ItemsSource = dao1.ListConsulta(null, dataescolhida, 0, 0);
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message, "Exceção", MessageBoxButton.OK, MessageBoxImage.Error);
+                }
+            }
+
+            if (idcaixa != 0)
+            {
+                try
+                {
+                    var dao = new PagamentoDAO();
+                    griddespesas.ItemsSource = dao.ListBusca(null, 0, null, idcaixa);
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message, "Exceção", MessageBoxButton.OK, MessageBoxImage.Error);
+                }
+
+                try
+                {
+                    var dao1 = new LucroDAO();
+                    gridlucros.ItemsSource = dao1.ListConsulta(null, null, 0, idcaixa);
                 }
                 catch (Exception ex)
                 {

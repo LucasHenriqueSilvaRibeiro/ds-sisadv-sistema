@@ -103,9 +103,9 @@
         <StackPanel Grid.Column="1" Grid.Row="3" Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
             <StackPanel Margin="6">
                 <Button Width="100" Height="70" Background="#FFF1F1F1" BorderBrush="{x:Null}" x:Name="btnAtribuirEvento" Click="btnAtribuirEvento_Click">
-                    <materialDesign:PackIcon Kind="CalendarAdd" Width="45" Height="50" Foreground="Black"/>
+                    <materialDesign:PackIcon Kind="UserAdd" Width="45" Height="50" Foreground="Black"/>
                 </Button>
-                <Label FontSize="15">Atribuir Evento</Label>
+                <Label FontSize="15">Adicionar cliente</Label>
             </StackPanel>
             <StackPanel Margin="6">
                 <Button Width="100" Height="70" Background="#FFF1F1F1" BorderBrush="{x:Null}" x:Name="btnPesquisarServico" Click="btnPesquisarServico_Click">

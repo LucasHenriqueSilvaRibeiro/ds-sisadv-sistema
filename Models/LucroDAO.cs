@@ -168,7 +168,7 @@ namespace SisAdv.Models
             }
         }
 
-        public List<Lucro> ListConsulta(string origem, string data, double valor)
+        public List<Lucro> ListConsulta(string origem, string data, double valor, int caixa)
         {
             try
             {
@@ -192,6 +192,8 @@ namespace SisAdv.Models
                     query.CommandText = $"{textoSelect} origem_luc LIKE '%{origem}%'";
                 else if (data != null)
                     query.CommandText = $"{textoSelect} data_luc = '{data}'";
+                else if (caixa != 0)
+                    query.CommandText = $"{textoSelect} fk_caixa = '{caixa}'";
 
                 MySqlDataReader reader = query.ExecuteReader();
 

@@ -13,7 +13,7 @@
         TextOptions.TextRenderingMode="Auto"        
         Background="#FFAEAEAE"
         FontFamily="{DynamicResource MaterialDesignFont}"
-        Title="RelatorioAlternativo" Height="450" Width="770" WindowStartupLocation="CenterScreen" ResizeMode="NoResize">
+        Title="RelatorioAlternativo" Height="450" Width="840" WindowStartupLocation="CenterScreen" ResizeMode="NoResize">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="60"/>
@@ -22,53 +22,27 @@
         </Grid.RowDefinitions>
 
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="380"/>
-            <ColumnDefinition Width="380"/>
+            <ColumnDefinition Width="410"/>
+            <ColumnDefinition Width="410"/>
         </Grid.ColumnDefinitions>
 
         <TextBlock Margin="15 0" FontSize="25" VerticalAlignment="Center">Lucros Recebidos</TextBlock>
 
-        <DataGrid Grid.Row="1" Width="350" Height="300" AlternatingRowBackground="#FFE5E5E5" x:Name="gridlucros" AlternationCount="2" AutoGenerateColumns="False" BorderBrush="#FF747474">
+        <DataGrid Grid.Row="1" Width="380" Height="300" AlternatingRowBackground="#FFE5E5E5" x:Name="gridlucros" AlternationCount="2" AutoGenerateColumns="False" BorderBrush="#FF747474">
             <DataGrid.Columns>
-                <DataGridTextColumn Header="Id" Width="auto" Binding="{Binding Id}"/>
                 <DataGridTextColumn Header="Data" Width="100" Binding="{Binding Data}"/>
                 <DataGridTextColumn Header="Nome" Width="auto" Binding="{Binding Origem}"/>
                 <DataGridTextColumn Header="Valor" Width="auto" Binding="{Binding Valor, ConverterCulture='pt-BR', StringFormat=C}"/>
-                <DataGridTemplateColumn>
-                    <DataGridTemplateColumn.CellTemplate>
-                        <DataTemplate>
-                            <StackPanel Orientation="Horizontal">
-                                <Button Style="{StaticResource MaterialDesignIconForegroundButton}" Content="{materialDesign:PackIcon Eye}"
-                                    ToolTip="Visualizar Registro" Margin="0 0 5 0" Click="Btn_Update_Click" />
-                                <Button Style="{StaticResource MaterialDesignIconForegroundButton}" Content="{materialDesign:PackIcon Delete}"
-                                    ToolTip="Excluir Registro" Click="Btn_Delete_Click" />
-                            </StackPanel>
-                        </DataTemplate>
-                    </DataGridTemplateColumn.CellTemplate>
-                </DataGridTemplateColumn>
             </DataGrid.Columns>
         </DataGrid>
 
         <TextBlock Margin="15 0" FontSize="25" Grid.Column="1" VerticalAlignment="Center">Despesas Pagas</TextBlock>
 
-        <DataGrid Grid.Row="1" Grid.Column="1" Width="350" Height="300" AlternatingRowBackground="#FFE5E5E5" x:Name="griddespesas" AlternationCount="2" AutoGenerateColumns="False" BorderBrush="#FF747474">
+        <DataGrid Grid.Row="1" Grid.Column="1" Width="380" Height="300" AlternatingRowBackground="#FFE5E5E5" x:Name="griddespesas" AlternationCount="2" AutoGenerateColumns="False" BorderBrush="#FF747474">
             <DataGrid.Columns>
-                <DataGridTextColumn Header="Id" Width="auto" Binding="{Binding Id}"/>
                 <DataGridTextColumn Header="Data" Width="100" Binding="{Binding DataPagamento}"/>
                 <DataGridTextColumn Header="Nome" Width="auto" Binding="{Binding Despesa.Origem}"/>
                 <DataGridTextColumn Header="Valor" Width="auto" Binding="{Binding Valor, ConverterCulture='pt-BR', StringFormat=C}"/>
-                <DataGridTemplateColumn>
-                    <DataGridTemplateColumn.CellTemplate>
-                        <DataTemplate>
-                            <StackPanel Orientation="Horizontal">
-                                <Button Style="{StaticResource MaterialDesignIconForegroundButton}" Content="{materialDesign:PackIcon Eye}"
-                                    ToolTip="Visualizar Registro" Margin="0 0 5 0" Click="Btn_Update_Click" />
-                                <Button Style="{StaticResource MaterialDesignIconForegroundButton}" Content="{materialDesign:PackIcon Delete}"
-                                    ToolTip="Excluir Registro" Click="Btn_Delete_Click" />
-                            </StackPanel>
-                        </DataTemplate>
-                    </DataGridTemplateColumn.CellTemplate>
-                </DataGridTemplateColumn>
             </DataGrid.Columns>
         </DataGrid>
     </Grid>

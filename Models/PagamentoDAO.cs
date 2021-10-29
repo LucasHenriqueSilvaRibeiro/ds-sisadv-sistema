@@ -165,7 +165,7 @@ namespace SisAdv.Models
             }
         }
 
-        public List<Pagamento> ListBusca(string datapagamento, double valor, string origem)
+        public List<Pagamento> ListBusca(string datapagamento, double valor, string origem, int caixa)
         {
             try
             {
@@ -188,10 +188,13 @@ namespace SisAdv.Models
                     query.CommandText = $"{textoSelect} data_pagamento = '{datapagamento}'";
                 
                 else if (valor != 0)
-                    query.CommandText = $"{textoSelect} valor_pagamento = {valor}";
-               
-                else
+                    query.CommandText = $"{textoSelect} valor_pagamento = {valor}";     
+                
+                else if (origem != null)
                     query.CommandText = $"{textoSelect} origem_despesa LIKE '%{origem}%'";
+
+                else if (caixa != 0)
+                    query.CommandText = $"{textoSelect} fk_caixa = {caixa}";
 
                 MySqlDataReader reader = query.ExecuteReader();
 

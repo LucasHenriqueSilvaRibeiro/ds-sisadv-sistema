@@ -85,7 +85,7 @@ namespace SisAdv.Views
                 }
 
                 gridpagamento.ItemsSource = null;
-                gridpagamento.ItemsSource = dao.ListBusca(datafinal, valor, origem);
+                gridpagamento.ItemsSource = dao.ListBusca(datafinal, valor, origem, 0);
             }
             catch (Exception ex)
             {

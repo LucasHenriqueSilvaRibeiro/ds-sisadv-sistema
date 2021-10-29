@@ -85,7 +85,7 @@ namespace SisAdv.Views
                     valor = salario;
 
                 dataGridBuscarLucro.ItemsSource = null;
-                dataGridBuscarLucro.ItemsSource = dao.ListConsulta(Origem, dataconvertida, valor);
+                dataGridBuscarLucro.ItemsSource = dao.ListConsulta(Origem, dataconvertida, valor, 0);
             }
             catch (Exception ex)
             {
