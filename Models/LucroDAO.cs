@@ -51,7 +51,7 @@ namespace SisAdv.Models
             {
                 var query = conn.Query();
                 query.CommandText = "SELECT * FROM lucro LEFT JOIN caixa ON fk_caixa = id_cx " +
-                                    "LEFT JOIN processo ON fk_processo = id_proc WHERE id_lucro = @id; ";
+                                    "LEFT JOIN servico ON fk_servico = id_servico WHERE id_lucro = @id; ";
 
                 query.Parameters.AddWithValue("@id", id);
 
@@ -69,8 +69,8 @@ namespace SisAdv.Models
                     lucro.Data = reader.GetDateTime("data_luc");
                     lucro.Valor = reader.GetDouble("valor_luc");
                     lucro.Descricao = reader.GetString("descricao_luc");
-                    lucro.FormaPagamento = reader.GetString("forma_pagamento");
-                    //lucro.Mensal = reader.GetBoolean(reader, "mensal_luc");
+                    lucro.FormaRecebimento = reader.GetString("forma_pagamento");
+                    lucro.Mensal = reader.GetBoolean("mensal_luc");
 
                     if (!DAOHelper.IsNull(reader, "fk_caixa"))
                         lucro.Caixa = new Caixa()
@@ -79,11 +79,11 @@ namespace SisAdv.Models
                             Mes = reader.GetString("mes_cx")
                         };
 
-                    if (!DAOHelper.IsNull(reader, "fk_processo"))
-                        lucro.Processo = new Processo()
+                    if (!DAOHelper.IsNull(reader, "fk_servico"))
+                        lucro.Servico = new Servico()
                         {
-                            Id = reader.GetInt32("id_proc"),
-                            Descricao = reader.GetString("descricao_proc")
+                            Id = reader.GetInt32("id_servico"),
+                            Descricao = reader.GetString("descricao_serv")
                         };
                 }
 
@@ -98,7 +98,37 @@ namespace SisAdv.Models
 
         public void Insert(Lucro t)
         {
-            throw new NotImplementedException();
+            try
+            {
+                var query = conn.Query();
+                query.CommandText = "CALL cadastrarLucro(@data, @origem, @descricao, @pagamento, @mensal, @caixa, @servico)";
+
+                query.Parameters.AddWithValue("@data", t.Data?.ToString("yyyy-MM-dd"));
+                query.Parameters.AddWithValue("@origem", t.Origem);
+                query.Parameters.AddWithValue("@descricao", t.Descricao);
+                query.Parameters.AddWithValue("@mensal", t.Mensal);
+                query.Parameters.AddWithValue("@pagamento", t.FormaRecebimento);
+                query.Parameters.AddWithValue("@caixa", t.Caixa.Id);
+                query.Parameters.AddWithValue("@servico", t.Servico.Id);
+
+                MySqlDataReader reader = query.ExecuteReader();
+
+                while (reader.Read())
+                {
+                    if (reader.GetName(0).Equals("Alerta"))
+                    {
+                        throw new Exception(reader.GetString("Alerta"));
+                    }
+                }
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+            finally
+            {
+                conn.Close();
+            }
         }
 
         public List<Lucro> List()
@@ -121,12 +151,11 @@ namespace SisAdv.Models
                         Data = DAOHelper.GetDateTime(reader, "data_luc"),
                         Valor = DAOHelper.GetDouble(reader, "valor_luc"),
                         Descricao = DAOHelper.GetString(reader, "descricao_luc"),
-                        FormaPagamento = DAOHelper.GetString(reader, "forma_pagamento"),
-                        //Mensal = DAOHelper.GetBoolean(reader, "mensal_luc"),
+                        FormaRecebimento = DAOHelper.GetString(reader, "forma_pagamento"),
+                        Mensal = reader.GetBoolean("mensal_luc"),
 
                         Caixa = DAOHelper.IsNull(reader, "fk_caixa") ? null : new Caixa() { Id = reader.GetInt32("fk_caixa") },
-                        Processo = DAOHelper.IsNull(reader, "fk_processo") ? null : new Processo { Id = reader.GetInt32("fk_processo") }
-                        //Cliente = DAOHelper.IsNull(reader, "cliente_serv") ? null : new Cliente() { Id = reader.GetInt32("fk_cliente"), Nome = reader.GetString("cliente_serv") },
+                        Servico = DAOHelper.IsNull(reader, "fk_servico") ? null : new Servico { Id = reader.GetInt32("fk_servico") }
                     }); ;
                 }
 
@@ -143,24 +172,24 @@ namespace SisAdv.Models
         {
             try
             {
-                string textoSelect = "SELECT  * FROM lucro WHERE";
+                string textoSelect = "SELECT * FROM lucro WHERE";
 
                 List<Lucro> listConsulta = new List<Lucro>();
 
                 var query = conn.Query();
 
                 if ((origem != null) && (data != null) && (valor != 0.0))
-                    query.CommandText = $"{textoSelect} origem_luc LIKE '{origem}%' and data_luc = '{data}' and valor_luc = {valor}";
+                    query.CommandText = $"{textoSelect} origem_luc LIKE '%{origem}%' and data_luc = '{data}' and valor_luc = {valor}";
                 else if ((origem != null) && (data != null))
-                    query.CommandText = $"{textoSelect} origem_luc LIKE '{origem}%' and data_luc = '{data}'";
+                    query.CommandText = $"{textoSelect} origem_luc LIKE '%{origem}%' and data_luc = '{data}'";
                 else if ((origem != null) && (valor != 0.0))
-                    query.CommandText = $"{textoSelect} origem_luc LIKE '{origem}%' and valor_luc = {valor}";
+                    query.CommandText = $"{textoSelect} origem_luc LIKE '%{origem}%' and valor_luc = {valor}";
                 else if ((valor != 0.0) && (data != null))
                     query.CommandText = $"{textoSelect} data_luc = '{data}' and valor_luc = {valor}";
                 else if (valor != 0.0)
                     query.CommandText = $"{textoSelect} valor_luc = {valor}";
                 else if (origem != null)
-                    query.CommandText = $"{textoSelect} origem_luc LIKE '{origem}%'";
+                    query.CommandText = $"{textoSelect} origem_luc LIKE '%{origem}%'";
                 else if (data != null)
                     query.CommandText = $"{textoSelect} data_luc = '{data}'";
 
@@ -170,9 +199,16 @@ namespace SisAdv.Models
                 {
                     listConsulta.Add(new Lucro()
                     {
-                        Origem = reader.GetString("origem_luc"),
+                        Id = reader.GetInt32("id_lucro"),
+                        Origem = DAOHelper.GetString(reader, "origem_luc"),
                         Data = DAOHelper.GetDateTime(reader, "data_luc"),
-                        Valor = DAOHelper.GetDouble(reader, "valor_luc")
+                        Valor = DAOHelper.GetDouble(reader, "valor_luc"),
+                        Descricao = DAOHelper.GetString(reader, "descricao_luc"),
+                        FormaRecebimento = DAOHelper.GetString(reader, "forma_pagamento"),
+                        Mensal = reader.GetBoolean("mensal_luc"),
+
+                        Caixa = DAOHelper.IsNull(reader, "fk_caixa") ? null : new Caixa() { Id = reader.GetInt32("fk_caixa") },
+                        Servico = DAOHelper.IsNull(reader, "fk_servico") ? null : new Servico { Id = reader.GetInt32("fk_servico") }
                     });
                 }
 
@@ -187,7 +223,37 @@ namespace SisAdv.Models
 
         public void Update(Lucro t)
         {
-            throw new NotImplementedException();
+            try
+            {
+                var query = conn.Query();
+
+                query.CommandText = "UPDATE lucro SET data_luc = @data, valor_luc = (select valor_serv from servico where id_servico = @servico), origem_luc = @origem, " +
+                                    "descricao_luc = @descricao, mensal_luc = @mensal, forma_pagamento = @formarecebimento, fk_caixa = @caixa, fk_servico = @servico WHERE id_lucro = @id";
+
+                query.Parameters.AddWithValue("@data", t.Data?.ToString("yyyy-MM-dd"));
+                query.Parameters.AddWithValue("@origem", t.Origem);
+                query.Parameters.AddWithValue("@descricao", t.Descricao);
+                query.Parameters.AddWithValue("@mensal", t.Mensal);
+                query.Parameters.AddWithValue("@formarecebimento", t.FormaRecebimento);
+                query.Parameters.AddWithValue("@caixa", t.Caixa.Id);
+                query.Parameters.AddWithValue("@servico", t.Servico.Id);
+
+                query.Parameters.AddWithValue("@id", t.Id);
+
+                var result = query.ExecuteNonQuery();
+
+                if (result == 0)
+                    throw new Exception("Atualização do registro não foi realizada.");
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+            finally
+            {
+                conn.Close();
+            }
         }
     }
 }

@@ -125,9 +125,9 @@ descricao_luc varchar (200),
 forma_pagamento varchar (30),
 mensal_luc bool,
 fk_caixa int,
-fk_processo int,
+fk_servico int,
 foreign key (fk_caixa) references caixa (id_cx),
-foreign key (fk_processo) references processo (id_proc)
+foreign key (fk_servico) references servico (id_servico)
 );
 
 create table despesa(
@@ -491,6 +491,10 @@ update caixa set total_lucro_cx = total_lucro_cx + new.valor_luc where (id_cx = 
 update caixa set saldo_final_cx = saldo_inicial_cx + total_lucro_cx - total_despesa_cx where (id_cx = new.fk_caixa);
 end;
 $$ delimiter ;
+call cadastrarLucro ('2021-02-24', 'Raça Negra', 'Processo', 'A vista no dinheiro', false, 6, 4);
+select * from servico;
+select * from caixa;
+select * from lucro;
 
 
 delimiter $$
@@ -524,26 +528,31 @@ select * from caixa;*/
 
 
 delimiter $$
-create procedure cadastrarLucro(data date, origem varchar (100), descricao varchar (200), formadepagamento varchar (30), mensal boolean, caixa int, processo int)
+create procedure cadastrarLucro(data date, origem varchar (100), descricao varchar (200), formadepagamento varchar (30), mensal boolean, caixa int, servico int)
 begin
 declare buscarvalorprocesso double;
-set buscarvalorprocesso = (select valor_proc from processo where processo = id_proc);
+declare verificacao int;
+set buscarvalorprocesso = (select valor_serv from servico where servico = id_servico);
+set verificacao = (select fk_servico from lucro where fk_servico = servico);
 if (Origem <> "") then
-		insert into lucro values (null, buscarvalorprocesso, data, origem, descricao, formadepagamento, mensal, caixa, processo);
-		select 'Lucro cadastrado no sistema com sucesso.' as Confirmacao;
+		if (verificacao is null) then
+			insert into lucro values (null, buscarvalorprocesso, data, origem, descricao, formadepagamento, mensal, caixa, servico);
+			select 'Lucro cadastrado no sistema com sucesso.' as Confirmacao;
+        else
+			select 'Esse serviço já deu origem a um outro lucro. Não será registrado!' as Alerta;
+        end if;
 else
 	select 'A origem precisa ser especificada, tente novamente.' as Alerta; 
 end if;
 end;
 $$ delimiter ;
 
-call cadastrarLucro ('2021-02-24', 'Maycon Douglas', 'Processo', 'A vista no dinheiro', false, 2, 1);
-call cadastrarLucro ('2021-02-24', 'Raça Negra', 'Processo', 'A vista no dinheiro', false, 2, 2);
-
+call cadastrarLucro ('2021-02-24', 'Maycon Douglas', 'Processo', 'A vista no dinheiro', false, 2, 2);
+call cadastrarLucro ('2021-02-24', 'Raça Negra', 'Processo', 'A vista no dinheiro', false, 3, 1);
 select * from lucro;
 select * from servico;
 select * from caixa;
-
+desc lucro;
 
 
 #Tabela Despesa--------------------------------------------------------------------------------------------------------------------------------------
