@@ -207,13 +207,14 @@ else
 end if;
 end;
 $$ delimiter ;
-drop procedure inserirCliente;
+#drop procedure inserirCliente;
 call inserirCliente ('Douglas Costa', 'emaildouglas@gmail.com', '808423', '803928', '69912345671', 'vendedor', 'Busca processar sua empresa por danos morais', 3);
 /*call inserirCliente ('Maycon Douglas', '012340125', '46540125', '69912345671', 'vendedor', 'Busca processar sua empresa por danos morais', 3);
 call inserirCliente ('Raça Nega', '01246445525', '49840125', '6991254541', 'cantor', 'Busca processar sua agencia', 3);
 call inserirCliente ('Turma do Pagode', '01245259999', '4425', '69943541', 'cantor', 'Busca p', 3);
 call inserirCliente ('Exalta Samba', '0124644', '4353455', '69544541', 'cantor', 'Busca processaa', 3);*/
 select * from cliente;
+select * from endereco;
 
 
 
@@ -325,15 +326,10 @@ set buscarnomeadvogado = (select nome_adv from advogado where advogado = id_advo
 set testeadvogado = (select id_advogado from advogado where id_advogado = advogado);
 set testecliente = (select id_cliente from cliente where id_cliente = cliente);
 
-set verificarjaexistente = (select id_servico from servico where (advogado = fk_advogado) and (cliente = fk_cliente) and (data_serv = data));
 if (testeadvogado is not null) then
 	if (testecliente is not null) then
-		if (verificarjaexistente is null) then
-			insert into servico values (null, buscarnomecliente, buscarnomeadvogado, valor, data, tipo, descricao, advogado, cliente);
-			select 'Serviço cadastrado no sistema.' as Confirmacao;
-		else
-			select 'Este serviço já foi cadastrado no sistema, tente outro.' as Alerta;
-		end if;
+		insert into servico values (null, buscarnomecliente, buscarnomeadvogado, valor, data, tipo, descricao, advogado, cliente);
+		select 'Serviço cadastrado no sistema.' as Confirmacao;
 	else
 		select 'Falta a escolha de um cliente para este serviço, ou o valor inserido não é valido!' as Alerta;
 	end if;

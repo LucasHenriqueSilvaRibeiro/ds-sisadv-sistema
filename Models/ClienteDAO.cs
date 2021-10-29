@@ -44,8 +44,7 @@ namespace SisAdv.Models
             {
                 conn.Close();
             }
-        }
-    
+        }    
 
         public Cliente GetById(int id)
         {
